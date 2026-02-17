@@ -4,10 +4,8 @@ using System.Linq;
 using HarmonyLib;
 using GameData.Domains;
 using GameData.Domains.Character;
-using GCharacter = GameData.Domains.Character.Character;
 using GameData.Domains.Character.Creation;
 using GameData.Domains.Organization;
-using GCombatSkill = GameData.Domains.CombatSkill.CombatSkill;
 using GameData.Domains.CombatSkill;
 using GameData.Common;
 using Config;
@@ -45,7 +43,7 @@ namespace RealTimeModifyCharacterBackend
         // 3. Core Implementation Logic: "The Ultimate Specification"
         [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
         [HarmonyPostfix]
-        public static unsafe void CreateIntelligentCharacter_Postfix(GCharacter __result, DataContext context)
+        public static unsafe void CreateIntelligentCharacter_Postfix(GameData.Domains.Character.Character __result, DataContext context)
         {
             if (__result == null) return;
 
@@ -79,28 +77,27 @@ namespace RealTimeModifyCharacterBackend
                 short musicFloor = (short)(150 * multiplier);
 
                 // Combat Aptitude
+                // Note: GetBaseCombatSkillQualifications returns ref CombatSkillShorts.
+                // In Taiwu Remake, Items is typically a pointer (short*) when decompiled or accessed in unsafe context.
+                // The error "already fixed" confirms it is treated as a fixed address/pointer already.
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                fixed (short* pC = cQuals.Items)
+                short* pC = cQuals.Items;
+                for (int i = 0; i < 14; i++)
                 {
-                    for (int i = 0; i < 14; i++)
-                    {
-                        if (pC[i] < combatFloor) { pC[i] = combatFloor; cChanged = true; }
-                    }
+                    if (pC[i] < combatFloor) { pC[i] = combatFloor; cChanged = true; }
                 }
                 if (cChanged) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
 
                 // Life Aptitude
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                fixed (short* pL = lQuals.Items)
+                short* pL = lQuals.Items;
+                // Music is index 0
+                if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
+                for (int i = 1; i < 16; i++)
                 {
-                    // Music is index 0
-                    if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
-                    for (int i = 1; i < 16; i++)
-                    {
-                        if (pL[i] < lifeFloor) { pL[i] = lifeFloor; lChanged = true; }
-                    }
+                    if (pL[i] < lifeFloor) { pL[i] = lifeFloor; lChanged = true; }
                 }
                 if (lChanged) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
 
@@ -117,7 +114,7 @@ namespace RealTimeModifyCharacterBackend
                         {
                             // Create as fully mastered (ReadingState 65535)
                             skillDomain.CreateCombatSkill(charId, skillCfg.TemplateId, 65535);
-                            GCombatSkill inst;
+                            GameData.Domains.CombatSkill.CombatSkill inst;
                             if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillCfg.TemplateId), out inst))
                             {
                                 inst.SetPracticeLevel(100, context);
@@ -134,36 +131,33 @@ namespace RealTimeModifyCharacterBackend
             }
         }
 
-        // --- Consolidated Identity Helpers ---
-        public static void SetGender(GCharacter character, sbyte gender, DataContext context)
+        // --- Consolidated Identity Helpers (Reflection based for robustness) ---
+        private static void SetGender(GameData.Domains.Character.Character character, sbyte gender, DataContext context)
         {
             SetPrivateField(character, "_gender", gender);
             InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)3, context });
             if (character.CollectionHelperData.IsArchive)
             {
-                unsafe
-                {
+                unsafe {
                     byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 7U, 1);
                     *ptr = (byte)gender;
                 }
             }
         }
 
-        public static void SetTransGender(GCharacter character, bool transgender, DataContext context)
+        private static void SetTransGender(GameData.Domains.Character.Character character, bool transgender, DataContext context)
         {
             SetPrivateField(character, "_transgender", transgender);
             InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)13, context });
             if (character.CollectionHelperData.IsArchive)
             {
-                unsafe
-                {
+                unsafe {
                     byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 26U, 1);
                     *ptr = (byte)(transgender ? 1 : 0);
                 }
             }
         }
 
-        // --- Reflection Helpers ---
         private static void SetPrivateField(object obj, string fieldName, object value)
         {
             var field = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
