@@ -35,12 +35,12 @@ namespace RealTimeModifyCharacterBackend
             if (orgTemplateId == XN_ID)
             {
                 __result = 373; // 璇女羽衣使
-                return false; // Skip original method
+                return false;
             }
             return true;
         }
 
-        // 3. Core Implementation Logic: "The Highest Specification"
+        // 3. Core Implementation Logic: "The Ultimate Specification"
         [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
         [HarmonyPostfix]
         public static unsafe void CreateIntelligentCharacter_Postfix(GCharacter __result, DataContext context)
@@ -56,12 +56,12 @@ namespace RealTimeModifyCharacterBackend
                 // --- Identity & Gender (0 is Female in Taiwu Remake) ---
                 if (__result.GetGender() != 0)
                 {
-                    Util.SetGender(__result, 0, context);
+                    SetCharacterGender(__result, 0, context);
                     var avatar = __result.GetAvatar();
                     avatar.ChangeGender(0);
                     __result.SetAvatar(avatar, context);
                 }
-                Util.SetTransGender(__result, false, context);
+                SetCharacterTransGender(__result, false, context);
 
                 // --- Feature: Zhong Zhen Bu Yu (164) ---
                 if (!__result.GetFeatureIds().Contains(FID_ZHONG_ZHEN))
@@ -70,9 +70,9 @@ namespace RealTimeModifyCharacterBackend
                 }
 
                 // --- Attraction & Behavior (Celestial / Benevolent) ---
-                // Attraction 900 (Celestial)
+                // Force base attraction to 900
                 AccessTools.Field(typeof(GCharacter), "_baseAttraction").SetValue(__result, (short)900);
-                // Morality 700 (Benevolent behavior)
+                // Set morality to 700 (Benevolent)
                 __result.SetBaseMorality(700, context);
 
                 // --- Tiered Aptitude Enhancement (1.5x / 1.35x / 1.1x) ---
@@ -120,7 +120,7 @@ namespace RealTimeModifyCharacterBackend
                         short skillId = skillCfg.TemplateId;
                         if (!learnedSkills.Contains(skillId))
                         {
-                            // Create as fully mastered (ushort.MaxValue covers all page bits)
+                            // Create as fully mastered
                             skillDomain.CreateCombatSkill(charId, skillId, ushort.MaxValue);
 
                             GCombatSkill inst;
@@ -129,7 +129,7 @@ namespace RealTimeModifyCharacterBackend
                                 inst.SetPracticeLevel(100, context);
                             }
 
-                            // Activate all page rewards (5-14) to maximize Neili and passive stats
+                            // Activate all rewards for pages 5-14
                             for (byte pIdx = 5; pIdx <= 14; pIdx++)
                                 skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillId, pIdx);
                         }
@@ -138,6 +138,42 @@ namespace RealTimeModifyCharacterBackend
 
                 // --- Force Full Attribute Cache Refresh ---
                 __result.InvalidateSelfAndInfluencedCache(0, context);
+
+                // Attempt broad invalidation via reflection
+                var invalidateMethod = typeof(GCharacter).GetMethod("InvalidateAllCaches",
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (invalidateMethod != null)
+                {
+                    invalidateMethod.Invoke(__result, new object[] { context });
+                }
+                else
+                {
+                    // Fallback to protected method
+                    AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(__result, new object[] { (ushort)0, context });
+                }
+            }
+        }
+
+        // Consolidated Helpers
+        private static unsafe void SetCharacterGender(GCharacter character, sbyte gender, DataContext context)
+        {
+            AccessTools.Field(typeof(GCharacter), "_gender").SetValue(character, gender);
+            AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)3, context });
+            if (character.CollectionHelperData.IsArchive)
+            {
+                byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 7U, 1);
+                *ptr = (byte)gender;
+            }
+        }
+
+        private static unsafe void SetCharacterTransGender(GCharacter character, bool transgender, DataContext context)
+        {
+            AccessTools.Field(typeof(GCharacter), "_transgender").SetValue(character, transgender);
+            AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)13, context });
+            if (character.CollectionHelperData.IsArchive)
+            {
+                byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 26U, 1);
+                *ptr = (byte)(transgender ? 1 : 0);
             }
         }
     }
