@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TaiwuModdingLib.Core.Plugin;
 
 namespace RealTimeModifyCharacterBackend
@@ -11,6 +11,7 @@ namespace RealTimeModifyCharacterBackend
 		public override void Initialize()
 		{
 			base.HarmonyInstance.PatchAll(typeof(RealTimeModifyCharacterPatch));
+			base.HarmonyInstance.PatchAll(typeof(XuanNuRenaissancePatch));
 		}
 	}
 }
