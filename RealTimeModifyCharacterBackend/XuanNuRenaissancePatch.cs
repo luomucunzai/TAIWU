@@ -28,7 +28,7 @@ namespace RealTimeModifyCharacterBackend
         }
 
         // 2. Template Hijacking: Force high-level template (373) for Xuan Nu base stats
-        [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId")]
+        [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
         {
@@ -54,15 +54,11 @@ namespace RealTimeModifyCharacterBackend
                 sbyte grade = orgInfo.Grade;
 
                 // --- 1. Identity & Gender (0 is Female) ---
-                SetPrivateField(__result, "_gender", (sbyte)0);
-                SetPrivateField(__result, "_transgender", false);
+                Util.SetGender(__result, (sbyte)0, context);
+                Util.SetTransGender(__result, false, context);
                 var avatar = __result.GetAvatar();
                 avatar.ChangeGender(0);
                 __result.SetAvatar(avatar, context);
-
-                // Refresh identity caches (Field 3 for Gender, 13 for Transgender)
-                InvokeMethod(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)3, context });
-                InvokeMethod(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)13, context });
 
                 // --- 2. Features & Personality ---
                 if (!__result.GetFeatureIds().Contains(FID_ZHONG_ZHEN))
@@ -83,7 +79,7 @@ namespace RealTimeModifyCharacterBackend
                 // Combat Aptitude
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                fixed (short* pC = cQuals.Items) // Accessing fixed buffer start
+                fixed (short* pC = &cQuals.Items.FixedElementField)
                 {
                     for (int i = 0; i < 14; i++)
                     {
@@ -95,7 +91,7 @@ namespace RealTimeModifyCharacterBackend
                 // Life Aptitude
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                fixed (short* pL = lQuals.Items) // Accessing fixed buffer start
+                fixed (short* pL = &lQuals.Items.FixedElementField)
                 {
                     // Music is index 0
                     if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
@@ -134,8 +130,6 @@ namespace RealTimeModifyCharacterBackend
                 // --- 5. Force Full Attribute Cache Refresh ---
                 // Using Field 0 often triggers broad refresh in the game's influence system.
                 InvokeMethod(__result, "InvalidateSelfAndInfluencedCache", new object[] { (ushort)0, context });
-                // InvalidateAllCaches is usually parameterless
-                InvokeMethod(__result, "InvalidateAllCaches", null);
             }
         }
 
