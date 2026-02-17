@@ -53,38 +53,37 @@ namespace RealTimeModifyCharacterBackend
                 int charId = __result.GetId();
                 sbyte grade = orgInfo.Grade;
 
-                // --- Identity & Gender (0 is Female in Taiwu Remake) ---
-                if (__result.GetGender() != 0)
-                {
-                    SetCharacterGender(__result, 0, context);
-                    var avatar = __result.GetAvatar();
-                    avatar.ChangeGender(0);
-                    __result.SetAvatar(avatar, context);
-                }
-                SetCharacterTransGender(__result, false, context);
+                // --- 1. Identity & Gender (0 is Female) ---
+                SetPrivateField(__result, "_gender", (sbyte)0);
+                SetPrivateField(__result, "_transgender", false);
+                var avatar = __result.GetAvatar();
+                avatar.ChangeGender(0);
+                __result.SetAvatar(avatar, context);
 
-                // --- Feature: Zhong Zhen Bu Yu (164) ---
+                // Refresh identity caches (Field 3 for Gender, 13 for Transgender)
+                InvokeMethod(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)3, context });
+                InvokeMethod(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)13, context });
+
+                // --- 2. Features & Personality ---
                 if (!__result.GetFeatureIds().Contains(FID_ZHONG_ZHEN))
                 {
                     __result.AddFeature(context, FID_ZHONG_ZHEN, true);
                 }
-
-                // --- Attraction & Behavior (Celestial / Benevolent) ---
-                // Force base attraction to 900
-                AccessTools.Field(typeof(GCharacter), "_baseAttraction").SetValue(__result, (short)900);
-                // Set morality to 700 (Benevolent)
+                // Attraction 900 (Celestial)
+                SetPrivateField(__result, "_baseAttraction", (short)900);
+                // Morality 700 (Benevolent)
                 __result.SetBaseMorality(700, context);
 
-                // --- Tiered Aptitude Enhancement (1.5x / 1.35x / 1.1x) ---
+                // --- 3. Aptitude Enhancement (Tiered Scaling) ---
                 float multiplier = (grade == 0) ? 1.5f : (grade == 1 ? 1.35f : 1.1f);
                 short combatFloor = (short)(130 * multiplier);
                 short lifeFloor = (short)(130 * multiplier);
                 short musicFloor = (short)(150 * multiplier);
 
-                // Modify Combat Skill Qualifications
+                // Combat Aptitude
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                fixed (short* pC = &cQuals.Items.FixedElementField)
+                fixed (short* pC = cQuals.Items) // Accessing fixed buffer start
                 {
                     for (int i = 0; i < 14; i++)
                     {
@@ -93,11 +92,12 @@ namespace RealTimeModifyCharacterBackend
                 }
                 if (cChanged) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
 
-                // Modify Life Skill Qualifications
+                // Life Aptitude
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                fixed (short* pL = &lQuals.Items.FixedElementField)
+                fixed (short* pL = lQuals.Items) // Accessing fixed buffer start
                 {
+                    // Music is index 0
                     if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
                     for (int i = 1; i < 16; i++)
                     {
@@ -106,74 +106,50 @@ namespace RealTimeModifyCharacterBackend
                 }
                 if (lChanged) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
 
-                // --- Purity (18) & Martial Arts Enlightenment ---
+                // --- 4. Mastery & Skills ---
                 __result.SetConsummateLevel(18, context);
                 CombatSkillDomain skillDomain = DomainManager.CombatSkill;
-
                 List<short> learnedSkills = __result.GetLearnedCombatSkills();
 
                 foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
                 {
                     if (skillCfg.SectId == XN_ID)
                     {
-                        short skillId = skillCfg.TemplateId;
-                        if (!learnedSkills.Contains(skillId))
+                        if (!learnedSkills.Contains(skillCfg.TemplateId))
                         {
-                            // Create as fully mastered
-                            skillDomain.CreateCombatSkill(charId, skillId, ushort.MaxValue);
-
+                            // Create as fully mastered (ReadingState 65535)
+                            skillDomain.CreateCombatSkill(charId, skillCfg.TemplateId, 65535);
                             GCombatSkill inst;
-                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillId), out inst))
+                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillCfg.TemplateId), out inst))
                             {
                                 inst.SetPracticeLevel(100, context);
                             }
-
-                            // Activate all rewards for pages 5-14
+                            // Activate all page rewards (5-14)
                             for (byte pIdx = 5; pIdx <= 14; pIdx++)
-                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillId, pIdx);
+                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillCfg.TemplateId, pIdx);
                         }
                     }
                 }
 
-                // --- Force Full Attribute Cache Refresh ---
-                __result.InvalidateSelfAndInfluencedCache(0, context);
-
-                // Attempt broad invalidation via reflection
-                var invalidateMethod = typeof(GCharacter).GetMethod("InvalidateAllCaches",
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                if (invalidateMethod != null)
-                {
-                    invalidateMethod.Invoke(__result, new object[] { context });
-                }
-                else
-                {
-                    // Fallback to protected method
-                    AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(__result, new object[] { (ushort)0, context });
-                }
+                // --- 5. Force Full Attribute Cache Refresh ---
+                // Using Field 0 often triggers broad refresh in the game's influence system.
+                InvokeMethod(__result, "InvalidateSelfAndInfluencedCache", new object[] { (ushort)0, context });
+                // InvalidateAllCaches is usually parameterless
+                InvokeMethod(__result, "InvalidateAllCaches", null);
             }
         }
 
-        // Consolidated Identity Helpers
-        private static unsafe void SetCharacterGender(GCharacter character, sbyte gender, DataContext context)
+        // --- Reflection Helpers ---
+        private static void SetPrivateField(object obj, string fieldName, object value)
         {
-            AccessTools.Field(typeof(GCharacter), "_gender").SetValue(character, gender);
-            AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)3, context });
-            if (character.CollectionHelperData.IsArchive)
-            {
-                byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 7U, 1);
-                *ptr = (byte)gender;
-            }
+            var field = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            field?.SetValue(obj, value);
         }
 
-        private static unsafe void SetCharacterTransGender(GCharacter character, bool transgender, DataContext context)
+        private static object InvokeMethod(object obj, string methodName, object[] args)
         {
-            AccessTools.Field(typeof(GCharacter), "_transgender").SetValue(character, transgender);
-            AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)13, context });
-            if (character.CollectionHelperData.IsArchive)
-            {
-                byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 26U, 1);
-                *ptr = (byte)(transgender ? 1 : 0);
-            }
+            var method = obj.GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            return method?.Invoke(obj, args);
         }
     }
 }
