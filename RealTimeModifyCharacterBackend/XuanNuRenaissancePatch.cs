@@ -19,7 +19,7 @@ namespace RealTimeModifyCharacterBackend
         private const sbyte XN_ID = 8;
         private const short FID_ZHONG_ZHEN = 164; // 忠贞不渝
 
-        // 1. Blueprint Hijacking: Force Grade 0 (1st Rank) config for all Xuan Nu
+        // 1. Blueprint Hijacking
         [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
@@ -27,20 +27,20 @@ namespace RealTimeModifyCharacterBackend
             if (orgTemplateId == XN_ID) grade = 0;
         }
 
-        // 2. Template Hijacking: Force high-level template (373) for Xuan Nu base stats
+        // 2. Template Hijacking
         [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
         {
             if (orgTemplateId == XN_ID)
             {
-                __result = 373; // 璇女羽衣使
+                __result = 373;
                 return false;
             }
             return true;
         }
 
-        // 3. Core Implementation Logic: "The Ultimate Specification"
+        // 3. Core Implementation
         [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
         [HarmonyPostfix]
         public static unsafe void CreateIntelligentCharacter_Postfix(GameData.Domains.Character.Character __result, DataContext context)
@@ -53,47 +53,49 @@ namespace RealTimeModifyCharacterBackend
                 int charId = __result.GetId();
                 sbyte grade = orgInfo.Grade;
 
-                // --- 1. Identity & Gender (0 is Female) ---
-                SetGender(__result, (sbyte)0, context);
-                SetTransGender(__result, false, context);
+                Util.SetGender(__result, (sbyte)0, context);
+                Util.SetTransGender(__result, false, context);
                 var avatar = __result.GetAvatar();
                 avatar.ChangeGender(0);
                 __result.SetAvatar(avatar, context);
 
-                // --- 2. Features & Personality ---
                 if (!__result.GetFeatureIds().Contains(FID_ZHONG_ZHEN))
                 {
                     __result.AddFeature(context, FID_ZHONG_ZHEN, true);
                 }
-                // Attraction 900 (Celestial)
+
                 SetPrivateField(__result, "_baseAttraction", (short)900);
-                // Morality 700 (Benevolent)
                 __result.SetBaseMorality(700, context);
 
-                // --- 3. Aptitude Enhancement (Tiered Scaling) ---
                 float multiplier = (grade == 0) ? 1.5f : (grade == 1 ? 1.35f : 1.1f);
                 short combatFloor = (short)(130 * multiplier);
                 short lifeFloor = (short)(130 * multiplier);
                 short musicFloor = (short)(150 * multiplier);
 
-                // Combat Aptitude
-                // Note: GetBaseCombatSkillQualifications returns ref CombatSkillShorts.
-                // In Taiwu Remake, Items is typically a pointer (short*) when decompiled or accessed in unsafe context.
-                // The error "already fixed" confirms it is treated as a fixed address/pointer already.
+                // --- Pointer arithmetic fix for Combat Aptitude ---
+                // We access the Items fixed buffer directly. Since __result.GetBaseCombatSkillQualifications()
+                // returns a copy or a local variable, and we are in an unsafe context,
+                // the FixedElementField pointer can be accessed without 'fixed' if the object is pinned.
+                // However, the error "already fixed" suggests that the compiler sees cQuals.Items as already fixed.
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                short* pC = cQuals.Items;
+
+                // Use the pattern that worked for the game's own code.
                 for (int i = 0; i < 14; i++)
                 {
-                    if (pC[i] < combatFloor) { pC[i] = combatFloor; cChanged = true; }
+                    short* p = &cQuals.Items.FixedElementField;
+                    if (p[i] < combatFloor)
+                    {
+                        p[i] = combatFloor;
+                        cChanged = true;
+                    }
                 }
                 if (cChanged) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
 
-                // Life Aptitude
+                // --- Pointer arithmetic fix for Life Aptitude ---
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                short* pL = lQuals.Items;
-                // Music is index 0
+                short* pL = &lQuals.Items.FixedElementField;
                 if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
                 for (int i = 1; i < 16; i++)
                 {
@@ -101,7 +103,6 @@ namespace RealTimeModifyCharacterBackend
                 }
                 if (lChanged) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
 
-                // --- 4. Mastery & Skills ---
                 __result.SetConsummateLevel(18, context);
                 CombatSkillDomain skillDomain = DomainManager.CombatSkill;
                 List<short> learnedSkills = __result.GetLearnedCombatSkills();
@@ -112,49 +113,19 @@ namespace RealTimeModifyCharacterBackend
                     {
                         if (!learnedSkills.Contains(skillCfg.TemplateId))
                         {
-                            // Create as fully mastered (ReadingState 65535)
                             skillDomain.CreateCombatSkill(charId, skillCfg.TemplateId, 65535);
                             GameData.Domains.CombatSkill.CombatSkill inst;
                             if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillCfg.TemplateId), out inst))
                             {
                                 inst.SetPracticeLevel(100, context);
                             }
-                            // Activate all page rewards (5-14)
                             for (byte pIdx = 5; pIdx <= 14; pIdx++)
                                 skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillCfg.TemplateId, pIdx);
                         }
                     }
                 }
 
-                // --- 5. Force Full Attribute Cache Refresh ---
                 InvokeMethod(__result, "InvalidateSelfAndInfluencedCache", new object[] { (ushort)0, context });
-            }
-        }
-
-        // --- Consolidated Identity Helpers (Reflection based for robustness) ---
-        private static void SetGender(GameData.Domains.Character.Character character, sbyte gender, DataContext context)
-        {
-            SetPrivateField(character, "_gender", gender);
-            InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)3, context });
-            if (character.CollectionHelperData.IsArchive)
-            {
-                unsafe {
-                    byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 7U, 1);
-                    *ptr = (byte)gender;
-                }
-            }
-        }
-
-        private static void SetTransGender(GameData.Domains.Character.Character character, bool transgender, DataContext context)
-        {
-            SetPrivateField(character, "_transgender", transgender);
-            InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)13, context });
-            if (character.CollectionHelperData.IsArchive)
-            {
-                unsafe {
-                    byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 26U, 1);
-                    *ptr = (byte)(transgender ? 1 : 0);
-                }
             }
         }
 
