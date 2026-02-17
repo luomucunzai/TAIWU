@@ -1,145 +1,136 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using GameData.Domains;
-using GameData.Domains.Character;
+using GCharacter = GameData.Domains.Character.Character;
 using GameData.Domains.Character.Creation;
 using GameData.Domains.Organization;
+using GCombatSkill = GameData.Domains.CombatSkill.CombatSkill;
 using GameData.Domains.CombatSkill;
 using GameData.Common;
 using Config;
+using System.Reflection;
 
 namespace RealTimeModifyCharacterBackend
 {
     public static class XuanNuRenaissancePatch
     {
-        // 1. Blueprint Hijacking: Force Grade 0 for Xuan Nu
+        private const sbyte XN_ID = 8;
+        private const short FID_ZHONG_ZHEN = 164; // 忠贞不渝
+
+        // 1. Blueprint Hijacking: All Xuan Nu members use Grade 0 (1st Rank) config
         [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
         {
-            if (orgTemplateId == 8) // Xuan Nu Sect
-            {
-                grade = 0; // Force Grade 0 (1st Rank)
-            }
+            if (orgTemplateId == XN_ID) grade = 0;
         }
 
         // 2. Template Hijacking: Force high-level template for Xuan Nu
-        // This determines base attributes like HP and Six-Dims baseline.
         [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
         {
-            if (orgTemplateId == 8)
+            if (orgTemplateId == XN_ID)
             {
-                __result = 373; // 璇女羽衣使 (Feather Robe Envoy - High level template)
-                return false; // Skip original method
+                __result = 373; // 璇女羽衣使
+                return false;
             }
             return true;
         }
 
-        // 3. Character Generation: Highest Specifications
+        // 3. Core Implementation Logic
         [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter", new Type[] { typeof(DataContext), typeof(IntelligentCharacterCreationInfo).MakeByRefType() })]
         [HarmonyPostfix]
-        public static unsafe void CreateIntelligentCharacter_Postfix(Character __result, DataContext context)
+        public static unsafe void CreateIntelligentCharacter_Postfix(GCharacter __result, DataContext context)
         {
             if (__result == null) return;
 
             OrganizationInfo orgInfo = __result.GetOrganizationInfo();
-            if (orgInfo.OrgTemplateId == 8) // Xuan Nu Sect
+            if (orgInfo.OrgTemplateId == XN_ID)
             {
                 int charId = __result.GetId();
+                sbyte grade = orgInfo.Grade;
 
-                // Gender Lock to Female (1)
-                if (__result.GetGender() != 1)
+                // --- Gender & Appearance (0 is Female in Taiwu Remake) ---
+                if (__result.GetGender() != 0)
                 {
-                    Util.SetGender(__result, 1, context);
+                    Util.SetGender(__result, 0, context);
+                    __result.GetAvatar()?.ChangeGender(0);
+                }
+                Util.SetTransGender(__result, false, context);
+
+                // --- Feature: Zhong Zhen Bu Yu (164) ---
+                if (!__result.GetFeatureIds().Contains(FID_ZHONG_ZHEN))
+                {
+                    __result.AddFeature(context, FID_ZHONG_ZHEN, true);
                 }
 
-                // Aptitude Floor (Combat 130)
-                CombatSkillShorts combatQuals = __result.GetBaseCombatSkillQualifications();
-                bool changedCombat = false;
-                fixed (short* pQuals = &combatQuals.Items.FixedElementField)
+                // --- Attraction & Behavior (Celestial / Benevolent) ---
+                // Force base attraction to 900
+                AccessTools.Field(typeof(GCharacter), "_baseAttraction").SetValue(__result, (short)900);
+                // Set morality to 700 (Benevolent / 仁善)
+                __result.SetBaseMorality(700, context);
+
+                // --- Tiered Aptitude Enhancement (1.5x / 1.35x / 1.1x) ---
+                float multiplier = (grade == 0) ? 1.5f : (grade == 1 ? 1.35f : 1.1f);
+                short combatFloor = (short)(130 * multiplier);
+                short lifeFloor = (short)(130 * multiplier);
+                short musicFloor = (short)(150 * multiplier);
+
+                // Combat Skill Qualifications
+                CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
+                bool cChanged = false;
+                fixed (short* pC = &cQuals.Items.FixedElementField)
                 {
                     for (int i = 0; i < 14; i++)
                     {
-                        if (pQuals[i] < 130)
-                        {
-                            pQuals[i] = 130;
-                            changedCombat = true;
-                        }
+                        if (pC[i] < combatFloor) { pC[i] = combatFloor; cChanged = true; }
                     }
                 }
-                if (changedCombat)
-                {
-                    __result.SetBaseCombatSkillQualifications(ref combatQuals, context);
-                }
+                if (cChanged) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
 
-                // Aptitude Floor (Life Skill: Music 150, others 130)
-                LifeSkillShorts lifeQuals = __result.GetBaseLifeSkillQualifications();
-                bool changedLife = false;
-                fixed (short* pQuals = &lifeQuals.Items.FixedElementField)
+                // Life Skill Qualifications
+                LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
+                bool lChanged = false;
+                fixed (short* pL = &lQuals.Items.FixedElementField)
                 {
-                    // Index 0 is Music (音律)
-                    if (pQuals[0] < 150)
-                    {
-                        pQuals[0] = 150;
-                        changedLife = true;
-                    }
+                    if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
                     for (int i = 1; i < 16; i++)
                     {
-                        if (pQuals[i] < 130)
-                        {
-                            pQuals[i] = 130;
-                            changedLife = true;
-                        }
+                        if (pL[i] < lifeFloor) { pL[i] = lifeFloor; lChanged = true; }
                     }
                 }
-                if (changedLife)
-                {
-                    __result.SetBaseLifeSkillQualifications(ref lifeQuals, context);
-                }
+                if (lChanged) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
 
-                // Inject 18 Purity (Consummate Level)
+                // --- Purity & Martial Arts Mastery ---
                 __result.SetConsummateLevel(18, context);
-
-                // Grant all Xuan Nu martial arts and Activate All Rewards (Pages 5-14)
                 CombatSkillDomain skillDomain = DomainManager.CombatSkill;
-                Dictionary<short, CombatSkill> existingSkills = skillDomain.GetCharCombatSkills(charId);
+
+                List<short> learnedSkills = __result.GetLearnedCombatSkills();
 
                 foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
                 {
-                    if (skillCfg.SectId == 8)
+                    if (skillCfg.SectId == XN_ID)
                     {
-                        short skillId = skillCfg.TemplateId;
-                        if (!existingSkills.ContainsKey(skillId))
+                        if (!learnedSkills.Contains(skillCfg.TemplateId))
                         {
-                            // Create as fully mastered (ReadingState 65535 covers all 15/16 bits)
-                            skillDomain.CreateCombatSkill(charId, skillId, 65535);
-
-                            CombatSkill newSkill;
-                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillId), out newSkill))
+                            skillDomain.CreateCombatSkill(charId, skillCfg.TemplateId, 65535);
+                            GCombatSkill inst;
+                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillCfg.TemplateId), out inst))
                             {
-                                newSkill.SetPracticeLevel(100, context);
+                                inst.SetPracticeLevel(100, context);
                             }
-
-                            // Activate all rewards for pages 5-14
-                            // This ensures full Neili bonuses and passive attributes are applied.
-                            for (byte pageIdx = 5; pageIdx <= 14; pageIdx++)
-                            {
-                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillId, pageIdx);
-                            }
+                            // Activate all page rewards (5-14)
+                            for (byte pIdx = 5; pIdx <= 14; pIdx++)
+                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillCfg.TemplateId, pIdx);
                         }
                     }
                 }
 
-                // Final Refresh: Force full cache invalidation
-                var method = typeof(Character).GetMethod("SetModifiedAndInvalidateInfluencedCache",
-                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
-                if (method != null)
-                {
-                    method.Invoke(__result, new object[] { (ushort)0, context });
-                }
+                // --- Force Full Cache Refresh ---
+                __result.InvalidateSelfAndInfluencedCache(0, context);
             }
         }
     }

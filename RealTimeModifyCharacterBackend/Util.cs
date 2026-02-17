@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Config;
@@ -10,6 +10,8 @@ using GameData.Domains.Character.AvatarSystem;
 using GameData.Domains.Character.Display;
 using HarmonyLib;
 
+namespace RealTimeModifyCharacterBackend
+{
 // Token: 0x02000006 RID: 6
 [NullableContext(1)]
 [Nullable(0)]
@@ -350,4 +352,5 @@ internal class Util
 		}
 		return result;
 	}
+}
 }
