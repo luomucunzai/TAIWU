@@ -15,9 +15,12 @@ using System.Reflection;
 using GameData.Domains.Item;
 using Config;
 
+// Resolve ambiguity
+using GCharacter = GameData.Domains.Character.Character;
+
 namespace XuanNvMemberUpgrade.FinalFramework
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "12.0.9")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "12.0.9_FinalFix")]
     public class XuanNvMemberUpgradeMod : TaiwuRemakePlugin
     {
         private const short XuanNvSectId = 8;
@@ -97,7 +100,7 @@ namespace XuanNvMemberUpgrade.FinalFramework
 
             [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
-            public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, Character __result)
+            public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, GCharacter __result)
             {
                 if (__result == null) return;
 
@@ -135,9 +138,15 @@ namespace XuanNvMemberUpgrade.FinalFramework
                 {
                     CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                     bool changed = false;
-                    short* p = &cQuals.Items.FixedElementField;
+                    // cQuals.Items is a fixed buffer (short*)
                     for (int i = 0; i < 14; i++)
-                        if (p[i] < globalCombatQualification) { p[i] = (short)globalCombatQualification; changed = true; }
+                    {
+                        if (cQuals.Items[i] < globalCombatQualification)
+                        {
+                            cQuals.Items[i] = (short)globalCombatQualification;
+                            changed = true;
+                        }
+                    }
                     if (changed) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
                 }
 
@@ -145,9 +154,16 @@ namespace XuanNvMemberUpgrade.FinalFramework
                 {
                     LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                     bool changed = false;
-                    short* p = &lQuals.Items.FixedElementField;
-                    for (int i = 0; i < 16; i++)
-                        if (p[i] < globalLifeQualification) { p[i] = (short)globalLifeQualification; changed = true; }
+                    // lQuals.Items is a fixed buffer (short*)
+                    if (lQuals.Items[0] < globalLifeQualification) { lQuals.Items[0] = (short)globalLifeQualification; changed = true; }
+                    for (int i = 1; i < 16; i++)
+                    {
+                        if (lQuals.Items[i] < globalLifeQualification)
+                        {
+                            lQuals.Items[i] = (short)globalLifeQualification;
+                            changed = true;
+                        }
+                    }
                     if (changed) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
                 }
 
@@ -168,7 +184,7 @@ namespace XuanNvMemberUpgrade.FinalFramework
                 InvokeMethod(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)0, context });
             }
 
-            private static void LearnAndMasterSkill(Character character, short skillId, DataContext context)
+            private static void LearnAndMasterSkill(GCharacter character, short skillId, DataContext context)
             {
                 if (character.GetLearnedCombatSkills().Contains(skillId)) return;
                 var skill = character.LearnNewCombatSkill(context, skillId, 65535);
