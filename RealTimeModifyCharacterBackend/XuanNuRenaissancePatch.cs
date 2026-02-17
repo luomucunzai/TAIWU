@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using GameData.Domains;
+using GameData.Domains.Character;
 using GCharacter = GameData.Domains.Character.Character;
 using GameData.Domains.Character.Creation;
 using GameData.Domains.Organization;
