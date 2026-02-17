@@ -1,0 +1,1629 @@
+Folder PATH listing for volume heaven
+Volume serial number is 7400-DB6F
+A:.
+│  Condition.cs
+│  EAiActionType.cs
+│  EAiConditionType.cs
+│  EAiNodeType.cs
+│  EAiParamType.cs
+│  EAvatarElementsType.cs
+│  EAvatarExtraPartsType.cs
+│  EBuildingBlockClass.cs
+│  EBuildingBlockType.cs
+│  EBuildingFormulaArgType.cs
+│  EBuildingFormulaType.cs
+│  EBuildingScaleClass.cs
+│  EBuildingScaleEffect.cs
+│  EBuildingScaleType.cs
+│  ECharacterFeatureDarkAshProtector.cs
+│  ECharacterFeatureInfectedType.cs
+│  ECharacterFeatureType.cs
+│  ECharacterMatcherAgeType.cs
+│  ECharacterMatcherGenderType.cs
+│  ECharacterMatcherIdentityType.cs
+│  ECharacterMatcherSubCondition.cs
+│  ECharacterPropertyDisplayType.cs
+│  ECharacterPropertyReferencedType.cs
+│  ECharacterSpecialTemmateType.cs
+│  ECombatEvaluationExtraCheck.cs
+│  ECombatSkillSubType.cs
+│  EConsummateLevelType.cs
+│  ECricketPartsType.cs
+│  EDebateNodeEffectRemoveType.cs
+│  EDebateRecordParamType.cs
+│  EDebateStrategyAiCheckType.cs
+│  EDebateStrategyMarkType.cs
+│  EDebateStrategyTargetObjectType.cs
+│  EDebateStrategyTargetType.cs
+│  EDebateStrategyTriggerType.cs
+│  EEventArgumentType.cs
+│  EEventFunctionConditionSubType.cs
+│  EEventFunctionType.cs
+│  EEventValueType.cs
+│  EFeastRequirementType.cs
+│  EFeastType.cs
+│  EFoodFoodType.cs
+│  EHotKeyDisplayType.cs
+│  EInformationInfoSwordInformationType.cs
+│  EInstantNotificationType.cs
+│  EInteractCheckTipConfessionLoveFactorType.cs
+│  EInteractCheckTipConfessionLovePureSubType.cs
+│  EInteractCheckTipConfessionLoveSecularSubType.cs
+│  EInteractCheckTipSpecialLineDisplayType.cs
+│  EInteractCheckTipSpecialValueDisplayType.cs
+│  EInteractionEventOptionAbleXiangshu.cs
+│  EInteractionEventOptionCompareConsummate.cs
+│  EInteractionEventOptionIdentityAbility.cs
+│  EInteractionEventOptionInteractionType.cs
+│  EInteractionEventOptionOrganizationSupport.cs
+│  EInteractionEventOptionTaiwuGroupStatus.cs
+│  ELifeRecordDisplayType.cs
+│  ELifeRecordScoreType.cs
+│  ELifeSkillCombatEffectGroup.cs
+│  ELifeSkillCombatEffectSubEffect.cs
+│  ELifeSkillCombatEffectType.cs
+│  EMapAreaAreaDirection.cs
+│  EMapBlockSubType.cs
+│  EMapBlockType.cs
+│  EMapPickupsType.cs
+│  EMapPickupsType2.cs
+│  EMaterialFilterHardness.cs
+│  EMaterialFilterType.cs
+│  EMaterialProperty.cs
+│  EMedicineEffectSubType.cs
+│  EMedicineEffectType.cs
+│  EMerchantTypeCityAttributeType.cs
+│  EMiscFilterType.cs
+│  EMiscGenerateType.cs
+│  EMixPoisonEffect.cs
+│  EMonthlyEventType.cs
+│  EMonthlyNotificationSectionType.cs
+│  ENeiliAllocationStatusType.cs
+│  ENormalInteractionType.cs
+│  ENpcRandomWordsLocation.cs
+│  ENpcRandomWordsType.cs
+│  EOrganizationSettlementType.cs
+│  EPrioritizedActionsActType.cs
+│  EProfessionFormulaType.cs
+│  EProfessionSkillTriggerType.cs
+│  EProfessionSkillType.cs
+│  EPunishmentTypeDisplayType.cs
+│  ERefiningEffectAccessoryType.cs
+│  ERefiningEffectArmorType.cs
+│  ERefiningEffectWeaponType.cs
+│  ESecretInformationAppliedSelectionHotKey.cs
+│  ESecretInformationInitialTarget.cs
+│  ESecretInformationSpecialConditionCalcFameLine.cs
+│  ESecretInformationSpecialConditionCalcSexualMateCase.cs
+│  ESecretInformationSpecialConditionCalcSexualMateRule.cs
+│  ESecretInformationSpecialConditionCalculate.cs
+│  ESecretInformationValueType.cs
+│  ESensitiveWordsType.cs
+│  ESkillBreakGridTypeType.cs
+│  ESkillBreakPlateGridBonusTypeAppearType.cs
+│  ESpecialEffectAiCostNeiliAllocationType.cs
+│  ESpecialEffectRawCreateType.cs
+│  ETaskChainGroup.cs
+│  ETaskChainType.cs
+│  ETaskConditionAreaType.cs
+│  ETaskConditionCharacterType.cs
+│  ETaskConditionType.cs
+│  ETeammateBubbleBubbleElementType.cs
+│  ETeammateCommandImplement.cs
+│  ETeammateCommandOption.cs
+│  ETeammateCommandType.cs
+│  ETravelingEventDisplayType.cs
+│  ETravelingEventTriggerAreaType.cs
+│  ETravelingEventTriggerType.cs
+│  ETravelingEventType.cs
+│  EVillagerRoleFormulaType.cs
+│  GlobalConfig.cs
+│  LanguageKey.cs
+│  LocalStringManager.cs
+│  TeachBookResult.cs
+│  
+├─AiEditor
+│      IAiConfigTuple.cs
+│      
+├─Config
+│  │  Accessory.cs
+│  │  AccessoryItem.cs
+│  │  Adventure.cs
+│  │  AdventureAdvancedBranch.cs
+│  │  AdventureBaseBranch.cs
+│  │  AdventureBranch.cs
+│  │  AdventureEndNode.cs
+│  │  AdventureItem.cs
+│  │  AdventureItemDropRate.cs
+│  │  AdventureItemDropRateItem.cs
+│  │  AdventureLifeSkillRequirement.cs
+│  │  AdventureLifeSkillRequirementItem.cs
+│  │  AdventurePersonalityContentWeights.cs
+│  │  AdventureRemakeMapBlock.cs
+│  │  AdventureRemakeMapBlockItem.cs
+│  │  AdventureStartNode.cs
+│  │  AdventureTerrain.cs
+│  │  AdventureTerrainItem.cs
+│  │  AdventureTransferNode.cs
+│  │  AdventureType.cs
+│  │  AdventureTypeItem.cs
+│  │  AgeEffect.cs
+│  │  AgeEffectItem.cs
+│  │  AiAction.cs
+│  │  AiActionItem.cs
+│  │  AiCondition.cs
+│  │  AiConditionItem.cs
+│  │  AiData.cs
+│  │  AiDataItem.cs
+│  │  AiGroup.cs
+│  │  AiGroupItem.cs
+│  │  AiNode.cs
+│  │  AiNodeItem.cs
+│  │  AiParam.cs
+│  │  AiParamItem.cs
+│  │  AiRelations.cs
+│  │  AiRelationsItem.cs
+│  │  Animal.cs
+│  │  AnimalItem.cs
+│  │  AreaTravelRoute.cs
+│  │  Armor.cs
+│  │  ArmorItem.cs
+│  │  AvatarClothColors.cs
+│  │  AvatarClothColorsItem.cs
+│  │  AvatarElements.cs
+│  │  AvatarElementsItem.cs
+│  │  AvatarExtraParts.cs
+│  │  AvatarExtraPartsItem.cs
+│  │  AvatarEyeballColors.cs
+│  │  AvatarEyeballColorsItem.cs
+│  │  AvatarFeatureColors.cs
+│  │  AvatarFeatureColorsItem.cs
+│  │  AvatarHairColors.cs
+│  │  AvatarHairColorsItem.cs
+│  │  AvatarHead.cs
+│  │  AvatarHeadItem.cs
+│  │  AvatarLipColors.cs
+│  │  AvatarLipColorsItem.cs
+│  │  AvatarSkinColors.cs
+│  │  AvatarSkinColorsItem.cs
+│  │  BecomeEnemyType.cs
+│  │  BecomeEnemyTypeItem.cs
+│  │  BehaviorType.cs
+│  │  BehaviorTypeItem.cs
+│  │  BigEventKey.cs
+│  │  BigEventKeyItem.cs
+│  │  BodyPart.cs
+│  │  BodyPartItem.cs
+│  │  Boss.cs
+│  │  BossItem.cs
+│  │  BreakGrid.cs
+│  │  BuildingBlock.cs
+│  │  BuildingBlockItem.cs
+│  │  BuildingFormula.cs
+│  │  BuildingFormulaItem.cs
+│  │  BuildingScale.cs
+│  │  BuildingScaleItem.cs
+│  │  Carrier.cs
+│  │  CarrierItem.cs
+│  │  CatchThiefLevel.cs
+│  │  CatchThiefLevelItem.cs
+│  │  CatchThiefPlace.cs
+│  │  CatchThiefPlaceItem.cs
+│  │  Character.cs
+│  │  CharacterDeathType.cs
+│  │  CharacterFeature.cs
+│  │  CharacterFeatureItem.cs
+│  │  CharacterFilterRules.cs
+│  │  CharacterFilterRulesItem.cs
+│  │  CharacterItem.cs
+│  │  CharacterMatcher.cs
+│  │  CharacterMatcherItem.cs
+│  │  CharacterPropertyDisplay.cs
+│  │  CharacterPropertyDisplayItem.cs
+│  │  CharacterPropertyExtensions.cs
+│  │  CharacterPropertyReferenced.cs
+│  │  CharacterPropertyReferencedItem.cs
+│  │  CharacterTitle.cs
+│  │  CharacterTitleItem.cs
+│  │  Chicken.cs
+│  │  ChickenItem.cs
+│  │  Choosy.cs
+│  │  ChoosyItem.cs
+│  │  Clothing.cs
+│  │  ClothingItem.cs
+│  │  CombatConfig.cs
+│  │  CombatConfigItem.cs
+│  │  CombatDifficulty.cs
+│  │  CombatDifficultyItem.cs
+│  │  CombatEvaluation.cs
+│  │  CombatEvaluationItem.cs
+│  │  CombatItemUse.cs
+│  │  CombatItemUseItem.cs
+│  │  CombatScene.cs
+│  │  CombatSceneItem.cs
+│  │  CombatSkeleton.cs
+│  │  CombatSkeletonItem.cs
+│  │  CombatSkill.cs
+│  │  CombatSkillItem.cs
+│  │  CombatSkillProperty.cs
+│  │  CombatSkillPropertyItem.cs
+│  │  CombatSkillType.cs
+│  │  CombatSkillTypeItem.cs
+│  │  CombatState.cs
+│  │  CombatStateItem.cs
+│  │  ConfigCollection.cs
+│  │  ConsummateLevel.cs
+│  │  ConsummateLevelItem.cs
+│  │  CraftTool.cs
+│  │  CraftToolItem.cs
+│  │  Cricket.cs
+│  │  CricketItem.cs
+│  │  CricketParts.cs
+│  │  CricketPartsItem.cs
+│  │  CricketPlace.cs
+│  │  CricketPlaceItem.cs
+│  │  DebateComment.cs
+│  │  DebateCommentItem.cs
+│  │  DebateEvaluation.cs
+│  │  DebateEvaluationItem.cs
+│  │  DebateNodeEffect.cs
+│  │  DebateNodeEffectItem.cs
+│  │  DebateRecord.cs
+│  │  DebateRecordItem.cs
+│  │  DebateReference.cs
+│  │  DebateReferenceItem.cs
+│  │  DebateStrategy.cs
+│  │  DebateStrategyEffect.cs
+│  │  DebateStrategyEffectItem.cs
+│  │  DebateStrategyItem.cs
+│  │  DebateStrategyTarget.cs
+│  │  DebateStrategyTargetItem.cs
+│  │  DemandInteraction.cs
+│  │  DemandInteractionItem.cs
+│  │  DemonSlayerTrial.cs
+│  │  DemonSlayerTrialItem.cs
+│  │  DemonSlayerTrialLevel.cs
+│  │  DemonSlayerTrialLevelItem.cs
+│  │  DemonSlayerTrialRestrict.cs
+│  │  DemonSlayerTrialRestrictItem.cs
+│  │  DestinyType.cs
+│  │  DestinyTypeItem.cs
+│  │  EMedicineEffectSubTypeExtension.cs
+│  │  EncyclopediaSuperLink.cs
+│  │  EncyclopediaSuperLinkItem.cs
+│  │  EnemyNest.cs
+│  │  EnemyNestItem.cs
+│  │  EnhancedRichTextTags.cs
+│  │  EnhancedRichTextTagsItem.cs
+│  │  EquipmentEffect.cs
+│  │  EquipmentEffectItem.cs
+│  │  EventActors.cs
+│  │  EventActorsItem.cs
+│  │  EventArgument.cs
+│  │  EventArgumentItem.cs
+│  │  EventBoolState.cs
+│  │  EventBoolStateItem.cs
+│  │  EventConditionOperator.cs
+│  │  EventConditionOperatorItem.cs
+│  │  EventFunction.cs
+│  │  EventFunctionItem.cs
+│  │  EventOptionConsumeType.cs
+│  │  EventOptionConsumeTypeItem.cs
+│  │  EventScriptType.cs
+│  │  EventScriptTypeItem.cs
+│  │  EventValue.cs
+│  │  EventValueItem.cs
+│  │  ExtraNameText.cs
+│  │  ExtraNameTextItem.cs
+│  │  FameAction.cs
+│  │  FameActionItem.cs
+│  │  Feast.cs
+│  │  FeastItem.cs
+│  │  Food.cs
+│  │  FoodItem.cs
+│  │  HanNameItem.cs
+│  │  HotKeyDisplay.cs
+│  │  HotKeyDisplayItem.cs
+│  │  HotkeyIndex.cs
+│  │  ImplementedDlc.cs
+│  │  ImplementedDlcItem.cs
+│  │  Information.cs
+│  │  InformationInfo.cs
+│  │  InformationInfoItem.cs
+│  │  InformationItem.cs
+│  │  InformationType.cs
+│  │  InformationTypeItem.cs
+│  │  InstantNotification.cs
+│  │  InstantNotificationItem.cs
+│  │  InteractCheck.cs
+│  │  InteractCheckItem.cs
+│  │  InteractCheckTip.cs
+│  │  InteractCheckTipItem.cs
+│  │  InteractionEventOption.cs
+│  │  InteractionEventOptionItem.cs
+│  │  ItemFilterRules.cs
+│  │  ItemFilterRulesItem.cs
+│  │  Jiao.cs
+│  │  JiaoItem.cs
+│  │  JiaoNurturance.cs
+│  │  JiaoNurturanceItem.cs
+│  │  JiaoProperty.cs
+│  │  JiaoPropertyItem.cs
+│  │  JiaoRecord.cs
+│  │  JiaoRecordItem.cs
+│  │  JieqingGameLevel.cs
+│  │  JieqingGameLevelItem.cs
+│  │  JieqingGamePeace.cs
+│  │  JieqingGamePeaceItem.cs
+│  │  LandFormType.cs
+│  │  LandFormTypeItem.cs
+│  │  Legacy.cs
+│  │  LegacyItem.cs
+│  │  LegacyPoint.cs
+│  │  LegacyPointItem.cs
+│  │  LegacyPointType.cs
+│  │  LegacyPointTypeItem.cs
+│  │  LegendaryBookPropertyBonusType.cs
+│  │  LegendaryBookPropertyBonusTypeItem.cs
+│  │  LegendaryBookSlot.cs
+│  │  LegendaryBookSlotItem.cs
+│  │  LifeLinkFeatureEffect.cs
+│  │  LifeLinkFeatureEffectItem.cs
+│  │  LifeRecord.cs
+│  │  LifeRecordItem.cs
+│  │  LifeSkill.cs
+│  │  LifeSkillCombatEffect.cs
+│  │  LifeSkillCombatEffectItem.cs
+│  │  LifeSkillCombatTalk.cs
+│  │  LifeSkillCombatTalkItem.cs
+│  │  LifeSkillItem.cs
+│  │  LifeSkillPageUnlockItem.cs
+│  │  LifeSkillPageUnlockType.cs
+│  │  LifeSkillType.cs
+│  │  LifeSkillTypeItem.cs
+│  │  LoadingTips.cs
+│  │  LoadingTipsItem.cs
+│  │  LocalMonasticTitles.cs
+│  │  LocalNames.cs
+│  │  LocalSurnames.cs
+│  │  LocalTownNames.cs
+│  │  LocalZangNames.cs
+│  │  Loong.cs
+│  │  LoongItem.cs
+│  │  MainStoryLineProgress.cs
+│  │  MainStoryLineProgressItem.cs
+│  │  MakeItemSubType.cs
+│  │  MakeItemSubTypeItem.cs
+│  │  MakeItemType.cs
+│  │  MakeItemTypeItem.cs
+│  │  MapArea.cs
+│  │  MapAreaItem.cs
+│  │  MapBlock.cs
+│  │  MapBlockItem.cs
+│  │  MapBlockMatcher.cs
+│  │  MapBlockMatcherItem.cs
+│  │  MapPickups.cs
+│  │  MapPickupsItem.cs
+│  │  MapState.cs
+│  │  MapStateItem.cs
+│  │  Material.cs
+│  │  MaterialItem.cs
+│  │  Medicine.cs
+│  │  MedicineItem.cs
+│  │  Merchant.cs
+│  │  MerchantItem.cs
+│  │  MerchantType.cs
+│  │  MerchantTypeItem.cs
+│  │  MiniGameYuanshan.cs
+│  │  MiniGameYuanshanItem.cs
+│  │  MinionGroup.cs
+│  │  MinionGroupItem.cs
+│  │  Misc.cs
+│  │  MiscItem.cs
+│  │  MixPoisonEffect.cs
+│  │  MixPoisonEffectItem.cs
+│  │  MonasticTitleItem.cs
+│  │  Month.cs
+│  │  MonthItem.cs
+│  │  MonthlyActions.cs
+│  │  MonthlyActionsItem.cs
+│  │  MonthlyEvent.cs
+│  │  MonthlyEventItem.cs
+│  │  MonthlyNotification.cs
+│  │  MonthlyNotificationItem.cs
+│  │  MonthlyNotificationSortingGroup.cs
+│  │  MonthlyNotificationSortingGroupItem.cs
+│  │  MouseTipType.cs
+│  │  MouseTipTypeItem.cs
+│  │  Music.cs
+│  │  MusicItem.cs
+│  │  NeedPersonality.cs
+│  │  NeedTrick.cs
+│  │  NeiliAllocationEffect.cs
+│  │  NeiliAllocationEffectItem.cs
+│  │  NeiliAllocationStatus.cs
+│  │  NeiliAllocationStatusItem.cs
+│  │  NeiliType.cs
+│  │  NeiliTypeItem.cs
+│  │  NormalInteraction.cs
+│  │  NormalInteractionItem.cs
+│  │  NpcRandomWords.cs
+│  │  NpcRandomWordsItem.cs
+│  │  Organization.cs
+│  │  OrganizationItem.cs
+│  │  OrganizationMember.cs
+│  │  OrganizationMemberItem.cs
+│  │  OtherActionType.cs
+│  │  OtherActionTypeItem.cs
+│  │  PersonalNeed.cs
+│  │  PersonalNeedItem.cs
+│  │  Poison.cs
+│  │  PoisonItem.cs
+│  │  PredefinedLog.cs
+│  │  PredefinedLogExtensions.cs
+│  │  PredefinedLogItem.cs
+│  │  PrioritizedActions.cs
+│  │  PrioritizedActionsItem.cs
+│  │  Profession.cs
+│  │  ProfessionFormula.cs
+│  │  ProfessionFormulaItem.cs
+│  │  ProfessionItem.cs
+│  │  ProfessionSkill.cs
+│  │  ProfessionSkillItem.cs
+│  │  ProtagonistFeature.cs
+│  │  ProtagonistFeatureItem.cs
+│  │  PunishmentSeverity.cs
+│  │  PunishmentSeverityItem.cs
+│  │  PunishmentType.cs
+│  │  PunishmentTypeItem.cs
+│  │  QiArtStrategy.cs
+│  │  QiArtStrategyItem.cs
+│  │  QiDisorderEffect.cs
+│  │  QiDisorderEffectItem.cs
+│  │  RandomEnemy.cs
+│  │  RandomEnemyItem.cs
+│  │  RanshanGiveupLegendaryBook.cs
+│  │  RanshanGiveupLegendaryBookItem.cs
+│  │  ReadingStrategy.cs
+│  │  ReadingStrategyItem.cs
+│  │  RefiningEffect.cs
+│  │  RefiningEffectItem.cs
+│  │  RefNameMap.cs
+│  │  RelationDisplayType.cs
+│  │  RelationDisplayTypeItem.cs
+│  │  ResourceCollection.cs
+│  │  ResourceCollectionItem.cs
+│  │  ResourceInfo.cs
+│  │  ResourceType.cs
+│  │  ResourceTypeItem.cs
+│  │  SamsaraPlatformRecord.cs
+│  │  SamsaraPlatformRecordItem.cs
+│  │  Season.cs
+│  │  SeasonItem.cs
+│  │  SecretInformation.cs
+│  │  SecretInformationAppliedContent.cs
+│  │  SecretInformationAppliedContentItem.cs
+│  │  SecretInformationAppliedRelation.cs
+│  │  SecretInformationAppliedRelationItem.cs
+│  │  SecretInformationAppliedResult.cs
+│  │  SecretInformationAppliedResultItem.cs
+│  │  SecretInformationAppliedSelection.cs
+│  │  SecretInformationAppliedSelectionItem.cs
+│  │  SecretInformationAppliedStruct.cs
+│  │  SecretInformationAppliedStructItem.cs
+│  │  SecretInformationDissemination.cs
+│  │  SecretInformationDisseminationItem.cs
+│  │  SecretInformationEffect.cs
+│  │  SecretInformationEffectItem.cs
+│  │  SecretInformationItem.cs
+│  │  SecretInformationSectPunish.cs
+│  │  SecretInformationSectPunishItem.cs
+│  │  SecretInformationSpecialCondition.cs
+│  │  SecretInformationSpecialConditionItem.cs
+│  │  SectApprovingEffect.cs
+│  │  SectApprovingEffectItem.cs
+│  │  SensitiveWords.cs
+│  │  SensitiveWordsItem.cs
+│  │  SettlementPrisonEventEffect.cs
+│  │  SettlementPrisonEventEffectItem.cs
+│  │  SettlementPrisonRecord.cs
+│  │  SettlementPrisonRecordItem.cs
+│  │  SettlementTreasuryEventEffect.cs
+│  │  SettlementTreasuryEventEffectItem.cs
+│  │  SettlementTreasuryLimit.cs
+│  │  SettlementTreasuryLimitItem.cs
+│  │  SettlementTreasuryRecord.cs
+│  │  SettlementTreasuryRecordItem.cs
+│  │  ShopEvent.cs
+│  │  ShopEventItem.cs
+│  │  ShortList.cs
+│  │  SkillBook.cs
+│  │  SkillBookItem.cs
+│  │  SkillBreakBonusEffect.cs
+│  │  SkillBreakBonusEffectImplement.cs
+│  │  SkillBreakBonusEffectImplementItem.cs
+│  │  SkillBreakBonusEffectItem.cs
+│  │  SkillBreakEffectDisplay.cs
+│  │  SkillBreakEffectDisplayItem.cs
+│  │  SkillBreakGridList.cs
+│  │  SkillBreakGridListItem.cs
+│  │  SkillBreakGridType.cs
+│  │  SkillBreakGridTypeItem.cs
+│  │  SkillBreakOutlineEffect.cs
+│  │  SkillBreakOutlineEffectItem.cs
+│  │  SkillBreakPageEffect.cs
+│  │  SkillBreakPageEffectImplement.cs
+│  │  SkillBreakPageEffectImplementItem.cs
+│  │  SkillBreakPageEffectItem.cs
+│  │  SkillBreakPlate.cs
+│  │  SkillBreakPlateGridBonusType.cs
+│  │  SkillBreakPlateGridBonusTypeItem.cs
+│  │  SkillBreakPlateItem.cs
+│  │  SkillGradeData.cs
+│  │  SkillGradeDataItem.cs
+│  │  SolarTerm.cs
+│  │  SolarTermItem.cs
+│  │  SpecialEffect.cs
+│  │  SpecialEffectDataField.cs
+│  │  SpecialEffectDataFieldItem.cs
+│  │  SpecialEffectItem.cs
+│  │  StoryScroll.cs
+│  │  StoryScrollItem.cs
+│  │  StringList.cs
+│  │  SurnameItem.cs
+│  │  SwordTomb.cs
+│  │  SwordTombItem.cs
+│  │  TaiwuBeHuntedEvent.cs
+│  │  TaiwuBeHuntedEventItem.cs
+│  │  TaiwuVillageStoragesRecord.cs
+│  │  TaiwuVillageStoragesRecordItem.cs
+│  │  TaskChain.cs
+│  │  TaskChainItem.cs
+│  │  TaskCondition.cs
+│  │  TaskConditionItem.cs
+│  │  TaskHint.cs
+│  │  TaskHintItem.cs
+│  │  TaskInfo.cs
+│  │  TaskInfoItem.cs
+│  │  TeaHorseCaravanEvent.cs
+│  │  TeaHorseCaravanEventItem.cs
+│  │  TeaHorseCaravanTerrain.cs
+│  │  TeaHorseCaravanTerrainItem.cs
+│  │  TeaHorseCaravanWeather.cs
+│  │  TeaHorseCaravanWeatherItem.cs
+│  │  TeammateBubble.cs
+│  │  TeammateBubbleItem.cs
+│  │  TeammateCommand.cs
+│  │  TeammateCommandItem.cs
+│  │  TeaWine.cs
+│  │  TeaWineItem.cs
+│  │  TownNameItem.cs
+│  │  TravelingEvent.cs
+│  │  TravelingEventItem.cs
+│  │  TravelSkeleton.cs
+│  │  TravelSkeletonItem.cs
+│  │  TrickDistanceAdjust.cs
+│  │  TrickType.cs
+│  │  TrickTypeItem.cs
+│  │  TutorialChapters.cs
+│  │  TutorialChaptersItem.cs
+│  │  TutorialVideo.cs
+│  │  TutorialVideoItem.cs
+│  │  UpdateLog.cs
+│  │  UpdateLogItem.cs
+│  │  VillagerRole.cs
+│  │  VillagerRoleArrangement.cs
+│  │  VillagerRoleArrangementItem.cs
+│  │  VillagerRoleAutoAction.cs
+│  │  VillagerRoleAutoActionItem.cs
+│  │  VillagerRoleFormula.cs
+│  │  VillagerRoleFormulaImpl.cs
+│  │  VillagerRoleFormulaItem.cs
+│  │  VillagerRoleItem.cs
+│  │  Weapon.cs
+│  │  WeaponItem.cs
+│  │  WeaponUnlockEffect.cs
+│  │  WeaponUnlockEffectItem.cs
+│  │  WeightsSumDistribution.cs
+│  │  WesternRegion.cs
+│  │  WesternRegionItem.cs
+│  │  WorldCreation.cs
+│  │  WorldCreationGroup.cs
+│  │  WorldCreationGroupItem.cs
+│  │  WorldCreationItem.cs
+│  │  WorldFavorability.cs
+│  │  WorldFavorabilityItem.cs
+│  │  WorldResource.cs
+│  │  WorldResourceItem.cs
+│  │  WorldState.cs
+│  │  WorldStateItem.cs
+│  │  WugKing.cs
+│  │  WugKingItem.cs
+│  │  ZangNameItem.cs
+│  │  ZhujianCombatSkillToWeapon.cs
+│  │  ZhujianCombatSkillToWeaponItem.cs
+│  │  
+│  ├─Common
+│  │      ConfigData.cs
+│  │      ConfigFormulaExtensions.cs
+│  │      ConfigItem.cs
+│  │      EquipmentTemplateBase.cs
+│  │      EquipmentTemplateCollectionBase.cs
+│  │      IConfigData.cs
+│  │      IConfigFormula.2.cs
+│  │      IConfigFormula.cs
+│  │      IFormulaArgTypeSource.cs
+│  │      IFormulaContextBridge.cs
+│  │      ItemTemplateBase.cs
+│  │      ItemTemplateCollectionBase.cs
+│  │      
+│  └─ConfigCells
+│      │  AutoTriggerMonthlyEvent.cs
+│      │  CombatStateProperty.cs
+│      │  EnemyNestCreationInfo.cs
+│      │  LifeSkillCombatBriberyItemSubTypeWeight.cs
+│      │  LifeSkillCombatBriberyItemTypeWeight.cs
+│      │  MakeItemResult.cs
+│      │  OrganizationApproving.cs
+│      │  PresetItemSubTypeWithGradeRange.cs
+│      │  PresetItemTemplateId.cs
+│      │  PresetItemTemplateIdGroup.cs
+│      │  PresetItemWithCount.cs
+│      │  PropertyAndValueAndModifyType.cs
+│      │  
+│      └─Character
+│              CharacterFilterElement.cs
+│              CharacterFilterRequirement.cs
+│              FeatureMedals.cs
+│              FeatureMedalType.cs
+│              FeatureMedalValue.cs
+│              PresetCombatSkill.cs
+│              PresetEquipmentItem.cs
+│              PresetEquipmentItemWithProb.cs
+│              PresetInventoryItem.cs
+│              PresetOrgMemberCombatSkill.cs
+│              PropertyAndValue.cs
+│              RelationTriggerOnBehaviorChance.cs
+│              
+├─GameData
+│  │  ExternalDataBridge.cs
+│  │  IGameContext.cs
+│  │  
+│  ├─Common
+│  │      DataUid.cs
+│  │      
+│  ├─DLC
+│  │  │  DlcId.cs
+│  │  │  DlcInfo.cs
+│  │  │  DlcInfoList.cs
+│  │  │  LoveDataItem.cs
+│  │  │  LoveTokenDataItem.cs
+│  │  │  
+│  │  ├─FiveLoong
+│  │  │      ChildrenOfLoong.cs
+│  │  │      Jiao.cs
+│  │  │      JiaoColor.cs
+│  │  │      JiaoEggItemDisplayData.cs
+│  │  │      JiaoEventAttitudeType.cs
+│  │  │      JiaoEvolutionDisplayData.cs
+│  │  │      JiaoEvolutionPageStatus.cs
+│  │  │      JiaoEvolutionStatus.cs
+│  │  │      JiaoGrowthStage.cs
+│  │  │      JiaoLoongDisplayData.cs
+│  │  │      JiaoLoongNameRelatedData.cs
+│  │  │      JiaoPool.cs
+│  │  │      JiaoPoolRecord.cs
+│  │  │      JiaoPoolRecordArgumentCollection.cs
+│  │  │      JiaoPoolRecordList.cs
+│  │  │      JiaoPoolStatus.cs
+│  │  │      JiaoProperty.cs
+│  │  │      LoongInfo.cs
+│  │  │      LoongLocationData.cs
+│  │  │      
+│  │  └─Shared
+│  │          DlcConstants.cs
+│  │          FiveLoongConstants.cs
+│  │          GiftFromConchShip1Constants.cs
+│  │          GiftFromConchShip2Constants.cs
+│  │          HappyNewYear2024Constants.cs
+│  │          InteractOfLoveConstants.cs
+│  │          InteractOfLoveMonthlyEventType.cs
+│  │          YearOfSnakeClothConstants.cs
+│  │          
+│  ├─Domains
+│  │  │  DomainHelper.cs
+│  │  │  
+│  │  ├─Adventure
+│  │  │      AdventureDomainHelper.cs
+│  │  │      AdventureInterruptType.cs
+│  │  │      AdventureMapConnect.cs
+│  │  │      AdventureMapPoint.cs
+│  │  │      AdventureMapTrunk.cs
+│  │  │      AdventureResultDisplayData.cs
+│  │  │      AdventureSiteData.cs
+│  │  │      AdventureSiteState.cs
+│  │  │      AdventureState.cs
+│  │  │      AdventureType.cs
+│  │  │      AreaAdventureData.cs
+│  │  │      BrokenAreaData.cs
+│  │  │      ELinkDir.cs
+│  │  │      EnemyNestConstValues.cs
+│  │  │      EnemyNestSiteExtraData.cs
+│  │  │      ENodeType.cs
+│  │  │      MapAreaFilterType.cs
+│  │  │      MapTemplateEnemyInfo.cs
+│  │  │      NodeContentType.cs
+│  │  │      SharedMethods.cs
+│  │  │      
+│  │  ├─Building
+│  │  │  │  ArtisanOrder.cs
+│  │  │  │  BuildingAreaData.cs
+│  │  │  │  BuildingBlockData.cs
+│  │  │  │  BuildingBlockDataEx.cs
+│  │  │  │  BuildingBlockKey.cs
+│  │  │  │  BuildingDefaultStoreLocation.cs
+│  │  │  │  BuildingDomainHelper.cs
+│  │  │  │  BuildingEarningsData.cs
+│  │  │  │  BuildingExceptionData.cs
+│  │  │  │  BuildingExceptionItem.cs
+│  │  │  │  BuildingExceptionType.cs
+│  │  │  │  BuildingFormulaContextBridge.cs
+│  │  │  │  BuildingManageYieldTipsData.cs
+│  │  │  │  BuildingOperationType.cs
+│  │  │  │  BuildingOptionAutoAddSoldItemPreset.cs
+│  │  │  │  BuildingOptionAutoGiveMemberPreset.cs
+│  │  │  │  BuildingProduceDependencyData.cs
+│  │  │  │  BuildingResourceOutputSetting.cs
+│  │  │  │  Chicken.cs
+│  │  │  │  ChickenBlessingInfoData.cs
+│  │  │  │  Feast.cs
+│  │  │  │  ItemSourceChange.cs
+│  │  │  │  MakeConditionArguments.cs
+│  │  │  │  MakeItemData.cs
+│  │  │  │  MakeItemMethod.cs
+│  │  │  │  MakeResult.cs
+│  │  │  │  MakeResultStage.cs
+│  │  │  │  PossessionPreview.cs
+│  │  │  │  PossessionResult.cs
+│  │  │  │  Production.cs
+│  │  │  │  ProductionData.cs
+│  │  │  │  ProductionPool.cs
+│  │  │  │  RecruitCharacterData.cs
+│  │  │  │  RecruitCharacterDataList.cs
+│  │  │  │  ResourceBlockExtraData.cs
+│  │  │  │  SamsaraPlatformCharDisplayData.cs
+│  │  │  │  SharedConstValue.cs
+│  │  │  │  SharedMethods.cs
+│  │  │  │  ShopBuildingTeachBookData.cs
+│  │  │  │  ShopEvaluationLevel.cs
+│  │  │  │  ShopEventData.cs
+│  │  │  │  StartMakeArguments.cs
+│  │  │  │  TeaHorseCaravanData.cs
+│  │  │  │  
+│  │  │  ├─Display
+│  │  │  │      CricketCollectionBatchButtonStateDisplayData.cs
+│  │  │  │      
+│  │  │  ├─SamsaraPlatformRecord
+│  │  │  │      SamsaraPlatformRecordCollection.cs
+│  │  │  │      SamsaraPlatformRecordRenderInfo.cs
+│  │  │  │      
+│  │  │  └─ShopEvent
+│  │  │          ShopEventCollection.cs
+│  │  │          ShopEventRenderInfo.cs
+│  │  │          
+│  │  ├─Character
+│  │  │  │  AgeAffector.cs
+│  │  │  │  AgeGroup.cs
+│  │  │  │  AliveState.cs
+│  │  │  │  Animal.cs
+│  │  │  │  AnimalType.cs
+│  │  │  │  AttractionType.cs
+│  │  │  │  BehaviorType.cs
+│  │  │  │  BodyType.cs
+│  │  │  │  CharacterDeathInfo.cs
+│  │  │  │  CharacterDomainHelper.cs
+│  │  │  │  CharacterHelper.cs
+│  │  │  │  CharacterList.cs
+│  │  │  │  CharacterPropertyBonus.cs
+│  │  │  │  CharacterSet.cs
+│  │  │  │  CombatHelper.cs
+│  │  │  │  CombatResources.cs
+│  │  │  │  CombatSkillAttainmentPanelsHelper.cs
+│  │  │  │  CombatSkillEquipment.cs
+│  │  │  │  CombatSkillHelper.cs
+│  │  │  │  CombatSkillInts.cs
+│  │  │  │  CombatSkillSbytes.cs
+│  │  │  │  CombatSkillShorts.cs
+│  │  │  │  DarkAshCounterData.cs
+│  │  │  │  DeadCharacter.cs
+│  │  │  │  Debts.cs
+│  │  │  │  DisorderLevelOfQi.cs
+│  │  │  │  EatingItems.cs
+│  │  │  │  EHealActionType.cs
+│  │  │  │  EHealthType.cs
+│  │  │  │  EquipmentSlot.cs
+│  │  │  │  EquipmentSlotHelper.cs
+│  │  │  │  EquipmentType.cs
+│  │  │  │  ExternalRelationStateHelper.cs
+│  │  │  │  ExternalRelationType.cs
+│  │  │  │  ExtraExternalRelationType.cs
+│  │  │  │  FameActionRecord.cs
+│  │  │  │  FameType.cs
+│  │  │  │  FullName.cs
+│  │  │  │  FullNameType.cs
+│  │  │  │  GearMate.cs
+│  │  │  │  GearMateRepairCount.cs
+│  │  │  │  GearMateRepairRequirementDisplayData.cs
+│  │  │  │  GearMateRepairTipType.cs
+│  │  │  │  GearMateRepairType.cs
+│  │  │  │  GearMateUpgradeType.cs
+│  │  │  │  Gender.cs
+│  │  │  │  Genome.cs
+│  │  │  │  Goodness.cs
+│  │  │  │  Grade.cs
+│  │  │  │  GraveHelper.cs
+│  │  │  │  HappinessType.cs
+│  │  │  │  HealthTypeHelper.cs
+│  │  │  │  HitOrAvoidInts.cs
+│  │  │  │  HitOrAvoidShorts.cs
+│  │  │  │  Injuries.cs
+│  │  │  │  InjuryType.cs
+│  │  │  │  InscriptionStatus.cs
+│  │  │  │  Inventory.cs
+│  │  │  │  KidnappedCharacter.cs
+│  │  │  │  KidnappedCharacterList.cs
+│  │  │  │  LifeSkillInts.cs
+│  │  │  │  LifeSkillItem.cs
+│  │  │  │  LifeSkillSbytes.cs
+│  │  │  │  LifeSkillShorts.cs
+│  │  │  │  LifeSkillType.cs
+│  │  │  │  LifeState.cs
+│  │  │  │  LovingAndHatingSects.cs
+│  │  │  │  MainAttributes.cs
+│  │  │  │  MainAttributeType.cs
+│  │  │  │  MonasticTitle.cs
+│  │  │  │  MonkType.cs
+│  │  │  │  NeiliAllocation.cs
+│  │  │  │  NeiliAllocationBonusHelper.cs
+│  │  │  │  NeiliAllocationType.cs
+│  │  │  │  NeiliProportionHelper.cs
+│  │  │  │  NeiliProportionOfFiveElements.cs
+│  │  │  │  NeiliProportionTransferType.cs
+│  │  │  │  Orderliness.cs
+│  │  │  │  OrganizationInfo.cs
+│  │  │  │  OuterAndInnerInts.cs
+│  │  │  │  OuterAndInnerShorts.cs
+│  │  │  │  Personalities.cs
+│  │  │  │  PersonalityType.cs
+│  │  │  │  PoisonInts.cs
+│  │  │  │  PoisonShorts.cs
+│  │  │  │  PossessionData.cs
+│  │  │  │  PreexistenceCharIds.cs
+│  │  │  │  Race.cs
+│  │  │  │  ResourceInts.cs
+│  │  │  │  ResourceType.cs
+│  │  │  │  ResourceTypeHelper.cs
+│  │  │  │  SexualOrientation.cs
+│  │  │  │  SharedConstValue.cs
+│  │  │  │  SharedMethods.cs
+│  │  │  │  SimulateEatingEffectResult.cs
+│  │  │  │  SkillGroup.cs
+│  │  │  │  SkillQualificationBonus.cs
+│  │  │  │  SkillQualificationGrowthType.cs
+│  │  │  │  XiangshuInfectionType.cs
+│  │  │  │  XiangshuType.cs
+│  │  │  │  
+│  │  │  ├─Ai
+│  │  │  │  │  ActionEnergySbytes.cs
+│  │  │  │  │  ActionEnergyType.cs
+│  │  │  │  │  ExtraPrioritizedActionType.cs
+│  │  │  │  │  HarmfulActionPhase.cs
+│  │  │  │  │  NpcTravelTarget.cs
+│  │  │  │  │  PersonalNeed.cs
+│  │  │  │  │  PrioritizedActionType.cs
+│  │  │  │  │  
+│  │  │  │  └─PrioritizedAction
+│  │  │  │          PrioritizedActionCooldown.cs
+│  │  │  │          PrioritizedActionCooldownList.cs
+│  │  │  │          PrioritizedActionCooldownSbytes.cs
+│  │  │  │          
+│  │  │  ├─AvatarSystem
+│  │  │  │  │  AvatarData.cs
+│  │  │  │  │  AvatarElementsGrownDates.cs
+│  │  │  │  │  AvatarExtraData.cs
+│  │  │  │  │  AvatarExtraDataFeatureMirrorType.cs
+│  │  │  │  │  AvatarGrowableElementType.cs
+│  │  │  │  │  AvatarInherit.cs
+│  │  │  │  │  AvatarManager.cs
+│  │  │  │  │  
+│  │  │  │  └─AvatarRes
+│  │  │  │          AvatarAsset.cs
+│  │  │  │          AvatarGroup.cs
+│  │  │  │          BodyRes.cs
+│  │  │  │          EyeRes.cs
+│  │  │  │          HairRes.cs
+│  │  │  │          MouthRes.cs
+│  │  │  │          
+│  │  │  ├─Creation
+│  │  │  │      CreatingType.cs
+│  │  │  │      ProtagonistCreationInfo.cs
+│  │  │  │      
+│  │  │  ├─Display
+│  │  │  │      AvatarRelatedData.cs
+│  │  │  │      CharacterAttributeDisplayData.cs
+│  │  │  │      CharacterDisplayData.cs
+│  │  │  │      CharacterDisplayDataForInfect.cs
+│  │  │  │      CharacterDisplayDataForMapBlock.cs
+│  │  │  │      CharacterDisplayDataForRelations.cs
+│  │  │  │      CharacterDisplayDataForSettlementBounty.cs
+│  │  │  │      CharacterDisplayDataForSettlementPrisoner.cs
+│  │  │  │      CharacterDisplayDataForTooltip.cs
+│  │  │  │      CharacterDisplayDataForUltimateSelect.cs
+│  │  │  │      CharacterDisplayDataWithInfo.cs
+│  │  │  │      CharacterInfoCountData.cs
+│  │  │  │      CharacterLocationDisplayData.cs
+│  │  │  │      CharacterLoveAndHateItemInfo.cs
+│  │  │  │      CharacterSamsaraData.cs
+│  │  │  │      CharIdAndName.cs
+│  │  │  │      DarkAshCounter.cs
+│  │  │  │      GraveDisplayData.cs
+│  │  │  │      GroupCharDisplayData.cs
+│  │  │  │      HunterState.cs
+│  │  │  │      KidnappedCharacterDisplayData.cs
+│  │  │  │      NameAndLifeRelatedData.cs
+│  │  │  │      NameRelatedData.cs
+│  │  │  │      RelatedCharactersForRelations.cs
+│  │  │  │      TaiwuShrineDisplayData.cs
+│  │  │  │      
+│  │  │  ├─Relation
+│  │  │  │  │  AddOneWayRelationResultType.cs
+│  │  │  │  │  BloodRelatedRelationType.cs
+│  │  │  │  │  FavorabilityType.cs
+│  │  │  │  │  ParentAndChild.cs
+│  │  │  │  │  RelatedCharacter.cs
+│  │  │  │  │  RelatedCharacters.cs
+│  │  │  │  │  RelationKey.cs
+│  │  │  │  │  RelationType.cs
+│  │  │  │  │  
+│  │  │  │  └─RelationTree
+│  │  │  │          CharIdAndRelation.cs
+│  │  │  │          Genealogy.cs
+│  │  │  │          GenealogyObsoleted.cs
+│  │  │  │          SpouseAndChildren.cs
+│  │  │  │          SpouseAndChildrenObsoleted.cs
+│  │  │  │          SpousesAndChildren.cs
+│  │  │  │          SpousesAndChildrenObsoleted.cs
+│  │  │  │          
+│  │  │  └─SortFilter
+│  │  │          CharacterFilterSubType.cs
+│  │  │          CharacterFilterType.cs
+│  │  │          CharacterSortFilterSettings.cs
+│  │  │          CharacterSortingType.cs
+│  │  │          
+│  │  ├─Combat
+│  │  │      BodyPartType.cs
+│  │  │      CFormula.cs
+│  │  │      CombatCharacterHelper.cs
+│  │  │      CombatDomainHelper.cs
+│  │  │      CombatResultDisplayData.cs
+│  │  │      CombatResultSnapshot.cs
+│  │  │      CombatResultType.cs
+│  │  │      CombatSkillDamageStepBonusDisplayData.cs
+│  │  │      CombatSkillDataHelper.cs
+│  │  │      CombatSkillEffectData.cs
+│  │  │      CombatStateType.cs
+│  │  │      CombatStatusType.cs
+│  │  │      CombatType.cs
+│  │  │      CombatWeaponDataHelper.cs
+│  │  │      CompleteDamageStepDisplayData.cs
+│  │  │      DamageStepCollection.cs
+│  │  │      DamageStepDisplayData.cs
+│  │  │      DefeatMarksCountOutOfCombatData.cs
+│  │  │      EChangeDurabilitySourceType.cs
+│  │  │      ECombatCastFreePriority.cs
+│  │  │      ECombatSkillEffectType.cs
+│  │  │      EDamageType.cs
+│  │  │      EFlawOrAcupointType.cs
+│  │  │      EMarkGroupType.cs
+│  │  │      EMarkType.cs
+│  │  │      EPrepareCombatResult.cs
+│  │  │      EShowMercyOption.cs
+│  │  │      EShowMercySelect.cs
+│  │  │      MarkTypeExtensions.cs
+│  │  │      MoveSpecialConstants.cs
+│  │  │      MoveState.cs
+│  │  │      OtherActionType.cs
+│  │  │      OuterAndInnerDamageStepDisplayData.cs
+│  │  │      PoisonSortingOrder.cs
+│  │  │      PoisonType.cs
+│  │  │      SharedConstValue.cs
+│  │  │      SkillEffectCollection.cs
+│  │  │      SkillEffectKey.cs
+│  │  │      SkillPowerChangeCollection.cs
+│  │  │      TrickCollection.cs
+│  │  │      TrickType.cs
+│  │  │      
+│  │  ├─CombatSkill
+│  │  │      AttackHitType.cs
+│  │  │      CombatSkillDirection.cs
+│  │  │      CombatSkillDisplayData.cs
+│  │  │      CombatSkillDomainHelper.cs
+│  │  │      CombatSkillEffectDescriptionDisplayData.cs
+│  │  │      CombatSkillEquipType.cs
+│  │  │      CombatSkillHelper.cs
+│  │  │      CombatSkillKey.cs
+│  │  │      CombatSkillPracticeType.cs
+│  │  │      CombatSkillStateHelper.cs
+│  │  │      CombatSkillTemplateHelper.cs
+│  │  │      CombatSkillType.cs
+│  │  │      FiveElementsType.cs
+│  │  │      IFilterableCombatSkill.cs
+│  │  │      NeedBodyPartType.cs
+│  │  │      
+│  │  ├─Extra
+│  │  │      CricketCollectionData.cs
+│  │  │      ETreasureExtraItemType.cs
+│  │  │      ExtraDomainHelper.cs
+│  │  │      GearMateBreakoutBanReason.cs
+│  │  │      LifeSkillCombatCardCollection.cs
+│  │  │      LifeSkillCombatReadBookPageData.cs
+│  │  │      MerchantBuyBackDebt.cs
+│  │  │      MerchantExtraGoods.cs
+│  │  │      MerchantExtraGoodsData.cs
+│  │  │      MerchantExtraGoodsItem.cs
+│  │  │      MerchantExtraGoodsType.cs
+│  │  │      SectStoryBonusDisplayData.cs
+│  │  │      SectStoryFairyland.cs
+│  │  │      SectStoryHeavenlyTree.cs
+│  │  │      SectStoryHeavenlyTreeExtendable.cs
+│  │  │      SectStorySpecialMerchant.cs
+│  │  │      SectStoryThiefData.cs
+│  │  │      SectStoryThreeCorpsesCharacter.cs
+│  │  │      SectStoryThreeCorpsesCharacterNotch.cs
+│  │  │      SectStoryThreeCorpsesCharacterProgress.cs
+│  │  │      SectStoryThreeVitalsCharacter.cs
+│  │  │      SectStoryThreeVitalsCharacterType.cs
+│  │  │      SectStoryThreeVitalsCharacterTypeExtensions.cs
+│  │  │      SharedConstValue.cs
+│  │  │      SharedMethods.cs
+│  │  │      TreasureConstants.cs
+│  │  │      TreasureExpectResult.cs
+│  │  │      TreasureFindResult.cs
+│  │  │      TreasureMaterialData.cs
+│  │  │      TreasureStateInfo.cs
+│  │  │      WeaveClothingDisplaySetting.cs
+│  │  │      
+│  │  ├─Global
+│  │  │  │  ArchiveInfo.cs
+│  │  │  │  ArchiveStatus.cs
+│  │  │  │  DreamBackUnlockStateType.cs
+│  │  │  │  FixedWorldInfo.cs
+│  │  │  │  GlobalDomainHelper.cs
+│  │  │  │  GlobalFlagType.cs
+│  │  │  │  MapPickupAutoTriggerSetting.cs
+│  │  │  │  SharedGlobalSettings.cs
+│  │  │  │  WipeOutType.cs
+│  │  │  │  WorldInfo.cs
+│  │  │  │  
+│  │  │  └─Inscription
+│  │  │          InscribedCharacter.cs
+│  │  │          InscribedCharacterKey.cs
+│  │  │          
+│  │  ├─Information
+│  │  │  │  InformationDomainHelper.cs
+│  │  │  │  NormalInformation.cs
+│  │  │  │  NormalInformationCollection.cs
+│  │  │  │  SecretInformationActorBroadcastType.cs
+│  │  │  │  SecretInformationBroadcastTipsData.cs
+│  │  │  │  SecretInformationBroadcastTipsExtraData.cs
+│  │  │  │  SecretInformationCharacterData.cs
+│  │  │  │  SecretInformationCharacterDataCollection.cs
+│  │  │  │  SecretInformationCharacterUsedCount.cs
+│  │  │  │  SecretInformationDisplayData.cs
+│  │  │  │  SecretInformationDisplayPackage.cs
+│  │  │  │  SecretInformationKey.cs
+│  │  │  │  SecretInformationMetaDataHelper.cs
+│  │  │  │  TaiwuInformationReceivedHistories.cs
+│  │  │  │  
+│  │  │  └─Collection
+│  │  │          SecretInformationCollection.cs
+│  │  │          SecretInformationRenderInfo.cs
+│  │  │          
+│  │  ├─Item
+│  │  │  │  AccessoryHelper.cs
+│  │  │  │  ArmorHelper.cs
+│  │  │  │  CarrierHelper.cs
+│  │  │  │  ClothingHelper.cs
+│  │  │  │  CombatSkillBookPage.cs
+│  │  │  │  CraftToolHelper.cs
+│  │  │  │  CricketCombatConfig.cs
+│  │  │  │  CricketData.cs
+│  │  │  │  CricketHelper.cs
+│  │  │  │  CricketSpecialConstants.cs
+│  │  │  │  CricketWagerData.cs
+│  │  │  │  EItemDebtState.cs
+│  │  │  │  EquipmentBonusType.cs
+│  │  │  │  FoodHelper.cs
+│  │  │  │  FullPoisonEffects.cs
+│  │  │  │  ItemDomainHelper.cs
+│  │  │  │  ItemFormula.cs
+│  │  │  │  ItemKey.cs
+│  │  │  │  ItemKeyAndCount.cs
+│  │  │  │  ItemKeyAndDate.cs
+│  │  │  │  ItemOperationType.cs
+│  │  │  │  ItemSubType.cs
+│  │  │  │  ItemTemplateHelper.cs
+│  │  │  │  ItemType.cs
+│  │  │  │  ItemUseType.cs
+│  │  │  │  MaterialHelper.cs
+│  │  │  │  MedicineHelper.cs
+│  │  │  │  MiscHelper.cs
+│  │  │  │  MixedPoisonType.cs
+│  │  │  │  ModificationStateHelper.cs
+│  │  │  │  ModificationType.cs
+│  │  │  │  MultiplyOperation.cs
+│  │  │  │  PoisonEffects.cs
+│  │  │  │  PoisonsAndLevels.cs
+│  │  │  │  PoisonSlot.cs
+│  │  │  │  RefiningEffects.cs
+│  │  │  │  SkillBookHelper.cs
+│  │  │  │  SkillBookPageIncompleteState.cs
+│  │  │  │  SkillBookStateHelper.cs
+│  │  │  │  TeaWineHelper.cs
+│  │  │  │  TemplateKey.cs
+│  │  │  │  TemplateKeyAndCount.cs
+│  │  │  │  Wager.cs
+│  │  │  │  WagerType.cs
+│  │  │  │  WeaponHelper.cs
+│  │  │  │  WugGrowthType.cs
+│  │  │  │  WugType.cs
+│  │  │  │  
+│  │  │  └─Display
+│  │  │          ItemDisplayData.cs
+│  │  │          ItemDisplayDataFilterId.cs
+│  │  │          ItemDisplayDataFilters.cs
+│  │  │          ItemPowerInfo.cs
+│  │  │          SkillBookModifyDisplayData.cs
+│  │  │          SkillBookPageDisplayData.cs
+│  │  │          
+│  │  ├─LegendaryBook
+│  │  │      ELegendaryBookSlotState.cs
+│  │  │      LegendaryBookAppearType.cs
+│  │  │      LegendaryBookCharacterRelatedData.cs
+│  │  │      LegendaryBookDomainHelper.cs
+│  │  │      LegendaryBookIncrementData.cs
+│  │  │      LegendaryBookOwnerData.cs
+│  │  │      LegendaryBookOwnerState.cs
+│  │  │      
+│  │  ├─LifeRecord
+│  │  │  │  LifeRecordDomainHelper.cs
+│  │  │  │  LifeRecordRenderInfo.cs
+│  │  │  │  ReadonlyLifeRecords.cs
+│  │  │  │  ReadonlyLifeRecordsWithDate.cs
+│  │  │  │  ReadonlyLifeRecordsWithTotalCount.cs
+│  │  │  │  
+│  │  │  └─GeneralRecord
+│  │  │          ArgumentCollection.cs
+│  │  │          ArgumentCollectionRenderArguments.cs
+│  │  │          IRecordArgumentSource.cs
+│  │  │          ParameterType.cs
+│  │  │          ReadonlyRecordCollection.cs
+│  │  │          RecordArgumentsRequest.cs
+│  │  │          RenderedArgumentCollection.cs
+│  │  │          RenderInfo.cs
+│  │  │          WriteableRecordCollection.cs
+│  │  │          
+│  │  ├─Map
+│  │  │  │  AnimalAreaData.cs
+│  │  │  │  AnimalPlaceData.cs
+│  │  │  │  AreaBlockCollection.cs
+│  │  │  │  AreaDisplayData.cs
+│  │  │  │  CollectResourceResult.cs
+│  │  │  │  CricketPlaceData.cs
+│  │  │  │  CricketPlaceExtraData.cs
+│  │  │  │  CrossAreaMoveInfo.cs
+│  │  │  │  Direction.cs
+│  │  │  │  DreamBackLocationData.cs
+│  │  │  │  EDreamBackLocationType.cs
+│  │  │  │  EMapPickupBanReason.cs
+│  │  │  │  FullBlockName.cs
+│  │  │  │  FulongInFlameArea.cs
+│  │  │  │  HunterAnimalKey.cs
+│  │  │  │  KidnappedTravelData.cs
+│  │  │  │  Location.cs
+│  │  │  │  LocationNameRelatedData.cs
+│  │  │  │  MapAreaData.cs
+│  │  │  │  MapAreaEdge.cs
+│  │  │  │  MapBlockData.cs
+│  │  │  │  MapBlockDisplayData.cs
+│  │  │  │  MapBlockEightDirectionType.cs
+│  │  │  │  MapDomainHelper.cs
+│  │  │  │  MapElementPickupDisplayData.cs
+│  │  │  │  MapHealSimulateResult.cs
+│  │  │  │  MapPickup.cs
+│  │  │  │  MapPickupCollection.cs
+│  │  │  │  MaterialResources.cs
+│  │  │  │  SettlementInfo.cs
+│  │  │  │  SharedConstValue.cs
+│  │  │  │  SharedMethods.cs
+│  │  │  │  TravelPreviewDisplayData.cs
+│  │  │  │  TravelRoute.cs
+│  │  │  │  TravelRouteKey.cs
+│  │  │  │  
+│  │  │  └─TeammateBubble
+│  │  │          TeammateBubbleCollection.cs
+│  │  │          TeammateBubbleRenderInfo.cs
+│  │  │          TeammateBubbleSubType.cs
+│  │  │          
+│  │  ├─Merchant
+│  │  │      CaravanDisplayData.cs
+│  │  │      CaravanExtraData.cs
+│  │  │      CaravanPath.cs
+│  │  │      CaravanState.cs
+│  │  │      MerchantBuyBackData.cs
+│  │  │      MerchantData.cs
+│  │  │      MerchantDomainHelper.cs
+│  │  │      MerchantInfoAreaData.cs
+│  │  │      MerchantInfoCaravanData.cs
+│  │  │      MerchantInfoMerchantData.cs
+│  │  │      MerchantOverFavorData.cs
+│  │  │      MerchantOverFavorLevelData.cs
+│  │  │      MerchantTradeArguments.cs
+│  │  │      MerchantType.cs
+│  │  │      OpenShopEventArguments.cs
+│  │  │      SharedMethods.cs
+│  │  │      
+│  │  ├─Mod
+│  │  │      EModVisibility.cs
+│  │  │      ModDomainHelper.cs
+│  │  │      ModId.cs
+│  │  │      ModInfo.cs
+│  │  │      ModInfoList.cs
+│  │  │      ModSource.cs
+│  │  │      SerializableModData.cs
+│  │  │      
+│  │  ├─Organization
+│  │  │  │  CivilianSettlementCharacterHelper.cs
+│  │  │  │  CivilianSettlementHelper.cs
+│  │  │  │  ETreasuryOperation.cs
+│  │  │  │  MartialArtTournamentPreparationInfo.cs
+│  │  │  │  OrganizationDomainHelper.cs
+│  │  │  │  OrganizationMemberExtensions.cs
+│  │  │  │  OrgMemberCollection.cs
+│  │  │  │  PrisonType.cs
+│  │  │  │  ResourceStatus.cs
+│  │  │  │  SectCharacterHelper.cs
+│  │  │  │  SectExploreStatus.cs
+│  │  │  │  SectFavorability.cs
+│  │  │  │  SectHelper.cs
+│  │  │  │  SettlementBounty.cs
+│  │  │  │  SettlementExtraData.cs
+│  │  │  │  SettlementLayeredTreasuries.cs
+│  │  │  │  SettlementPrison.cs
+│  │  │  │  SettlementPrisoner.cs
+│  │  │  │  SettlementSupportingBlockDisplayData.cs
+│  │  │  │  SettlementTreasury.cs
+│  │  │  │  SettlementTreasuryLayers.cs
+│  │  │  │  SettlementType.cs
+│  │  │  │  
+│  │  │  ├─Display
+│  │  │  │      OrganizationCombatSkillsDisplayData.cs
+│  │  │  │      PunishmentSeverityCustomizeData.cs
+│  │  │  │      SettlementBountyDisplayData.cs
+│  │  │  │      SettlementDisplayData.cs
+│  │  │  │      SettlementNameRelatedData.cs
+│  │  │  │      SettlementPrisonDisplayData.cs
+│  │  │  │      SettlementTreasuryDisplayData.cs
+│  │  │  │      
+│  │  │  ├─SettlementPrisonRecord
+│  │  │  │      SettlementPrisonRecordCollection.cs
+│  │  │  │      SettlementPrisonRecordRenderInfo.cs
+│  │  │  │      
+│  │  │  ├─SettlementTreasuryRecord
+│  │  │  │      SettlementTreasuryRecordCollection.cs
+│  │  │  │      SettlementTreasuryRecordRenderInfo.cs
+│  │  │  │      
+│  │  │  └─TaiwuVillageStoragesRecord
+│  │  │          TaiwuVillageStoragesRecordCollection.cs
+│  │  │          TaiwuVillageStoragesRecordRenderInfo.cs
+│  │  │          
+│  │  ├─SpecialEffect
+│  │  │      AffectedDataHelper.cs
+│  │  │      SpecialEffectDomainHelper.cs
+│  │  │      
+│  │  ├─Taiwu
+│  │  │  │  CombatSkillPlan.cs
+│  │  │  │  ConflictCombatSkill.cs
+│  │  │  │  CraftStorageType.cs
+│  │  │  │  ESkillBreakGridState.cs
+│  │  │  │  ESkillBreakPlateBonusType.cs
+│  │  │  │  ESkillBreakPlateState.cs
+│  │  │  │  FoodStorageType.cs
+│  │  │  │  ISkillBreakPlateFormatter.cs
+│  │  │  │  ItemSourceType.cs
+│  │  │  │  LegacyPassingState.cs
+│  │  │  │  LegacyPointReference.cs
+│  │  │  │  MedicineStorageType.cs
+│  │  │  │  ReadingBookStrategies.cs
+│  │  │  │  SharedMethods.cs
+│  │  │  │  SkillBonusAffectRange.cs
+│  │  │  │  SkillBreakBonusCollection.cs
+│  │  │  │  SkillBreakPlate.cs
+│  │  │  │  SkillBreakPlateAxial.cs
+│  │  │  │  SkillBreakPlateBonus.cs
+│  │  │  │  SkillBreakPlateBonusList.cs
+│  │  │  │  SkillBreakPlateConstants.cs
+│  │  │  │  SkillBreakPlateFormatterDefault.cs
+│  │  │  │  SkillBreakPlateGrid.cs
+│  │  │  │  SkillBreakPlateGridObsolete.cs
+│  │  │  │  SkillBreakPlateGridStateHelper.cs
+│  │  │  │  SkillBreakPlateIndex.cs
+│  │  │  │  SkillBreakPlateObsolete.cs
+│  │  │  │  SkillBreakPlateObsoleteList.cs
+│  │  │  │  StockStorageType.cs
+│  │  │  │  TaiwuCombatSkill.cs
+│  │  │  │  TaiwuDomainHelper.cs
+│  │  │  │  TaiwuLifeSkill.cs
+│  │  │  │  TaiwuSkill.cs
+│  │  │  │  TaiwuVillageStorage.cs
+│  │  │  │  TaiwuVillageStorageType.cs
+│  │  │  │  VillagerLivingStatus.cs
+│  │  │  │  VillagerStatusDisplayData.cs
+│  │  │  │  VillagerTreasuryNeed.cs
+│  │  │  │  VillagerWorkData.cs
+│  │  │  │  VillagerWorkStatus.cs
+│  │  │  │  VillagerWorkType.cs
+│  │  │  │  
+│  │  │  ├─Debate
+│  │  │  │      ActivatedStrategy.cs
+│  │  │  │      DebateComment.cs
+│  │  │  │      DebateConflictResult.cs
+│  │  │  │      DebateConstants.cs
+│  │  │  │      DebateGame.cs
+│  │  │  │      DebateNode.cs
+│  │  │  │      DebateNodeEffectState.cs
+│  │  │  │      DebateOperation.cs
+│  │  │  │      DebateOperationType.cs
+│  │  │  │      DebatePlayer.cs
+│  │  │  │      DebateResult.cs
+│  │  │  │      DebateState.cs
+│  │  │  │      DebateStrategyLocation.cs
+│  │  │  │      Pawn.cs
+│  │  │  │      PawnDamageInfo.cs
+│  │  │  │      PawnRemoveCause.cs
+│  │  │  │      PlayerTargetType.cs
+│  │  │  │      PressureTriggerType.cs
+│  │  │  │      StrategyTarget.cs
+│  │  │  │      
+│  │  │  ├─Display
+│  │  │  │  │  DispatchSwordTombDisplayData.cs
+│  │  │  │  │  IVillagerRoleArrangementDisplayData.cs
+│  │  │  │  │  ProfessionTipDisplayData.cs
+│  │  │  │  │  QiArtStrategyDisplayData.cs
+│  │  │  │  │  VillagerRoleArrangementDisplayDataWrapper.cs
+│  │  │  │  │  VillagerRoleCharacterDisplayData.cs
+│  │  │  │  │  VillagerRoleCharacterSlimDisplayData.cs
+│  │  │  │  │  VillagerRoleManageDisplayData.cs
+│  │  │  │  │  VillagerRoleTipsDisplayData.cs
+│  │  │  │  │  
+│  │  │  │  └─VillagerRoleArrangement
+│  │  │  │          AcquiringDisplayData.cs
+│  │  │  │          BuildingRelationshipDisplayData.cs
+│  │  │  │          EntertainingDisplayData.cs
+│  │  │  │          GuardingSwordTombDisplayData.cs
+│  │  │  │          HealingDisplayData.cs
+│  │  │  │          LearningCombatSkillDisplayData.cs
+│  │  │  │          LearningLifeSkillDisplayData.cs
+│  │  │  │          PeddlingDisplayData.cs
+│  │  │  │          PriceGougingDisplayData.cs
+│  │  │  │          PriceSuppressionDisplayData.cs
+│  │  │  │          SpreadingInfluenceDisplayData.cs
+│  │  │  │          TaiwuEnvoyDisplayData.cs
+│  │  │  │          
+│  │  │  ├─Profession
+│  │  │  │  │  ObsoleteProfessionData.cs
+│  │  │  │  │  ProfessionData.cs
+│  │  │  │  │  ProfessionDataType.cs
+│  │  │  │  │  ProfessionFormulaImpl.cs
+│  │  │  │  │  ProfessionRelatedConstants.cs
+│  │  │  │  │  ProfessionSkillArg.cs
+│  │  │  │  │  ProfessionSkillInvalidType.cs
+│  │  │  │  │  SharedMethods.cs
+│  │  │  │  │  TaiwuProfessionSkillSlots.cs
+│  │  │  │  │  TasterUltimateResult.cs
+│  │  │  │  │  
+│  │  │  │  └─SkillsData
+│  │  │  │          AristocratSkillsData.cs
+│  │  │  │          BeggarSkillsData.cs
+│  │  │  │          BuddhistMonkSkillsData.cs
+│  │  │  │          DukeSkillsData.cs
+│  │  │  │          HunterSkillsData.cs
+│  │  │  │          IProfessionSkillsData.cs
+│  │  │  │          ObsoleteAristocratSkillsData.cs
+│  │  │  │          ObsoleteBeggarSkillsData.cs
+│  │  │  │          ObsoleteBuddhistMonkSkillsData.cs
+│  │  │  │          ObsoleteDukeSkillsData.cs
+│  │  │  │          ObsoleteHunterSkillsData.cs
+│  │  │  │          ObsoleteTaoistMonkSkillsData.cs
+│  │  │  │          ObsoleteTravelingBuddhistMonkSkillsData.cs
+│  │  │  │          ObsoleteTravelingTaoistMonkSkillsData.cs
+│  │  │  │          TaoistMonkSkillsData.cs
+│  │  │  │          TeaTasterSkillsData.cs
+│  │  │  │          TravelerPalaceData.cs
+│  │  │  │          TravelerSkillsData.cs
+│  │  │  │          TravelingBuddhistMonkSkillsData.cs
+│  │  │  │          TravelingTaoistMonkSkillsData.cs
+│  │  │  │          WineTasterSkillsData.cs
+│  │  │  │          
+│  │  │  └─VillagerRole
+│  │  │          SharedData.cs
+│  │  │          SharedMethods.cs
+│  │  │          VillagerRoleActionSetting.cs
+│  │  │          VillagerRoleActionType.cs
+│  │  │          VillagerRoleCraftsmanFixedActionFailType.cs
+│  │  │          VillagerRoleCraftsmanFixedActionType.cs
+│  │  │          VillagerRoleDoctorFixedActionFailType.cs
+│  │  │          VillagerRoleDoctorFixedActionType.cs
+│  │  │          VillagerRoleFarmerFixedActionFailType.cs
+│  │  │          VillagerRoleFarmerFixedActionType.cs
+│  │  │          VillagerRoleStorageType.cs
+│  │  │          
+│  │  ├─TaiwuEvent
+│  │  │  │  EventScriptId.cs
+│  │  │  │  EventScriptRuntimeSettings.cs
+│  │  │  │  TaiwuEventDomainHelper.cs
+│  │  │  │  
+│  │  │  ├─DisplayEvent
+│  │  │  │      CharacterSelectFilter.cs
+│  │  │  │      EventActorData.cs
+│  │  │  │      EventCricketBettingData.cs
+│  │  │  │      EventInputDataType.cs
+│  │  │  │      EventInputRequestData.cs
+│  │  │  │      EventInteractCheckData.cs
+│  │  │  │      EventNotifyData.cs
+│  │  │  │      EventOptionInfo.cs
+│  │  │  │      EventSelectCharacterData.cs
+│  │  │  │      EventSelectCombatSkillData.cs
+│  │  │  │      EventSelectFameData.cs
+│  │  │  │      EventSelectFuyuFaithCountData.cs
+│  │  │  │      EventSelectInformationData.cs
+│  │  │  │      EventSelectItemData.cs
+│  │  │  │      EventSelectLifeSkillData.cs
+│  │  │  │      EventSelectNeigongLoopingCountData.cs
+│  │  │  │      EventSelectReadingBookCountData.cs
+│  │  │  │      OptionAvailableConditionInfo.cs
+│  │  │  │      OptionAvailableInfo.cs
+│  │  │  │      OptionAvailableInfoMinimumElement.cs
+│  │  │  │      SelectApprovedTaiwu.cs
+│  │  │  │      SelectItemFilter.cs
+│  │  │  │      TaiwuEventCharacterNameDecodeData.cs
+│  │  │  │      TaiwuEventDisplayData.cs
+│  │  │  │      TaiwuEventDisplayExtraData.cs
+│  │  │  │      TaiwuEventSummaryDisplayData.cs
+│  │  │  │      
+│  │  │  ├─Enum
+│  │  │  │      ConfigMonthlyActionDefines.cs
+│  │  │  │      EEventType.cs
+│  │  │  │      EKillCharacterType.cs
+│  │  │  │      EventActionNames.cs
+│  │  │  │      EventMaskControl.cs
+│  │  │  │      EventOptionBehavior.cs
+│  │  │  │      EventOptionState.cs
+│  │  │  │      InteractPrisonerType.cs
+│  │  │  │      InventoryItemOperationType.cs
+│  │  │  │      LifeSkillCombatForceSilentType.cs
+│  │  │  │      OneShotEventType.cs
+│  │  │  │      SpecialEventOptionType.cs
+│  │  │  │      
+│  │  │  ├─EventLog
+│  │  │  │      EventLogData.cs
+│  │  │  │      EventLogResultData.cs
+│  │  │  │      EventLogResultType.cs
+│  │  │  │      
+│  │  │  ├─EventOption
+│  │  │  │      EventBoolStateInfo.cs
+│  │  │  │      EventOptionCost.cs
+│  │  │  │      OptionConsumeInfo.cs
+│  │  │  │      OptionConsumeType.cs
+│  │  │  │      
+│  │  │  └─MonthlyEventActions
+│  │  │          CharacterSearchRange.cs
+│  │  │          MonthlyActionKey.cs
+│  │  │          MonthlyActionState.cs
+│  │  │          MonthlyActionType.cs
+│  │  │          
+│  │  ├─TutorialChapter
+│  │  │      TutorialChapterDomainHelper.cs
+│  │  │      
+│  │  └─World
+│  │      │  AdvancingMonthState.cs
+│  │      │  BigEventRecord.cs
+│  │      │  BossInvasionSpeedType.cs
+│  │      │  CharacterLifespanType.cs
+│  │      │  CombatDifficulty.cs
+│  │      │  Difficulty.cs
+│  │      │  GameVersionInfo.cs
+│  │      │  HereticsAmountType.cs
+│  │      │  JuniorXiangshuTaskStatus.cs
+│  │      │  LandFormType.cs
+│  │      │  MainStoryLineProgress.cs
+│  │      │  NotificationSortingGroup.cs
+│  │      │  SharedMethods.cs
+│  │      │  StateTaskStatus.cs
+│  │      │  SwordTombStatus.cs
+│  │      │  WorldCreationInfo.cs
+│  │      │  WorldDomainHelper.cs
+│  │      │  WorldFunctionType.cs
+│  │      │  WorldPopulationType.cs
+│  │      │  WorldResourceAmountType.cs
+│  │      │  WorldStateData.cs
+│  │      │  XiangshuAvatarDisplayStatus.cs
+│  │      │  XiangshuAvatarIds.cs
+│  │      │  XiangshuAvatarTaskStatus.cs
+│  │      │  
+│  │      ├─MonthlyEvent
+│  │      │      MonthlyEventCollection.cs
+│  │      │      MonthlyEventRenderInfo.cs
+│  │      │      
+│  │      ├─Notification
+│  │      │      InstantNotificationCollection.cs
+│  │      │      InstantNotificationRenderInfo.cs
+│  │      │      MonthlyNotificationCollection.cs
+│  │      │      
+│  │      ├─SectMainStory
+│  │      │      SectBaihuaLifeLinkData.cs
+│  │      │      SectEmeiBreakBonusData.cs
+│  │      │      SectMainStoryEventArgKeys.cs
+│  │      │      SectWuxianWugJugData.cs
+│  │      │      
+│  │      ├─Task
+│  │      │      TaskData.cs
+│  │      │      TaskDisplayData.cs
+│  │      │      TaskDisplayType.cs
+│  │      │      TaskStatusType.cs
+│  │      │      
+│  │      └─TravelingEvent
+│  │              TravelingEventCollection.cs
+│  │              TravelingEventRenderInfo.cs
+│  │              
+│  ├─GameDataBridge
+│  │  │  ClientMessageType.cs
+│  │  │  DisplayEventType.cs
+│  │  │  InterProcessMessage.cs
+│  │  │  Notification.cs
+│  │  │  NotificationCollection.cs
+│  │  │  NotificationType.cs
+│  │  │  Operation.cs
+│  │  │  OperationCollection.cs
+│  │  │  OperationType.cs
+│  │  │  ServerMessageType.cs
+│  │  │  
+│  │  └─VnPipe
+│  │          Bridge.cs
+│  │          IPipe.cs
+│  │          Master.cs
+│  │          NativeObject.cs
+│  │          Slaver.cs
+│  │          
+│  └─Utilities
+│          CombatItemExtensions.cs
+│          ICombatItemConfig.cs
+│          IItemConfig.cs
+│          ItemConfigHelper.cs
+│          RawDataPool.cs
+│          
+├─Microsoft
+│  └─CodeAnalysis
+│          EmbeddedAttribute.cs
+│          
+├─Properties
+│      AssemblyInfo.cs
+│      
+├─SerializableGameDataSourceGenerator
+│      AutoGenerateSerializableGameDataAttribute.cs
+│      
+└─System
+    └─Runtime
+        └─CompilerServices
+                IsUnmanagedAttribute.cs
+                

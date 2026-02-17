@@ -1,0 +1,3193 @@
+Folder PATH listing for volume heaven
+Volume serial number is 7400-DB6F
+A:.
+│  exported.json
+│  install_dotnet_core.vdf
+│  restart.bat
+│  steam_appid.txt
+│  tags-update.log
+│  TaiwuLauncher.exe
+│  The Scroll of Taiwu.exe
+│  UnityCrashHandler64.exe
+│  UnityPlayer.dll
+│  WinPixEventRuntime.dll
+│  运行库手动安装.txt
+│  
+├─Backend
+│      api-ms-win-core-console-l1-1-0.dll
+│      api-ms-win-core-console-l1-2-0.dll
+│      api-ms-win-core-datetime-l1-1-0.dll
+│      api-ms-win-core-debug-l1-1-0.dll
+│      api-ms-win-core-errorhandling-l1-1-0.dll
+│      api-ms-win-core-fibers-l1-1-0.dll
+│      api-ms-win-core-file-l1-1-0.dll
+│      api-ms-win-core-file-l1-2-0.dll
+│      api-ms-win-core-file-l2-1-0.dll
+│      api-ms-win-core-handle-l1-1-0.dll
+│      api-ms-win-core-heap-l1-1-0.dll
+│      api-ms-win-core-interlocked-l1-1-0.dll
+│      api-ms-win-core-libraryloader-l1-1-0.dll
+│      api-ms-win-core-localization-l1-2-0.dll
+│      api-ms-win-core-memory-l1-1-0.dll
+│      api-ms-win-core-namedpipe-l1-1-0.dll
+│      api-ms-win-core-processenvironment-l1-1-0.dll
+│      api-ms-win-core-processthreads-l1-1-0.dll
+│      api-ms-win-core-processthreads-l1-1-1.dll
+│      api-ms-win-core-profile-l1-1-0.dll
+│      api-ms-win-core-rtlsupport-l1-1-0.dll
+│      api-ms-win-core-string-l1-1-0.dll
+│      api-ms-win-core-synch-l1-1-0.dll
+│      api-ms-win-core-synch-l1-2-0.dll
+│      api-ms-win-core-sysinfo-l1-1-0.dll
+│      api-ms-win-core-timezone-l1-1-0.dll
+│      api-ms-win-core-util-l1-1-0.dll
+│      api-ms-win-crt-conio-l1-1-0.dll
+│      api-ms-win-crt-convert-l1-1-0.dll
+│      api-ms-win-crt-environment-l1-1-0.dll
+│      api-ms-win-crt-filesystem-l1-1-0.dll
+│      api-ms-win-crt-heap-l1-1-0.dll
+│      api-ms-win-crt-locale-l1-1-0.dll
+│      api-ms-win-crt-math-l1-1-0.dll
+│      api-ms-win-crt-multibyte-l1-1-0.dll
+│      api-ms-win-crt-private-l1-1-0.dll
+│      api-ms-win-crt-process-l1-1-0.dll
+│      api-ms-win-crt-runtime-l1-1-0.dll
+│      api-ms-win-crt-stdio-l1-1-0.dll
+│      api-ms-win-crt-string-l1-1-0.dll
+│      api-ms-win-crt-time-l1-1-0.dll
+│      api-ms-win-crt-utility-l1-1-0.dll
+│      ArchiveData.dll
+│      clretwrc.dll
+│      clrgc.dll
+│      clrjit.dll
+│      CompDevLib.Interpreter.dll
+│      CompDevLib.Interpreter.pdb
+│      coreclr.dll
+│      createdump.exe
+│      dbgshim.dll
+│      GameData.Adventure.dll
+│      GameData.Adventure.pdb
+│      GameData.Combat.Math.dll
+│      GameData.Combat.Math.pdb
+│      GameData.Common.Algorithm.dll
+│      GameData.Common.Algorithm.pdb
+│      GameData.Common.dll
+│      GameData.Common.pdb
+│      GameData.deps.json
+│      GameData.dll
+│      GameData.exe
+│      GameData.GameDataBridge.dll
+│      GameData.GameDataBridge.pdb
+│      GameData.pdb
+│      GameData.runtimeconfig.json
+│      GameData.Serializer.dll
+│      GameData.Serializer.pdb
+│      GameData.Shared.dll
+│      GameData.Shared.Enum.dll
+│      GameData.Shared.Enum.pdb
+│      GameData.Shared.pdb
+│      GameData.Utilities.dll
+│      GameData.Utilities.pdb
+│      GameData.Utilities.Structure.dll
+│      GameData.Utilities.Structure.pdb
+│      hostfxr.dll
+│      hostpolicy.dll
+│      Microsoft.CSharp.dll
+│      Microsoft.DiaSymReader.Native.amd64.dll
+│      Microsoft.VisualBasic.Core.dll
+│      Microsoft.VisualBasic.dll
+│      Microsoft.Win32.Primitives.dll
+│      Microsoft.Win32.Registry.dll
+│      MoonSharp.Interpreter.dll
+│      mscordaccore.dll
+│      mscordaccore_amd64_amd64_6.0.1222.56807.dll
+│      mscordaccore_amd64_amd64_6.0.3624.51421.dll
+│      mscordaccore_amd64_amd64_8.0.1224.60305.dll
+│      mscordbi.dll
+│      mscorlib.dll
+│      mscorrc.dll
+│      msquic.dll
+│      netstandard.dll
+│      Newtonsoft.Json.dll
+│      NLog.dll
+│      Redzen.dll
+│      Steamworks.NET.dll
+│      steam_api64.dll
+│      System.AppContext.dll
+│      System.Buffers.dll
+│      System.Collections.Concurrent.dll
+│      System.Collections.dll
+│      System.Collections.Immutable.dll
+│      System.Collections.NonGeneric.dll
+│      System.Collections.Specialized.dll
+│      System.ComponentModel.Annotations.dll
+│      System.ComponentModel.DataAnnotations.dll
+│      System.ComponentModel.dll
+│      System.ComponentModel.EventBasedAsync.dll
+│      System.ComponentModel.Primitives.dll
+│      System.ComponentModel.TypeConverter.dll
+│      System.Configuration.dll
+│      System.Console.dll
+│      System.Core.dll
+│      System.Data.Common.dll
+│      System.Data.DataSetExtensions.dll
+│      System.Data.dll
+│      System.Diagnostics.Contracts.dll
+│      System.Diagnostics.Debug.dll
+│      System.Diagnostics.DiagnosticSource.dll
+│      System.Diagnostics.FileVersionInfo.dll
+│      System.Diagnostics.Process.dll
+│      System.Diagnostics.StackTrace.dll
+│      System.Diagnostics.TextWriterTraceListener.dll
+│      System.Diagnostics.Tools.dll
+│      System.Diagnostics.TraceSource.dll
+│      System.Diagnostics.Tracing.dll
+│      System.dll
+│      System.Drawing.dll
+│      System.Drawing.Primitives.dll
+│      System.Dynamic.Runtime.dll
+│      System.Formats.Asn1.dll
+│      System.Formats.Tar.dll
+│      System.Globalization.Calendars.dll
+│      System.Globalization.dll
+│      System.Globalization.Extensions.dll
+│      System.IO.Compression.Brotli.dll
+│      System.IO.Compression.dll
+│      System.IO.Compression.FileSystem.dll
+│      System.IO.Compression.Native.dll
+│      System.IO.Compression.ZipFile.dll
+│      System.IO.dll
+│      System.IO.FileSystem.AccessControl.dll
+│      System.IO.FileSystem.dll
+│      System.IO.FileSystem.DriveInfo.dll
+│      System.IO.FileSystem.Primitives.dll
+│      System.IO.FileSystem.Watcher.dll
+│      System.IO.IsolatedStorage.dll
+│      System.IO.MemoryMappedFiles.dll
+│      System.IO.Pipes.AccessControl.dll
+│      System.IO.Pipes.dll
+│      System.IO.UnmanagedMemoryStream.dll
+│      System.Linq.dll
+│      System.Linq.Expressions.dll
+│      System.Linq.Parallel.dll
+│      System.Linq.Queryable.dll
+│      System.Memory.dll
+│      System.Net.dll
+│      System.Net.Http.dll
+│      System.Net.Http.Json.dll
+│      System.Net.HttpListener.dll
+│      System.Net.Mail.dll
+│      System.Net.NameResolution.dll
+│      System.Net.NetworkInformation.dll
+│      System.Net.Ping.dll
+│      System.Net.Primitives.dll
+│      System.Net.Quic.dll
+│      System.Net.Requests.dll
+│      System.Net.Security.dll
+│      System.Net.ServicePoint.dll
+│      System.Net.Sockets.dll
+│      System.Net.WebClient.dll
+│      System.Net.WebHeaderCollection.dll
+│      System.Net.WebProxy.dll
+│      System.Net.WebSockets.Client.dll
+│      System.Net.WebSockets.dll
+│      System.Numerics.dll
+│      System.Numerics.Vectors.dll
+│      System.ObjectModel.dll
+│      System.Private.CoreLib.dll
+│      System.Private.DataContractSerialization.dll
+│      System.Private.Uri.dll
+│      System.Private.Xml.dll
+│      System.Private.Xml.Linq.dll
+│      System.Reflection.DispatchProxy.dll
+│      System.Reflection.dll
+│      System.Reflection.Emit.dll
+│      System.Reflection.Emit.ILGeneration.dll
+│      System.Reflection.Emit.Lightweight.dll
+│      System.Reflection.Extensions.dll
+│      System.Reflection.Metadata.dll
+│      System.Reflection.Primitives.dll
+│      System.Reflection.TypeExtensions.dll
+│      System.Resources.Reader.dll
+│      System.Resources.ResourceManager.dll
+│      System.Resources.Writer.dll
+│      System.Runtime.CompilerServices.Unsafe.dll
+│      System.Runtime.CompilerServices.VisualC.dll
+│      System.Runtime.dll
+│      System.Runtime.Extensions.dll
+│      System.Runtime.Handles.dll
+│      System.Runtime.InteropServices.dll
+│      System.Runtime.InteropServices.JavaScript.dll
+│      System.Runtime.InteropServices.RuntimeInformation.dll
+│      System.Runtime.Intrinsics.dll
+│      System.Runtime.Loader.dll
+│      System.Runtime.Numerics.dll
+│      System.Runtime.Serialization.dll
+│      System.Runtime.Serialization.Formatters.dll
+│      System.Runtime.Serialization.Json.dll
+│      System.Runtime.Serialization.Primitives.dll
+│      System.Runtime.Serialization.Xml.dll
+│      System.Security.AccessControl.dll
+│      System.Security.Claims.dll
+│      System.Security.Cryptography.Algorithms.dll
+│      System.Security.Cryptography.Cng.dll
+│      System.Security.Cryptography.Csp.dll
+│      System.Security.Cryptography.dll
+│      System.Security.Cryptography.Encoding.dll
+│      System.Security.Cryptography.OpenSsl.dll
+│      System.Security.Cryptography.Primitives.dll
+│      System.Security.Cryptography.X509Certificates.dll
+│      System.Security.dll
+│      System.Security.Principal.dll
+│      System.Security.Principal.Windows.dll
+│      System.Security.SecureString.dll
+│      System.ServiceModel.Web.dll
+│      System.ServiceProcess.dll
+│      System.Text.Encoding.CodePages.dll
+│      System.Text.Encoding.dll
+│      System.Text.Encoding.Extensions.dll
+│      System.Text.Encodings.Web.dll
+│      System.Text.Json.dll
+│      System.Text.RegularExpressions.dll
+│      System.Threading.Channels.dll
+│      System.Threading.dll
+│      System.Threading.Overlapped.dll
+│      System.Threading.Tasks.Dataflow.dll
+│      System.Threading.Tasks.dll
+│      System.Threading.Tasks.Extensions.dll
+│      System.Threading.Tasks.Parallel.dll
+│      System.Threading.Thread.dll
+│      System.Threading.ThreadPool.dll
+│      System.Threading.Timer.dll
+│      System.Transactions.dll
+│      System.Transactions.Local.dll
+│      System.ValueTuple.dll
+│      System.Web.dll
+│      System.Web.HttpUtility.dll
+│      System.Windows.dll
+│      System.Xml.dll
+│      System.Xml.Linq.dll
+│      System.Xml.ReaderWriter.dll
+│      System.Xml.Serialization.dll
+│      System.Xml.XDocument.dll
+│      System.Xml.XmlDocument.dll
+│      System.Xml.XmlSerializer.dll
+│      System.Xml.XPath.dll
+│      System.Xml.XPath.XDocument.dll
+│      ucrtbase.dll
+│      vnpipe.dll
+│      WindowsBase.dll
+│      
+├─BepInEx
+│  │  .doorstop_version
+│  │  changelog.txt
+│  │  doorstop_config.ini
+│  │  winhttp.dll
+│  │  
+│  └─BepInEx
+│      └─core
+│              0Harmony.dll
+│              0Harmony.xml
+│              0Harmony20.dll
+│              BepInEx.dll
+│              BepInEx.Harmony.dll
+│              BepInEx.Harmony.xml
+│              BepInEx.Preloader.dll
+│              BepInEx.Preloader.xml
+│              BepInEx.xml
+│              HarmonyXInterop.dll
+│              Mono.Cecil.dll
+│              Mono.Cecil.Mdb.dll
+│              Mono.Cecil.Pdb.dll
+│              Mono.Cecil.Rocks.dll
+│              MonoMod.RuntimeDetour.dll
+│              MonoMod.RuntimeDetour.xml
+│              MonoMod.Utils.dll
+│              MonoMod.Utils.xml
+│              
+├─Combat
+│  └─CombatAi
+│      │  taiwu.aid
+│      │  
+│      ├─debate
+│      │      sample.aid
+│      │      
+│      ├─sect-story
+│      │      baihua-anonym-escape.aid
+│      │      baihua-anonym.aid
+│      │      shaolin-slayer-trial-demon0.aid
+│      │      shaolin-slayer-trial-demon10.aid
+│      │      shaolin-slayer-trial-demon11.aid
+│      │      shaolin-slayer-trial-demon12.aid
+│      │      shaolin-slayer-trial-demon17.aid
+│      │      shaolin-slayer-trial-demon2.aid
+│      │      shaolin-slayer-trial-demon3.aid
+│      │      shaolin-slayer-trial-demon4.aid
+│      │      shaolin-slayer-trial-demon6.aid
+│      │      shaolin-slayer-trial-demon7.aid
+│      │      zhujian-gear-mate-play.aid
+│      │      
+│      ├─special-role
+│      │      GearMan.aid
+│      │      
+│      ├─sword-tomb
+│      │      dayue-yaochang.aid
+│      │      huanxin.aid
+│      │      jin-huanger.aid
+│      │      jiuhan.aid
+│      │      monv.aid
+│      │      shufang.aid
+│      │      wei-qi.aid
+│      │      xiangshu.aid
+│      │      xuefeng.aid
+│      │      yi-yihou.aid
+│      │      yixiang.aid
+│      │      
+│      └─tutorial
+│              little-monk.aid
+│              
+├─DEBUG_SAVE
+├─Event
+│  ├─EventCompiler
+│  │  │  Microsoft.CodeAnalysis.CSharp.dll
+│  │  │  Microsoft.CodeAnalysis.dll
+│  │  │  TaiwuEventCompiler.deps.json
+│  │  │  TaiwuEventCompiler.dll
+│  │  │  TaiwuEventCompiler.exe
+│  │  │  TaiwuEventCompiler.runtimeconfig.json
+│  │  │  
+│  │  ├─cs
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─de
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─es
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─fr
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─it
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─ja
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─ko
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─pl
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─pt-BR
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─ru
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─tr
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  ├─zh-Hans
+│  │  │      Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │  │      Microsoft.CodeAnalysis.resources.dll
+│  │  │      
+│  │  └─zh-Hant
+│  │          Microsoft.CodeAnalysis.CSharp.resources.dll
+│  │          Microsoft.CodeAnalysis.resources.dll
+│  │          
+│  ├─EventLanguages
+│  │      Taiwu_EventPackage_AutumnCriketMatch_Language_CN.txt
+│  │      Taiwu_EventPackage_CaravanInteraction_Language_CN.txt
+│  │      Taiwu_EventPackage_changshengzhisi_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Chat_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Interact_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Main_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Oppose_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_RandomEnemy_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Relate_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Special_Language_CN.txt
+│  │      Taiwu_EventPackage_CharacterInteraction_Study_Language_CN.txt
+│  │      Taiwu_EventPackage_ComparativeartEvent_Language_CN.txt
+│  │      Taiwu_EventPackage_DeepValleyExit_Language_CN.txt
+│  │      Taiwu_EventPackage_DreamBackRelationship_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryChengDu_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryDaLi_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryFuZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryGuangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryGuiZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryHangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryJiangLing_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryJingCheng_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryLiaoYang_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryQingZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryQinZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryShouChun_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryTaiYuan_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryXiangYang_Language_CN.txt
+│  │      Taiwu_EventPackage_FemaleMarryYangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_FindBingCan_Language_CN.txt
+│  │      Taiwu_EventPackage_FindBlackBear_Language_CN.txt
+│  │      Taiwu_EventPackage_FindChanQiao_Language_CN.txt
+│  │      Taiwu_EventPackage_FindChanYi_Language_CN.txt
+│  │      Taiwu_EventPackage_FindDuanChang_Language_CN.txt
+│  │      Taiwu_EventPackage_FindFaceMan_Language_CN.txt
+│  │      Taiwu_EventPackage_FindJiuQu_Language_CN.txt
+│  │      Taiwu_EventPackage_FindKunLun_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMedicineAttackProtect_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMedicineDetoxify_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMedicineHeal_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMedicineHitDefuse_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMedicineOther_Language_CN.txt
+│  │      Taiwu_EventPackage_FindMonkeyHead_Language_CN.txt
+│  │      Taiwu_EventPackage_FindPeacock_Language_CN.txt
+│  │      Taiwu_EventPackage_FindQingZhu_Language_CN.txt
+│  │      Taiwu_EventPackage_FindShenZhao_Language_CN.txt
+│  │      Taiwu_EventPackage_FindTianCan_Language_CN.txt
+│  │      Taiwu_EventPackage_FindTreasureEvents_Language_CN.txt
+│  │      Taiwu_EventPackage_FindXieQiao_Language_CN.txt
+│  │      Taiwu_EventPackage_FindXuanTie_Language_CN.txt
+│  │      Taiwu_EventPackage_FindXueChan_Language_CN.txt
+│  │      Taiwu_EventPackage_FindXuHuang_Language_CN.txt
+│  │      Taiwu_EventPackage_FindZiTan_Language_CN.txt
+│  │      Taiwu_EventPackage_FuyuRecoverXiangshuCurse_Language_CN.txt
+│  │      Taiwu_EventPackage_InjectionInteractOption_Language_CN.txt
+│  │      Taiwu_EventPackage_InteractStory_ElopeBecauseOfLove_Language_CN.txt
+│  │      Taiwu_EventPackage_InteractStory_TeaParty_Language_CN.txt
+│  │      Taiwu_EventPackage_InteractStory_WineParty_Language_CN.txt
+│  │      Taiwu_EventPackage_JieqingAssassinAttack_Language_CN.txt
+│  │      Taiwu_EventPackage_KidnappedCharacterInteraction_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_BambooBorn_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_CemeteryImmortal_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_DeepValley_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_DesertedpostStation_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_DestroyArea_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_FirstTaiWu_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_LandOfTrance_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_LargeAreaBloodstain_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_0_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_1_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_2_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_3_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_4_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_5_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_6_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_7_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_8_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_9_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_DaXuanN_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FengHuang_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FenShen_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FuXieTie_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_GuiShenX_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_JieLongP_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_MoNvYi_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_QiuMoMu_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SealEvil_Rongchen_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SmallVilliage_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGraveProgress_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_DaXuanN_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FengHuang_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FenShen_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FuXieTie_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_GuiShenX_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_JieLongP_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Mie_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_MoNvYi_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_QiuMoMu_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Rongchen_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Scroll_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Yuan_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_TaiwuCrossArchive_FindMemory_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_VisitSect_Language_CN.txt
+│  │      Taiwu_EventPackage_MainStory_VowRewards_Language_CN.txt
+│  │      Taiwu_EventPackage_MapAnimalInteraction_Language_CN.txt
+│  │      Taiwu_EventPackage_MapPickup_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryAdventure_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryChengDu_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryDaLi_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryFuZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryGuangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryGuiZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryHangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryJiangLing_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryJingCheng_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryLiaoYang_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryQingZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryQinZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryShouChun_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryTaiYuan_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryXiangYang_Language_CN.txt
+│  │      Taiwu_EventPackage_MarryYangZhou_Language_CN.txt
+│  │      Taiwu_EventPackage_MonkeyKing_Language_CN.txt
+│  │      Taiwu_EventPackage_NewSecretInformationEvent_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_01_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_02_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_03_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_04_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_05_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_06_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_07_Language_CN.txt
+│  │      Taiwu_EventPackage_NewTutorialChapter_08_Language_CN.txt
+│  │      Taiwu_EventPackage_PrisonerMonthAdvanceEvents_Language_CN.txt
+│  │      Taiwu_EventPackage_Prison_Language_CN.txt
+│  │      Taiwu_EventPackage_Profession2_Language_CN.txt
+│  │      Taiwu_EventPackage_Profession3_Language_CN.txt
+│  │      Taiwu_EventPackage_Profession4_Language_CN.txt
+│  │      Taiwu_EventPackage_RevertZhuLu_Language_CN.txt
+│  │      Taiwu_EventPackage_RighteousHigh_Language_CN.txt
+│  │      Taiwu_EventPackage_RighteousLow_Language_CN.txt
+│  │      Taiwu_EventPackage_RighteousMiddle_Language_CN.txt
+│  │      Taiwu_EventPackage_RoleTaiwuSelfMonthAdvanceEvents_Language_CN.txt
+│  │      Taiwu_EventPackage_SameBlockNpcMonthAdvanceEvents_Language_CN.txt
+│  │      Taiwu_EventPackage_SaveLoaded_Language_CN.txt
+│  │      Taiwu_EventPackage_SecretInformationCommon_Language_CN.txt
+│  │      Taiwu_EventPackage_SectBuildingInteraction_Language_CN.txt
+│  │      Taiwu_EventPackage_SectCombatMatchMonthlyEvent_Language_CN.txt
+│  │      Taiwu_EventPackage_SectCombatMatch_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryAdventure3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryBaihua1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryBaihua2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryBaihuaAdventure1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryBaihuaAdventure5_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryCommon_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryEmeiAdventureOne_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryEmeiAdventureTwo_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryEmei_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulong1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulong2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulong3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulong4_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJingang2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJingang3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJingangAdventure_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJingang_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureOne_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureThree_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureTwo_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryKongsang_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryNewBaihuaJie_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryNewBaihuaZuan_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRanshanAdventure1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRanshanAdventure2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRanshanExtra_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRanshan_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiEpitasis_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiFinale_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiPrelude_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryShaolin_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryShixiangAdventure_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryShixiang_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryWudang_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryWuxianAdventure1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryWuxianAdventure2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryWuxianExtra_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryWuxian_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannvAdventureOne_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_2_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Interact_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part1_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part3_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part4_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuehouGraveAdventure_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryXuehou_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanAdventureCircle_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanEpitasis_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanFinale_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanPrelude_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanRisingAction_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanSpecialinteraction_Language_CN.txt
+│  │      Taiwu_EventPackage_SectMainStoryZhujianPrelude_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryRemakeEmeiRisingActio_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryZhujianAdventureFinale_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryZhujianAdventureGrowFull_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryZhujianEpitasis_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryZhujianFinale_Language_CN.txt
+│  │      Taiwu_EventPackage_SectStoryZhujianRisingAction_Language_CN.txt
+│  │      Taiwu_EventPackage_SettlementTresury_Language_CN.txt
+│  │      Taiwu_EventPackage_SkillMatch_Cooking_Language_CN.txt
+│  │      Taiwu_EventPackage_SkillMatch_Medicine_Language_CN.txt
+│  │      Taiwu_EventPackage_SkillMatch_Toxicology_Language_CN.txt
+│  │      Taiwu_EventPackage_SmallVilliageChange_Language_CN.txt
+│  │      Taiwu_EventPackage_SmallVilliageDarkRiver_Language_CN.txt
+│  │      Taiwu_EventPackage_SpringMarket_Language_CN.txt
+│  │      Taiwu_EventPackage_Story_Jouenry_Language_CN.txt
+│  │      Taiwu_EventPackage_StrangeBookAdventure_Language_CN.txt
+│  │      Taiwu_EventPackage_SummerCombatMatch_Language_CN.txt
+│  │      Taiwu_EventPackage_SwordGraveInformation_Language_CN.txt
+│  │      Taiwu_EventPackage_TabutInteract_Language_CN.txt
+│  │      Taiwu_EventPackage_TaiwuBeHuntedNew_Language_CN.txt
+│  │      Taiwu_EventPackage_TaiwuCrossArchiveLifeRecord_Language_CN.txt
+│  │      Taiwu_EventPackage_TaiwuCrossArchive_Language_CN.txt
+│  │      Taiwu_EventPackage_TaiwuLegacyPassing_Language_CN.txt
+│  │      Taiwu_EventPackage_TamingCarriers_Language_CN.txt
+│  │      Taiwu_EventPackage_TeammateMonthAdvanceEvents_Language_CN.txt
+│  │      Taiwu_EventPackage_VillagerRole_Interact_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_EGai_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_ERenGu_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_HanFei_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_LuanZang_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_MiXiang_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_PanTu_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_QiShi_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_QunMo_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_XieRen_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_XiuLuo_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_YiShi_Language_CN.txt
+│  │      Taiwu_EventPackage_WD_ZeiRen_Language_CN.txt
+│  │      Taiwu_EventPackage_WinterLifeSkillMatch_Language_CN.txt
+│  │      Taiwu_EventPackage_WorldKungfuMeeting_Language_CN.txt
+│  │      Taiwu_EventPackage_zhiye1_Language_CN.txt
+│  │      
+│  ├─EventLib
+│  │      Taiwu_EventPackage_AutumnCriketMatch.dll
+│  │      Taiwu_EventPackage_CaravanInteraction.dll
+│  │      Taiwu_EventPackage_changshengzhisi.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Chat.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Interact.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Main.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Oppose.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_RandomEnemy.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Relate.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Special.dll
+│  │      Taiwu_EventPackage_CharacterInteraction_Study.dll
+│  │      Taiwu_EventPackage_ComparativeartEvent.dll
+│  │      Taiwu_EventPackage_DeepValleyExit.dll
+│  │      Taiwu_EventPackage_DreamBackRelationship.dll
+│  │      Taiwu_EventPackage_FemaleMarryChengDu.dll
+│  │      Taiwu_EventPackage_FemaleMarryDaLi.dll
+│  │      Taiwu_EventPackage_FemaleMarryFuZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryGuangZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryGuiZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryHangZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryJiangLing.dll
+│  │      Taiwu_EventPackage_FemaleMarryJingCheng.dll
+│  │      Taiwu_EventPackage_FemaleMarryLiaoYang.dll
+│  │      Taiwu_EventPackage_FemaleMarryQingZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryQinZhou.dll
+│  │      Taiwu_EventPackage_FemaleMarryShouChun.dll
+│  │      Taiwu_EventPackage_FemaleMarryTaiYuan.dll
+│  │      Taiwu_EventPackage_FemaleMarryXiangYang.dll
+│  │      Taiwu_EventPackage_FemaleMarryYangZhou.dll
+│  │      Taiwu_EventPackage_FindBingCan.dll
+│  │      Taiwu_EventPackage_FindBlackBear.dll
+│  │      Taiwu_EventPackage_FindChanQiao.dll
+│  │      Taiwu_EventPackage_FindChanYi.dll
+│  │      Taiwu_EventPackage_FindDuanChang.dll
+│  │      Taiwu_EventPackage_FindFaceMan.dll
+│  │      Taiwu_EventPackage_FindJiuQu.dll
+│  │      Taiwu_EventPackage_FindKunLun.dll
+│  │      Taiwu_EventPackage_FindMedicineAttackProtect.dll
+│  │      Taiwu_EventPackage_FindMedicineDetoxify.dll
+│  │      Taiwu_EventPackage_FindMedicineHeal.dll
+│  │      Taiwu_EventPackage_FindMedicineHitDefuse.dll
+│  │      Taiwu_EventPackage_FindMedicineOther.dll
+│  │      Taiwu_EventPackage_FindMonkeyHead.dll
+│  │      Taiwu_EventPackage_FindPeacock.dll
+│  │      Taiwu_EventPackage_FindQingZhu.dll
+│  │      Taiwu_EventPackage_FindShenZhao.dll
+│  │      Taiwu_EventPackage_FindTianCan.dll
+│  │      Taiwu_EventPackage_FindTreasureEvents.dll
+│  │      Taiwu_EventPackage_FindXieQiao.dll
+│  │      Taiwu_EventPackage_FindXuanTie.dll
+│  │      Taiwu_EventPackage_FindXueChan.dll
+│  │      Taiwu_EventPackage_FindXuHuang.dll
+│  │      Taiwu_EventPackage_FindZiTan.dll
+│  │      Taiwu_EventPackage_FuyuRecoverXiangshuCurse.dll
+│  │      Taiwu_EventPackage_InjectionInteractOption.dll
+│  │      Taiwu_EventPackage_InteractStory_ElopeBecauseOfLove.dll
+│  │      Taiwu_EventPackage_InteractStory_TeaParty.dll
+│  │      Taiwu_EventPackage_InteractStory_WineParty.dll
+│  │      Taiwu_EventPackage_JieqingAssassinAttack.dll
+│  │      Taiwu_EventPackage_KidnappedCharacterInteraction.dll
+│  │      Taiwu_EventPackage_MainStory_BambooBorn.dll
+│  │      Taiwu_EventPackage_MainStory_CemeteryImmortal.dll
+│  │      Taiwu_EventPackage_MainStory_DeepValley.dll
+│  │      Taiwu_EventPackage_MainStory_DesertedpostStation.dll
+│  │      Taiwu_EventPackage_MainStory_DestroyArea.dll
+│  │      Taiwu_EventPackage_MainStory_FirstTaiWu.dll
+│  │      Taiwu_EventPackage_MainStory_LandOfTrance.dll
+│  │      Taiwu_EventPackage_MainStory_LargeAreaBloodstain.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_0.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_1.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_2.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_3.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_4.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_5.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_6.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_7.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_8.dll
+│  │      Taiwu_EventPackage_MainStory_RockBamboo_9.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_DaXuanN.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FengHuang.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FenShen.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_FuXieTie.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_GuiShenX.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_JieLongP.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_MoNvYi.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_QiuMoMu.dll
+│  │      Taiwu_EventPackage_MainStory_SealEvil_Rongchen.dll
+│  │      Taiwu_EventPackage_MainStory_SmallVilliage.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGraveProgress.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_DaXuanN.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FengHuang.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FenShen.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_FuXieTie.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_GuiShenX.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_JieLongP.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Mie.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_MoNvYi.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_QiuMoMu.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Rongchen.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Scroll.dll
+│  │      Taiwu_EventPackage_MainStory_SwordGrave_Yuan.dll
+│  │      Taiwu_EventPackage_MainStory_TaiwuCrossArchive_FindMemory.dll
+│  │      Taiwu_EventPackage_MainStory_VisitSect.dll
+│  │      Taiwu_EventPackage_MainStory_VowRewards.dll
+│  │      Taiwu_EventPackage_MapAnimalInteraction.dll
+│  │      Taiwu_EventPackage_MapPickup.dll
+│  │      Taiwu_EventPackage_MarryAdventure.dll
+│  │      Taiwu_EventPackage_MarryChengDu.dll
+│  │      Taiwu_EventPackage_MarryDaLi.dll
+│  │      Taiwu_EventPackage_MarryFuZhou.dll
+│  │      Taiwu_EventPackage_MarryGuangZhou.dll
+│  │      Taiwu_EventPackage_MarryGuiZhou.dll
+│  │      Taiwu_EventPackage_MarryHangZhou.dll
+│  │      Taiwu_EventPackage_MarryJiangLing.dll
+│  │      Taiwu_EventPackage_MarryJingCheng.dll
+│  │      Taiwu_EventPackage_MarryLiaoYang.dll
+│  │      Taiwu_EventPackage_MarryQingZhou.dll
+│  │      Taiwu_EventPackage_MarryQinZhou.dll
+│  │      Taiwu_EventPackage_MarryShouChun.dll
+│  │      Taiwu_EventPackage_MarryTaiYuan.dll
+│  │      Taiwu_EventPackage_MarryXiangYang.dll
+│  │      Taiwu_EventPackage_MarryYangZhou.dll
+│  │      Taiwu_EventPackage_MonkeyKing.dll
+│  │      Taiwu_EventPackage_NewSecretInformationEvent.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_01.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_02.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_03.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_04.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_05.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_06.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_07.dll
+│  │      Taiwu_EventPackage_NewTutorialChapter_08.dll
+│  │      Taiwu_EventPackage_Prison.dll
+│  │      Taiwu_EventPackage_PrisonerMonthAdvanceEvents.dll
+│  │      Taiwu_EventPackage_Profession2.dll
+│  │      Taiwu_EventPackage_Profession3.dll
+│  │      Taiwu_EventPackage_Profession4.dll
+│  │      Taiwu_EventPackage_RevertZhuLu.dll
+│  │      Taiwu_EventPackage_RighteousHigh.dll
+│  │      Taiwu_EventPackage_RighteousLow.dll
+│  │      Taiwu_EventPackage_RighteousMiddle.dll
+│  │      Taiwu_EventPackage_RoleTaiwuSelfMonthAdvanceEvents.dll
+│  │      Taiwu_EventPackage_SameBlockNpcMonthAdvanceEvents.dll
+│  │      Taiwu_EventPackage_SaveLoaded.dll
+│  │      Taiwu_EventPackage_SecretInformationCommon.dll
+│  │      Taiwu_EventPackage_SectBuildingInteraction.dll
+│  │      Taiwu_EventPackage_SectCombatMatch.dll
+│  │      Taiwu_EventPackage_SectCombatMatchMonthlyEvent.dll
+│  │      Taiwu_EventPackage_SectMainStoryAdventure3.dll
+│  │      Taiwu_EventPackage_SectMainStoryBaihua1.dll
+│  │      Taiwu_EventPackage_SectMainStoryBaihua2.dll
+│  │      Taiwu_EventPackage_SectMainStoryBaihuaAdventure1.dll
+│  │      Taiwu_EventPackage_SectMainStoryBaihuaAdventure5.dll
+│  │      Taiwu_EventPackage_SectMainStoryCommon.dll
+│  │      Taiwu_EventPackage_SectMainStoryEmei.dll
+│  │      Taiwu_EventPackage_SectMainStoryEmeiAdventureOne.dll
+│  │      Taiwu_EventPackage_SectMainStoryEmeiAdventureTwo.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulong1.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulong2.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulong3.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulong4.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure1.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure2.dll
+│  │      Taiwu_EventPackage_SectMainStoryFulongAdventure3.dll
+│  │      Taiwu_EventPackage_SectMainStoryJingang.dll
+│  │      Taiwu_EventPackage_SectMainStoryJingang2.dll
+│  │      Taiwu_EventPackage_SectMainStoryJingang3.dll
+│  │      Taiwu_EventPackage_SectMainStoryJingangAdventure.dll
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureOne.dll
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureThree.dll
+│  │      Taiwu_EventPackage_SectMainStoryJixiAdventureTwo.dll
+│  │      Taiwu_EventPackage_SectMainStoryKongsang.dll
+│  │      Taiwu_EventPackage_SectMainStoryNewBaihuaJie.dll
+│  │      Taiwu_EventPackage_SectMainStoryNewBaihuaZuan.dll
+│  │      Taiwu_EventPackage_SectMainStoryRanshan.dll
+│  │      Taiwu_EventPackage_SectMainStoryRanshanAdventure1.dll
+│  │      Taiwu_EventPackage_SectMainStoryRanshanAdventure2.dll
+│  │      Taiwu_EventPackage_SectMainStoryRanshanExtra.dll
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiEpitasis.dll
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiFinale.dll
+│  │      Taiwu_EventPackage_SectMainStoryRemakeEmeiPrelude.dll
+│  │      Taiwu_EventPackage_SectMainStoryShaolin.dll
+│  │      Taiwu_EventPackage_SectMainStoryShixiang.dll
+│  │      Taiwu_EventPackage_SectMainStoryShixiangAdventure.dll
+│  │      Taiwu_EventPackage_SectMainStoryWudang.dll
+│  │      Taiwu_EventPackage_SectMainStoryWuxian.dll
+│  │      Taiwu_EventPackage_SectMainStoryWuxianAdventure1.dll
+│  │      Taiwu_EventPackage_SectMainStoryWuxianAdventure2.dll
+│  │      Taiwu_EventPackage_SectMainStoryWuxianExtra.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannvAdventureOne.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_1.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_2.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Adventure_3.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Interact.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part1.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part3.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuannv_Part4.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuehou.dll
+│  │      Taiwu_EventPackage_SectMainStoryXuehouGraveAdventure.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanAdventureCircle.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanEpitasis.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanFinale.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanPrelude.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanRisingAction.dll
+│  │      Taiwu_EventPackage_SectMainStoryYuanshanSpecialinteraction.dll
+│  │      Taiwu_EventPackage_SectMainStoryZhujianPrelude.dll
+│  │      Taiwu_EventPackage_SectStoryRemakeEmeiRisingActio.dll
+│  │      Taiwu_EventPackage_SectStoryZhujianAdventureFinale.dll
+│  │      Taiwu_EventPackage_SectStoryZhujianAdventureGrowFull.dll
+│  │      Taiwu_EventPackage_SectStoryZhujianEpitasis.dll
+│  │      Taiwu_EventPackage_SectStoryZhujianFinale.dll
+│  │      Taiwu_EventPackage_SectStoryZhujianRisingAction.dll
+│  │      Taiwu_EventPackage_SettlementTresury.dll
+│  │      Taiwu_EventPackage_SkillMatch_Cooking.dll
+│  │      Taiwu_EventPackage_SkillMatch_Medicine.dll
+│  │      Taiwu_EventPackage_SkillMatch_Toxicology.dll
+│  │      Taiwu_EventPackage_SmallVilliageChange.dll
+│  │      Taiwu_EventPackage_SmallVilliageDarkRiver.dll
+│  │      Taiwu_EventPackage_SpringMarket.dll
+│  │      Taiwu_EventPackage_Story_Jouenry.dll
+│  │      Taiwu_EventPackage_StrangeBookAdventure.dll
+│  │      Taiwu_EventPackage_SummerCombatMatch.dll
+│  │      Taiwu_EventPackage_SwordGraveInformation.dll
+│  │      Taiwu_EventPackage_TabutInteract.dll
+│  │      Taiwu_EventPackage_TaiwuBeHuntedNew.dll
+│  │      Taiwu_EventPackage_TaiwuCrossArchive.dll
+│  │      Taiwu_EventPackage_TaiwuCrossArchiveLifeRecord.dll
+│  │      Taiwu_EventPackage_TaiwuLegacyPassing.dll
+│  │      Taiwu_EventPackage_TamingCarriers.dll
+│  │      Taiwu_EventPackage_TeammateMonthAdvanceEvents.dll
+│  │      Taiwu_EventPackage_VillagerRole_Interact.dll
+│  │      Taiwu_EventPackage_WD_EGai.dll
+│  │      Taiwu_EventPackage_WD_ERenGu.dll
+│  │      Taiwu_EventPackage_WD_HanFei.dll
+│  │      Taiwu_EventPackage_WD_LuanZang.dll
+│  │      Taiwu_EventPackage_WD_MiXiang.dll
+│  │      Taiwu_EventPackage_WD_PanTu.dll
+│  │      Taiwu_EventPackage_WD_QiShi.dll
+│  │      Taiwu_EventPackage_WD_QunMo.dll
+│  │      Taiwu_EventPackage_WD_XieRen.dll
+│  │      Taiwu_EventPackage_WD_XiuLuo.dll
+│  │      Taiwu_EventPackage_WD_YiShi.dll
+│  │      Taiwu_EventPackage_WD_ZeiRen.dll
+│  │      Taiwu_EventPackage_WinterLifeSkillMatch.dll
+│  │      Taiwu_EventPackage_WorldKungfuMeeting.dll
+│  │      Taiwu_EventPackage_zhiye1.dll
+│  │      
+│  └─EventScript
+│          Taiwu_EventPackage_CaravanInteraction.twes
+│          Taiwu_EventPackage_CharacterInteraction_Interact.twes
+│          Taiwu_EventPackage_CharacterInteraction_Main.twes
+│          Taiwu_EventPackage_CharacterInteraction_RandomEnemy.twes
+│          Taiwu_EventPackage_DeepValleyExit.twes
+│          Taiwu_EventPackage_FuyuRecoverXiangshuCurse.twes
+│          Taiwu_EventPackage_MainStory_FirstTaiWu.twes
+│          Taiwu_EventPackage_MainStory_SmallVilliage.twes
+│          Taiwu_EventPackage_MainStory_VowRewards.twes
+│          Taiwu_EventPackage_Profession3.twes
+│          Taiwu_EventPackage_RoleTaiwuSelfMonthAdvanceEvents.twes
+│          Taiwu_EventPackage_SectBuildingInteraction.twes
+│          Taiwu_EventPackage_SectMainStoryRemakeEmeiEpitasis.twes
+│          Taiwu_EventPackage_SectMainStoryRemakeEmeiFinale.twes
+│          Taiwu_EventPackage_SectMainStoryRemakeEmeiPrelude.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanAdventureCircle.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanEpitasis.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanFinale.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanPrelude.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanRisingAction.twes
+│          Taiwu_EventPackage_SectMainStoryYuanshanSpecialinteraction.twes
+│          Taiwu_EventPackage_SectMainStoryZhujianPrelude.twes
+│          Taiwu_EventPackage_SectStoryRemakeEmeiRisingActio.twes
+│          Taiwu_EventPackage_SectStoryZhujianAdventureFinale.twes
+│          Taiwu_EventPackage_SectStoryZhujianAdventureGrowFull.twes
+│          Taiwu_EventPackage_SectStoryZhujianEpitasis.twes
+│          Taiwu_EventPackage_SectStoryZhujianFinale.twes
+│          Taiwu_EventPackage_SectStoryZhujianRisingAction.twes
+│          Taiwu_EventPackage_SettlementTresury.twes
+│          Taiwu_EventPackage_TaiwuBeHuntedNew.twes
+│          
+├─Logs
+│      ArchiveData_2025-10-02_21_11_47.log
+│      GameData_2025-10-02_21_11_45.log
+│      
+├─Mod
+│  │  log.txt
+│  │  
+│  ├─功法大师
+│  │  │  Config.Lua
+│  │  │  cover.png
+│  │  │  Settings.Lua
+│  │  │  
+│  │  └─Plugins
+│  │          Fix_ALLCombatSkill.dll
+│  │          
+│  ├─天公不作美
+│  │  │  Config.Lua
+│  │  │  natural.png
+│  │  │  Settings.Lua
+│  │  │  
+│  │  └─Plugins
+│  │          TheWeatherIsnotGood.dll
+│  │          
+│  ├─学习功法
+│  │  │  Config.Lua
+│  │  │  learn.png
+│  │  │  Settings.Lua
+│  │  │  
+│  │  └─Plugins
+│  │          learn_skill.dll
+│  │          
+│  ├─实时修改人物
+│  │      ONE.lua
+│  │      situhuanyue.lua
+│  │      taiwushizhe.lua
+│  │      WENRUOHONG.lua
+│  │      WENRUOJUN.lua
+│  │      WENRUOYI.lua
+│  │      xiaocao.lua
+│  │      YUHENG.lua
+│  │      
+│  └─璇女
+│      │  Config.lua
+│      │  Cover.png
+│      │  Settings.Lua
+│      │  
+│      └─Plugins
+│              xuannvfeng.dll
+│              
+├─MonoBleedingEdge
+│  ├─EmbedRuntime
+│  │      mono-2.0-bdwgc.dll
+│  │      MonoPosixHelper.dll
+│  │      
+│  └─etc
+│      └─mono
+│          │  browscap.ini
+│          │  config
+│          │  
+│          ├─2.0
+│          │  │  DefaultWsdlHelpGenerator.aspx
+│          │  │  machine.config
+│          │  │  settings.map
+│          │  │  web.config
+│          │  │  
+│          │  └─Browsers
+│          │          Compat.browser
+│          │          
+│          ├─4.0
+│          │  │  DefaultWsdlHelpGenerator.aspx
+│          │  │  machine.config
+│          │  │  settings.map
+│          │  │  web.config
+│          │  │  
+│          │  └─Browsers
+│          │          Compat.browser
+│          │          
+│          ├─4.5
+│          │  │  DefaultWsdlHelpGenerator.aspx
+│          │  │  machine.config
+│          │  │  settings.map
+│          │  │  web.config
+│          │  │  
+│          │  └─Browsers
+│          │          Compat.browser
+│          │          
+│          └─mconfig
+│                  config.xml
+│                  
+├─read_me
+│  │  read.md
+│  │  read_story.md
+│  │  
+│  ├─bin
+│  │  └─Debug
+│  │      └─net10.0
+│  ├─obj
+│  │  └─Debug
+│  │      └─net10.0
+│  │          │  .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+│  │          │  功法.AssemblyInfo.cs
+│  │          │  功法.AssemblyInfoInputs.cache
+│  │          │  功法.GeneratedMSBuildEditorConfig.editorconfig
+│  │          │  功法.GlobalUsings.g.cs
+│  │          │  功法中枢.AssemblyInfo.cs
+│  │          │  功法中枢.AssemblyInfoInputs.cache
+│  │          │  功法中枢.GeneratedMSBuildEditorConfig.editorconfig
+│  │          │  功法中枢.GlobalUsings.g.cs
+│  │          │  功法数据库.AssemblyInfo.cs
+│  │          │  功法数据库.AssemblyInfoInputs.cache
+│  │          │  功法数据库.GeneratedMSBuildEditorConfig.editorconfig
+│  │          │  功法数据库.GlobalUsings.g.cs
+│  │          │  功法突破.AssemblyInfo.cs
+│  │          │  功法突破.AssemblyInfoInputs.cache
+│  │          │  功法突破.GeneratedMSBuildEditorConfig.editorconfig
+│  │          │  功法突破.GlobalUsings.g.cs
+│  │          │  读书.AssemblyInfo.cs
+│  │          │  读书.AssemblyInfoInputs.cache
+│  │          │  读书.GeneratedMSBuildEditorConfig.editorconfig
+│  │          │  读书.GlobalUsings.g.cs
+│  │          │  
+│  │          ├─ref
+│  │          └─refint
+│  ├─学习功法
+│  │  │  Config.Lua
+│  │  │  readme.md
+│  │  │  
+│  │  └─Plugins
+│  └─璇女 - Copy
+│      │  Config.lua
+│      │  Cover.png
+│      │  Settings.Lua
+│      │  
+│      └─Plugins
+│              xuannvfeng.dll
+│              
+├─redist
+│  ├─dotnet
+│  │      install_dotnet5.cmd
+│  │      install_dotnet6.cmd
+│  │      runtime_dotnet5_x64.exe
+│  │      runtime_dotnet6_x64.exe
+│  │      
+│  └─vc
+│          VC_redist.x64.exe
+│          
+├─Save
+│  │  CombatAiSetting.lua
+│  │  CreationInfo.lua
+│  │  global.sav
+│  │  global.sav.old
+│  │  SortConfig.lua
+│  │  SystemSetting.lua
+│  │  
+│  ├─1
+│  │      local.sav
+│  │      local.sav.bak.1729051640
+│  │      local.sav.bak.1729052483
+│  │      local.sav.bak.1729053280
+│  │      local.sav.bak.1729053852
+│  │      local.sav.bak.1729055063
+│  │      local.sav.old
+│  │      local.sav.sp
+│  │      
+│  ├─ConvenienceModConfig
+│  └─world_5
+│          local.sav
+│          local.sav.bak.1729338162
+│          local.sav.bak.1729338541
+│          local.sav.bak.1729338600
+│          local.sav.bak.1729338679
+│          local.sav.bak.1729338790
+│          local.sav.old
+│          local.sav.sp
+│          
+├─save_cunzi
+│      exported.json
+│      
+├─Save_test
+│  │  CombatAiSetting.lua
+│  │  CreationInfo.lua
+│  │  CustomKeyCommands.lua
+│  │  global.sav
+│  │  global.sav.old
+│  │  ModSettings.Lua
+│  │  SortConfig.lua
+│  │  SystemSetting.lua
+│  │  
+│  ├─ConvenienceModConfig
+│  │      TaiwuManagerModConfig.json
+│  │      
+│  ├─world_1
+│  │      local.sav
+│  │      local.sav.bak.1750822911
+│  │      local.sav.bak.1750823566
+│  │      local.sav.bak.1750894313
+│  │      local.sav.bak.1750895980
+│  │      local.sav.bak.1750896036
+│  │      local.sav.bak.1750896745
+│  │      local.sav.bak.1750896802
+│  │      local.sav.bak.1750897228
+│  │      local.sav.old
+│  │      local.sav.sp
+│  │      
+│  ├─world_3
+│  │      local.sav
+│  │      local.sav.bak.1759390549
+│  │      local.sav.bak.1759390584
+│  │      local.sav.bak.1759390838
+│  │      local.sav.bak.1759390921
+│  │      local.sav.bak.1759390966
+│  │      local.sav.bak.1759391031
+│  │      local.sav.bak.1759391045
+│  │      local.sav.bak.1759391582
+│  │      local.sav.bak.1759391618
+│  │      local.sav.bak.1759391625
+│  │      local.sav.old
+│  │      local.sav.sp
+│  │      
+│  ├─world_4
+│  │      local.sav
+│  │      local.sav.bak.1759319656
+│  │      local.sav.bak.1759319755
+│  │      local.sav.bak.1759319853
+│  │      local.sav.bak.1759320012
+│  │      local.sav.bak.1759320178
+│  │      local.sav.bak.1759320185
+│  │      local.sav.bak.1759320217
+│  │      local.sav.bak.1759320241
+│  │      local.sav.bak.1759320292
+│  │      local.sav.bak.1759320465
+│  │      local.sav.old
+│  │      local.sav.sp
+│  │      
+│  └─world_5
+│      │  local.sav
+│      │  local.sav.bak.1749978499
+│      │  local.sav.bak.1749978785
+│      │  local.sav.bak.1749978970
+│      │  local.sav.bak.1749979332
+│      │  local.sav.bak.1749979358
+│      │  local.sav.bak.1749980235
+│      │  local.sav.bak.1749980313
+│      │  local.sav.bak.1749980343
+│      │  local.sav.bak.1749980483
+│      │  local.sav.bak.1749980567
+│      │  local.sav.old
+│      │  local.sav.sp
+│      │  
+│      └─beifen
+│              local.sav.bak.1749867455
+│              
+├─The Scroll Of Taiwu Alpha V1.0_Data
+│      EA版存档转移.txt
+│      
+└─The Scroll of Taiwu_Data
+    │  app.info
+    │  boot.config
+    │  globalgamemanagers
+    │  globalgamemanagers.assets
+    │  globalgamemanagers.assets.resS
+    │  level0
+    │  resources.assets
+    │  resources.resource
+    │  RuntimeInitializeOnLoads.json
+    │  ScriptingAssemblies.json
+    │  sharedassets0.assets
+    │  sharedassets0.assets.resS
+    │  
+    ├─FiveLoong
+    │  ├─0.0.76.31
+    │  │  ├─DlcResources
+    │  │  │      fiveloong_avatarpackers.uab
+    │  │  │      fiveloong_combat_animal_dragon_baxia.uab
+    │  │  │      fiveloong_combat_animal_dragon_bian.uab
+    │  │  │      fiveloong_combat_animal_dragon_chaofeng.uab
+    │  │  │      fiveloong_combat_animal_dragon_chiwen.uab
+    │  │  │      fiveloong_combat_animal_dragon_pulao.uab
+    │  │  │      fiveloong_combat_animal_dragon_qiuniu.uab
+    │  │  │      fiveloong_combat_animal_dragon_suanni.uab
+    │  │  │      fiveloong_combat_animal_dragon_yazi.uab
+    │  │  │      fiveloong_combat_animal_loong.uab
+    │  │  │      fiveloong_combat_scene_155.uab
+    │  │  │      fiveloong_info.uab
+    │  │  │      fiveloong_mapblockeffect.uab
+    │  │  │      fiveloong_music_loong_battle.uab
+    │  │  │      fiveloong_music_loong_story.uab
+    │  │  │      fiveloong_music_mapblockambience.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_hualong_loop.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_hualong_music_loop.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_wave_loop.uab
+    │  │  │      fiveloong_npcface_bigface.uab
+    │  │  │      fiveloong_npcface_normalface.uab
+    │  │  │      fiveloong_npcface_smallface.uab
+    │  │  │      fiveloong_packagecontroller.uab
+    │  │  │      fiveloong_packers_fiveloongcommon.uab
+    │  │  │      fiveloong_packers_fiveloongjiaoeggicon.uab
+    │  │  │      fiveloong_packers_fiveloongloongpool.uab
+    │  │  │      fiveloong_packers_fiveloongloongpoolsceneassets.uab
+    │  │  │      fiveloong_packers_fiveloongloongpoolwarterassets.uab
+    │  │  │      fiveloong_prefab_core.uab
+    │  │  │      fiveloong_sounds_combatfootstep.uab
+    │  │  │      fiveloong_sounds_combatsounds.uab
+    │  │  │      fiveloong_sounds_jiaopool.uab
+    │  │  │      fiveloong_sounds_mapblockambience.uab
+    │  │  │      fiveloong_sounds_travelsounds.uab
+    │  │  │      fiveloong_spineanimal_carrier.uab
+    │  │  │      fiveloong_spineanimal_loongpool.uab
+    │  │  │      fiveloong_spineanimal_loongpool_luan.uab
+    │  │  │      fiveloong_texture_eventback.uab
+    │  │  │      fiveloong_texture_loongpool.uab
+    │  │  │      fiveloong_uieffectprefabs.uab
+    │  │  │      fiveloong_views.uab
+    │  │  │      
+    │  │  └─Events
+    │  │      ├─EventLanguages
+    │  │      │      Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_LoongDLCJiaoRandomEvent_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_LoongDLC_Language_CN.txt
+    │  │      │      
+    │  │      └─EventLib
+    │  │              Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong.dll
+    │  │              Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool.dll
+    │  │              Taiwu_EventPackage_LoongDLC.dll
+    │  │              Taiwu_EventPackage_LoongDLCJiaoRandomEvent.dll
+    │  │              
+    │  ├─0.0.77.16
+    │  │  ├─DlcResources
+    │  │  │      fiveloong_avatarpackers.uab
+    │  │  │      fiveloong_combat_animal_dragon_baxia.uab
+    │  │  │      fiveloong_combat_animal_dragon_bian.uab
+    │  │  │      fiveloong_combat_animal_dragon_chaofeng.uab
+    │  │  │      fiveloong_combat_animal_dragon_chiwen.uab
+    │  │  │      fiveloong_combat_animal_dragon_pulao.uab
+    │  │  │      fiveloong_combat_animal_dragon_qiuniu.uab
+    │  │  │      fiveloong_combat_animal_dragon_suanni.uab
+    │  │  │      fiveloong_combat_animal_dragon_yazi.uab
+    │  │  │      fiveloong_combat_animal_loong.uab
+    │  │  │      fiveloong_combat_scene_155.uab
+    │  │  │      fiveloong_info.uab
+    │  │  │      fiveloong_mapblockeffect.uab
+    │  │  │      fiveloong_music_loong_battle.uab
+    │  │  │      fiveloong_music_loong_story.uab
+    │  │  │      fiveloong_music_mapblockambience.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_hualong_loop.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_hualong_music_loop.uab
+    │  │  │      fiveloong_music_ui_building_jiaochi_wave_loop.uab
+    │  │  │      fiveloong_npcface_bigface.uab
+    │  │  │      fiveloong_npcface_normalface.uab
+    │  │  │      fiveloong_npcface_smallface.uab
+    │  │  │      fiveloong_packagecontroller.uab
+    │  │  │      fiveloong_packers_fiveloongcommon.uab
+    │  │  │      fiveloong_packers_fiveloongjiaoeggicon.uab
+    │  │  │      fiveloong_packers_fiveloongloongpool.uab
+    │  │  │      fiveloong_packers_fiveloongloongpoolsceneassets.uab
+    │  │  │      fiveloong_packers_fiveloongloongpoolwarterassets.uab
+    │  │  │      fiveloong_prefab_core.uab
+    │  │  │      fiveloong_sounds_combatfootstep.uab
+    │  │  │      fiveloong_sounds_combatsounds.uab
+    │  │  │      fiveloong_sounds_jiaopool.uab
+    │  │  │      fiveloong_sounds_mapblockambience.uab
+    │  │  │      fiveloong_sounds_travelsounds.uab
+    │  │  │      fiveloong_spineanimal_carrier.uab
+    │  │  │      fiveloong_spineanimal_loongpool.uab
+    │  │  │      fiveloong_spineanimal_loongpool_luan.uab
+    │  │  │      fiveloong_texture_eventback.uab
+    │  │  │      fiveloong_texture_loongpool.uab
+    │  │  │      fiveloong_uieffectprefabs.uab
+    │  │  │      fiveloong_views.uab
+    │  │  │      
+    │  │  └─Events
+    │  │      ├─EventLanguages
+    │  │      │      Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_LoongDLCJiaoRandomEvent_Language_CN.txt
+    │  │      │      Taiwu_EventPackage_LoongDLC_Language_CN.txt
+    │  │      │      
+    │  │      └─EventLib
+    │  │              Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong.dll
+    │  │              Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool.dll
+    │  │              Taiwu_EventPackage_LoongDLC.dll
+    │  │              Taiwu_EventPackage_LoongDLCJiaoRandomEvent.dll
+    │  │              
+    │  └─0.0.79.25
+    │      ├─DlcResources
+    │      │      fiveloong_avatarpackers.uab
+    │      │      fiveloong_combat_animal_dragon_baxia.uab
+    │      │      fiveloong_combat_animal_dragon_bian.uab
+    │      │      fiveloong_combat_animal_dragon_chaofeng.uab
+    │      │      fiveloong_combat_animal_dragon_chiwen.uab
+    │      │      fiveloong_combat_animal_dragon_pulao.uab
+    │      │      fiveloong_combat_animal_dragon_qiuniu.uab
+    │      │      fiveloong_combat_animal_dragon_suanni.uab
+    │      │      fiveloong_combat_animal_dragon_yazi.uab
+    │      │      fiveloong_combat_animal_loong.uab
+    │      │      fiveloong_combat_scene_155.uab
+    │      │      fiveloong_info.uab
+    │      │      fiveloong_mapblockeffect.uab
+    │      │      fiveloong_music_loong_battle.uab
+    │      │      fiveloong_music_loong_story.uab
+    │      │      fiveloong_music_mapblockambience.uab
+    │      │      fiveloong_music_ui_building_jiaochi_hualong_loop.uab
+    │      │      fiveloong_music_ui_building_jiaochi_hualong_music_loop.uab
+    │      │      fiveloong_music_ui_building_jiaochi_wave_loop.uab
+    │      │      fiveloong_npcface_bigface.uab
+    │      │      fiveloong_npcface_normalface.uab
+    │      │      fiveloong_npcface_smallface.uab
+    │      │      fiveloong_packagecontroller.uab
+    │      │      fiveloong_packers_fiveloongcommon.uab
+    │      │      fiveloong_packers_fiveloongjiaoeggicon.uab
+    │      │      fiveloong_packers_fiveloongloongpool.uab
+    │      │      fiveloong_packers_fiveloongloongpoolsceneassets.uab
+    │      │      fiveloong_packers_fiveloongloongpoolwarterassets.uab
+    │      │      fiveloong_prefab_core.uab
+    │      │      fiveloong_sounds_combatfootstep.uab
+    │      │      fiveloong_sounds_combatsounds.uab
+    │      │      fiveloong_sounds_jiaopool.uab
+    │      │      fiveloong_sounds_mapblockambience.uab
+    │      │      fiveloong_sounds_travelsounds.uab
+    │      │      fiveloong_spineanimal_carrier.uab
+    │      │      fiveloong_spineanimal_loongpool.uab
+    │      │      fiveloong_spineanimal_loongpool_luan.uab
+    │      │      fiveloong_texture_eventback.uab
+    │      │      fiveloong_texture_loongpool.uab
+    │      │      fiveloong_uieffectprefabs.uab
+    │      │      fiveloong_views.uab
+    │      │      
+    │      └─Events
+    │          ├─EventLanguages
+    │          │      Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong_Language_CN.txt
+    │          │      Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool_Language_CN.txt
+    │          │      Taiwu_EventPackage_LoongDLCJiaoRandomEvent_Language_CN.txt
+    │          │      Taiwu_EventPackage_LoongDLC_Language_CN.txt
+    │          │      
+    │          └─EventLib
+    │                  Taiwu_EventPackage_FiveLoongDLCChildrenOfLoong.dll
+    │                  Taiwu_EventPackage_FiveLoongDLCInteractJiaoPool.dll
+    │                  Taiwu_EventPackage_LoongDLC.dll
+    │                  Taiwu_EventPackage_LoongDLCJiaoRandomEvent.dll
+    │                  
+    ├─GameResources
+    │      assetbundles
+    │      atlasinfos.uab
+    │      atlas_adventure.uab
+    │      atlas_adventureeditor.uab
+    │      atlas_adventureterrains.uab
+    │      atlas_building.uab
+    │      atlas_buildingarea.uab
+    │      atlas_building_ui.uab
+    │      atlas_catchcricket.uab
+    │      atlas_charactermenu.uab
+    │      atlas_charactermenu_combatskill.uab
+    │      atlas_charactermenu_equip.uab
+    │      atlas_charactermenu_equipcombatskill.uab
+    │      atlas_charactermenu_information.uab
+    │      atlas_charactermenu_items.uab
+    │      atlas_charactermenu_lifecombatskillcommon.uab
+    │      atlas_charactermenu_liferecord.uab
+    │      atlas_charactermenu_lifeskill.uab
+    │      atlas_charactermenu_relationship.uab
+    │      atlas_charactermenu_team.uab
+    │      atlas_characterpropertycard.uab
+    │      atlas_combat.uab
+    │      atlas_combatskillicon.uab
+    │      atlas_combatskilltree.uab
+    │      atlas_combatskilltype.uab
+    │      atlas_combatskilltypeicon.uab
+    │      atlas_common.uab
+    │      atlas_commonsortandfilter.uab
+    │      atlas_cricketcombat.uab
+    │      atlas_encyclopedia.uab
+    │      atlas_eventwindow.uab
+    │      atlas_following.uab
+    │      atlas_gamelinescroll.uab
+    │      atlas_gather.uab
+    │      atlas_getitem.uab
+    │      atlas_heal.uab
+    │      atlas_inscription.uab
+    │      atlas_interactcheck.uab
+    │      atlas_itembigicon_food.uab
+    │      atlas_itembigicon_teawine.uab
+    │      atlas_itemicon_accessory.uab
+    │      atlas_itemicon_armor.uab
+    │      atlas_itemicon_carrier.uab
+    │      atlas_itemicon_clothing.uab
+    │      atlas_itemicon_crafttool.uab
+    │      atlas_itemicon_cricket.uab
+    │      atlas_itemicon_food.uab
+    │      atlas_itemicon_material.uab
+    │      atlas_itemicon_medicine.uab
+    │      atlas_itemicon_misc.uab
+    │      atlas_itemicon_skillbook.uab
+    │      atlas_itemicon_teawine.uab
+    │      atlas_itemicon_weapon.uab
+    │      atlas_legacy.uab
+    │      atlas_legacyicon.uab
+    │      atlas_legendarybook.uab
+    │      atlas_lifeskillcombat.uab
+    │      atlas_lifeskillcombatcard.uab
+    │      atlas_lifeskilltype.uab
+    │      atlas_lifeskilltypeicon.uab
+    │      atlas_loading.uab
+    │      atlas_mainmenu.uab
+    │      atlas_mainui.uab
+    │      atlas_mapblockvillagerwork.uab
+    │      atlas_montheventicons.uab
+    │      atlas_monthnotify.uab
+    │      atlas_monthnotifyicons.uab
+    │      atlas_monthsolarterm.uab
+    │      atlas_musicplayer.uab
+    │      atlas_newgame.uab
+    │      atlas_partworldmap.uab
+    │      atlas_popup.uab
+    │      atlas_profession.uab
+    │      atlas_professionskillicons.uab
+    │      atlas_reading.uab
+    │      atlas_resource.uab
+    │      atlas_resourceicon.uab
+    │      atlas_resourceitemicon.uab
+    │      atlas_settlementinfo.uab
+    │      atlas_settlementprison.uab
+    │      atlas_shop.uab
+    │      atlas_skillbreak.uab
+    │      atlas_systemoptions.uab
+    │      atlas_taiwuvillagers.uab
+    │      atlas_tempold.uab
+    │      atlas_tips.uab
+    │      atlas_tutorial.uab
+    │      atlas_villagerrole.uab
+    │      atlas_villagerrolevisual.uab
+    │      atlas_worldmap_bigmap.uab
+    │      atlas_worldmap_minimap.uab
+    │      atlas_worldstateicons.uab
+    │      audioinfos.uab
+    │      audiopackage_adventure.uab
+    │      audiopackage_assignchicken.uab
+    │      audiopackage_birthsect.uab
+    │      audiopackage_bottom.uab
+    │      audiopackage_building.uab
+    │      audiopackage_carrier.uab
+    │      audiopackage_character.uab
+    │      audiopackage_charactermenu.uab
+    │      audiopackage_collect.uab
+    │      audiopackage_combat.uab
+    │      audiopackage_combatprepareskill.uab
+    │      audiopackage_common.uab
+    │      audiopackage_cricket.uab
+    │      audiopackage_drops.uab
+    │      audiopackage_fulongfire.uab
+    │      audiopackage_interactcheckresult.uab
+    │      audiopackage_legendarybook.uab
+    │      audiopackage_lifeskillcombat.uab
+    │      audiopackage_logo.uab
+    │      audiopackage_mainstory.uab
+    │      audiopackage_map.uab
+    │      audiopackage_mappickup.uab
+    │      audiopackage_month.uab
+    │      audiopackage_newgame.uab
+    │      audiopackage_professionskill.uab
+    │      audiopackage_professionui.uab
+    │      audiopackage_reading.uab
+    │      audiopackage_scroll.uab
+    │      audiopackage_sectmainstory.uab
+    │      audiopackage_sectmainyuanshan.uab
+    │      audiopackage_shop.uab
+    │      audiopackage_skillbreak.uab
+    │      audiopackage_solarterms.uab
+    │      audiopackage_specialbreak.uab
+    │      audiopackage_teahorsecaravan.uab
+    │      audiopackage_top.uab
+    │      audiopackage_upgradeteamatecommand.uab
+    │      avataratlasinfos.uab
+    │      avatarpackers.uab
+    │      avatar_graphics_1.uab
+    │      avatar_graphics_2.uab
+    │      avatar_graphics_251.uab
+    │      avatar_graphics_252.uab
+    │      avatar_graphics_253.uab
+    │      avatar_graphics_254.uab
+    │      avatar_graphics_255.uab
+    │      avatar_graphics_3.uab
+    │      avatar_graphics_4.uab
+    │      avatar_graphics_5.uab
+    │      avatar_graphics_6.uab
+    │      combatbase.uab
+    │      combat_animal_bear.uab
+    │      combat_animal_bear_elite.uab
+    │      combat_animal_bull.uab
+    │      combat_animal_bull_elite.uab
+    │      combat_animal_eagle.uab
+    │      combat_animal_eagle_elite.uab
+    │      combat_animal_jaguar.uab
+    │      combat_animal_jaguar_elite.uab
+    │      combat_animal_lion.uab
+    │      combat_animal_lion_elite.uab
+    │      combat_animal_monkey.uab
+    │      combat_animal_monkey_elite.uab
+    │      combat_animal_monkey_king.uab
+    │      combat_animal_pig.uab
+    │      combat_animal_pig_elite.uab
+    │      combat_animal_snake.uab
+    │      combat_animal_snake_elite.uab
+    │      combat_animal_snake_wudang.uab
+    │      combat_animal_tiger.uab
+    │      combat_animal_tiger_elite.uab
+    │      combat_boss1.uab
+    │      combat_boss10.uab
+    │      combat_boss10_afterall.uab
+    │      combat_boss11.uab
+    │      combat_boss12.uab
+    │      combat_boss13.uab
+    │      combat_boss14.uab
+    │      combat_boss2.uab
+    │      combat_boss3.uab
+    │      combat_boss4.uab
+    │      combat_boss5.uab
+    │      combat_boss6.uab
+    │      combat_boss7.uab
+    │      combat_boss8.uab
+    │      combat_boss9.uab
+    │      combat_scene_101.uab
+    │      combat_scene_102.uab
+    │      combat_scene_103.uab
+    │      combat_scene_104.uab
+    │      combat_scene_105.uab
+    │      combat_scene_106.uab
+    │      combat_scene_107.uab
+    │      combat_scene_108.uab
+    │      combat_scene_109.uab
+    │      combat_scene_110.uab
+    │      combat_scene_111.uab
+    │      combat_scene_112.uab
+    │      combat_scene_113.uab
+    │      combat_scene_114.uab
+    │      combat_scene_115.uab
+    │      combat_scene_117.uab
+    │      combat_scene_118.uab
+    │      combat_scene_119.uab
+    │      combat_scene_120.uab
+    │      combat_scene_121.uab
+    │      combat_scene_122.uab
+    │      combat_scene_123.uab
+    │      combat_scene_124.uab
+    │      combat_scene_125.uab
+    │      combat_scene_126.uab
+    │      combat_scene_127.uab
+    │      combat_scene_128.uab
+    │      combat_scene_129.uab
+    │      combat_scene_130.uab
+    │      combat_scene_131.uab
+    │      combat_scene_132.uab
+    │      combat_scene_133.uab
+    │      combat_scene_141_dark.uab
+    │      combat_scene_141_light.uab
+    │      combat_scene_142.uab
+    │      combat_scene_143.uab
+    │      combat_scene_144.uab
+    │      combat_scene_145.uab
+    │      combat_scene_146.uab
+    │      combat_scene_147.uab
+    │      combat_scene_148.uab
+    │      combat_scene_149.uab
+    │      combat_scene_150.uab
+    │      combat_scene_151.uab
+    │      combat_scene_152.uab
+    │      combat_scene_153.uab
+    │      combat_scene_154.uab
+    │      combat_scene_156.uab
+    │      combat_skill_100201.uab
+    │      combat_skill_100202.uab
+    │      combat_skill_100203.uab
+    │      combat_skill_100204.uab
+    │      combat_skill_100205.uab
+    │      combat_skill_100206.uab
+    │      combat_skill_100207.uab
+    │      combat_skill_100208.uab
+    │      combat_skill_100701.uab
+    │      combat_skill_100702.uab
+    │      combat_skill_100703.uab
+    │      combat_skill_100704.uab
+    │      combat_skill_100705.uab
+    │      combat_skill_100706.uab
+    │      combat_skill_100707.uab
+    │      combat_skill_100708.uab
+    │      combat_skill_100709.uab
+    │      combat_skill_10103.uab
+    │      combat_skill_101101.uab
+    │      combat_skill_101102.uab
+    │      combat_skill_101103.uab
+    │      combat_skill_101104.uab
+    │      combat_skill_101105.uab
+    │      combat_skill_101106.uab
+    │      combat_skill_101107.uab
+    │      combat_skill_101108.uab
+    │      combat_skill_10202.uab
+    │      combat_skill_10207.uab
+    │      combat_skill_10304.uab
+    │      combat_skill_10307.uab
+    │      combat_skill_10407.uab
+    │      combat_skill_10805.uab
+    │      combat_skill_10809.uab
+    │      combat_skill_11001.uab
+    │      combat_skill_110401.uab
+    │      combat_skill_110402.uab
+    │      combat_skill_110403.uab
+    │      combat_skill_110404.uab
+    │      combat_skill_110405.uab
+    │      combat_skill_110406.uab
+    │      combat_skill_110407.uab
+    │      combat_skill_110408.uab
+    │      combat_skill_111201.uab
+    │      combat_skill_111202.uab
+    │      combat_skill_111203.uab
+    │      combat_skill_111204.uab
+    │      combat_skill_111205.uab
+    │      combat_skill_111206.uab
+    │      combat_skill_111207.uab
+    │      combat_skill_111208.uab
+    │      combat_skill_111209.uab
+    │      combat_skill_11203.uab
+    │      combat_skill_11207.uab
+    │      combat_skill_11305.uab
+    │      combat_skill_11308.uab
+    │      combat_skill_11501.uab
+    │      combat_skill_120301.uab
+    │      combat_skill_120302.uab
+    │      combat_skill_120303.uab
+    │      combat_skill_120304.uab
+    │      combat_skill_120305.uab
+    │      combat_skill_120306.uab
+    │      combat_skill_120307.uab
+    │      combat_skill_120308.uab
+    │      combat_skill_120309.uab
+    │      combat_skill_120901.uab
+    │      combat_skill_120902.uab
+    │      combat_skill_120903.uab
+    │      combat_skill_120904.uab
+    │      combat_skill_120905.uab
+    │      combat_skill_120906.uab
+    │      combat_skill_120907.uab
+    │      combat_skill_120908.uab
+    │      combat_skill_120909.uab
+    │      combat_skill_130301.uab
+    │      combat_skill_130302.uab
+    │      combat_skill_130303.uab
+    │      combat_skill_130304.uab
+    │      combat_skill_130305.uab
+    │      combat_skill_130306.uab
+    │      combat_skill_130307.uab
+    │      combat_skill_130308.uab
+    │      combat_skill_130309.uab
+    │      combat_skill_130801.uab
+    │      combat_skill_130802.uab
+    │      combat_skill_130803.uab
+    │      combat_skill_130804.uab
+    │      combat_skill_130805.uab
+    │      combat_skill_130806.uab
+    │      combat_skill_130807.uab
+    │      combat_skill_130808.uab
+    │      combat_skill_130809.uab
+    │      combat_skill_150001.uab
+    │      combat_skill_150004.uab
+    │      combat_skill_20102.uab
+    │      combat_skill_20103.uab
+    │      combat_skill_20105.uab
+    │      combat_skill_20108.uab
+    │      combat_skill_20109.uab
+    │      combat_skill_20204.uab
+    │      combat_skill_20207.uab
+    │      combat_skill_20208.uab
+    │      combat_skill_20209.uab
+    │      combat_skill_20305.uab
+    │      combat_skill_20306.uab
+    │      combat_skill_20308.uab
+    │      combat_skill_20309.uab
+    │      combat_skill_20401.uab
+    │      combat_skill_20403.uab
+    │      combat_skill_20405.uab
+    │      combat_skill_20407.uab
+    │      combat_skill_20501.uab
+    │      combat_skill_20504.uab
+    │      combat_skill_20507.uab
+    │      combat_skill_20601.uab
+    │      combat_skill_20603.uab
+    │      combat_skill_20606.uab
+    │      combat_skill_20701.uab
+    │      combat_skill_20704.uab
+    │      combat_skill_20706.uab
+    │      combat_skill_20707.uab
+    │      combat_skill_20708.uab
+    │      combat_skill_20802.uab
+    │      combat_skill_20806.uab
+    │      combat_skill_20807.uab
+    │      combat_skill_20902.uab
+    │      combat_skill_20905.uab
+    │      combat_skill_20906.uab
+    │      combat_skill_21004.uab
+    │      combat_skill_21008.uab
+    │      combat_skill_21102.uab
+    │      combat_skill_21103.uab
+    │      combat_skill_21105.uab
+    │      combat_skill_21106.uab
+    │      combat_skill_21108.uab
+    │      combat_skill_21202.uab
+    │      combat_skill_21204.uab
+    │      combat_skill_21205.uab
+    │      combat_skill_21206.uab
+    │      combat_skill_21208.uab
+    │      combat_skill_21302.uab
+    │      combat_skill_21303.uab
+    │      combat_skill_21304.uab
+    │      combat_skill_21307.uab
+    │      combat_skill_21402.uab
+    │      combat_skill_21403.uab
+    │      combat_skill_21405.uab
+    │      combat_skill_21408.uab
+    │      combat_skill_21501.uab
+    │      combat_skill_21503.uab
+    │      combat_skill_21505.uab
+    │      combat_skill_21508.uab
+    │      combat_skill_30101.uab
+    │      combat_skill_30102.uab
+    │      combat_skill_30103.uab
+    │      combat_skill_30104.uab
+    │      combat_skill_30105.uab
+    │      combat_skill_30106.uab
+    │      combat_skill_30107.uab
+    │      combat_skill_30108.uab
+    │      combat_skill_30201.uab
+    │      combat_skill_30202.uab
+    │      combat_skill_30203.uab
+    │      combat_skill_30204.uab
+    │      combat_skill_30205.uab
+    │      combat_skill_30206.uab
+    │      combat_skill_30207.uab
+    │      combat_skill_30208.uab
+    │      combat_skill_30209.uab
+    │      combat_skill_30401.uab
+    │      combat_skill_30402.uab
+    │      combat_skill_30403.uab
+    │      combat_skill_30404.uab
+    │      combat_skill_30405.uab
+    │      combat_skill_30406.uab
+    │      combat_skill_30407.uab
+    │      combat_skill_30408.uab
+    │      combat_skill_30409.uab
+    │      combat_skill_30601.uab
+    │      combat_skill_30602.uab
+    │      combat_skill_30603.uab
+    │      combat_skill_30604.uab
+    │      combat_skill_30605.uab
+    │      combat_skill_30606.uab
+    │      combat_skill_30607.uab
+    │      combat_skill_30608.uab
+    │      combat_skill_30609.uab
+    │      combat_skill_30801.uab
+    │      combat_skill_30802.uab
+    │      combat_skill_30803.uab
+    │      combat_skill_30804.uab
+    │      combat_skill_30805.uab
+    │      combat_skill_30806.uab
+    │      combat_skill_30807.uab
+    │      combat_skill_31001.uab
+    │      combat_skill_31002.uab
+    │      combat_skill_31003.uab
+    │      combat_skill_31004.uab
+    │      combat_skill_31005.uab
+    │      combat_skill_31006.uab
+    │      combat_skill_31101.uab
+    │      combat_skill_31102.uab
+    │      combat_skill_31103.uab
+    │      combat_skill_31104.uab
+    │      combat_skill_31105.uab
+    │      combat_skill_31106.uab
+    │      combat_skill_31107.uab
+    │      combat_skill_31108.uab
+    │      combat_skill_31109.uab
+    │      combat_skill_31201.uab
+    │      combat_skill_31202.uab
+    │      combat_skill_31203.uab
+    │      combat_skill_31204.uab
+    │      combat_skill_31205.uab
+    │      combat_skill_31206.uab
+    │      combat_skill_31207.uab
+    │      combat_skill_31208.uab
+    │      combat_skill_31401.uab
+    │      combat_skill_31402.uab
+    │      combat_skill_31403.uab
+    │      combat_skill_31404.uab
+    │      combat_skill_31405.uab
+    │      combat_skill_31406.uab
+    │      combat_skill_31407.uab
+    │      combat_skill_31408.uab
+    │      combat_skill_31409.uab
+    │      combat_skill_31501.uab
+    │      combat_skill_31502.uab
+    │      combat_skill_31503.uab
+    │      combat_skill_31504.uab
+    │      combat_skill_31505.uab
+    │      combat_skill_31506.uab
+    │      combat_skill_31507.uab
+    │      combat_skill_31508.uab
+    │      combat_skill_40101.uab
+    │      combat_skill_40102.uab
+    │      combat_skill_40103.uab
+    │      combat_skill_40104.uab
+    │      combat_skill_40105.uab
+    │      combat_skill_40106.uab
+    │      combat_skill_40201.uab
+    │      combat_skill_40202.uab
+    │      combat_skill_40203.uab
+    │      combat_skill_40204.uab
+    │      combat_skill_40205.uab
+    │      combat_skill_40206.uab
+    │      combat_skill_40207.uab
+    │      combat_skill_40208.uab
+    │      combat_skill_40209.uab
+    │      combat_skill_40301.uab
+    │      combat_skill_40302.uab
+    │      combat_skill_40303.uab
+    │      combat_skill_40304.uab
+    │      combat_skill_40305.uab
+    │      combat_skill_40306.uab
+    │      combat_skill_40307.uab
+    │      combat_skill_40308.uab
+    │      combat_skill_40309.uab
+    │      combat_skill_40701.uab
+    │      combat_skill_40702.uab
+    │      combat_skill_40703.uab
+    │      combat_skill_40704.uab
+    │      combat_skill_40705.uab
+    │      combat_skill_40706.uab
+    │      combat_skill_40707.uab
+    │      combat_skill_40801.uab
+    │      combat_skill_40802.uab
+    │      combat_skill_40803.uab
+    │      combat_skill_40804.uab
+    │      combat_skill_40805.uab
+    │      combat_skill_40806.uab
+    │      combat_skill_40807.uab
+    │      combat_skill_40808.uab
+    │      combat_skill_41001.uab
+    │      combat_skill_41002.uab
+    │      combat_skill_41003.uab
+    │      combat_skill_41004.uab
+    │      combat_skill_41005.uab
+    │      combat_skill_41006.uab
+    │      combat_skill_41201.uab
+    │      combat_skill_41202.uab
+    │      combat_skill_41203.uab
+    │      combat_skill_41204.uab
+    │      combat_skill_41205.uab
+    │      combat_skill_41206.uab
+    │      combat_skill_41207.uab
+    │      combat_skill_41208.uab
+    │      combat_skill_41209.uab
+    │      combat_skill_41301.uab
+    │      combat_skill_41302.uab
+    │      combat_skill_41303.uab
+    │      combat_skill_41304.uab
+    │      combat_skill_41305.uab
+    │      combat_skill_41306.uab
+    │      combat_skill_41307.uab
+    │      combat_skill_41308.uab
+    │      combat_skill_41309.uab
+    │      combat_skill_41501.uab
+    │      combat_skill_41502.uab
+    │      combat_skill_41503.uab
+    │      combat_skill_41504.uab
+    │      combat_skill_41505.uab
+    │      combat_skill_41506.uab
+    │      combat_skill_41507.uab
+    │      combat_skill_50501.uab
+    │      combat_skill_50502.uab
+    │      combat_skill_50503.uab
+    │      combat_skill_50504.uab
+    │      combat_skill_50505.uab
+    │      combat_skill_50506.uab
+    │      combat_skill_50507.uab
+    │      combat_skill_50508.uab
+    │      combat_skill_50509.uab
+    │      combat_skill_51001.uab
+    │      combat_skill_51002.uab
+    │      combat_skill_51003.uab
+    │      combat_skill_51004.uab
+    │      combat_skill_51005.uab
+    │      combat_skill_51006.uab
+    │      combat_skill_51007.uab
+    │      combat_skill_51008.uab
+    │      combat_skill_51501.uab
+    │      combat_skill_51502.uab
+    │      combat_skill_51503.uab
+    │      combat_skill_51504.uab
+    │      combat_skill_51505.uab
+    │      combat_skill_51506.uab
+    │      combat_skill_51507.uab
+    │      combat_skill_51508.uab
+    │      combat_skill_61001.uab
+    │      combat_skill_61002.uab
+    │      combat_skill_61003.uab
+    │      combat_skill_61004.uab
+    │      combat_skill_61005.uab
+    │      combat_skill_61006.uab
+    │      combat_skill_61007.uab
+    │      combat_skill_61008.uab
+    │      combat_skill_61009.uab
+    │      combat_skill_61301.uab
+    │      combat_skill_61302.uab
+    │      combat_skill_61303.uab
+    │      combat_skill_61304.uab
+    │      combat_skill_61305.uab
+    │      combat_skill_61306.uab
+    │      combat_skill_61307.uab
+    │      combat_skill_61308.uab
+    │      combat_skill_61309.uab
+    │      combat_skill_61401.uab
+    │      combat_skill_61402.uab
+    │      combat_skill_61403.uab
+    │      combat_skill_61404.uab
+    │      combat_skill_61405.uab
+    │      combat_skill_61406.uab
+    │      combat_skill_61501.uab
+    │      combat_skill_61502.uab
+    │      combat_skill_61503.uab
+    │      combat_skill_61504.uab
+    │      combat_skill_61505.uab
+    │      combat_skill_61506.uab
+    │      combat_skill_61507.uab
+    │      combat_skill_70201.uab
+    │      combat_skill_70202.uab
+    │      combat_skill_70203.uab
+    │      combat_skill_70204.uab
+    │      combat_skill_70205.uab
+    │      combat_skill_70206.uab
+    │      combat_skill_70207.uab
+    │      combat_skill_70208.uab
+    │      combat_skill_70401.uab
+    │      combat_skill_70402.uab
+    │      combat_skill_70403.uab
+    │      combat_skill_70404.uab
+    │      combat_skill_70405.uab
+    │      combat_skill_70406.uab
+    │      combat_skill_70407.uab
+    │      combat_skill_70408.uab
+    │      combat_skill_70409.uab
+    │      combat_skill_70410.uab
+    │      combat_skill_70501.uab
+    │      combat_skill_70502.uab
+    │      combat_skill_70503.uab
+    │      combat_skill_70504.uab
+    │      combat_skill_70505.uab
+    │      combat_skill_70506.uab
+    │      combat_skill_70507.uab
+    │      combat_skill_70508.uab
+    │      combat_skill_70701.uab
+    │      combat_skill_70702.uab
+    │      combat_skill_70703.uab
+    │      combat_skill_70704.uab
+    │      combat_skill_70705.uab
+    │      combat_skill_70706.uab
+    │      combat_skill_70707.uab
+    │      combat_skill_70708.uab
+    │      combat_skill_70709.uab
+    │      combat_skill_70901.uab
+    │      combat_skill_70902.uab
+    │      combat_skill_70903.uab
+    │      combat_skill_70904.uab
+    │      combat_skill_70905.uab
+    │      combat_skill_70906.uab
+    │      combat_skill_70907.uab
+    │      combat_skill_70908.uab
+    │      combat_skill_71201.uab
+    │      combat_skill_71202.uab
+    │      combat_skill_71203.uab
+    │      combat_skill_71204.uab
+    │      combat_skill_71205.uab
+    │      combat_skill_71206.uab
+    │      combat_skill_71207.uab
+    │      combat_skill_71301.uab
+    │      combat_skill_71302.uab
+    │      combat_skill_71303.uab
+    │      combat_skill_71304.uab
+    │      combat_skill_71305.uab
+    │      combat_skill_71306.uab
+    │      combat_skill_71307.uab
+    │      combat_skill_71308.uab
+    │      combat_skill_80501.uab
+    │      combat_skill_80502.uab
+    │      combat_skill_80503.uab
+    │      combat_skill_80504.uab
+    │      combat_skill_80505.uab
+    │      combat_skill_80506.uab
+    │      combat_skill_80507.uab
+    │      combat_skill_80508.uab
+    │      combat_skill_80601.uab
+    │      combat_skill_80602.uab
+    │      combat_skill_80603.uab
+    │      combat_skill_80604.uab
+    │      combat_skill_80605.uab
+    │      combat_skill_80606.uab
+    │      combat_skill_80607.uab
+    │      combat_skill_80608.uab
+    │      combat_skill_80609.uab
+    │      combat_skill_80901.uab
+    │      combat_skill_80902.uab
+    │      combat_skill_80903.uab
+    │      combat_skill_80904.uab
+    │      combat_skill_80905.uab
+    │      combat_skill_80906.uab
+    │      combat_skill_80907.uab
+    │      combat_skill_80908.uab
+    │      combat_skill_81101.uab
+    │      combat_skill_81102.uab
+    │      combat_skill_81103.uab
+    │      combat_skill_81104.uab
+    │      combat_skill_81105.uab
+    │      combat_skill_81106.uab
+    │      combat_skill_81107.uab
+    │      combat_skill_81108.uab
+    │      combat_skill_81109.uab
+    │      combat_skill_81401.uab
+    │      combat_skill_81402.uab
+    │      combat_skill_81403.uab
+    │      combat_skill_81404.uab
+    │      combat_skill_81405.uab
+    │      combat_skill_81406.uab
+    │      combat_skill_81407.uab
+    │      combat_skill_81408.uab
+    │      combat_skill_90101.uab
+    │      combat_skill_90102.uab
+    │      combat_skill_90103.uab
+    │      combat_skill_90104.uab
+    │      combat_skill_90105.uab
+    │      combat_skill_90106.uab
+    │      combat_skill_90107.uab
+    │      combat_skill_90108.uab
+    │      combat_skill_90109.uab
+    │      combat_skill_90601.uab
+    │      combat_skill_90602.uab
+    │      combat_skill_90603.uab
+    │      combat_skill_90604.uab
+    │      combat_skill_90605.uab
+    │      combat_skill_90606.uab
+    │      combat_skill_90607.uab
+    │      combat_skill_90608.uab
+    │      combat_skill_90609.uab
+    │      combat_skill_90901.uab
+    │      combat_skill_90902.uab
+    │      combat_skill_90903.uab
+    │      combat_skill_90904.uab
+    │      combat_skill_90905.uab
+    │      combat_skill_90906.uab
+    │      combat_skill_90907.uab
+    │      combat_skill_90908.uab
+    │      combat_skill_boss1.uab
+    │      combat_skill_boss11.uab
+    │      combat_skill_boss13.uab
+    │      combat_skill_boss14.uab
+    │      combat_skill_boss2.uab
+    │      combat_skill_boss3.uab
+    │      combat_skill_boss4.uab
+    │      combat_skill_boss5.uab
+    │      combat_skill_boss6.uab
+    │      combat_skill_boss7.uab
+    │      combat_skill_boss8.uab
+    │      combat_skill_boss9.uab
+    │      fonts.uab
+    │      graphics_adventureterrains.uab
+    │      graphics_combatskilltype.uab
+    │      graphics_combatskilltypeicon.uab
+    │      graphics_itembigicon_food.uab
+    │      graphics_itembigicon_teawine.uab
+    │      graphics_itemicon_accessory.uab
+    │      graphics_itemicon_armor.uab
+    │      graphics_itemicon_carrier.uab
+    │      graphics_itemicon_clothing.uab
+    │      graphics_itemicon_crafttool.uab
+    │      graphics_itemicon_cricket.uab
+    │      graphics_itemicon_food.uab
+    │      graphics_itemicon_material.uab
+    │      graphics_itemicon_medicine.uab
+    │      graphics_itemicon_misc.uab
+    │      graphics_itemicon_skillbook.uab
+    │      graphics_itemicon_teawine.uab
+    │      graphics_itemicon_weapon.uab
+    │      graphics_legacyicon.uab
+    │      graphics_lifeskilltype.uab
+    │      graphics_lifeskilltypeicon.uab
+    │      graphics_mapblockvillagerwork.uab
+    │      graphics_montheventicons.uab
+    │      graphics_monthnotifyicons.uab
+    │      graphics_professionskillicons.uab
+    │      graphics_resource.uab
+    │      graphics_resourceicon.uab
+    │      graphics_resourceitemicon.uab
+    │      graphics_worldmap_bigmap.uab
+    │      graphics_worldmap_minimap.uab
+    │      graphics_worldstateicons.uab
+    │      internaldlcconfigs.uab
+    │      language_cn.uab
+    │      language_cnh.uab
+    │      language_en.uab
+    │      language_eventoptiontips.uab
+    │      language_jp.uab
+    │      lua.uab
+    │      mapatlases.uab
+    │      mapatlasinfo.uab
+    │      mapblockeffect.uab
+    │      materials.uab
+    │      music_combat.uab
+    │      music_cricket.uab
+    │      music_gang.uab
+    │      music_jiaoyi.uab
+    │      music_lifeskillcombat.uab
+    │      music_mainstory.uab
+    │      music_newgame.uab
+    │      music_sectmainstory.uab
+    │      music_sectmainyuanshan.uab
+    │      music_world.uab
+    │      npcavataroffset.uab
+    │      npc_bigface.uab
+    │      npc_normalface.uab
+    │      npc_smallface.uab
+    │      packagecontroller.uab
+    │      particle_animation.uab
+    │      particle_mesh.uab
+    │      shaders.uab
+    │      sort.uab
+    │      soundeffect_adventure.uab
+    │      soundeffect_assignchicken.uab
+    │      soundeffect_birthsect.uab
+    │      soundeffect_bottom.uab
+    │      soundeffect_building.uab
+    │      soundeffect_carrier.uab
+    │      soundeffect_character.uab
+    │      soundeffect_charactermenu.uab
+    │      soundeffect_collect.uab
+    │      soundeffect_combat.uab
+    │      soundeffect_combatprepareskill.uab
+    │      soundeffect_common.uab
+    │      soundeffect_cricket.uab
+    │      soundeffect_drops.uab
+    │      soundeffect_fulongfire.uab
+    │      soundeffect_interactcheckresult.uab
+    │      soundeffect_legendarybook.uab
+    │      soundeffect_lifeskillcombat.uab
+    │      soundeffect_logo.uab
+    │      soundeffect_mainstory.uab
+    │      soundeffect_map.uab
+    │      soundeffect_mappickup.uab
+    │      soundeffect_month.uab
+    │      soundeffect_newgame.uab
+    │      soundeffect_professionskill.uab
+    │      soundeffect_professionui.uab
+    │      soundeffect_reading.uab
+    │      soundeffect_scroll.uab
+    │      soundeffect_sectmainstory.uab
+    │      soundeffect_sectmainyuanshan.uab
+    │      soundeffect_shop.uab
+    │      soundeffect_skillbreak.uab
+    │      soundeffect_solarterms.uab
+    │      soundeffect_specialbreak.uab
+    │      soundeffect_teahorsecaravan.uab
+    │      soundeffect_top.uab
+    │      soundeffect_upgradeteamatecommand.uab
+    │      spine_advance.uab
+    │      spine_adventure.uab
+    │      spine_building.uab
+    │      spine_butterfly.uab
+    │      spine_carrier.uab
+    │      spine_catchcricket.uab
+    │      spine_catchthief.uab
+    │      spine_character.uab
+    │      spine_characterattributedataview.uab
+    │      spine_charactermenuliferecord.uab
+    │      spine_chickenmap.uab
+    │      spine_combat.uab
+    │      spine_combatbegin.uab
+    │      spine_combatresult.uab
+    │      spine_combatspeed.uab
+    │      spine_crickecombat.uab
+    │      spine_cricket.uab
+    │      spine_cricketplace.uab
+    │      spine_debate.uab
+    │      spine_dreamback.uab
+    │      spine_dynamicillustration.uab
+    │      spine_event.uab
+    │      spine_favorabilitychange.uab
+    │      spine_gather.uab
+    │      spine_gearmate.uab
+    │      spine_heal.uab
+    │      spine_jinganghighmonkdisciple.uab
+    │      spine_legacy.uab
+    │      spine_legendarybook.uab
+    │      spine_lifeskillcombat.uab
+    │      spine_make.uab
+    │      spine_mappickup.uab
+    │      spine_minigame.uab
+    │      spine_monthnotify.uab
+    │      spine_mousetip.uab
+    │      spine_newgame.uab
+    │      spine_partworldmap.uab
+    │      spine_practicecombatskill.uab
+    │      spine_profession.uab
+    │      spine_professionskill.uab
+    │      spine_ranshan.uab
+    │      spine_readhint.uab
+    │      spine_reading.uab
+    │      spine_resourcechoosy.uab
+    │      spine_settlementinfo.uab
+    │      spine_shop.uab
+    │      spine_specialbreak.uab
+    │      spine_taiwuvillagers.uab
+    │      spine_task.uab
+    │      spine_travel.uab
+    │      spine_upgradeteammatecommand.uab
+    │      spine_wugjug.uab
+    │      texturematerialgroup.uab
+    │      uianimation.uab
+    │      uigraphics_adventure.uab
+    │      uigraphics_adventureeditor.uab
+    │      uigraphics_building.uab
+    │      uigraphics_buildingarea.uab
+    │      uigraphics_building_ui.uab
+    │      uigraphics_catchcricket.uab
+    │      uigraphics_charactermenu.uab
+    │      uigraphics_charactermenu_combatskill.uab
+    │      uigraphics_charactermenu_equip.uab
+    │      uigraphics_charactermenu_equipcombatskill.uab
+    │      uigraphics_charactermenu_information.uab
+    │      uigraphics_charactermenu_items.uab
+    │      uigraphics_charactermenu_lifecombatskillcommon.uab
+    │      uigraphics_charactermenu_liferecord.uab
+    │      uigraphics_charactermenu_lifeskill.uab
+    │      uigraphics_charactermenu_relationship.uab
+    │      uigraphics_charactermenu_team.uab
+    │      uigraphics_characterpropertycard.uab
+    │      uigraphics_combat.uab
+    │      uigraphics_combatskillicon.uab
+    │      uigraphics_combatskilltree.uab
+    │      uigraphics_common.uab
+    │      uigraphics_commonsortandfilter.uab
+    │      uigraphics_cricketcombat.uab
+    │      uigraphics_encyclopedia.uab
+    │      uigraphics_eventwindow.uab
+    │      uigraphics_following.uab
+    │      uigraphics_gamelinescroll.uab
+    │      uigraphics_gather.uab
+    │      uigraphics_getitem.uab
+    │      uigraphics_heal.uab
+    │      uigraphics_inscription.uab
+    │      uigraphics_interactcheck.uab
+    │      uigraphics_legacy.uab
+    │      uigraphics_legendarybook.uab
+    │      uigraphics_lifeskillcombat.uab
+    │      uigraphics_lifeskillcombatcard.uab
+    │      uigraphics_loading.uab
+    │      uigraphics_mainmenu.uab
+    │      uigraphics_mainui.uab
+    │      uigraphics_monthnotify.uab
+    │      uigraphics_monthsolarterm.uab
+    │      uigraphics_musicplayer.uab
+    │      uigraphics_newgame.uab
+    │      uigraphics_partworldmap.uab
+    │      uigraphics_popup.uab
+    │      uigraphics_profession.uab
+    │      uigraphics_reading.uab
+    │      uigraphics_settlementinfo.uab
+    │      uigraphics_settlementprison.uab
+    │      uigraphics_shop.uab
+    │      uigraphics_skillbreak.uab
+    │      uigraphics_systemoptions.uab
+    │      uigraphics_taiwuvillagers.uab
+    │      uigraphics_tempold.uab
+    │      uigraphics_tips.uab
+    │      uigraphics_tutorial.uab
+    │      uigraphics_villagerrole.uab
+    │      uigraphics_villagerrolevisual.uab
+    │      uiprefabs.uab
+    │      uipreset_adventure.uab
+    │      uipreset_building.uab
+    │      uipreset_character.uab
+    │      uipreset_charactermenuequipcombatskill.uab
+    │      uipreset_charactermenuinfo.uab
+    │      uipreset_chicken.uab
+    │      uipreset_chickenmap.uab
+    │      uipreset_combat.uab
+    │      uipreset_combatskill.uab
+    │      uipreset_commonwarning.uab
+    │      uipreset_cricket.uab
+    │      uipreset_cursor.uab
+    │      uipreset_encyclopedia.uab
+    │      uipreset_gather.uab
+    │      uipreset_hotkey.uab
+    │      uipreset_imagenumber.uab
+    │      uipreset_information.uab
+    │      uipreset_item.uab
+    │      uipreset_lifeskill.uab
+    │      uipreset_lifeskillcombat.uab
+    │      uipreset_map.uab
+    │      uipreset_modifybook.uab
+    │      uipreset_mousetips.uab
+    │      uipreset_practice.uab
+    │      uipreset_practicecombatskill.uab
+    │      uipreset_profession.uab
+    │      uipreset_scrollstory.uab
+    │      uipreset_setselectcount.uab
+    │      uipreset_setselectcountwithdisablebg.uab
+    │      uipreset_specialbreak.uab
+    │      uipreset_spritelabel.uab
+    │      uipreset_systemsetting.uab
+    │      uipreset_uicommonelements.uab
+    │      uipreset_villager.uab
+    │      ui_particle_adventure.uab
+    │      ui_particle_assignchicken.uab
+    │      ui_particle_building.uab
+    │      ui_particle_buildingchickenhouse.uab
+    │      ui_particle_buildingcomfortablehouse.uab
+    │      ui_particle_buildingcraft.uab
+    │      ui_particle_buildingsixdestinies.uab
+    │      ui_particle_button.uab
+    │      ui_particle_catchcricket.uab
+    │      ui_particle_chanegetricktype.uab
+    │      ui_particle_charactermenu.uab
+    │      ui_particle_charactermenuequipcombatskill.uab
+    │      ui_particle_charactermenulifeskill.uab
+    │      ui_particle_charactermenuneili.uab
+    │      ui_particle_combat.uab
+    │      ui_particle_combatdrops.uab
+    │      ui_particle_cricketcombat.uab
+    │      ui_particle_eventwindow.uab
+    │      ui_particle_fiveelementstransfer.uab
+    │      ui_particle_fulongfire.uab
+    │      ui_particle_gamelinescroll.uab
+    │      ui_particle_gearmate.uab
+    │      ui_particle_getitem.uab
+    │      ui_particle_heal.uab
+    │      ui_particle_interactcheckresult.uab
+    │      ui_particle_jieqingtangram.uab
+    │      ui_particle_launcher.uab
+    │      ui_particle_legacy.uab
+    │      ui_particle_legendarybook.uab
+    │      ui_particle_lifelink.uab
+    │      ui_particle_lifeskillcombat.uab
+    │      ui_particle_mainmenuscroll.uab
+    │      ui_particle_makewugking.uab
+    │      ui_particle_makingsystem.uab
+    │      ui_particle_map.uab
+    │      ui_particle_musicplayer.uab
+    │      ui_particle_newgame.uab
+    │      ui_particle_originalinstyle.uab
+    │      ui_particle_partworldmap.uab
+    │      ui_particle_professionskill.uab
+    │      ui_particle_reading.uab
+    │      ui_particle_resource.uab
+    │      ui_particle_savelegendarybook.uab
+    │      ui_particle_sectshaolindemonslayer.uab
+    │      ui_particle_settlementinformation.uab
+    │      ui_particle_skillbreak.uab
+    │      ui_particle_specialbreak.uab
+    │      ui_particle_swapsoul.uab
+    │      ui_particle_task.uab
+    │      ui_particle_teahorsecaravanweather.uab
+    │      ui_particle_teammate.uab
+    │      ui_particle_testbranchinvite.uab
+    │      ui_particle_upgradeteammatecommand.uab
+    │      ui_particle_yuanshanthreedemon.uab
+    │      ui_texture_adventure.uab
+    │      ui_texture_adventure_environment.uab
+    │      ui_texture_building.uab
+    │      ui_texture_catchcricket.uab
+    │      ui_texture_cgtextures.uab
+    │      ui_texture_charactermenu.uab
+    │      ui_texture_charactermenu3_10_mh_changjing.uab
+    │      ui_texture_charactermenu3_12_huisebeijing.uab
+    │      ui_texture_charactermenu_liferecord.uab
+    │      ui_texture_charactermenu_zhuozi_0.uab
+    │      ui_texture_charactermenu_zhuozi_1.uab
+    │      ui_texture_charactermenu_zhuozi_10.uab
+    │      ui_texture_charactermenu_zhuozi_11.uab
+    │      ui_texture_charactermenu_zhuozi_2.uab
+    │      ui_texture_charactermenu_zhuozi_3.uab
+    │      ui_texture_charactermenu_zhuozi_4.uab
+    │      ui_texture_charactermenu_zhuozi_5.uab
+    │      ui_texture_charactermenu_zhuozi_6.uab
+    │      ui_texture_charactermenu_zhuozi_7.uab
+    │      ui_texture_charactermenu_zhuozi_8.uab
+    │      ui_texture_charactermenu_zhuozi_9.uab
+    │      ui_texture_chicken.uab
+    │      ui_texture_combat.uab
+    │      ui_texture_combatskill.uab
+    │      ui_texture_combatskilltree.uab
+    │      ui_texture_combatskilltype_loading.uab
+    │      ui_texture_cricketcombat.uab
+    │      ui_texture_cursors.uab
+    │      ui_texture_encyclopedia.uab
+    │      ui_texture_eventback.uab
+    │      ui_texture_eventwindow.uab
+    │      ui_texture_following.uab
+    │      ui_texture_gamelinescroll.uab
+    │      ui_texture_getitem.uab
+    │      ui_texture_heal.uab
+    │      ui_texture_legacy.uab
+    │      ui_texture_legacyactivate.uab
+    │      ui_texture_legendarybook.uab
+    │      ui_texture_lifeskill.uab
+    │      ui_texture_lifeskillcombat.uab
+    │      ui_texture_lifeskilltype_loading.uab
+    │      ui_texture_loading.uab
+    │      ui_texture_logo.uab
+    │      ui_texture_mainmenu.uab
+    │      ui_texture_mainmenuscroll.uab
+    │      ui_texture_mainui.uab
+    │      ui_texture_map.uab
+    │      ui_texture_mapblockcorrectfullsize.uab
+    │      ui_texture_mask.uab
+    │      ui_texture_monthnotify.uab
+    │      ui_texture_monthtexture.uab
+    │      ui_texture_musicplayer.uab
+    │      ui_texture_newgame.uab
+    │      ui_texture_partworldmap.uab
+    │      ui_texture_popup.uab
+    │      ui_texture_profession.uab
+    │      ui_texture_reading.uab
+    │      ui_texture_resourcelevel_authority.uab
+    │      ui_texture_resourcelevel_fabric.uab
+    │      ui_texture_resourcelevel_food.uab
+    │      ui_texture_resourcelevel_herb.uab
+    │      ui_texture_resourcelevel_jade.uab
+    │      ui_texture_resourcelevel_metal.uab
+    │      ui_texture_resourcelevel_money.uab
+    │      ui_texture_resourcelevel_table.uab
+    │      ui_texture_resourcelevel_wood.uab
+    │      ui_texture_sectstory.uab
+    │      ui_texture_settlementinfo.uab
+    │      ui_texture_settlementprison.uab
+    │      ui_texture_shop.uab
+    │      ui_texture_skillbreak.uab
+    │      ui_texture_uitextures.uab
+    │      ui_texture_updatelog.uab
+    │      ui_texture_villagerrole.uab
+    │      ui_texture_villagerwork.uab
+    │      views.uab
+    │      
+    ├─Managed
+    │      0Harmony.dll
+    │      Assembly-CSharp-firstpass.dll
+    │      Assembly-CSharp-firstpass.pdb
+    │      Assembly-CSharp.dll
+    │      Assembly-CSharp.pdb
+    │      Coffee.SoftMaskForUGUI.dll
+    │      Coffee.SoftMaskForUGUI.pdb
+    │      Coffee.UIParticle.dll
+    │      Coffee.UIParticle.pdb
+    │      CompDevLib.Interpreter.dll
+    │      DemiLib.dll
+    │      DOTween.dll
+    │      DOTweenPro.dll
+    │      EasyButtons.dll
+    │      EasyButtons.pdb
+    │      Encyclopedia.dll
+    │      GameData.Adventure.dll
+    │      GameData.Combat.Math.dll
+    │      GameData.Common.Algorithm.dll
+    │      GameData.Common.dll
+    │      GameData.Serializer.dll
+    │      GameData.Shared.dll
+    │      GameData.Utilities.dll
+    │      GameData.Utilities.Structure.dll
+    │      Google.Protobuf.dll
+    │      I18N.CJK.dll
+    │      I18N.dll
+    │      I18N.MidEast.dll
+    │      I18N.Other.dll
+    │      I18N.Rare.dll
+    │      I18N.West.dll
+    │      ICSharpCode.SharpZipLib.dll
+    │      Mono.Cecil.dll
+    │      Mono.Cecil.Mdb.dll
+    │      Mono.Cecil.Pdb.dll
+    │      Mono.Cecil.Rocks.dll
+    │      Mono.Security.dll
+    │      MonoMod.RuntimeDetour.dll
+    │      MonoMod.Utils.dll
+    │      MoonSharp.Interpreter.dll
+    │      mscorlib.dll
+    │      netstandard.dll
+    │      Newtonsoft.Json.dll
+    │      Newtonsoft.Json.pdb
+    │      NLog.dll
+    │      NPOI.dll
+    │      NPOI.OOXML.dll
+    │      NPOI.OpenXml4Net.dll
+    │      NPOI.OpenXmlFormats.dll
+    │      Redzen.dll
+    │      SingularityGroup.HotReload.Runtime.dll
+    │      SingularityGroup.HotReload.Runtime.pdb
+    │      SingularityGroup.HotReload.Runtime.Public.dll
+    │      SingularityGroup.HotReload.Runtime.Public.pdb
+    │      SingularityGroup.HotReload.RuntimeDependencies.dll
+    │      SingularityGroup.HotReload.RuntimeDependencies2019.dll
+    │      SingularityGroup.HotReload.RuntimeDependencies2020.dll
+    │      SingularityGroup.HotReload.RuntimeDependencies2022.dll
+    │      spine-csharp.dll
+    │      spine-csharp.pdb
+    │      spine-unity.dll
+    │      spine-unity.pdb
+    │      Steamworks.NET.dll
+    │      steam_api64.dll
+    │      System.Buffers.dll
+    │      System.ComponentModel.Composition.dll
+    │      System.Configuration.dll
+    │      System.Core.dll
+    │      System.Data.DataSetExtensions.dll
+    │      System.Data.dll
+    │      System.dll
+    │      System.Drawing.dll
+    │      System.EnterpriseServices.dll
+    │      System.IO.Compression.dll
+    │      System.IO.Compression.FileSystem.dll
+    │      System.Memory.dll
+    │      System.Net.Http.dll
+    │      System.Numerics.dll
+    │      System.Numerics.Vectors.dll
+    │      System.Reflection.Emit.dll
+    │      System.Reflection.Emit.ILGeneration.dll
+    │      System.Reflection.Emit.Lightweight.dll
+    │      System.Runtime.CompilerServices.Unsafe.dll
+    │      System.Runtime.Serialization.dll
+    │      System.Security.dll
+    │      System.ServiceModel.Internals.dll
+    │      System.Transactions.dll
+    │      System.Xml.dll
+    │      System.Xml.Linq.dll
+    │      TaiwuModdingLib.dll
+    │      Unity.AI.Navigation.dll
+    │      Unity.AI.Navigation.pdb
+    │      Unity.Analytics.DataPrivacy.dll
+    │      Unity.Analytics.DataPrivacy.pdb
+    │      Unity.MemoryProfiler.dll
+    │      Unity.MemoryProfiler.pdb
+    │      Unity.Services.Analytics.dll
+    │      Unity.Services.Analytics.pdb
+    │      Unity.Services.Core.Analytics.dll
+    │      Unity.Services.Core.Analytics.pdb
+    │      Unity.Services.Core.Configuration.dll
+    │      Unity.Services.Core.Configuration.pdb
+    │      Unity.Services.Core.Device.dll
+    │      Unity.Services.Core.Device.pdb
+    │      Unity.Services.Core.dll
+    │      Unity.Services.Core.Environments.dll
+    │      Unity.Services.Core.Environments.Internal.dll
+    │      Unity.Services.Core.Environments.Internal.pdb
+    │      Unity.Services.Core.Environments.pdb
+    │      Unity.Services.Core.Internal.dll
+    │      Unity.Services.Core.Internal.pdb
+    │      Unity.Services.Core.Networking.dll
+    │      Unity.Services.Core.Networking.pdb
+    │      Unity.Services.Core.pdb
+    │      Unity.Services.Core.Registration.dll
+    │      Unity.Services.Core.Registration.pdb
+    │      Unity.Services.Core.Scheduler.dll
+    │      Unity.Services.Core.Scheduler.pdb
+    │      Unity.Services.Core.Telemetry.dll
+    │      Unity.Services.Core.Telemetry.pdb
+    │      Unity.Services.Core.Threading.dll
+    │      Unity.Services.Core.Threading.pdb
+    │      Unity.TextMeshPro.dll
+    │      Unity.TextMeshPro.pdb
+    │      Unity.Timeline.dll
+    │      Unity.Timeline.pdb
+    │      UnityEngine.AccessibilityModule.dll
+    │      UnityEngine.AccessibilityModule.pdb
+    │      UnityEngine.AIModule.dll
+    │      UnityEngine.AIModule.pdb
+    │      UnityEngine.AndroidJNIModule.dll
+    │      UnityEngine.AndroidJNIModule.pdb
+    │      UnityEngine.AnimationModule.dll
+    │      UnityEngine.AnimationModule.pdb
+    │      UnityEngine.ARModule.dll
+    │      UnityEngine.ARModule.pdb
+    │      UnityEngine.AssetBundleModule.dll
+    │      UnityEngine.AssetBundleModule.pdb
+    │      UnityEngine.AudioModule.dll
+    │      UnityEngine.AudioModule.pdb
+    │      UnityEngine.ClothModule.dll
+    │      UnityEngine.ClothModule.pdb
+    │      UnityEngine.ClusterInputModule.dll
+    │      UnityEngine.ClusterInputModule.pdb
+    │      UnityEngine.ClusterRendererModule.dll
+    │      UnityEngine.ClusterRendererModule.pdb
+    │      UnityEngine.ContentLoadModule.dll
+    │      UnityEngine.ContentLoadModule.pdb
+    │      UnityEngine.CoreModule.dll
+    │      UnityEngine.CoreModule.pdb
+    │      UnityEngine.CrashReportingModule.dll
+    │      UnityEngine.CrashReportingModule.pdb
+    │      UnityEngine.DirectorModule.dll
+    │      UnityEngine.DirectorModule.pdb
+    │      UnityEngine.dll
+    │      UnityEngine.DSPGraphModule.dll
+    │      UnityEngine.DSPGraphModule.pdb
+    │      UnityEngine.GameCenterModule.dll
+    │      UnityEngine.GameCenterModule.pdb
+    │      UnityEngine.GIModule.dll
+    │      UnityEngine.GIModule.pdb
+    │      UnityEngine.GridModule.dll
+    │      UnityEngine.GridModule.pdb
+    │      UnityEngine.HotReloadModule.dll
+    │      UnityEngine.HotReloadModule.pdb
+    │      UnityEngine.ImageConversionModule.dll
+    │      UnityEngine.ImageConversionModule.pdb
+    │      UnityEngine.IMGUIModule.dll
+    │      UnityEngine.IMGUIModule.pdb
+    │      UnityEngine.InputLegacyModule.dll
+    │      UnityEngine.InputLegacyModule.pdb
+    │      UnityEngine.InputModule.dll
+    │      UnityEngine.InputModule.pdb
+    │      UnityEngine.JSONSerializeModule.dll
+    │      UnityEngine.JSONSerializeModule.pdb
+    │      UnityEngine.LocalizationModule.dll
+    │      UnityEngine.LocalizationModule.pdb
+    │      UnityEngine.NVIDIAModule.dll
+    │      UnityEngine.NVIDIAModule.pdb
+    │      UnityEngine.ParticleSystemModule.dll
+    │      UnityEngine.ParticleSystemModule.pdb
+    │      UnityEngine.pdb
+    │      UnityEngine.PerformanceReportingModule.dll
+    │      UnityEngine.PerformanceReportingModule.pdb
+    │      UnityEngine.Physics2DModule.dll
+    │      UnityEngine.Physics2DModule.pdb
+    │      UnityEngine.PhysicsModule.dll
+    │      UnityEngine.PhysicsModule.pdb
+    │      UnityEngine.ProfilerModule.dll
+    │      UnityEngine.ProfilerModule.pdb
+    │      UnityEngine.PropertiesModule.dll
+    │      UnityEngine.PropertiesModule.pdb
+    │      UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll
+    │      UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.pdb
+    │      UnityEngine.ScreenCaptureModule.dll
+    │      UnityEngine.ScreenCaptureModule.pdb
+    │      UnityEngine.SharedInternalsModule.dll
+    │      UnityEngine.SharedInternalsModule.pdb
+    │      UnityEngine.SpriteMaskModule.dll
+    │      UnityEngine.SpriteMaskModule.pdb
+    │      UnityEngine.SpriteShapeModule.dll
+    │      UnityEngine.SpriteShapeModule.pdb
+    │      UnityEngine.StreamingModule.dll
+    │      UnityEngine.StreamingModule.pdb
+    │      UnityEngine.SubstanceModule.dll
+    │      UnityEngine.SubstanceModule.pdb
+    │      UnityEngine.SubsystemsModule.dll
+    │      UnityEngine.SubsystemsModule.pdb
+    │      UnityEngine.TerrainModule.dll
+    │      UnityEngine.TerrainModule.pdb
+    │      UnityEngine.TerrainPhysicsModule.dll
+    │      UnityEngine.TerrainPhysicsModule.pdb
+    │      UnityEngine.TextCoreFontEngineModule.dll
+    │      UnityEngine.TextCoreFontEngineModule.pdb
+    │      UnityEngine.TextCoreTextEngineModule.dll
+    │      UnityEngine.TextCoreTextEngineModule.pdb
+    │      UnityEngine.TextRenderingModule.dll
+    │      UnityEngine.TextRenderingModule.pdb
+    │      UnityEngine.TilemapModule.dll
+    │      UnityEngine.TilemapModule.pdb
+    │      UnityEngine.TLSModule.dll
+    │      UnityEngine.TLSModule.pdb
+    │      UnityEngine.UI.dll
+    │      UnityEngine.UI.pdb
+    │      UnityEngine.UIElementsModule.dll
+    │      UnityEngine.UIElementsModule.pdb
+    │      UnityEngine.UIModule.dll
+    │      UnityEngine.UIModule.pdb
+    │      UnityEngine.UmbraModule.dll
+    │      UnityEngine.UmbraModule.pdb
+    │      UnityEngine.UnityAnalyticsCommonModule.dll
+    │      UnityEngine.UnityAnalyticsCommonModule.pdb
+    │      UnityEngine.UnityAnalyticsModule.dll
+    │      UnityEngine.UnityAnalyticsModule.pdb
+    │      UnityEngine.UnityConnectModule.dll
+    │      UnityEngine.UnityConnectModule.pdb
+    │      UnityEngine.UnityCurlModule.dll
+    │      UnityEngine.UnityCurlModule.pdb
+    │      UnityEngine.UnityTestProtocolModule.dll
+    │      UnityEngine.UnityTestProtocolModule.pdb
+    │      UnityEngine.UnityWebRequestAssetBundleModule.dll
+    │      UnityEngine.UnityWebRequestAssetBundleModule.pdb
+    │      UnityEngine.UnityWebRequestAudioModule.dll
+    │      UnityEngine.UnityWebRequestAudioModule.pdb
+    │      UnityEngine.UnityWebRequestModule.dll
+    │      UnityEngine.UnityWebRequestModule.pdb
+    │      UnityEngine.UnityWebRequestTextureModule.dll
+    │      UnityEngine.UnityWebRequestTextureModule.pdb
+    │      UnityEngine.UnityWebRequestWWWModule.dll
+    │      UnityEngine.UnityWebRequestWWWModule.pdb
+    │      UnityEngine.VehiclesModule.dll
+    │      UnityEngine.VehiclesModule.pdb
+    │      UnityEngine.VFXModule.dll
+    │      UnityEngine.VFXModule.pdb
+    │      UnityEngine.VideoModule.dll
+    │      UnityEngine.VideoModule.pdb
+    │      UnityEngine.VirtualTexturingModule.dll
+    │      UnityEngine.VirtualTexturingModule.pdb
+    │      UnityEngine.VRModule.dll
+    │      UnityEngine.VRModule.pdb
+    │      UnityEngine.WindModule.dll
+    │      UnityEngine.WindModule.pdb
+    │      UnityEngine.XRModule.dll
+    │      UnityEngine.XRModule.pdb
+    │      
+    ├─Plugins
+    │  └─x86_64
+    │          vnpipe.dll
+    │          
+    ├─Resources
+    │      unity default resources
+    │      unity_builtin_extra
+    │      
+    └─StreamingAssets
+        │  .gitignore
+        │  UnityServicesProjectConfiguration.json
+        │  
+        ├─ConfigRefNameMapping
+        │      Accessory.ref.txt
+        │      Adventure.ref.txt
+        │      AdventureItemDropRate.ref.txt
+        │      AdventureLifeSkillRequirement.ref.txt
+        │      AdventureRemakeMapBlock.ref.txt
+        │      AdventureTerrain.ref.txt
+        │      AdventureType.ref.txt
+        │      AgeEffect.ref.txt
+        │      AiAction.ref.txt
+        │      AiCondition.ref.txt
+        │      AiData.ref.txt
+        │      AiGroup.ref.txt
+        │      AiNode.ref.txt
+        │      AiParam.ref.txt
+        │      AiRelations.ref.txt
+        │      Animal.ref.txt
+        │      Armor.ref.txt
+        │      AvatarClothColors.ref.txt
+        │      AvatarElements.ref.txt
+        │      AvatarExtraParts.ref.txt
+        │      AvatarEyeballColors.ref.txt
+        │      AvatarFeatureColors.ref.txt
+        │      AvatarHairColors.ref.txt
+        │      AvatarHead.ref.txt
+        │      AvatarLipColors.ref.txt
+        │      AvatarSkinColors.ref.txt
+        │      BecomeEnemyType.ref.txt
+        │      BehaviorType.ref.txt
+        │      BigEventKey.ref.txt
+        │      BodyPart.ref.txt
+        │      Boss.ref.txt
+        │      BuildingBlock.ref.txt
+        │      BuildingFormula.ref.txt
+        │      BuildingScale.ref.txt
+        │      Carrier.ref.txt
+        │      CatchThiefLevel.ref.txt
+        │      CatchThiefPlace.ref.txt
+        │      Character.ref.txt
+        │      CharacterDeathType.ref.txt
+        │      CharacterFeature.ref.txt
+        │      CharacterFilterRules.ref.txt
+        │      CharacterMatcher.ref.txt
+        │      CharacterPropertyDisplay.ref.txt
+        │      CharacterPropertyReferenced.ref.txt
+        │      CharacterTitle.ref.txt
+        │      Chicken.ref.txt
+        │      Choosy.ref.txt
+        │      Clothing.ref.txt
+        │      CombatConfig.ref.txt
+        │      CombatDifficulty.ref.txt
+        │      CombatEvaluation.ref.txt
+        │      CombatItemUse.ref.txt
+        │      CombatScene.ref.txt
+        │      CombatSkeleton.ref.txt
+        │      CombatSkill.ref.txt
+        │      CombatSkillProperty.ref.txt
+        │      CombatSkillType.ref.txt
+        │      CombatState.ref.txt
+        │      ConsummateLevel.ref.txt
+        │      CraftTool.ref.txt
+        │      Cricket.ref.txt
+        │      CricketParts.ref.txt
+        │      CricketPlace.ref.txt
+        │      DebateComment.ref.txt
+        │      DebateEvaluation.ref.txt
+        │      DebateNodeEffect.ref.txt
+        │      DebateRecord.ref.txt
+        │      DebateReference.ref.txt
+        │      DebateStrategy.ref.txt
+        │      DebateStrategyEffect.ref.txt
+        │      DebateStrategyTarget.ref.txt
+        │      DemandInteraction.ref.txt
+        │      DemonSlayerTrial.ref.txt
+        │      DemonSlayerTrialLevel.ref.txt
+        │      DemonSlayerTrialRestrict.ref.txt
+        │      DestinyType.ref.txt
+        │      EncyclopediaSuperLink.ref.txt
+        │      EnemyNest.ref.txt
+        │      EnhancedRichTextTags.ref.txt
+        │      EquipmentEffect.ref.txt
+        │      EventActors.ref.txt
+        │      EventArgument.ref.txt
+        │      EventBoolState.ref.txt
+        │      EventCondition.ref.txt
+        │      EventConditionOperator.ref.txt
+        │      EventFunction.ref.txt
+        │      EventOptionConsumeType.ref.txt
+        │      EventScriptType.ref.txt
+        │      EventValue.ref.txt
+        │      ExtraNameText.ref.txt
+        │      FameAction.ref.txt
+        │      Feast.ref.txt
+        │      Food.ref.txt
+        │      HotKeyDisplay.ref.txt
+        │      ImplementedDlc.ref.txt
+        │      Information.ref.txt
+        │      InformationInfo.ref.txt
+        │      InformationType.ref.txt
+        │      InstantNotification.ref.txt
+        │      InteractCheck.ref.txt
+        │      InteractCheckTip.ref.txt
+        │      InteractionEventOption.ref.txt
+        │      ItemFilterRules.ref.txt
+        │      Jiao.ref.txt
+        │      JiaoNurturance.ref.txt
+        │      JiaoProperty.ref.txt
+        │      JiaoRecord.ref.txt
+        │      JieqingGameLevel.ref.txt
+        │      JieqingGamePeace.ref.txt
+        │      LandFormType.ref.txt
+        │      Legacy.ref.txt
+        │      LegacyPoint.ref.txt
+        │      LegacyPointType.ref.txt
+        │      LegendaryBookPropertyBonusType.ref.txt
+        │      LegendaryBookSlot.ref.txt
+        │      LifeLinkFeatureEffect.ref.txt
+        │      LifeRecord.ref.txt
+        │      LifeSkill.ref.txt
+        │      LifeSkillCombatEffect.ref.txt
+        │      LifeSkillCombatTalk.ref.txt
+        │      LifeSkillType.ref.txt
+        │      LoadingTips.ref.txt
+        │      Loong.ref.txt
+        │      LoopingEffect.ref.txt
+        │      MainStoryLineProgress.ref.txt
+        │      MakeItemSubType.ref.txt
+        │      MakeItemType.ref.txt
+        │      MapArea.ref.txt
+        │      MapBlock.ref.txt
+        │      MapBlockMatcher.ref.txt
+        │      MapPickups.ref.txt
+        │      MapState.ref.txt
+        │      Material.ref.txt
+        │      Medicine.ref.txt
+        │      Merchant.ref.txt
+        │      MerchantType.ref.txt
+        │      MiniGameYuanshan.ref.txt
+        │      MinionGroup.ref.txt
+        │      Misc.ref.txt
+        │      MixPoisonEffect.ref.txt
+        │      Month.ref.txt
+        │      MonthlyActions.ref.txt
+        │      MonthlyEvent.ref.txt
+        │      MonthlyNotification.ref.txt
+        │      MonthlyNotificationSortingGroup.ref.txt
+        │      MouseTipType.ref.txt
+        │      Music.ref.txt
+        │      NeiliAllocationEffect.ref.txt
+        │      NeiliAllocationStatus.ref.txt
+        │      NeiliType.ref.txt
+        │      NormalInteraction.ref.txt
+        │      NpcRandomWords.ref.txt
+        │      Organization.ref.txt
+        │      OrganizationMember.ref.txt
+        │      OtherActionType.ref.txt
+        │      PersonalNeed.ref.txt
+        │      Poison.ref.txt
+        │      PredefinedLog.ref.txt
+        │      PrioritizedActions.ref.txt
+        │      Profession.ref.txt
+        │      ProfessionFormula.ref.txt
+        │      ProfessionSkill.ref.txt
+        │      ProtagonistFeature.ref.txt
+        │      PunishmentSeverity.ref.txt
+        │      PunishmentType.ref.txt
+        │      QiArtStrategy.ref.txt
+        │      QiDisorderEffect.ref.txt
+        │      RandomEnemy.ref.txt
+        │      RanshanGiveupLegendaryBook.ref.txt
+        │      ReadingStrategy.ref.txt
+        │      RefiningEffect.ref.txt
+        │      RelationDisplayType.ref.txt
+        │      ResourceCollection.ref.txt
+        │      ResourceType.ref.txt
+        │      SamsaraPlatformRecord.ref.txt
+        │      Season.ref.txt
+        │      SecretInformation.ref.txt
+        │      SecretInformationAppliedContent.ref.txt
+        │      SecretInformationAppliedRelation.ref.txt
+        │      SecretInformationAppliedResult.ref.txt
+        │      SecretInformationAppliedSelection.ref.txt
+        │      SecretInformationAppliedStruct.ref.txt
+        │      SecretInformationDissemination.ref.txt
+        │      SecretInformationEffect.ref.txt
+        │      SecretInformationSectPunish.ref.txt
+        │      SecretInformationSpecialCondition.ref.txt
+        │      SectApprovingEffect.ref.txt
+        │      SensitiveWords.ref.txt
+        │      SettlementPrisonEventEffect.ref.txt
+        │      SettlementPrisonRecord.ref.txt
+        │      SettlementTreasuryEventEffect.ref.txt
+        │      SettlementTreasuryRecord.ref.txt
+        │      ShopEvent.ref.txt
+        │      SkillBook.ref.txt
+        │      SkillBreakBonusEffect.ref.txt
+        │      SkillBreakBonusEffectImplement.ref.txt
+        │      SkillBreakEffectDisplay.ref.txt
+        │      SkillBreakGridList.ref.txt
+        │      SkillBreakGridType.ref.txt
+        │      SkillBreakOutlineEffect.ref.txt
+        │      SkillBreakPageEffect.ref.txt
+        │      SkillBreakPageEffectImplement.ref.txt
+        │      SkillBreakPlate.ref.txt
+        │      SkillBreakPlateGridBonusType.ref.txt
+        │      SkillGradeData.ref.txt
+        │      SolarTerm.ref.txt
+        │      SpecialEffect.ref.txt
+        │      SpecialEffectDataField.ref.txt
+        │      StoryScroll.ref.txt
+        │      SwordTomb.ref.txt
+        │      TaiwuBeHuntedEvent.ref.txt
+        │      TaiwuVillageStoragesRecord.ref.txt
+        │      TaskChain.ref.txt
+        │      TaskCondition.ref.txt
+        │      TaskHint.ref.txt
+        │      TaskInfo.ref.txt
+        │      TeaHorseCaravanEvent.ref.txt
+        │      TeaHorseCaravanTerrain.ref.txt
+        │      TeaHorseCaravanWeather.ref.txt
+        │      TeammateBubble.ref.txt
+        │      TeammateCommand.ref.txt
+        │      TeaWine.ref.txt
+        │      TravelingEvent.ref.txt
+        │      TravelSkeleton.ref.txt
+        │      TrickType.ref.txt
+        │      TutorialChapters.ref.txt
+        │      TutorialVideo.ref.txt
+        │      UpdateLog.ref.txt
+        │      VillagerRole.ref.txt
+        │      VillagerRoleArrangement.ref.txt
+        │      VillagerRoleAutoAction.ref.txt
+        │      VillagerRoleFormula.ref.txt
+        │      Weapon.ref.txt
+        │      WeaponUnlockEffect.ref.txt
+        │      WesternRegion.ref.txt
+        │      WorldCreation.ref.txt
+        │      WorldCreationGroup.ref.txt
+        │      WorldFavorability.ref.txt
+        │      WorldResource.ref.txt
+        │      WorldState.ref.txt
+        │      WugKing.ref.txt
+        │      ZhujianCombatSkillToWeapon.ref.txt
+        │      
+        ├─EventScriptsTemplates
+        │      CustomConfigTemplate.template
+        │      TaiwuEventAPITemplate.template
+        │      TaiwuEventConstructor.template
+        │      TaiwuEventOptionTemplate.template
+        │      TaiwuEventTemplate.template
+        │      
+        └─Language_CN
+                Accessory_language.txt
+                AdventureRemakeMapBlock_language.txt
+                AdventureTerrain_language.txt
+                AdventureType_language.txt
+                Adventure_language.txt
+                AiAction_language.txt
+                AiCondition_language.txt
+                AiNode_language.txt
+                AiParam_language.txt
+                Armor_language.txt
+                AvatarClothColors_language.txt
+                AvatarEyeballColors_language.txt
+                AvatarFeatureColors_language.txt
+                AvatarHairColors_language.txt
+                AvatarHead_language.txt
+                AvatarLipColors_language.txt
+                AvatarSkinColors_language.txt
+                BecomeEnemyType_language.txt
+                BehaviorType_language.txt
+                BodyPart_language.txt
+                BuildingBlock_language.txt
+                BuildingScale_language.txt
+                Carrier_language.txt
+                CatchThiefLevel_language.txt
+                CharacterDeathType_language.txt
+                CharacterFeature_language.txt
+                CharacterPropertyDisplay_language.txt
+                CharacterTitle_language.txt
+                Character_language.txt
+                Chicken_language.txt
+                Clothing_language.txt
+                CombatConfig_language.txt
+                CombatDifficulty_language.txt
+                CombatEvaluation_language.txt
+                CombatSkillProperty_language.txt
+                CombatSkillType_language.txt
+                CombatSkill_language.txt
+                CombatState_language.txt
+                ConsummateLevel_language.txt
+                CraftTool_language.txt
+                CricketParts_language.txt
+                Cricket_language.txt
+                DebateComment_language.txt
+                DebateEvaluation_language.txt
+                DebateNodeEffect_language.txt
+                DebateRecord_language.txt
+                DebateStrategyTarget_language.txt
+                DebateStrategy_language.txt
+                DemandInteraction_language.txt
+                DemonSlayerTrialLevel_language.txt
+                DemonSlayerTrialRestrict_language.txt
+                DemonSlayerTrial_language.txt
+                DestinyType_language.txt
+                EnemyNest_language.txt
+                EquipmentEffect_language.txt
+                EventActors_language.txt
+                EventArgument_language.txt
+                EventBoolState_language.txt
+                EventConditionOperator_language.txt
+                EventFunction_language.txt
+                EventScriptType_language.txt
+                EventValue_language.txt
+                ExtraNameText_language.txt
+                FameAction_language.txt
+                Feast_language.txt
+                Food_language.txt
+                HotKeyDisplay_language.txt
+                InformationInfo_language.txt
+                InformationType_language.txt
+                InstantNotification_language.txt
+                InteractCheckTip_language.txt
+                InteractionEventOption_language.txt
+                JiaoNurturance_language.txt
+                JiaoProperty_language.txt
+                JiaoRecord_language.txt
+                Jiao_language.txt
+                LandFormType_language.txt
+                LegacyPointType_language.txt
+                LegacyPoint_language.txt
+                Legacy_language.txt
+                LegendaryBookSlot_language.txt
+                LifeRecord_language.txt
+                LifeSkillCombatEffect_language.txt
+                LifeSkillCombatTalk_language.txt
+                LifeSkillType_language.txt
+                LifeSkill_language.txt
+                LoadingTips_language.txt
+                Loong_language.txt
+                MainStoryLineProgress_language.txt
+                MakeItemSubType_language.txt
+                MakeItemType_language.txt
+                MapArea_language.txt
+                MapBlock_language.txt
+                MapPickups_language.txt
+                MapState_language.txt
+                Material_language.txt
+                Medicine_language.txt
+                MerchantType_language.txt
+                Merchant_language.txt
+                MiniGameYuanshan_language.txt
+                Misc_language.txt
+                MixPoisonEffect_language.txt
+                MonthlyActions_language.txt
+                MonthlyEvent_language.txt
+                MonthlyNotificationSortingGroup_language.txt
+                MonthlyNotification_language.txt
+                Month_language.txt
+                Music_language.txt
+                NeiliAllocationStatus_language.txt
+                NeiliType_language.txt
+                NormalInteraction_language.txt
+                NpcRandomWords_language.txt
+                OrganizationMember_language.txt
+                Organization_language.txt
+                PersonalNeed_language.txt
+                Poison_language.txt
+                PredefinedLog_language.txt
+                PrioritizedActions_language.txt
+                ProfessionSkill_language.txt
+                Profession_language.txt
+                ProtagonistFeature_language.txt
+                PunishmentSeverity_language.txt
+                PunishmentType_language.txt
+                QiArtStrategy_language.txt
+                QiDisorderEffect_language.txt
+                ReadingStrategy_language.txt
+                RelationDisplayType_language.txt
+                ResourceType_language.txt
+                SamsaraPlatformRecord_language.txt
+                SecretInformationAppliedContent_language.txt
+                SecretInformationAppliedRelation_language.txt
+                SecretInformationAppliedResult_language.txt
+                SecretInformationAppliedSelection_language.txt
+                SecretInformationEffect_language.txt
+                SecretInformationSpecialCondition_language.txt
+                SecretInformation_language.txt
+                SectApprovingEffect_language.txt
+                SettlementPrisonRecord_language.txt
+                SettlementTreasuryRecord_language.txt
+                ShopEvent_language.txt
+                SkillBook_language.txt
+                SkillBreakBonusEffect_language.txt
+                SkillBreakEffectDisplay_language.txt
+                SkillBreakGridType_language.txt
+                SkillBreakOutlineEffect_language.txt
+                SkillBreakPageEffectImplement_language.txt
+                SkillBreakPlateGridBonusType_language.txt
+                SolarTerm_language.txt
+                SpecialEffectDataField_language.txt
+                SpecialEffect_language.txt
+                StoryScroll_language.txt
+                TaiwuBeHuntedEvent_language.txt
+                TaiwuVillageStoragesRecord_language.txt
+                TaskChain_language.txt
+                TaskHint_language.txt
+                TaskInfo_language.txt
+                TeaHorseCaravanEvent_language.txt
+                TeaHorseCaravanTerrain_language.txt
+                TeaHorseCaravanWeather_language.txt
+                TeammateBubble_language.txt
+                TeammateCommand_language.txt
+                TeaWine_language.txt
+                TravelingEvent_language.txt
+                TrickType_language.txt
+                TutorialChapters_language.txt
+                TutorialVideo_language.txt
+                ui_language.txt
+                UpdateLog_language.txt
+                VillagerRoleArrangement_language.txt
+                VillagerRoleAutoAction_language.txt
+                VillagerRoleFormula_language.txt
+                VillagerRole_language.txt
+                WeaponUnlockEffect_language.txt
+                Weapon_language.txt
+                WesternRegion_language.txt
+                WorldCreationGroup_language.txt
+                WorldCreation_language.txt
+                WorldState_language.txt
+                WugKing_language.txt
+                
