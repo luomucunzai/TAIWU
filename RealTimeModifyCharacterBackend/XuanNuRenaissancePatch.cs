@@ -13,7 +13,7 @@ namespace RealTimeModifyCharacterBackend
 {
     public static class XuanNuRenaissancePatch
     {
-        // 1. Blueprint Hijacking: All Xuan Nu members use Grade 0 (1st Rank) config
+        // 1. Blueprint Hijacking: Force Grade 0 for Xuan Nu
         [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
@@ -24,7 +24,21 @@ namespace RealTimeModifyCharacterBackend
             }
         }
 
-        // 2. Character Generation: Highest Specifications
+        // 2. Template Hijacking: Force high-level template for Xuan Nu
+        // This determines base attributes like HP and Six-Dims baseline.
+        [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
+        [HarmonyPrefix]
+        public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
+        {
+            if (orgTemplateId == 8)
+            {
+                __result = 373; // 璇女羽衣使 (Feather Robe Envoy - High level template)
+                return false; // Skip original method
+            }
+            return true;
+        }
+
+        // 3. Character Generation: Highest Specifications
         [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter", new Type[] { typeof(DataContext), typeof(IntelligentCharacterCreationInfo).MakeByRefType() })]
         [HarmonyPostfix]
         public static unsafe void CreateIntelligentCharacter_Postfix(Character __result, DataContext context)
@@ -36,37 +50,60 @@ namespace RealTimeModifyCharacterBackend
             {
                 int charId = __result.GetId();
 
-                // Point 2: Gender Lock to Female (1)
+                // Gender Lock to Female (1)
                 if (__result.GetGender() != 1)
                 {
                     Util.SetGender(__result, 1, context);
                 }
 
-                // Point 1: Aptitude Floor (130)
-                // Use fixed pointer to safely modify the qualifications in place if possible,
-                // or modify a copy and set it back.
-                CombatSkillShorts qualifications = __result.GetBaseCombatSkillQualifications();
-                bool changedQuals = false;
-                fixed (short* pQuals = &qualifications.Items.FixedElementField)
+                // Aptitude Floor (Combat 130)
+                CombatSkillShorts combatQuals = __result.GetBaseCombatSkillQualifications();
+                bool changedCombat = false;
+                fixed (short* pQuals = &combatQuals.Items.FixedElementField)
                 {
                     for (int i = 0; i < 14; i++)
                     {
                         if (pQuals[i] < 130)
                         {
                             pQuals[i] = 130;
-                            changedQuals = true;
+                            changedCombat = true;
                         }
                     }
                 }
-                if (changedQuals)
+                if (changedCombat)
                 {
-                    __result.SetBaseCombatSkillQualifications(ref qualifications, context);
+                    __result.SetBaseCombatSkillQualifications(ref combatQuals, context);
                 }
 
-                // Point 3: Inject 18 Purity (Consummate Level)
+                // Aptitude Floor (Life Skill: Music 150, others 130)
+                LifeSkillShorts lifeQuals = __result.GetBaseLifeSkillQualifications();
+                bool changedLife = false;
+                fixed (short* pQuals = &lifeQuals.Items.FixedElementField)
+                {
+                    // Index 0 is Music (音律)
+                    if (pQuals[0] < 150)
+                    {
+                        pQuals[0] = 150;
+                        changedLife = true;
+                    }
+                    for (int i = 1; i < 16; i++)
+                    {
+                        if (pQuals[i] < 130)
+                        {
+                            pQuals[i] = 130;
+                            changedLife = true;
+                        }
+                    }
+                }
+                if (changedLife)
+                {
+                    __result.SetBaseLifeSkillQualifications(ref lifeQuals, context);
+                }
+
+                // Inject 18 Purity (Consummate Level)
                 __result.SetConsummateLevel(18, context);
 
-                // Point 4: Grant all Xuan Nu martial arts and Activate Rewards
+                // Grant all Xuan Nu martial arts and Activate All Rewards (Pages 5-14)
                 CombatSkillDomain skillDomain = DomainManager.CombatSkill;
                 Dictionary<short, CombatSkill> existingSkills = skillDomain.GetCharCombatSkills(charId);
 
@@ -77,21 +114,18 @@ namespace RealTimeModifyCharacterBackend
                         short skillId = skillCfg.TemplateId;
                         if (!existingSkills.ContainsKey(skillId))
                         {
-                            // Create as fully mastered (ReadingState 1023)
-                            skillDomain.CreateCombatSkill(charId, skillId, 1023);
+                            // Create as fully mastered (ReadingState 65535 covers all 15/16 bits)
+                            skillDomain.CreateCombatSkill(charId, skillId, 65535);
 
-                            // Set PracticeLevel to 100
-                            // In this game's Domain architecture, some objects have setters that handle the domain logic.
-                            // Based on Character.cs, SetConsummateLevel handles its own archive/domain logic.
-                            // We'll try to find the skill object we just created to set practice level.
                             CombatSkill newSkill;
                             if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillId), out newSkill))
                             {
                                 newSkill.SetPracticeLevel(100, context);
                             }
 
-                            // Activate rewards for normal pages 5-9 (Direct/正练)
-                            for (byte pageIdx = 5; pageIdx <= 9; pageIdx++)
+                            // Activate all rewards for pages 5-14
+                            // This ensures full Neili bonuses and passive attributes are applied.
+                            for (byte pageIdx = 5; pageIdx <= 14; pageIdx++)
                             {
                                 skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillId, pageIdx);
                             }
@@ -99,8 +133,7 @@ namespace RealTimeModifyCharacterBackend
                     }
                 }
 
-                // Final Refresh: Invalidate all caches.
-                // Using reflection to call the internal method for a deep refresh.
+                // Final Refresh: Force full cache invalidation
                 var method = typeof(Character).GetMethod("SetModifiedAndInvalidateInfluencedCache",
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public);
                 if (method != null)
