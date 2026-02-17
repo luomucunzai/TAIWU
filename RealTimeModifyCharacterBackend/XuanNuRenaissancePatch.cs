@@ -19,7 +19,7 @@ namespace RealTimeModifyCharacterBackend
         private const sbyte XN_ID = 8;
         private const short FID_ZHONG_ZHEN = 164; // 忠贞不渝
 
-        // 1. Blueprint Hijacking: All Xuan Nu members use Grade 0 (1st Rank) config
+        // 1. Blueprint Hijacking: Force Grade 0 (1st Rank) config for all Xuan Nu
         [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
         [HarmonyPrefix]
         public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
@@ -27,21 +27,21 @@ namespace RealTimeModifyCharacterBackend
             if (orgTemplateId == XN_ID) grade = 0;
         }
 
-        // 2. Template Hijacking: Force high-level template for Xuan Nu
-        [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
+        // 2. Template Hijacking: Force high-level template (373) for Xuan Nu base stats
+        [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId")]
         [HarmonyPrefix]
         public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
         {
             if (orgTemplateId == XN_ID)
             {
                 __result = 373; // 璇女羽衣使
-                return false;
+                return false; // Skip original method
             }
             return true;
         }
 
-        // 3. Core Implementation Logic
-        [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter", new Type[] { typeof(DataContext), typeof(IntelligentCharacterCreationInfo).MakeByRefType() })]
+        // 3. Core Implementation Logic: "The Highest Specification"
+        [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
         [HarmonyPostfix]
         public static unsafe void CreateIntelligentCharacter_Postfix(GCharacter __result, DataContext context)
         {
@@ -53,11 +53,13 @@ namespace RealTimeModifyCharacterBackend
                 int charId = __result.GetId();
                 sbyte grade = orgInfo.Grade;
 
-                // --- Gender & Appearance (0 is Female in Taiwu Remake) ---
+                // --- Identity & Gender (0 is Female in Taiwu Remake) ---
                 if (__result.GetGender() != 0)
                 {
                     Util.SetGender(__result, 0, context);
-                    __result.GetAvatar()?.ChangeGender(0);
+                    var avatar = __result.GetAvatar();
+                    avatar.ChangeGender(0);
+                    __result.SetAvatar(avatar, context);
                 }
                 Util.SetTransGender(__result, false, context);
 
@@ -68,9 +70,9 @@ namespace RealTimeModifyCharacterBackend
                 }
 
                 // --- Attraction & Behavior (Celestial / Benevolent) ---
-                // Force base attraction to 900
+                // Attraction 900 (Celestial)
                 AccessTools.Field(typeof(GCharacter), "_baseAttraction").SetValue(__result, (short)900);
-                // Set morality to 700 (Benevolent / 仁善)
+                // Morality 700 (Benevolent behavior)
                 __result.SetBaseMorality(700, context);
 
                 // --- Tiered Aptitude Enhancement (1.5x / 1.35x / 1.1x) ---
@@ -79,7 +81,7 @@ namespace RealTimeModifyCharacterBackend
                 short lifeFloor = (short)(130 * multiplier);
                 short musicFloor = (short)(150 * multiplier);
 
-                // Combat Skill Qualifications
+                // Modify Combat Skill Qualifications
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
                 fixed (short* pC = &cQuals.Items.FixedElementField)
@@ -91,11 +93,12 @@ namespace RealTimeModifyCharacterBackend
                 }
                 if (cChanged) __result.SetBaseCombatSkillQualifications(ref cQuals, context);
 
-                // Life Skill Qualifications
+                // Modify Life Skill Qualifications
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
                 fixed (short* pL = &lQuals.Items.FixedElementField)
                 {
+                    // Music (Index 0)
                     if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
                     for (int i = 1; i < 16; i++)
                     {
@@ -104,7 +107,7 @@ namespace RealTimeModifyCharacterBackend
                 }
                 if (lChanged) __result.SetBaseLifeSkillQualifications(ref lQuals, context);
 
-                // --- Purity & Martial Arts Mastery ---
+                // --- Purity (18) & Martial Arts Enlightenment ---
                 __result.SetConsummateLevel(18, context);
                 CombatSkillDomain skillDomain = DomainManager.CombatSkill;
 
@@ -114,22 +117,26 @@ namespace RealTimeModifyCharacterBackend
                 {
                     if (skillCfg.SectId == XN_ID)
                     {
-                        if (!learnedSkills.Contains(skillCfg.TemplateId))
+                        short skillId = skillCfg.TemplateId;
+                        if (!learnedSkills.Contains(skillId))
                         {
-                            skillDomain.CreateCombatSkill(charId, skillCfg.TemplateId, 65535);
+                            // Create as fully mastered (ushort.MaxValue covers all page bits)
+                            skillDomain.CreateCombatSkill(charId, skillId, ushort.MaxValue);
+
                             GCombatSkill inst;
-                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillCfg.TemplateId), out inst))
+                            if (skillDomain.TryGetElement_CombatSkills(new CombatSkillKey(charId, skillId), out inst))
                             {
                                 inst.SetPracticeLevel(100, context);
                             }
-                            // Activate all page rewards (5-14)
+
+                            // Activate all page rewards (5-14) to maximize Neili and passive stats
                             for (byte pIdx = 5; pIdx <= 14; pIdx++)
-                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillCfg.TemplateId, pIdx);
+                                skillDomain.TryActivateCombatSkillBookPageWhenSetReadingState(context, charId, skillId, pIdx);
                         }
                     }
                 }
 
-                // --- Force Full Cache Refresh ---
+                // --- Force Full Attribute Cache Refresh ---
                 __result.InvalidateSelfAndInfluencedCache(0, context);
             }
         }
