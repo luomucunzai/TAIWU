@@ -12,6 +12,7 @@ using GameData.Domains.CombatSkill;
 using GameData.Common;
 using Config;
 using System.Reflection;
+using GameData.ArchiveData;
 
 namespace RealTimeModifyCharacterBackend
 {
@@ -55,8 +56,8 @@ namespace RealTimeModifyCharacterBackend
                 sbyte grade = orgInfo.Grade;
 
                 // --- 1. Identity & Gender (0 is Female) ---
-                Util.SetGender(__result, (sbyte)0, context);
-                Util.SetTransGender(__result, false, context);
+                SetGender(__result, (sbyte)0, context);
+                SetTransGender(__result, false, context);
                 var avatar = __result.GetAvatar();
                 avatar.ChangeGender(0);
                 __result.SetAvatar(avatar, context);
@@ -80,7 +81,7 @@ namespace RealTimeModifyCharacterBackend
                 // Combat Aptitude
                 CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                fixed (short* pC = &cQuals.Items.FixedElementField)
+                fixed (short* pC = cQuals.Items)
                 {
                     for (int i = 0; i < 14; i++)
                     {
@@ -92,7 +93,7 @@ namespace RealTimeModifyCharacterBackend
                 // Life Aptitude
                 LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                fixed (short* pL = &lQuals.Items.FixedElementField)
+                fixed (short* pL = lQuals.Items)
                 {
                     // Music is index 0
                     if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
@@ -129,8 +130,36 @@ namespace RealTimeModifyCharacterBackend
                 }
 
                 // --- 5. Force Full Attribute Cache Refresh ---
-                // Using Field 0 often triggers broad refresh in the game's influence system.
                 InvokeMethod(__result, "InvalidateSelfAndInfluencedCache", new object[] { (ushort)0, context });
+            }
+        }
+
+        // --- Consolidated Identity Helpers ---
+        public static void SetGender(GCharacter character, sbyte gender, DataContext context)
+        {
+            SetPrivateField(character, "_gender", gender);
+            InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)3, context });
+            if (character.CollectionHelperData.IsArchive)
+            {
+                unsafe
+                {
+                    byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 7U, 1);
+                    *ptr = (byte)gender;
+                }
+            }
+        }
+
+        public static void SetTransGender(GCharacter character, bool transgender, DataContext context)
+        {
+            SetPrivateField(character, "_transgender", transgender);
+            InvokeMethod(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)13, context });
+            if (character.CollectionHelperData.IsArchive)
+            {
+                unsafe
+                {
+                    byte* ptr = OperationAdder.DynamicObjectCollection_SetFixedField<int>(character.CollectionHelperData.DomainId, character.CollectionHelperData.DataId, character.GetId(), 26U, 1);
+                    *ptr = (byte)(transgender ? 1 : 0);
+                }
             }
         }
 

@@ -12,7 +12,7 @@ using HarmonyLib;
 
 namespace RealTimeModifyCharacterBackend
 {
-    internal class Util
+    public class Util
     {
         public static GameData.Domains.Character.Character getCharacter(string charNameOrId)
         {
