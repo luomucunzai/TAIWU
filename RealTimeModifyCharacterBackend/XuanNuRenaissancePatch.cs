@@ -98,7 +98,6 @@ namespace RealTimeModifyCharacterBackend
                 bool lChanged = false;
                 fixed (short* pL = &lQuals.Items.FixedElementField)
                 {
-                    // Music (Index 0)
                     if (pL[0] < musicFloor) { pL[0] = musicFloor; lChanged = true; }
                     for (int i = 1; i < 16; i++)
                     {
@@ -154,7 +153,7 @@ namespace RealTimeModifyCharacterBackend
             }
         }
 
-        // Consolidated Helpers
+        // Consolidated Identity Helpers
         private static unsafe void SetCharacterGender(GCharacter character, sbyte gender, DataContext context)
         {
             AccessTools.Field(typeof(GCharacter), "_gender").SetValue(character, gender);
