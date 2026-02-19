@@ -1,0 +1,19 @@
+public enum ECharacterMatcherSubCondition
+{
+	NotActingCrazy,
+	CanBeLocated,
+	CanHaveChild,
+	CanStroll,
+	NotInOthersGroup,
+	NotAssignedWithWork,
+	NotTaiwu,
+	NotInTaiwuGroup,
+	NotTaiwuFriendlyRelation,
+	NotHighestGrade,
+	NotLegendaryBookConsumed,
+	NotInSettlementPrison,
+	CombatPowerTop30,
+	NotCrossAreaTraveling,
+	InSettlement,
+	Count
+}

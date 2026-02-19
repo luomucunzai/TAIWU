@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>GameData.Shared</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="GameData.Utilities">
+      <HintPath>../../GameData.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="GameData.Serializer" />
+    <Reference Include="Redzen" />
+    <Reference Include="GameData.Utilities.Structure" />
+    <Reference Include="GameData.Combat.Math" />
+  </ItemGroup>
+</Project>

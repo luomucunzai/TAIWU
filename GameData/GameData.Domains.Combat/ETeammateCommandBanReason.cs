@@ -1,0 +1,35 @@
+namespace GameData.Domains.Combat;
+
+public enum ETeammateCommandBanReason : sbyte
+{
+	Negative = -2,
+	Internal,
+	CommonNotMain,
+	CommonCd,
+	CommonFallen,
+	CommonStop,
+	CommonConflict,
+	AccelerateNotPreparing,
+	PushInEdge,
+	PullInEdge,
+	HealInjuryNonInjury,
+	HealInjuryAttainmentLack,
+	HealInjuryCountLack,
+	HealInjuryHerbLack,
+	HealPoisonNonPoison,
+	HealPoisonAttainmentLack,
+	HealPoisonCountLack,
+	HealPoisonHerbLack,
+	HealFlawNonFlaw,
+	HealAcupointNonAcupoint,
+	TransferInjuryNonInjury,
+	TransferNeiliAllocationLack,
+	AttackNonTrick,
+	AttackSkillNonSkill,
+	AttackSkillBanned,
+	DefendSkillNonSkill,
+	DefendSkillBanned,
+	AddUnlockAttackValueFull,
+	TransferManyMarkNonAnyMark,
+	RepairItemNonAnyRepairable
+}

@@ -1,0 +1,66 @@
+using GameData.Combat.Math;
+using GameData.Common;
+using GameData.DomainEvents;
+using GameData.Domains.Combat;
+using GameData.Domains.CombatSkill;
+
+namespace GameData.Domains.SpecialEffect.Animal.Beast.Neigong;
+
+public class WeiWoDuZun : AnimalEffectBase
+{
+	private bool _inAttackRange;
+
+	private CValuePercent CostPercent => CValuePercent.op_Implicit(base.IsElite ? 66 : 33);
+
+	public WeiWoDuZun()
+	{
+	}
+
+	public WeiWoDuZun(CombatSkillKey skillKey)
+		: base(skillKey)
+	{
+	}
+
+	public override void OnEnable(DataContext context)
+	{
+		Events.RegisterHandler_CombatBegin(OnCombatBegin);
+		Events.RegisterHandler_DistanceChanged(OnDistanceChanged);
+	}
+
+	public override void OnDisable(DataContext context)
+	{
+		Events.UnRegisterHandler_CombatBegin(OnCombatBegin);
+		Events.UnRegisterHandler_DistanceChanged(OnDistanceChanged);
+	}
+
+	private void OnCombatBegin(DataContext context)
+	{
+		_inAttackRange = DomainManager.Combat.InAttackRange(base.CombatChar);
+		DoAffect(context);
+	}
+
+	private void OnDistanceChanged(DataContext context, CombatCharacter mover, short distance, bool isMove, bool isForced)
+	{
+		bool flag = DomainManager.Combat.InAttackRange(base.CombatChar);
+		if (flag != _inAttackRange)
+		{
+			_inAttackRange = flag;
+			DoAffect(context);
+		}
+	}
+
+	private void DoAffect(DataContext context)
+	{
+		//IL_0035: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0050: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006a: Unknown result type (might be due to invalid IL or missing references)
+		if (base.IsCurrent)
+		{
+			CombatCharacter combatCharacter = DomainManager.Combat.GetCombatCharacter(!base.CombatChar.IsAlly);
+			ChangeStanceValue(context, combatCharacter, -combatCharacter.GetMaxStanceValue() * CostPercent);
+			ChangeBreathValue(context, combatCharacter, -combatCharacter.GetMaxBreathValue() * CostPercent);
+			ChangeMobilityValue(context, combatCharacter, -MoveSpecialConstants.MaxMobility * CostPercent);
+			ShowSpecialEffectTips(0);
+		}
+	}
+}

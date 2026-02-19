@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>0Harmony</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Mono.Cecil" />
+    <Reference Include="MonoMod.Utils" />
+    <Reference Include="System.Reflection.Emit.ILGeneration">
+      <HintPath>../../../../../../../../root/.dotnet/shared/Microsoft.NETCore.App/8.0.24/System.Reflection.Emit.ILGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour" />
+    <Reference Include="System.Reflection.Emit">
+      <HintPath>../../../../../../../../root/.dotnet/shared/Microsoft.NETCore.App/8.0.24/System.Reflection.Emit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Emit.Lightweight">
+      <HintPath>../../../../../../../../root/.dotnet/shared/Microsoft.NETCore.App/8.0.24/System.Reflection.Emit.Lightweight.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+public enum EAvatarElementsType
+{
+	Cloth = 1,
+	ClothColor,
+	ClothSkin,
+	ClothPart,
+	Head,
+	Eye,
+	EyeBall,
+	EyeBrow,
+	Nose,
+	Mouth,
+	MouthPart,
+	Beard1,
+	Beard2,
+	Hair1,
+	Hair1Part,
+	Hair2,
+	Hair2Part,
+	Feature1,
+	Feature2,
+	Wrinkle1,
+	Wrinkle2,
+	Wrinkle3,
+	Count
+}

@@ -1,0 +1,201 @@
+using GameData.Serializer;
+
+namespace GameData.DLC.FiveLoong;
+
+[SerializableGameData(IsExtensible = true)]
+public class JiaoPoolRecord : ISerializableGameData
+{
+	private static class FieldIds
+	{
+		public const ushort RecordTemplateId = 0;
+
+		public const ushort Jiao1Id = 1;
+
+		public const ushort Jiao2Id = 2;
+
+		public const ushort TemplateId = 3;
+
+		public const ushort PropertyChangeVolume = 4;
+
+		public const ushort NurturanceTemplateId = 5;
+
+		public const ushort Date = 6;
+
+		public const ushort Count = 7;
+
+		public static readonly string[] FieldId2FieldName = new string[7] { "RecordTemplateId", "Jiao1Id", "Jiao2Id", "TemplateId", "PropertyChangeVolume", "NurturanceTemplateId", "Date" };
+	}
+
+	[SerializableGameDataField]
+	public short RecordTemplateId;
+
+	[SerializableGameDataField]
+	public int Jiao1Id;
+
+	[SerializableGameDataField]
+	public int Jiao2Id;
+
+	[SerializableGameDataField]
+	public short NurturanceTemplateId;
+
+	[SerializableGameDataField]
+	public short TemplateId;
+
+	[SerializableGameDataField]
+	public int PropertyChangeVolume;
+
+	[SerializableGameDataField]
+	public int Date;
+
+	public JiaoPoolRecord()
+	{
+	}
+
+	public JiaoPoolRecord(short recordId, int id1)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = -1;
+		NurturanceTemplateId = -1;
+		TemplateId = -1;
+		PropertyChangeVolume = -1;
+	}
+
+	public JiaoPoolRecord(short recordId, int id1, int value)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = -1;
+		NurturanceTemplateId = -1;
+		TemplateId = -1;
+		PropertyChangeVolume = value;
+	}
+
+	public JiaoPoolRecord(short recordId, int id1, short templateId)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = -1;
+		NurturanceTemplateId = -1;
+		TemplateId = templateId;
+		PropertyChangeVolume = -1;
+	}
+
+	public JiaoPoolRecord(short recordId, int id1, short templateId, int value)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = -1;
+		NurturanceTemplateId = -1;
+		TemplateId = templateId;
+		PropertyChangeVolume = value;
+	}
+
+	public JiaoPoolRecord(short recordId, int id1, int id2, short templateId)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = id2;
+		NurturanceTemplateId = -1;
+		TemplateId = templateId;
+		PropertyChangeVolume = -1;
+	}
+
+	public JiaoPoolRecord(short recordId, int id1, short nurturanceTemplateId, short templateId, int value)
+	{
+		RecordTemplateId = recordId;
+		Jiao1Id = id1;
+		Jiao2Id = -1;
+		NurturanceTemplateId = nurturanceTemplateId;
+		TemplateId = templateId;
+		PropertyChangeVolume = value;
+	}
+
+	public bool IsSerializedSizeFixed()
+	{
+		return false;
+	}
+
+	public int GetSerializedSize()
+	{
+		int num = 24;
+		if (num > 4)
+		{
+			return (num + 3) / 4 * 4;
+		}
+		return num;
+	}
+
+	public unsafe int Serialize(byte* pData)
+	{
+		*(short*)pData = 7;
+		byte* num = pData + 2;
+		*(short*)num = RecordTemplateId;
+		byte* num2 = num + 2;
+		*(int*)num2 = Jiao1Id;
+		byte* num3 = num2 + 4;
+		*(int*)num3 = Jiao2Id;
+		byte* num4 = num3 + 4;
+		*(short*)num4 = TemplateId;
+		byte* num5 = num4 + 2;
+		*(int*)num5 = PropertyChangeVolume;
+		byte* num6 = num5 + 4;
+		*(short*)num6 = NurturanceTemplateId;
+		byte* num7 = num6 + 2;
+		*(int*)num7 = Date;
+		int num8 = (int)(num7 + 4 - pData);
+		if (num8 > 4)
+		{
+			return (num8 + 3) / 4 * 4;
+		}
+		return num8;
+	}
+
+	public unsafe int Deserialize(byte* pData)
+	{
+		byte* ptr = pData;
+		ushort num = *(ushort*)ptr;
+		ptr += 2;
+		if (num > 0)
+		{
+			RecordTemplateId = *(short*)ptr;
+			ptr += 2;
+		}
+		if (num > 1)
+		{
+			Jiao1Id = *(int*)ptr;
+			ptr += 4;
+		}
+		if (num > 2)
+		{
+			Jiao2Id = *(int*)ptr;
+			ptr += 4;
+		}
+		if (num > 3)
+		{
+			TemplateId = *(short*)ptr;
+			ptr += 2;
+		}
+		if (num > 4)
+		{
+			PropertyChangeVolume = *(int*)ptr;
+			ptr += 4;
+		}
+		if (num > 5)
+		{
+			NurturanceTemplateId = *(short*)ptr;
+			ptr += 2;
+		}
+		if (num > 6)
+		{
+			Date = *(int*)ptr;
+			ptr += 4;
+		}
+		int num2 = (int)(ptr - pData);
+		if (num2 > 4)
+		{
+			return (num2 + 3) / 4 * 4;
+		}
+		return num2;
+	}
+}

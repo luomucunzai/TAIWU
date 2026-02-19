@@ -1,0 +1,26 @@
+public enum ETaskConditionType
+{
+	Invalid = -1,
+	AdventureVisible,
+	CharacterExists,
+	CharacterAtMapBlock,
+	CharacterAtMapArea,
+	CharacterAtAdventure,
+	CharacterHasItems,
+	CharacterHasItemSubType,
+	FavorabilityToTaiwu,
+	SettlementHasBuilding,
+	FunctionUnlocked,
+	JuniorXiangshuTaskStatus,
+	JuniorXiangshuTaskCompleteAmount,
+	SwordTombStatus,
+	MartialArtTournamentPreparing,
+	GlobalArgBoxValueRange,
+	GlobalArgBoxKeyExists,
+	ConditionAnd,
+	ConditionOr,
+	IsInAdventure,
+	ProfessionSkillValid,
+	StateTemplateVisited,
+	Count
+}

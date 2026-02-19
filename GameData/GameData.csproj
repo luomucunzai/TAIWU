@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>GameData</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp6.0</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="GameData.Shared">
+      <HintPath>../../GameData.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog" />
+    <Reference Include="GameData.Utilities">
+      <HintPath>../../GameData.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="MoonSharp.Interpreter" />
+    <Reference Include="Steamworks.NET" />
+    <Reference Include="GameData.Common">
+      <HintPath>../../GameData.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GameData.Serializer" />
+    <Reference Include="Redzen" />
+    <Reference Include="GameData.Utilities.Structure" />
+    <Reference Include="GameData.Combat.Math" />
+    <Reference Include="CompDevLib.Interpreter" />
+    <Reference Include="TaiwuModdingLib" />
+    <Reference Include="GameData.Common.Algorithm" />
+  </ItemGroup>
+</Project>

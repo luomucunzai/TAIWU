@@ -1,0 +1,35 @@
+namespace GameData.Domains.Item;
+
+public enum ItemOwnerType : sbyte
+{
+	None,
+	System,
+	CharacterInventory,
+	CharacterEquipment,
+	CharacterEatingItem,
+	KidnapperRope,
+	MapBlock,
+	Grave,
+	Warehouse,
+	Treasury,
+	StockStorageWarehouse,
+	StockStorageGoodsShelf,
+	CraftStorageWarehouse,
+	CraftStorageMaterial,
+	CraftStorageToFix,
+	CraftStorageToDisassemble,
+	MedicineStorageWarehouse,
+	MedicineStorageMaterial,
+	MedicineStorageToDetox,
+	MedicineStorageToAddPoison,
+	FoodStorageWarehouse,
+	FoodStorageMaterial,
+	Trough,
+	Building,
+	Merchant,
+	Caravan,
+	BuildingMerchant,
+	Library,
+	FleeCarrier,
+	SpecialGroupMember
+}

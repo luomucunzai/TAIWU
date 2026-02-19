@@ -1,0 +1,20 @@
+public enum ELifeSkillCombatEffectSubEffect
+{
+	SelfExtraQuestionAroundHouseThesisLow,
+	SelfGridCoverBookStatesWhenAllQuestion,
+	SelfTrapedInCell,
+	SelfChangeBookCd,
+	SelfDoPickByPoint,
+	SelfEraseAroundSelfThesisHouseQuestionThesis,
+	SelfEraseAroundHouseQuestionEffects,
+	SelfExtraQuestionAroundHouseThesisBreakWhenAdversaryThesisHigh,
+	SelfExtraQuestionOnHouseThesisLowAndTransition,
+	SelfExtraQuestionOnHouseThesisLowAndRecycleCardAndExchangeOperation,
+	SelfThesisChangeAroundHouseActivePointWithParam,
+	SelfNotCostBookStates,
+	SelfThesisWhenFixedEraseEffectsAroundHouseAllQuestionLowAndThesisLow,
+	SelfThesisWhenFixedDoCancelAroundHouseAllQuestionLowAndThesisLow,
+	SelfThesisWhenFixedDoPickWithAroundHouseThesisCount,
+	PointChange,
+	Count
+}

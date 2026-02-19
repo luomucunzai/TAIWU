@@ -1,0 +1,27 @@
+public enum EBuildingBlockClass
+{
+	Invalid = -1,
+	Static,
+	BornResource,
+	Villiage,
+	Resource,
+	Function,
+	Kungfu,
+	Music,
+	Chess,
+	Poem,
+	Painting,
+	Math,
+	Appraisal,
+	Forging,
+	Woodworking,
+	Medicine,
+	Toxicology,
+	Weaving,
+	Jade,
+	Taoism,
+	Buddhism,
+	Cooking,
+	Eclectic,
+	Count
+}

@@ -1,0 +1,19 @@
+public enum ESensitiveWordsType
+{
+	Undetermined,
+	Gambling,
+	Crime,
+	Advertisement,
+	Terrorism,
+	SensitiveEvents,
+	Abuse,
+	Pornographic,
+	RareCharacters,
+	IllegalWebsites,
+	Contraband,
+	Heresy,
+	Politics,
+	letter,
+	Religion,
+	Count
+}

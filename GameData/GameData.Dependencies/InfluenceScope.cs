@@ -1,0 +1,36 @@
+namespace GameData.Dependencies;
+
+public enum InfluenceScope
+{
+	All,
+	Self,
+	TaiwuChar,
+	CharWhoEquippedTheItem,
+	CombatSkillOwner,
+	AllCharsInTaiwuVillage,
+	AllNonHeadCharsInTaiwuVillage,
+	AllCharsInCombat,
+	AllCombatCharsInCombat,
+	CombatSkillsOfAllCharsInCombat,
+	CombatSkillsOfTheChar,
+	CombatSkillsOfTaiwuChar,
+	CombatSkillsOfTheCombatChar,
+	CombatCharOfTheCombatSkillData,
+	CombatCharOfTheCombatWeaponData,
+	CombatCharOfTheChar,
+	CharOfTheCombatChar,
+	SectCharOfTheChar,
+	CivilianSettlementCharOfTheChar,
+	SectCharsOfTheSect,
+	CivilianSettlementCharsOfTheCivilianSettlement,
+	SectCharsOfTheChar,
+	CivilianSettlementCharsOfTheChar,
+	CharacterAffectedByTheSpecialEffects,
+	CombatSkillsOfTheCharacterAffectedByTheSpecialEffects,
+	CombatCharacterAffectedByTheSpecialEffects,
+	CombatSkillDataAffectedByTheSpecialEffects,
+	CombatSkillsAffectedByPowerChangeInCombat,
+	CombatSkillsAffectedByPowerReplaceInCombat,
+	CombatSkillsAffectedByCombatSkillDataInCombat,
+	TaiwuAndGearMates
+}

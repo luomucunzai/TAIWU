@@ -1,0 +1,212 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+
+namespace Config;
+
+[Serializable]
+public class AvatarExtraParts : ConfigData<AvatarExtraPartsItem, short>
+{
+	public static class DefKey
+	{
+		public const short Avatar_1_Veil_1 = 0;
+
+		public const short Avatar_2_Veil_1 = 1;
+
+		public const short Avatar_3_Veil_1 = 2;
+
+		public const short Avatar_4_Veil_1 = 3;
+
+		public const short Avatar_5_Veil_1 = 4;
+
+		public const short Avatar_6_Veil_1 = 5;
+
+		public const short AvatarMask_0 = 6;
+
+		public const short AvatarMask_Count = 23;
+
+		public const short Avatar_1_Blush_1 = 24;
+
+		public const short Avatar_2_Blush_1 = 25;
+
+		public const short Avatar_3_Blush_1 = 26;
+
+		public const short Avatar_4_Blush_1 = 27;
+
+		public const short Avatar_5_Blush_1 = 28;
+
+		public const short Avatar_6_Blush_1 = 29;
+
+		public const short avatar_1_clothpart_31_1 = 30;
+
+		public const short avatar_2_clothpart_31_1 = 31;
+
+		public const short avatar_3_clothpart_31_1 = 32;
+
+		public const short avatar_4_clothpart_31_1 = 33;
+
+		public const short avatar_5_clothpart_31_1 = 34;
+
+		public const short avatar_6_clothpart_31_1 = 35;
+
+		public const short Avatar_1_JieqingMask_1 = 36;
+
+		public const short Avatar_2_JieqingMask_1 = 37;
+
+		public const short Avatar_3_JieqingMask_1 = 38;
+
+		public const short Avatar_4_JieqingMask_1 = 39;
+
+		public const short Avatar_5_JieqingMask_1 = 40;
+
+		public const short Avatar_6_JieqingMask_1 = 41;
+
+		public const short Avatar_251_JieqingMask_1 = 42;
+
+		public const short Avatar_252_JieqingMask_1 = 43;
+
+		public const short Avatar_253_JieqingMask_1 = 44;
+
+		public const short Avatar_254_JieqingMask_1 = 45;
+	}
+
+	public static class DefValue
+	{
+		public static AvatarExtraPartsItem Avatar_1_Veil_1 => Instance[(short)0];
+
+		public static AvatarExtraPartsItem Avatar_2_Veil_1 => Instance[(short)1];
+
+		public static AvatarExtraPartsItem Avatar_3_Veil_1 => Instance[(short)2];
+
+		public static AvatarExtraPartsItem Avatar_4_Veil_1 => Instance[(short)3];
+
+		public static AvatarExtraPartsItem Avatar_5_Veil_1 => Instance[(short)4];
+
+		public static AvatarExtraPartsItem Avatar_6_Veil_1 => Instance[(short)5];
+
+		public static AvatarExtraPartsItem AvatarMask_0 => Instance[(short)6];
+
+		public static AvatarExtraPartsItem AvatarMask_Count => Instance[(short)23];
+
+		public static AvatarExtraPartsItem Avatar_1_Blush_1 => Instance[(short)24];
+
+		public static AvatarExtraPartsItem Avatar_2_Blush_1 => Instance[(short)25];
+
+		public static AvatarExtraPartsItem Avatar_3_Blush_1 => Instance[(short)26];
+
+		public static AvatarExtraPartsItem Avatar_4_Blush_1 => Instance[(short)27];
+
+		public static AvatarExtraPartsItem Avatar_5_Blush_1 => Instance[(short)28];
+
+		public static AvatarExtraPartsItem Avatar_6_Blush_1 => Instance[(short)29];
+
+		public static AvatarExtraPartsItem avatar_1_clothpart_31_1 => Instance[(short)30];
+
+		public static AvatarExtraPartsItem avatar_2_clothpart_31_1 => Instance[(short)31];
+
+		public static AvatarExtraPartsItem avatar_3_clothpart_31_1 => Instance[(short)32];
+
+		public static AvatarExtraPartsItem avatar_4_clothpart_31_1 => Instance[(short)33];
+
+		public static AvatarExtraPartsItem avatar_5_clothpart_31_1 => Instance[(short)34];
+
+		public static AvatarExtraPartsItem avatar_6_clothpart_31_1 => Instance[(short)35];
+
+		public static AvatarExtraPartsItem Avatar_1_JieqingMask_1 => Instance[(short)36];
+
+		public static AvatarExtraPartsItem Avatar_2_JieqingMask_1 => Instance[(short)37];
+
+		public static AvatarExtraPartsItem Avatar_3_JieqingMask_1 => Instance[(short)38];
+
+		public static AvatarExtraPartsItem Avatar_4_JieqingMask_1 => Instance[(short)39];
+
+		public static AvatarExtraPartsItem Avatar_5_JieqingMask_1 => Instance[(short)40];
+
+		public static AvatarExtraPartsItem Avatar_6_JieqingMask_1 => Instance[(short)41];
+
+		public static AvatarExtraPartsItem Avatar_251_JieqingMask_1 => Instance[(short)42];
+
+		public static AvatarExtraPartsItem Avatar_252_JieqingMask_1 => Instance[(short)43];
+
+		public static AvatarExtraPartsItem Avatar_253_JieqingMask_1 => Instance[(short)44];
+
+		public static AvatarExtraPartsItem Avatar_254_JieqingMask_1 => Instance[(short)45];
+	}
+
+	public static AvatarExtraParts Instance = new AvatarExtraParts();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "AvatarId", "Type", "Name", "PositionFollow", "LayerFollow", "LayerOffset", "ColorFollow", "ScaleFollow" };
+
+	internal override int ToInt(short value)
+	{
+		return value;
+	}
+
+	internal override short ToTemplateId(int value)
+	{
+		return (short)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new AvatarExtraPartsItem(0, 1, EAvatarExtraPartsType.Veil, "avatar_1_veil_1", "Head", new float[2] { 5f, -61f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(1, 2, EAvatarExtraPartsType.Veil, "avatar_2_veil_1", "Head", new float[2] { 4f, -60f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(2, 3, EAvatarExtraPartsType.Veil, "avatar_3_veil_1", "Head", new float[2] { 5f, -60f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(3, 4, EAvatarExtraPartsType.Veil, "avatar_4_veil_1", "Head", new float[2] { 3f, -64f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(4, 5, EAvatarExtraPartsType.Veil, "avatar_5_veil_1", "Head", new float[2] { 5f, -61f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(5, 6, EAvatarExtraPartsType.Veil, "avatar_6_veil_1", "Head", new float[2] { 3f, -63f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(6, 1, EAvatarExtraPartsType.Mask, "avatar_1_mask_1", "EyesArea", new float[2] { 0f, -3f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(7, 1, EAvatarExtraPartsType.Mask, "avatar_1_mask_2", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(8, 1, EAvatarExtraPartsType.Mask, "avatar_1_mask_3", "EyesArea", new float[2] { 0f, -12f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(9, 2, EAvatarExtraPartsType.Mask, "avatar_2_mask_1", "EyesArea", new float[2] { 0f, -1f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(10, 2, EAvatarExtraPartsType.Mask, "avatar_2_mask_2", "EyesArea", new float[2] { 0f, -1f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(11, 2, EAvatarExtraPartsType.Mask, "avatar_2_mask_3", "EyesArea", new float[2] { 0f, -8f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(12, 3, EAvatarExtraPartsType.Mask, "avatar_3_mask_1", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(13, 3, EAvatarExtraPartsType.Mask, "avatar_3_mask_2", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(14, 3, EAvatarExtraPartsType.Mask, "avatar_3_mask_3", "EyesArea", new float[2] { 0f, -12f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(15, 4, EAvatarExtraPartsType.Mask, "avatar_4_mask_1", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(16, 4, EAvatarExtraPartsType.Mask, "avatar_4_mask_2", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(17, 4, EAvatarExtraPartsType.Mask, "avatar_4_mask_3", "EyesArea", new float[2] { 0f, -12f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(18, 5, EAvatarExtraPartsType.Mask, "avatar_5_mask_1", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(19, 5, EAvatarExtraPartsType.Mask, "avatar_5_mask_2", "EyesArea", new float[2] { 0f, -1f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(20, 5, EAvatarExtraPartsType.Mask, "avatar_5_mask_3", "EyesArea", new float[2] { 0f, -14f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(21, 6, EAvatarExtraPartsType.Mask, "avatar_6_mask_1", "EyesArea", new float[2] { 0f, -2f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(22, 6, EAvatarExtraPartsType.Mask, "avatar_6_mask_2", "EyesArea", new float[2] { 0f, -1f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(23, 6, EAvatarExtraPartsType.Mask, "avatar_6_mask_3", "EyesArea", new float[2] { 0f, -11f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(24, 1, EAvatarExtraPartsType.Blush, "avatar_1_blush_1", "Head", new float[2] { 12f, 12f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(25, 2, EAvatarExtraPartsType.Blush, "avatar_2_blush_1", "Head", new float[2] { 13f, 11f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(26, 3, EAvatarExtraPartsType.Blush, "avatar_3_blush_1", "Head", new float[2] { 14f, 14f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(27, 4, EAvatarExtraPartsType.Blush, "avatar_4_blush_1", "Head", new float[2] { 16f, 13f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(28, 5, EAvatarExtraPartsType.Blush, "avatar_5_blush_1", "Head", new float[2] { 11f, 12f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(29, 6, EAvatarExtraPartsType.Blush, "avatar_6_blush_1", "Head", new float[2] { 13f, 17f }, "Beard_2", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(30, 1, EAvatarExtraPartsType.DuckHead, "avatar_1_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(31, 2, EAvatarExtraPartsType.DuckHead, "avatar_2_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(32, 3, EAvatarExtraPartsType.DuckHead, "avatar_3_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(33, 4, EAvatarExtraPartsType.DuckHead, "avatar_4_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(34, 5, EAvatarExtraPartsType.DuckHead, "avatar_5_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(35, 6, EAvatarExtraPartsType.DuckHead, "avatar_6_clothpart_31_1", "Body", new float[2], "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(36, 1, EAvatarExtraPartsType.Mask, "avatar_1_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(37, 2, EAvatarExtraPartsType.Mask, "avatar_2_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(38, 3, EAvatarExtraPartsType.Mask, "avatar_3_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(39, 4, EAvatarExtraPartsType.Mask, "avatar_4_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(40, 5, EAvatarExtraPartsType.Mask, "avatar_5_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(41, 6, EAvatarExtraPartsType.Mask, "avatar_6_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(42, 251, EAvatarExtraPartsType.Mask, "avatar_251_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(43, 252, EAvatarExtraPartsType.Mask, "avatar_252_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(44, 253, EAvatarExtraPartsType.Mask, "avatar_253_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(45, 254, EAvatarExtraPartsType.Mask, "avatar_254_mask_4", "EyesArea", new float[2] { 0f, 7f }, "FrontHair", 0, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(46, 1, EAvatarExtraPartsType.Hat, "avatar_1_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, -10f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(47, 2, EAvatarExtraPartsType.Hat, "avatar_2_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, -4f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(48, 3, EAvatarExtraPartsType.Hat, "avatar_3_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, -4f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(49, 4, EAvatarExtraPartsType.Hat, "avatar_4_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, -4f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(50, 5, EAvatarExtraPartsType.Hat, "avatar_5_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, 4f }, "FrontHair", 1, null, null));
+		_dataArray.Add(new AvatarExtraPartsItem(51, 6, EAvatarExtraPartsType.Hat, "avatar_6_cloth_hat_front_30011", "EyesArea", new float[2] { 0f, 4f }, "FrontHair", 1, null, null));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<AvatarExtraPartsItem>(52);
+		CreateItems0();
+	}
+}

@@ -1,0 +1,145 @@
+using System;
+using System.Collections.Generic;
+using Config.Common;
+
+namespace Config;
+
+[Serializable]
+public class EventBoolState : ConfigData<EventBoolStateItem, short>
+{
+	public static class DefKey
+	{
+		public const short ShuffleOption = 0;
+
+		public const short MainRoleUseAlternativeName = 1;
+
+		public const short TargetRoleUseAlternativeName = 2;
+
+		public const short NotShowMainRole = 3;
+
+		public const short NotShowTargetRole = 4;
+
+		public const short ForbidViewSelf = 5;
+
+		public const short ForbidViewCharacter = 6;
+
+		public const short HideLeftFavorability = 7;
+
+		public const short HideFavorability = 8;
+
+		public const short MainRoleShowBlush = 9;
+
+		public const short TargetRoleShowBlush = 10;
+
+		public const short LeftRoleShowInjuryInfo = 11;
+
+		public const short RightRoleShowInjuryInfo = 12;
+
+		public const short RightCharacterShadow = 13;
+
+		public const short RightForbiddenConsummateLevel = 14;
+
+		public const short LeftForbidShowFavorChangeEffect = 15;
+
+		public const short RightForbidShowFavorChangeEffect = 16;
+
+		public const short LeftActorShowMarriageLook1 = 17;
+
+		public const short LeftActorShowMarriageLook2 = 18;
+
+		public const short RightActorShowMarriageLook1 = 19;
+
+		public const short RightActorShowMarriageLook2 = 20;
+	}
+
+	public static class DefValue
+	{
+		public static EventBoolStateItem ShuffleOption => Instance[(short)0];
+
+		public static EventBoolStateItem MainRoleUseAlternativeName => Instance[(short)1];
+
+		public static EventBoolStateItem TargetRoleUseAlternativeName => Instance[(short)2];
+
+		public static EventBoolStateItem NotShowMainRole => Instance[(short)3];
+
+		public static EventBoolStateItem NotShowTargetRole => Instance[(short)4];
+
+		public static EventBoolStateItem ForbidViewSelf => Instance[(short)5];
+
+		public static EventBoolStateItem ForbidViewCharacter => Instance[(short)6];
+
+		public static EventBoolStateItem HideLeftFavorability => Instance[(short)7];
+
+		public static EventBoolStateItem HideFavorability => Instance[(short)8];
+
+		public static EventBoolStateItem MainRoleShowBlush => Instance[(short)9];
+
+		public static EventBoolStateItem TargetRoleShowBlush => Instance[(short)10];
+
+		public static EventBoolStateItem LeftRoleShowInjuryInfo => Instance[(short)11];
+
+		public static EventBoolStateItem RightRoleShowInjuryInfo => Instance[(short)12];
+
+		public static EventBoolStateItem RightCharacterShadow => Instance[(short)13];
+
+		public static EventBoolStateItem RightForbiddenConsummateLevel => Instance[(short)14];
+
+		public static EventBoolStateItem LeftForbidShowFavorChangeEffect => Instance[(short)15];
+
+		public static EventBoolStateItem RightForbidShowFavorChangeEffect => Instance[(short)16];
+
+		public static EventBoolStateItem LeftActorShowMarriageLook1 => Instance[(short)17];
+
+		public static EventBoolStateItem LeftActorShowMarriageLook2 => Instance[(short)18];
+
+		public static EventBoolStateItem RightActorShowMarriageLook1 => Instance[(short)19];
+
+		public static EventBoolStateItem RightActorShowMarriageLook2 => Instance[(short)20];
+	}
+
+	public static EventBoolState Instance = new EventBoolState();
+
+	private readonly HashSet<string> RequiredFields = new HashSet<string> { "TemplateId", "Name" };
+
+	internal override int ToInt(short value)
+	{
+		return value;
+	}
+
+	internal override short ToTemplateId(int value)
+	{
+		return (short)value;
+	}
+
+	private void CreateItems0()
+	{
+		_dataArray.Add(new EventBoolStateItem(0, 0, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(1, 1, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(2, 2, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(3, 3, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(4, 4, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(5, 5, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(6, 6, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(7, 7, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(8, 8, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(9, 9, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(10, 10, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(11, 11, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(12, 12, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(13, 13, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(14, 14, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(15, 15, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(16, 16, removeBeforeNextEvent: true));
+		_dataArray.Add(new EventBoolStateItem(17, 17, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(18, 18, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(19, 19, removeBeforeNextEvent: false));
+		_dataArray.Add(new EventBoolStateItem(20, 20, removeBeforeNextEvent: false));
+	}
+
+	public override void Init()
+	{
+		base.Init();
+		_dataArray = new List<EventBoolStateItem>(21);
+		CreateItems0();
+	}
+}
