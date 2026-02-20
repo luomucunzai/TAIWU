@@ -87,19 +87,6 @@ namespace XuanNvRenaissance
                 }
             }
 
-            // 2. Template Forcing: Master the base statistics blueprint
-            [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
-            [HarmonyPrefix]
-            public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
-            {
-                if (orgTemplateId == XuanNvSectId)
-                {
-                    __result = 373; // 璇女羽衣使 (High specification template)
-                    return false;
-                }
-                return true;
-            }
-
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
             [HarmonyPostfix]
             public static void CalcAttraction_Postfix(GameData.Domains.Character.Character __instance, ref short __result)
@@ -111,7 +98,7 @@ namespace XuanNvRenaissance
                 }
             }
 
-            // 3. Complete Control Over Individual Generation
+            // 2. Complete Control Over Individual Generation
             [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
             public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
@@ -133,7 +120,23 @@ namespace XuanNvRenaissance
                 // Morality: Force Benevolent (700)
                 __result.SetBaseMorality(700, context);
 
-                // --- 2. Master Features ---
+                // --- 2. Master Main Attributes (Floor 100) ---
+                MainAttributes mAttrs = __result.GetBaseMainAttributes();
+                bool mChanged = false;
+                for (int i = 0; i < 6; i++)
+                {
+                    if (mAttrs[i] < 100)
+                    {
+                        mAttrs[i] = 100;
+                        mChanged = true;
+                    }
+                }
+                if (mChanged)
+                {
+                    __result.SetBaseMainAttributes(mAttrs, context);
+                }
+
+                // --- 3. Master Features ---
                 if (!string.IsNullOrWhiteSpace(globalFeatureIds))
                 {
                     foreach (string idStr in globalFeatureIds.Split(','))
@@ -146,7 +149,7 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // --- 3. Master Aptitudes (Floor Logic) ---
+                // --- 4. Master Aptitudes (Floor Logic) ---
                 if (globalCombatQualification > 0)
                 {
                     CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
@@ -185,7 +188,7 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // --- 4. Master Skills ---
+                // --- 5. Master Skills ---
                 __result.SetConsummateLevel(18, context);
 
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
