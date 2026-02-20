@@ -8,6 +8,7 @@
   <ItemGroup>
     <Reference Include="GameData">
       <HintPath>../GameData.dll</HintPath>
+      <Aliases>GameDataBackend</Aliases>
     </Reference>
     <Reference Include="GameData.Shared">
       <HintPath>../GameData.Shared.dll</HintPath>

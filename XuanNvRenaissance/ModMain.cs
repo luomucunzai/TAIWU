@@ -1,22 +1,22 @@
-using GameData.Common;
-using GameData.Domains;
-using GameData.Domains.Character;
-using GameData.Domains.Character.AvatarSystem;
-using GameData.Domains.Character.Creation;
-using GameData.Domains.CombatSkill;
-using GameData.Domains.Organization;
+extern alias GameDataBackend;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaiwuModdingLib.Core.Plugin;
-using GameData.Utilities;
 using System.Reflection;
-using GameData.Domains.Item;
 using Config;
-using GameData.ArchiveData;
-using GBridge = GameData.GameDataBridge.GameDataBridge;
-using GSerializer = GameData.Serializer.Serializer;
+using GBridge = GameDataBackend::GameData.GameDataBridge.GameDataBridge;
+using GSerializer = GameDataBackend::GameData.Serializer.Serializer;
+using GDataContext = GameDataBackend::GameData.Common.DataContext;
+using GRawDataPool = GameDataBackend::GameData.Utilities.RawDataPool;
+using GCharacter = GameDataBackend::GameData.Domains.Character.Character;
+using GCharacterDomain = GameDataBackend::GameData.Domains.Character.CharacterDomain;
+using GOrganizationDomain = GameDataBackend::GameData.Domains.Organization.OrganizationDomain;
+using GOrganizationInfo = GameDataBackend::GameData.Domains.Organization.OrganizationInfo;
+using GAvatarData = GameDataBackend::GameData.Domains.Character.AvatarSystem.AvatarData;
+using GCombatSkillShorts = GameDataBackend::GameData.Domains.Character.CombatSkillShorts;
+using GLifeSkillShorts = GameDataBackend::GameData.Domains.Character.LifeSkillShorts;
 
 namespace XuanNvRenaissance
 {
@@ -51,24 +51,24 @@ namespace XuanNvRenaissance
         {
             try
             {
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalCharmMin", ref globalCharmMin);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalCharmMax", ref globalCharmMax);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalFeatureIds", ref globalFeatureIds);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalSkillIds", ref globalSkillIds);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalCombatQualification", ref globalCombatQualification);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "globalLifeQualification", ref globalLifeQualification);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalCharmMin", ref globalCharmMin);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalCharmMax", ref globalCharmMax);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalFeatureIds", ref globalFeatureIds);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalSkillIds", ref globalSkillIds);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalCombatQualification", ref globalCombatQualification);
+                GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, "globalLifeQualification", ref globalLifeQualification);
 
                 gradeTargetTemplates.Clear();
                 for (sbyte i = 0; i < 9; i++)
                 {
                     int selectedIndex = 0; // Default to Rank 1 (index 0)
-                    DomainManager.Mod.GetSetting(base.ModIdStr, $"Grade{i + 1}_TargetTemplate", ref selectedIndex);
+                    GameDataBackend::GameData.Domains.DomainManager.Mod.GetSetting(base.ModIdStr, $"Grade{i + 1}_TargetTemplate", ref selectedIndex);
                     gradeTargetTemplates[i] = selectedIndex;
                 }
             }
             catch (Exception ex)
             {
-                AdaptableLog.Error($"XuanNvRenaissance: LoadModSettings Error: {ex.Message}");
+                GameDataBackend::GameData.Utilities.AdaptableLog.Error($"XuanNvRenaissance: LoadModSettings Error: {ex.Message}");
             }
         }
 
@@ -76,7 +76,7 @@ namespace XuanNvRenaissance
         public static class XuanNuHooks
         {
             // 1. Rank Mapping: Control the config lookup for sect ranks
-            [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
+            [HarmonyPatch(typeof(GOrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
             [HarmonyPrefix]
             public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
             {
@@ -90,7 +90,7 @@ namespace XuanNvRenaissance
             }
 
             // 2. Template Forcing: Master the base statistics blueprint
-            [HarmonyPatch(typeof(OrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
+            [HarmonyPatch(typeof(GOrganizationDomain), "GetCharacterTemplateId", new Type[] { typeof(sbyte), typeof(sbyte), typeof(sbyte) })]
             [HarmonyPrefix]
             public static bool GetCharacterTemplateId_Prefix(sbyte orgTemplateId, ref short __result)
             {
@@ -102,9 +102,9 @@ namespace XuanNvRenaissance
                 return true;
             }
 
-            [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
+            [HarmonyPatch(typeof(GCharacter), "CalcAttraction")]
             [HarmonyPostfix]
-            public static void CalcAttraction_Postfix(GameData.Domains.Character.Character __instance, ref short __result)
+            public static void CalcAttraction_Postfix(GCharacter __instance, ref short __result)
             {
                 if (__instance.GetOrganizationInfo().OrgTemplateId == XuanNvSectId)
                 {
@@ -114,13 +114,13 @@ namespace XuanNvRenaissance
             }
 
             // 3. Complete Control Over Individual Generation
-            [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
+            [HarmonyPatch(typeof(GCharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
-            public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
+            public static unsafe void CreateIntelligentCharacter_Postfix(GDataContext context, GCharacter __result)
             {
                 if (__result == null) return;
 
-                OrganizationInfo orgInfo = __result.GetOrganizationInfo();
+                GOrganizationInfo orgInfo = __result.GetOrganizationInfo();
                 if (orgInfo.OrgTemplateId != XuanNvSectId) return;
 
                 // --- 1. Master Identity ---
@@ -128,7 +128,7 @@ namespace XuanNvRenaissance
                 Util.InvalidateField(__result, (ushort)3, context); // Gender
                 Util.InvalidateField(__result, (ushort)13, context); // Transgender
 
-                AvatarData avatar = __result.GetAvatar();
+                GAvatarData avatar = __result.GetAvatar();
                 avatar.ChangeGender(FemaleGenderId);
                 __result.SetAvatar(avatar, context);
 
@@ -151,7 +151,7 @@ namespace XuanNvRenaissance
                 // --- 3. Master Aptitudes (Floor Logic) ---
                 if (globalCombatQualification > 0)
                 {
-                    CombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
+                    GCombatSkillShorts cQuals = __result.GetBaseCombatSkillQualifications();
                     bool changed = false;
                     short* pItems = cQuals.Items;
                     for (int i = 0; i < 14; i++)
@@ -170,7 +170,7 @@ namespace XuanNvRenaissance
 
                 if (globalLifeQualification > 0)
                 {
-                    LifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
+                    GLifeSkillShorts lQuals = __result.GetBaseLifeSkillQualifications();
                     bool changed = false;
                     short* pItems = lQuals.Items;
                     for (int i = 0; i < 16; i++)
@@ -211,7 +211,7 @@ namespace XuanNvRenaissance
                 Util.InvalidateField(__result, (ushort)1, context); // Attraction
             }
 
-            private static void LearnAndMasterSkill(GameData.Domains.Character.Character character, short skillId, DataContext context)
+            private static void LearnAndMasterSkill(GCharacter character, short skillId, GDataContext context)
             {
                 if (character.GetLearnedCombatSkills().Contains(skillId)) return;
 
@@ -220,7 +220,7 @@ namespace XuanNvRenaissance
                 {
                     skill.SetPracticeLevel((sbyte)100, context);
                     for (byte pIdx = 0; pIdx < 15; pIdx++)
-                        DomainManager.CombatSkill.TryActivateCombatSkillBookPageWhenSetReadingState(context, character.GetId(), skillId, pIdx);
+                        GameDataBackend::GameData.Domains.DomainManager.CombatSkill.TryActivateCombatSkillBookPageWhenSetReadingState(context, character.GetId(), skillId, pIdx);
                 }
             }
         }
@@ -232,27 +232,27 @@ namespace XuanNvRenaissance
             [HarmonyTargetMethod]
             static MethodBase TargetMethod()
             {
-                return AccessTools.Method("GameData.GameDataBridge.GameDataBridge:ProcessMethodCall");
+                return AccessTools.Method(typeof(GBridge), "ProcessMethodCall");
             }
 
             [HarmonyPrefix]
-            public static bool ProcessMethodCall_Prefix(GameData.GameDataBridge.Operation operation, RawDataPool argDataPool, DataContext context)
+            public static bool ProcessMethodCall_Prefix(GameDataBackend::GameData.GameDataBridge.Operation operation, GRawDataPool argDataPool, GDataContext context)
             {
                 if (operation.DomainId != 66) return true;
 
-                var notificationCollection = (GameData.GameDataBridge.NotificationCollection)AccessTools.Field(typeof(GBridge), "_pendingNotifications").GetValue(null);
+                var notificationCollection = (GameDataBackend::GameData.GameDataBridge.NotificationCollection)AccessTools.Field(typeof(GBridge), "_pendingNotifications").GetValue(null);
 
-                if (!GameData.ArchiveData.Common.IsInWorld()) return true;
+                if (!GameDataBackend::GameData.ArchiveData.Common.IsInWorld()) return true;
 
                 int result = HandleOperation(operation, argDataPool, notificationCollection.DataPool, context);
                 if (result >= 0)
                 {
-                    notificationCollection.Notifications.Add(GameData.GameDataBridge.Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
+                    notificationCollection.Notifications.Add(GameDataBackend::GameData.GameDataBridge.Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
                 }
                 return false;
             }
 
-            private static int HandleOperation(GameData.GameDataBridge.Operation operation, RawDataPool argDataPool, RawDataPool returnDataPool, DataContext dataContext)
+            private static int HandleOperation(GameDataBackend::GameData.GameDataBridge.Operation operation, GRawDataPool argDataPool, GRawDataPool returnDataPool, GDataContext dataContext)
             {
                 int result = -1;
                 int argsOffset = operation.ArgsOffset;
@@ -290,11 +290,11 @@ namespace XuanNvRenaissance
 
         public static class Util
         {
-            public static List<GameData.Domains.Character.Character> GetAllXuanNvMembers()
+            public static List<GCharacter> GetAllXuanNvMembers()
             {
-                var members = new List<GameData.Domains.Character.Character>();
-                var charDomain = DomainManager.Character;
-                var objects = (Dictionary<int, GameData.Domains.Character.Character>)AccessTools.Field(typeof(CharacterDomain), "_objects").GetValue(charDomain);
+                var members = new List<GCharacter>();
+                var charDomain = GameDataBackend::GameData.Domains.DomainManager.Character;
+                var objects = (Dictionary<int, GCharacter>)AccessTools.Field(typeof(GCharacterDomain), "_objects").GetValue(charDomain);
                 if (objects != null)
                 {
                     foreach (var character in objects.Values)
@@ -308,19 +308,19 @@ namespace XuanNvRenaissance
                 return members;
             }
 
-            public static GameData.Domains.Character.Character GetCharacter(string charNameOrId)
+            public static GCharacter GetCharacter(string charNameOrId)
             {
                 if (string.IsNullOrEmpty(charNameOrId)) return null;
                 if (int.TryParse(charNameOrId, out int id))
                 {
-                    if (DomainManager.Character.TryGetElement_Objects(id, out GameData.Domains.Character.Character character)) return character;
+                    if (GameDataBackend::GameData.Domains.DomainManager.Character.TryGetElement_Objects(id, out GCharacter character)) return character;
                 }
                 return null;
             }
 
-            public static void InvalidateField(GameData.Domains.Character.Character character, ushort fieldId, DataContext context)
+            public static void InvalidateField(GCharacter character, ushort fieldId, GDataContext context)
             {
-                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
+                AccessTools.Method(typeof(GCharacter), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
             }
         }
     }
