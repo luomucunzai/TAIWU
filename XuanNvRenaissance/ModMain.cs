@@ -15,8 +15,8 @@ using System.Reflection;
 using GameData.Domains.Item;
 using Config;
 using GameData.ArchiveData;
-using GameData.GameDataBridge;
-using GameData.Serializer;
+using GBridge = GameData.GameDataBridge.GameDataBridge;
+using GSerializer = GameData.Serializer.Serializer;
 
 namespace XuanNvRenaissance
 {
@@ -236,23 +236,23 @@ namespace XuanNvRenaissance
             }
 
             [HarmonyPrefix]
-            public static bool ProcessMethodCall_Prefix(Operation operation, RawDataPool argDataPool, DataContext context)
+            public static bool ProcessMethodCall_Prefix(GameData.GameDataBridge.Operation operation, RawDataPool argDataPool, DataContext context)
             {
                 if (operation.DomainId != 66) return true;
 
-                var notificationCollection = (NotificationCollection)AccessTools.Field(typeof(GameData.GameDataBridge.GameDataBridge), "_pendingNotifications").GetValue(null);
+                var notificationCollection = (GameData.GameDataBridge.NotificationCollection)AccessTools.Field(typeof(GBridge), "_pendingNotifications").GetValue(null);
 
                 if (!GameData.ArchiveData.Common.IsInWorld()) return true;
 
                 int result = HandleOperation(operation, argDataPool, notificationCollection.DataPool, context);
                 if (result >= 0)
                 {
-                    notificationCollection.Notifications.Add(Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
+                    notificationCollection.Notifications.Add(GameData.GameDataBridge.Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
                 }
                 return false;
             }
 
-            private static int HandleOperation(Operation operation, RawDataPool argDataPool, RawDataPool returnDataPool, DataContext dataContext)
+            private static int HandleOperation(GameData.GameDataBridge.Operation operation, RawDataPool argDataPool, RawDataPool returnDataPool, DataContext dataContext)
             {
                 int result = -1;
                 int argsOffset = operation.ArgsOffset;
@@ -262,8 +262,8 @@ namespace XuanNvRenaissance
                         {
                             string charNameOrId = "";
                             List<int> fids = new List<int>();
-                            int nextOffset = argsOffset + GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
-                            GameData.Serializer.Serializer.Deserialize(argDataPool, nextOffset, ref fids);
+                            int nextOffset = argsOffset + GSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
+                            GSerializer.Deserialize(argDataPool, nextOffset, ref fids);
 
                             var character = Util.GetCharacter(charNameOrId);
                             if (character != null)
@@ -276,8 +276,8 @@ namespace XuanNvRenaissance
                         {
                             string charNameOrId = "";
                             int val = 0;
-                            int nextOffset = argsOffset + GameData.Serializer.Serializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
-                            GameData.Serializer.Serializer.Deserialize(argDataPool, nextOffset, ref val);
+                            int nextOffset = argsOffset + GSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
+                            GSerializer.Deserialize(argDataPool, nextOffset, ref val);
 
                             var character = Util.GetCharacter(charNameOrId);
                             if (character != null) character.SetBaseMorality((short)val, dataContext);
