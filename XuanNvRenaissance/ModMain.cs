@@ -20,7 +20,7 @@ using Redzen.Random;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.0")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.1")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -83,7 +83,10 @@ namespace XuanNvRenaissance
         [HarmonyPatch]
         public static class XuanNuHooks
         {
-            // 1. Rank Mapping
+            // Helper for Rank-based Qual reduction
+            private static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max ? max : value);
+
+            // 1. Rank Mapping: Control the config lookup for sect ranks
             [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
             [HarmonyPrefix]
             public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
@@ -95,15 +98,14 @@ namespace XuanNvRenaissance
                 }
             }
 
-            // 2. Persistent Charm
+            // 2. Persistent Charm Postfix
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
             [HarmonyPostfix]
             public static void CalcAttraction_Postfix(GameData.Domains.Character.Character __instance, ref short __result)
             {
                 if (__instance.GetOrganizationInfo().OrgTemplateId == XuanNvSectId)
                 {
-                    if (__result < globalCharmMin) __result = (short)globalCharmMin;
-                    if (__result > globalCharmMax) __result = (short)globalCharmMax;
+                    __result = (short)Clamp(__result, globalCharmMin, globalCharmMax);
                 }
             }
 
@@ -123,7 +125,7 @@ namespace XuanNvRenaissance
             // 4. Recruit Character Postfix
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, ref RecruitCharacterData __result)
+            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
@@ -140,33 +142,27 @@ namespace XuanNvRenaissance
                     __result.AvatarData.ChangeGender(FemaleGenderId);
                     __result.AvatarData.AdjustToBaseCharm(random, charm);
 
-                    sbyte grade = (sbyte)Math.Clamp(peopleLevel - 1, 0, 8);
+                    sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
 
-                    int combatQualBase = Math.Max(20, globalCombatQual - grade * 10);
-                    int lifeQualBase = Math.Max(20, globalLifeQual - grade * 10);
+                    int combatQualBase = Clamp(globalCombatQual - grade * 10, 20, 200);
+                    int lifeQualBase = Clamp(globalLifeQual - grade * 10, 20, 200);
 
                     CombatSkillShorts cQuals = __result.CombatSkillQualifications;
-                    fixed (short* p = cQuals.Items)
-                    {
-                        for (int i = 0; i < 14; i++)
-                            if (p[i] < combatQualBase) p[i] = (short)combatQualBase;
-                    }
+                    short* p = cQuals.Items;
+                    for (int i = 0; i < 14; i++)
+                        if (p[i] < combatQualBase) p[i] = (short)combatQualBase;
                     __result.CombatSkillQualifications = cQuals;
 
                     LifeSkillShorts lQuals = __result.LifeSkillQualifications;
-                    fixed (short* p = lQuals.Items)
-                    {
-                        for (int i = 0; i < 16; i++)
-                            if (p[i] < lifeQualBase) p[i] = (short)lifeQualBase;
-                    }
+                    short* pl = lQuals.Items;
+                    for (int i = 0; i < 16; i++)
+                        if (pl[i] < lifeQualBase) pl[i] = (short)lifeQualBase;
                     __result.LifeSkillQualifications = lQuals;
 
                     MainAttributes attrs = __result.MainAttributes;
-                    fixed (short* pa = attrs.Items)
-                    {
-                        for (int i = 0; i < 6; i++)
-                            if (pa[i] < globalMainAttrFloor) pa[i] = (short)globalMainAttrFloor;
-                    }
+                    short* pa = attrs.Items;
+                    for (int i = 0; i < 6; i++)
+                        if (pa[i] < globalMainAttrFloor) pa[i] = (short)globalMainAttrFloor;
                     __result.MainAttributes = attrs;
 
                     if (!string.IsNullOrWhiteSpace(globalFeatureIds))
@@ -193,7 +189,7 @@ namespace XuanNvRenaissance
 
                 // --- 2. Identity & Morality ---
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
-                Util.InvalidateField(character, (ushort)3, context); // Gender
+                Util.InvalidateField(character, 3, context); // Gender
                 character.SetBaseMorality(700, context);
 
                 // --- 3. Charm & Appearance ---
@@ -202,7 +198,7 @@ namespace XuanNvRenaissance
                 avatar.ChangeGender(FemaleGenderId);
                 avatar.AdjustToBaseCharm(context.Random, finalCharm);
                 character.SetAvatar(avatar, context);
-                Util.InvalidateField(character, (ushort)1, context); // Attraction
+                Util.InvalidateField(character, 1, context); // Attraction
 
                 // --- 4. Pure Essence ---
                 if (globalPureEssence > 0)
@@ -212,26 +208,24 @@ namespace XuanNvRenaissance
                 }
 
                 // --- 5. Qualifications ---
-                int combatQualBase = Math.Max(20, globalCombatQual - grade * 10);
-                int lifeQualBase = Math.Max(20, globalLifeQual - grade * 10);
+                int combatQualBase = Clamp(globalCombatQual - grade * 10, 20, 200);
+                int lifeQualBase = Clamp(globalLifeQual - grade * 10, 20, 200);
 
                 CombatSkillShorts cQuals = character.GetBaseCombatSkillQualifications();
+                short* pc = cQuals.Items;
                 bool cChanged = false;
-                fixed (short* p = cQuals.Items)
+                for (int i = 0; i < 14; i++)
                 {
-                    for (int i = 0; i < 14; i++)
-                        if (p[i] < combatQualBase) { p[i] = (short)combatQualBase; cChanged = true; }
+                    if (pc[i] < combatQualBase) { pc[i] = (short)combatQualBase; cChanged = true; }
                 }
                 if (cChanged) character.SetBaseCombatSkillQualifications(ref cQuals, context);
 
                 LifeSkillShorts lQuals = character.GetBaseLifeSkillQualifications();
+                short* pl = lQuals.Items;
                 bool lChanged = false;
-                fixed (short* p = lQuals.Items)
+                for (int i = 0; i < 16; i++)
                 {
-                    for (int i = 0; i < 16; i++)
-                    {
-                        if (p[i] < lifeQualBase) { p[i] = (short)lifeQualBase; lChanged = true; }
-                    }
+                    if (pl[i] < lifeQualBase) { pl[i] = (short)lifeQualBase; lChanged = true; }
                 }
                 if (lChanged) character.SetBaseLifeSkillQualifications(ref lQuals, context);
 
@@ -239,12 +233,10 @@ namespace XuanNvRenaissance
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
+                    short* pa = attrs.Items;
                     bool attrChanged = false;
-                    fixed (short* pa = attrs.Items)
-                    {
-                        for (int i = 0; i < 6; i++)
-                            if (pa[i] < globalMainAttrFloor) { pa[i] = (short)globalMainAttrFloor; attrChanged = true; }
-                    }
+                    for (int i = 0; i < 6; i++)
+                        if (pa[i] < globalMainAttrFloor) { pa[i] = (short)globalMainAttrFloor; attrChanged = true; }
                     if (attrChanged) character.SetBaseMainAttributes(attrs, context);
                 }
 
@@ -276,6 +268,7 @@ namespace XuanNvRenaissance
                     }
                 }
 
+                // Synchronization
                 Util.InvokeMethod(character, "InvalidateAllCaches", new object[] { context });
             }
 
@@ -298,10 +291,11 @@ namespace XuanNvRenaissance
                 {
                     skill.SetPracticeLevel((sbyte)100, context);
 
+                    // Breakthrough activation (Default Orthodox)
                     ushort actState = 0;
-                    actState = CombatSkillStateHelper.SetPageActive(actState, 1);
+                    actState = CombatSkillStateHelper.SetPageActive(actState, 1); // Benevolent outline
                     for (byte i = 5; i < 10; i++)
-                        actState = CombatSkillStateHelper.SetPageActive(actState, i);
+                        actState = CombatSkillStateHelper.SetPageActive(actState, i); // Orthodox normal
 
                     skill.SetActivationState(actState, context);
 
@@ -324,13 +318,18 @@ namespace XuanNvRenaissance
             public static bool ProcessMethodCall_Prefix(Operation operation, RawDataPool argDataPool, DataContext context)
             {
                 if (operation.DomainId != 66) return true;
-                Type bridgeType = AccessTools.TypeByName("GameData.GameDataBridge.GameDataBridge");
+
+                Type bridgeType = AccessTools.TypeByName("GameData.GameDataBridge.GameDataBridge, GameData");
                 var pendingField = AccessTools.Field(bridgeType, "_pendingNotifications");
                 NotificationCollection notificationCollection = (NotificationCollection)pendingField.GetValue(null);
+
                 if (!GameData.ArchiveData.Common.IsInWorld()) return true;
+
                 int result = HandleOperation(operation, argDataPool, notificationCollection.DataPool, context);
                 if (result >= 0)
+                {
                     notificationCollection.Notifications.Add(Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
+                }
                 return false;
             }
 
@@ -340,23 +339,27 @@ namespace XuanNvRenaissance
                 int argsOffset = operation.ArgsOffset;
                 switch (operation.MethodId)
                 {
-                    case 1:
+                    case 1: // Add Features
                         {
                             string charNameOrId = "";
                             List<int> fids = new List<int>();
                             int nextOffset = argsOffset + GameDataSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
                             GameDataSerializer.Deserialize(argDataPool, nextOffset, ref fids);
+
                             var character = Util.GetCharacter(charNameOrId);
                             if (character != null)
+                            {
                                 foreach (int fid in fids) character.AddFeature(dataContext, (short)fid, true);
+                            }
                         }
                         break;
-                    case 3:
+                    case 3: // Set Morality
                         {
                             string charNameOrId = "";
                             int val = 0;
                             int nextOffset = argsOffset + GameDataSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
                             GameDataSerializer.Deserialize(argDataPool, nextOffset, ref val);
+
                             var character = Util.GetCharacter(charNameOrId);
                             if (character != null) character.SetBaseMorality((short)val, dataContext);
                         }
@@ -371,12 +374,14 @@ namespace XuanNvRenaissance
             private static MethodInfo _deserializeMethod_string;
             private static MethodInfo _deserializeMethod_list_int;
             private static MethodInfo _deserializeMethod_int;
-            private static Type SerializerType => AccessTools.TypeByName("GameData.Serializer.Serializer");
+
+            private static Type SerializerType => AccessTools.TypeByName("GameData.Serializer.Serializer, GameData");
 
             public static int Deserialize(RawDataPool dataPool, int offset, ref string value)
             {
                 if (_deserializeMethod_string == null)
                     _deserializeMethod_string = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(string).MakeByRefType() });
+
                 object[] args = new object[] { dataPool, offset, value };
                 int result = (int)_deserializeMethod_string.Invoke(null, args);
                 value = (string)args[2];
@@ -387,6 +392,7 @@ namespace XuanNvRenaissance
             {
                 if (_deserializeMethod_list_int == null)
                     _deserializeMethod_list_int = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(List<int>).MakeByRefType() });
+
                 object[] args = new object[] { dataPool, offset, value };
                 int result = (int)_deserializeMethod_list_int.Invoke(null, args);
                 value = (List<int>)args[2];
@@ -397,6 +403,7 @@ namespace XuanNvRenaissance
             {
                 if (_deserializeMethod_int == null)
                     _deserializeMethod_int = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(int).MakeByRefType() });
+
                 object[] args = new object[] { dataPool, offset, value };
                 int result = (int)_deserializeMethod_int.Invoke(null, args);
                 value = (int)args[2];
@@ -410,7 +417,9 @@ namespace XuanNvRenaissance
             {
                 if (string.IsNullOrEmpty(charNameOrId)) return null;
                 if (int.TryParse(charNameOrId, out int id))
+                {
                     if (DomainManager.Character.TryGetElement_Objects(id, out GameData.Domains.Character.Character character)) return character;
+                }
                 return null;
             }
 
@@ -422,7 +431,7 @@ namespace XuanNvRenaissance
 
             public static void InvalidateField(GameData.Domains.Character.Character character, ushort fieldId, DataContext context)
             {
-                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
+                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)fieldId, context });
             }
         }
     }
