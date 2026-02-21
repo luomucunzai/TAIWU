@@ -11,21 +11,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaiwuModdingLib.Core.Plugin;
-using GameData.Utilities;
 using System.Reflection;
 using GameData.Domains.Item;
 using Config;
-using GameData.ArchiveData;
 using GameData.Domains.Building;
 using Redzen.Random;
-using System.Diagnostics;
 using GameData.Domains.World.Notification;
 using GameData.Domains.Map;
 using System.Runtime.InteropServices;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.2")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.3")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -91,7 +88,7 @@ namespace XuanNvRenaissance
                 {
                     int selectedIndex = i; // Default
                     DomainManager.Mod.GetSetting(base.ModIdStr, $"Grade{i + 1}_TargetTemplate", ref selectedIndex);
-                    gradeTargetTemplates[i] = selectedIndex;
+                    gradeTargetTemplates[i] = (int)selectedIndex;
                 }
             }
             catch (Exception ex)
@@ -103,9 +100,9 @@ namespace XuanNvRenaissance
         public static sbyte GetWeightedBodyType(IRandomSource random)
         {
             int val = random.Next(100);
-            if (val < 25) return 0; // 小体型 2.5/10 -> 25%
-            if (val < 85) return 1; // 中体型 6.0/10 -> 60%
-            return 2; // 大体型 1.5/10 -> 15%
+            if (val < 25) return (sbyte)0; // 小体型 25%
+            if (val < 85) return (sbyte)1; // 中体型 60%
+            return (sbyte)2; // 大体型 15%
         }
 
         public static void EnsureHair(AvatarData avatar, IRandomSource random)
@@ -131,7 +128,7 @@ namespace XuanNvRenaissance
             {
                 if (__instance.GetOrganizationInfo().OrgTemplateId == XuanNvSectId)
                 {
-                    __result = (short)Clamp(__result, globalCharmMin, globalCharmMax);
+                    __result = (short)Clamp((int)__result, globalCharmMin, globalCharmMax);
                 }
             }
 
@@ -144,70 +141,6 @@ namespace XuanNvRenaissance
                 if (__result.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
 
                 ApplyXuanNvHighSpec(__result, context);
-            }
-
-            // 3. Recruit Character Postfix
-            [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
-            [HarmonyPostfix]
-            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
-            {
-                if (__result == null) return;
-
-                var settlement = DomainManager.Organization.GetSettlementByLocation(blockKey.GetLocation());
-                if (settlement != null && settlement.GetOrgTemplateId() == XuanNvSectId)
-                {
-                    short age = (short)random.Next(globalAgeMin, globalAgeMax + 1);
-                    short charm = (short)random.Next(globalCharmMin, globalCharmMax + 1);
-
-                    __result.Age = age;
-                    __result.Gender = FemaleGenderId;
-                    __result.Transgender = false;
-                    __result.BaseAttraction = charm;
-
-                    sbyte bodyType = GetWeightedBodyType(random);
-                    __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, FemaleGenderId, false, bodyType, charm);
-                    EnsureHair(__result.AvatarData, random);
-
-                    sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
-
-                    // Apply mapping for stats calculation
-                    if (gradeTargetTemplates.TryGetValue(grade, out int mappedGrade))
-                        grade = (sbyte)mappedGrade;
-
-                    int combatQualBase = globalCombatQual - grade * 10;
-                    if (grade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
-                    else combatQualBase = Math.Max(combatQualBase, 20);
-
-                    int lifeQualBase = globalLifeQual - grade * 10;
-                    if (grade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
-                    else lifeQualBase = Math.Max(lifeQualBase, 20);
-
-                    ref CombatSkillShorts cQuals = ref __result.CombatSkillQualifications;
-                    Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref cQuals, 1));
-                    for (int i = 0; i < 14; i++)
-                        if (cSpan[i] < combatQualBase) cSpan[i] = (short)combatQualBase;
-
-                    ref LifeSkillShorts lQuals = ref __result.LifeSkillQualifications;
-                    Span<short> lSpan = MemoryMarshal.Cast<LifeSkillShorts, short>(MemoryMarshal.CreateSpan(ref lQuals, 1));
-                    for (int i = 0; i < 16; i++)
-                        if (lSpan[i] < lifeQualBase) lSpan[i] = (short)lifeQualBase;
-
-                    ref MainAttributes attrs = ref __result.MainAttributes;
-                    Span<short> aSpan = MemoryMarshal.Cast<MainAttributes, short>(MemoryMarshal.CreateSpan(ref attrs, 1));
-                    for (int i = 0; i < 6; i++)
-                        if (aSpan[i] < globalMainAttrFloor) aSpan[i] = (short)globalMainAttrFloor;
-
-                    if (!string.IsNullOrWhiteSpace(globalFeatureIds))
-                    {
-                        if (__result.FeatureIds == null) __result.FeatureIds = new List<short>();
-                        foreach (string idStr in globalFeatureIds.Split(','))
-                        {
-                            if (short.TryParse(idStr.Trim(), out short fid))
-                                if (!__result.FeatureIds.Contains(fid)) __result.FeatureIds.Add(fid);
-                        }
-                    }
-                    __result.Recalculate();
-                }
             }
 
             public static void ApplyXuanNvHighSpec(GameData.Domains.Character.Character character, DataContext context)
@@ -224,16 +157,16 @@ namespace XuanNvRenaissance
                 character.SetCurrAge(age, context);
 
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
-                Util.InvalidateField(character, 3, context);
-                character.SetBaseMorality(700, context);
-                character.SetXiangshuInfection(0, context);
+                Util.InvalidateField(character, (ushort)3, context);
+                character.SetBaseMorality((short)700, context);
+                character.SetXiangshuInfection((short)0, context);
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
                 sbyte bodyType = GetWeightedBodyType(context.Random);
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
                 EnsureHair(newAvatar, context.Random);
                 character.SetAvatar(newAvatar, context);
-                Util.InvalidateField(character, 1, context);
+                Util.InvalidateField(character, (ushort)1, context);
 
                 Injuries emptyInjuries = default(Injuries);
                 emptyInjuries.Initialize();
@@ -243,7 +176,7 @@ namespace XuanNvRenaissance
 
                 if (globalPureEssence > 0)
                 {
-                    if (character.GetConsummateLevel() < globalPureEssence)
+                    if (character.GetConsummateLevel() < (sbyte)globalPureEssence)
                         character.SetConsummateLevel((sbyte)globalPureEssence, context);
                 }
 
@@ -255,32 +188,27 @@ namespace XuanNvRenaissance
                 if (effectiveGrade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
                 else lifeQualBase = Math.Max(lifeQualBase, 20);
 
-                CombatSkillShorts pcQuals = character.GetBaseCombatSkillQualifications();
-                Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref pcQuals, 1));
-                bool cChanged = false;
-                for (int i = 0; i < 14; i++)
+                // Safe Qualification modification
+                for (sbyte i = 0; i < (sbyte)14; i++)
                 {
-                    if (cSpan[i] < combatQualBase) { cSpan[i] = (short)combatQualBase; cChanged = true; }
+                    short current = character.GetBaseCombatSkillQualification(i);
+                    if (current < (short)combatQualBase)
+                        character.ChangeBaseCombatSkillQualification(context, i, (short)(combatQualBase - current));
                 }
-                if (cChanged) character.SetBaseCombatSkillQualifications(ref pcQuals, context);
 
-                LifeSkillShorts plQuals = character.GetBaseLifeSkillQualifications();
-                Span<short> lSpan = MemoryMarshal.Cast<LifeSkillShorts, short>(MemoryMarshal.CreateSpan(ref plQuals, 1));
-                bool lChanged = false;
-                for (int i = 0; i < 16; i++)
+                for (sbyte i = 0; i < (sbyte)16; i++)
                 {
-                    if (lSpan[i] < lifeQualBase) { lSpan[i] = (short)lifeQualBase; lChanged = true; }
+                    short current = character.GetBaseLifeSkillQualification(i);
+                    if (current < (short)lifeQualBase)
+                        character.ChangeBaseLifeSkillQualification(context, i, (short)(lifeQualBase - current));
                 }
-                if (lChanged) character.SetBaseLifeSkillQualifications(ref plQuals, context);
 
+                // Safe Main Attribute modification
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
-                    Span<short> aSpan = MemoryMarshal.Cast<MainAttributes, short>(MemoryMarshal.CreateSpan(ref attrs, 1));
-                    bool attrChanged = false;
-                    for (int i = 0; i < 6; i++)
-                        if (aSpan[i] < globalMainAttrFloor) { aSpan[i] = (short)globalMainAttrFloor; attrChanged = true; }
-                    if (attrChanged) character.SetBaseMainAttributes(attrs, context);
+                    bool changed = Util.EnforceAttributeFloor(ref attrs, (short)globalMainAttrFloor);
+                    if (changed) character.SetBaseMainAttributes(attrs, context);
                 }
 
                 if (!string.IsNullOrWhiteSpace(globalFeatureIds))
@@ -336,11 +264,11 @@ namespace XuanNvRenaissance
                 if (learnedSkills.Contains(skillId))
                 {
                     skill = DomainManager.CombatSkill.GetElement_CombatSkills((character.GetId(), skillId));
-                    if (skill != null) skill.SetReadingState(32767, context);
+                    if (skill != null) skill.SetReadingState((ushort)32767, context);
                 }
                 else
                 {
-                    skill = character.LearnNewCombatSkill(context, skillId, 32767);
+                    skill = character.LearnNewCombatSkill(context, skillId, (ushort)32767);
                 }
 
                 if (skill != null)
@@ -348,7 +276,7 @@ namespace XuanNvRenaissance
                     skill.SetPracticeLevel((sbyte)100, context);
                     ushort actState = 0;
                     actState = CombatSkillStateHelper.SetPageActive(actState, 1);
-                    for (byte i = 5; i < 10; i++) actState = CombatSkillStateHelper.SetPageActive(actState, i);
+                    for (byte i = 5; i < 10; i++) actState = CombatSkillStateHelper.SetPageActive(actState, (int)i);
                     skill.SetActivationState(actState, context);
 
                     for (byte pIdx = 0; pIdx < 15; pIdx++)
@@ -387,10 +315,10 @@ namespace XuanNvRenaissance
                         {
                             Injuries delta = default(Injuries);
                             delta.Initialize();
-                            for (sbyte i = 0; i < 7; i++)
+                            for (sbyte i = 0; i < (sbyte)7; i++)
                             {
-                                if (injuries.Get(i, false) > 0) delta.Set(i, false, 20);
-                                if (injuries.Get(i, true) > 0) delta.Set(i, true, 20);
+                                if (injuries.Get(i, false) > 0) delta.Set(i, false, (short)20);
+                                if (injuries.Get(i, true) > 0) delta.Set(i, true, (short)20);
                             }
                             __instance.ChangeInjuries(context, delta);
                             DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyHealOuterInjury(__instance.GetId(), __instance.GetValidLocation(), 20);
@@ -401,7 +329,7 @@ namespace XuanNvRenaissance
                 // 2. Artistic Performance
                 if (enableArtisticFavor && random.CheckPercentProb(10 * multiplier / 100))
                 {
-                    if (__instance.GetLifeSkillQualification(0) > 80) // Music
+                    if (__instance.GetLifeSkillQualification((sbyte)0) > 80) // Music
                     {
                         var location = __instance.GetValidLocation();
                         var block = DomainManager.Map.GetBlock(location);
@@ -424,7 +352,7 @@ namespace XuanNvRenaissance
                 // 3. Pure Essence Gain
                 if (enablePureEssenceGain && random.CheckPercentProb(2 * multiplier / 100))
                 {
-                    if (__instance.GetConsummateLevel() < 18)
+                    if (__instance.GetConsummateLevel() < (sbyte)18)
                     {
                         __instance.SetConsummateLevel((sbyte)(__instance.GetConsummateLevel() + 1), context);
                         DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyGetHealth(__instance.GetId(), __instance.GetValidLocation(), 1);
@@ -439,7 +367,7 @@ namespace XuanNvRenaissance
                     {
                         var info = new IntelligentCharacterCreationInfo
                         {
-                            OrgInfo = new OrganizationInfo(XuanNvSectId, 8, false, settlementId),
+                            OrgInfo = new OrganizationInfo(XuanNvSectId, (sbyte)8, false, settlementId),
                             Gender = FemaleGenderId,
                             Location = __instance.GetValidLocation()
                         };
@@ -467,7 +395,59 @@ namespace XuanNvRenaissance
 
             public static void InvalidateField(GameData.Domains.Character.Character character, ushort fieldId, DataContext context)
             {
-                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)fieldId, context });
+                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
+            }
+
+            public static bool EnforceAttributeFloor(ref MainAttributes attrs, short floor)
+            {
+                bool changed = false;
+
+                // Mirror struct for safe layout access without unsafe/Span
+                MainAttributesMirror mirror = ToMirror(attrs);
+
+                if (mirror.Strength < floor) { mirror.Strength = floor; changed = true; }
+                if (mirror.Agility < floor) { mirror.Agility = floor; changed = true; }
+                if (mirror.Vitality < floor) { mirror.Vitality = floor; changed = true; }
+                if (mirror.Intelligence < floor) { mirror.Intelligence = floor; changed = true; }
+                if (mirror.Mind < floor) { mirror.Mind = floor; changed = true; }
+                if (mirror.Charm < floor) { mirror.Charm = floor; changed = true; }
+
+                if (changed) attrs = FromMirror(mirror);
+                return changed;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            private struct MainAttributesMirror {
+                public short Strength;
+                public short Agility;
+                public short Vitality;
+                public short Intelligence;
+                public short Mind;
+                public short Charm;
+            }
+
+            private static MainAttributesMirror ToMirror(MainAttributes attrs)
+            {
+                int size = Marshal.SizeOf(typeof(MainAttributes));
+                IntPtr ptr = Marshal.AllocHGlobal(size);
+                try {
+                    Marshal.StructureToPtr(attrs, ptr, false);
+                    return (MainAttributesMirror)Marshal.PtrToStructure(ptr, typeof(MainAttributesMirror));
+                } finally {
+                    Marshal.FreeHGlobal(ptr);
+                }
+            }
+
+            private static MainAttributes FromMirror(MainAttributesMirror mirror)
+            {
+                int size = Marshal.SizeOf(typeof(MainAttributes));
+                IntPtr ptr = Marshal.AllocHGlobal(size);
+                try {
+                    Marshal.StructureToPtr(mirror, ptr, false);
+                    return (MainAttributes)Marshal.PtrToStructure(ptr, typeof(MainAttributes));
+                } finally {
+                    Marshal.FreeHGlobal(ptr);
+                }
             }
         }
     }
