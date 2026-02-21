@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>XuanNvRenaissance</AssemblyName>
+    <TargetFramework>netcoreapp6.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GameData">
+      <HintPath>../GameData.dll</HintPath>
+    </Reference>
+    <Reference Include="GameData.Shared">
+      <HintPath>../GameData.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="GameData.Common">
+      <HintPath>../GameData.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GameData.Utilities">
+      <HintPath>../GameData.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>../0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="TaiwuModdingLib">
+      <HintPath>../TaiwuModdingLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Config">
+      <HintPath>../Config.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
