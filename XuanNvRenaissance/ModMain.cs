@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.0")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.1")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -104,19 +104,7 @@ namespace XuanNvRenaissance
         {
             private static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max ? max : value);
 
-            // 1. Rank Mapping
-            [HarmonyPatch(typeof(OrganizationDomain), "GetOrgMemberConfig", new Type[] { typeof(sbyte), typeof(sbyte) })]
-            [HarmonyPrefix]
-            public static void GetOrgMemberConfig_Prefix(sbyte orgTemplateId, ref sbyte grade)
-            {
-                if (orgTemplateId == XuanNvSectId)
-                {
-                    if (gradeTargetTemplates.TryGetValue(grade, out int mappedGrade))
-                        grade = (sbyte)mappedGrade;
-                }
-            }
-
-            // 2. Persistent Charm
+            // 1. Persistent Charm
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
             [HarmonyPostfix]
             public static void CalcAttraction_Postfix(GameData.Domains.Character.Character __instance, ref short __result)
@@ -127,7 +115,7 @@ namespace XuanNvRenaissance
                 }
             }
 
-            // 3. Complete Control Over Individual Generation
+            // 2. Complete Control Over Individual Generation
             [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
             public static void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
@@ -138,10 +126,10 @@ namespace XuanNvRenaissance
                 ApplyXuanNvHighSpec(__result, context);
             }
 
-            // 4. Recruit Character Postfix
+            // 3. Recruit Character Postfix
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
+            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
@@ -161,6 +149,10 @@ namespace XuanNvRenaissance
 
                     sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
 
+                    // Apply mapping for stats calculation
+                    if (gradeTargetTemplates.TryGetValue(grade, out int mappedGrade))
+                        grade = (sbyte)mappedGrade;
+
                     int combatQualBase = globalCombatQual - grade * 10;
                     if (grade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
                     else combatQualBase = Math.Max(combatQualBase, 20);
@@ -169,7 +161,6 @@ namespace XuanNvRenaissance
                     if (grade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
                     else lifeQualBase = Math.Max(lifeQualBase, 20);
 
-                    // Modifying RecruitCharacterData Qualifications using Spans (No unsafe block)
                     ref CombatSkillShorts cQuals = ref __result.CombatSkillQualifications;
                     Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref cQuals, 1));
                     for (int i = 0; i < 14; i++)
@@ -201,7 +192,12 @@ namespace XuanNvRenaissance
             public static void ApplyXuanNvHighSpec(GameData.Domains.Character.Character character, DataContext context)
             {
                 OrganizationInfo orgInfo = character.GetOrganizationInfo();
-                sbyte grade = orgInfo.Grade;
+                sbyte originalGrade = orgInfo.Grade;
+                sbyte effectiveGrade = originalGrade;
+
+                // Internal mapping for stats/items without affecting the official rank (and title)
+                if (gradeTargetTemplates.TryGetValue(originalGrade, out int mappedGrade))
+                    effectiveGrade = (sbyte)mappedGrade;
 
                 short age = (short)context.Random.Next(globalAgeMin, globalAgeMax + 1);
                 character.SetActualAge(age, context);
@@ -230,15 +226,14 @@ namespace XuanNvRenaissance
                         character.SetConsummateLevel((sbyte)globalPureEssence, context);
                 }
 
-                int combatQualBase = globalCombatQual - grade * 10;
-                if (grade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
+                int combatQualBase = globalCombatQual - effectiveGrade * 10;
+                if (effectiveGrade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
                 else combatQualBase = Math.Max(combatQualBase, 20);
 
-                int lifeQualBase = globalLifeQual - grade * 10;
-                if (grade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
+                int lifeQualBase = globalLifeQual - effectiveGrade * 10;
+                if (effectiveGrade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
                 else lifeQualBase = Math.Max(lifeQualBase, 20);
 
-                // Safe modification using Spans
                 CombatSkillShorts pcQuals = character.GetBaseCombatSkillQualifications();
                 Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref pcQuals, 1));
                 bool cChanged = false;
@@ -276,11 +271,12 @@ namespace XuanNvRenaissance
                     }
                 }
 
+                // Learn skills based on effective grade
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
                 {
                     foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
                     {
-                        if (skillCfg.SectId == XuanNvSectId && skillCfg.Grade >= grade)
+                        if (skillCfg.SectId == XuanNvSectId && skillCfg.Grade >= effectiveGrade)
                             LearnAndMasterSkill(character, skillCfg.TemplateId, context);
                     }
                 }
@@ -290,6 +286,44 @@ namespace XuanNvRenaissance
                     {
                         if (short.TryParse(idStr.Trim(), out short sid))
                             LearnAndMasterSkill(character, sid, context);
+                    }
+                }
+
+                // Equipment replacement if grade is mapped
+                if (effectiveGrade != originalGrade)
+                {
+                    OrganizationMemberItem targetOrgMember = OrganizationDomain.GetOrgMemberConfig(XuanNvSectId, effectiveGrade);
+                    if (targetOrgMember != null)
+                    {
+                        // Remove old items from inventory that are of equipment types
+                        character.RemoveUnequippedEquipment(context);
+
+                        // Add new items
+                        PresetEquipmentItem[] equipmentArr = new PresetEquipmentItem[12];
+                        for(int i=0; i<12; i++) equipmentArr[i] = new PresetEquipmentItem(-1, -1);
+
+                        foreach(var pEquip in targetOrgMember.Equipment)
+                        {
+                            if(context.Random.CheckPercentProb(pEquip.Prob))
+                            {
+                                // Find slot. Simple heuristic.
+                                int slot = -1;
+                                if (pEquip.Type == 3) slot = 4; // Clothing
+                                else if (pEquip.Type == 0) slot = 0; // Weapon 1
+                                // ... we skip complex logic and just use AddEquipmentAndInventoryItems which handles it better if we pass them as inventory
+                            }
+                        }
+
+                        // Actually, the easiest way to give them the high rank items is to use the game's methods
+                        List<PresetInventoryItem> inventoryList = new List<PresetInventoryItem>(targetOrgMember.Inventory);
+                        // Add equipment to inventory too
+                        foreach(var pEquip in targetOrgMember.Equipment)
+                        {
+                             if(context.Random.CheckPercentProb(pEquip.Prob))
+                                 inventoryList.Add(new PresetInventoryItem(pEquip.Type, pEquip.TemplateId, 1, 100));
+                        }
+
+                        character.AddEquipmentAndInventoryItems(context, new PresetEquipmentItem[12], inventoryList);
                     }
                 }
 
