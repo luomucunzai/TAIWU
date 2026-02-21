@@ -9,10 +9,13 @@ using HarmonyLib;
 using TaiwuModdingLib.Core.Plugin;
 using Redzen.Random;
 using GameData.Domains.Building;
+using GameData.Domains.Character.AvatarSystem;
+using System.Linq;
+using System.Reflection;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("天公不作美", "black_wing & AI Improved", "1.1.0")]
+    [PluginConfig("天公不作美", "black_wing & AI Improved", "1.1.3")]
     public class GlobalBeautyProjectMod : TaiwuRemakeHarmonyPlugin
     {
         public static bool isXuanNvModEnabled;
@@ -39,15 +42,24 @@ namespace GlobalBeautyProject
         {
             try
             {
+                // Taiwu Remake settings can be bool or string (for numbers in text fields)
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isxuannvmod", ref isXuanNvModEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isSect", ref isSectEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isnoSect", ref isVillagerEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isFixedCharmValue", ref isFixedBoostEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isRangeCharm", ref isRangeModeEnabled);
 
-                DomainManager.Mod.GetSetting(base.ModIdStr, "addFixedCharmValue", ref fixedBoostValue);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "MinRangeCharm", ref rangeMin);
-                DomainManager.Mod.GetSetting(base.ModIdStr, "MaxRangeCharm", ref rangeMax);
+                string s = fixedBoostValue.ToString();
+                if (DomainManager.Mod.GetSetting(base.ModIdStr, "addFixedCharmValue", ref s))
+                    int.TryParse(s, out fixedBoostValue);
+
+                s = rangeMin.ToString();
+                if (DomainManager.Mod.GetSetting(base.ModIdStr, "MinRangeCharm", ref s))
+                    int.TryParse(s, out rangeMin);
+
+                s = rangeMax.ToString();
+                if (DomainManager.Mod.GetSetting(base.ModIdStr, "MaxRangeCharm", ref s))
+                    int.TryParse(s, out rangeMax);
             }
             catch (Exception ex)
             {
@@ -58,24 +70,26 @@ namespace GlobalBeautyProject
         public static bool ShouldApply(sbyte orgTemplateId)
         {
             if (orgTemplateId == 8) return isXuanNvModEnabled;
-            if (OrganizationDomain.IsSect(orgTemplateId)) return isSectEnabled;
-            return isVillagerEnabled;
+            // Sects: 1-15
+            if (orgTemplateId >= 1 && orgTemplateId <= 15) return isSectEnabled;
+            // Villagers/Towns/etc: 21-38
+            if (orgTemplateId >= 21 && orgTemplateId <= 38) return isVillagerEnabled;
+            return false;
         }
 
         public static short CalculateNewAttraction(short currentAttraction, IRandomSource random)
         {
-            short val = currentAttraction;
             if (isRangeModeEnabled)
             {
                 int min = Math.Min(rangeMin, rangeMax);
                 int max = Math.Max(rangeMin, rangeMax);
-                val = (short)random.Next(min, max + 1);
+                return (short)random.Next(min, max + 1);
             }
             else if (isFixedBoostEnabled)
             {
-                val = (short)(currentAttraction + fixedBoostValue);
+                return (short)Math.Min(900, Math.Max(0, (int)currentAttraction + fixedBoostValue));
             }
-            return (short)Math.Min(900, Math.Max(0, (int)val));
+            return currentAttraction;
         }
 
         [HarmonyPatch]
@@ -87,12 +101,28 @@ namespace GlobalBeautyProject
             {
                 if (ShouldApply(info.OrgInfo.OrgTemplateId))
                 {
-                    // If BaseAttraction is < 0, the game would normally generate it.
-                    // We force it here so the game uses our value for avatar generation too.
                     short current = info.BaseAttraction;
-                    if (current < 0) current = 350; // Use a middle value as base if not specified
-
+                    if (current < 0) current = 350;
                     info.BaseAttraction = CalculateNewAttraction(current, context.Random);
+                }
+            }
+
+            [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
+            [HarmonyPostfix]
+            public static void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
+            {
+                if (__result == null) return;
+                if (ShouldApply(__result.GetOrganizationInfo().OrgTemplateId))
+                {
+                    short targetCharm = __result.GetBaseAttraction();
+                    sbyte bodyType = (sbyte)(__result.GetActualAge() < 30 ? 0 : (__result.GetActualAge() < 50 ? 1 : 2));
+
+                    // Regenerate avatar using the game's official method to ensure parts match the charm value
+                    AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, __result.GetGender(), __result.GetTransgender(), bodyType, targetCharm);
+                    __result.SetAvatar(newAvatar, context);
+
+                    // Invalidate Attraction cache (Field ID 1)
+                    AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(__result, new object[] { (ushort)1, context });
                 }
             }
 
@@ -102,13 +132,12 @@ namespace GlobalBeautyProject
             {
                 if (ShouldApply(__instance.GetOrganizationInfo().OrgTemplateId))
                 {
-                    // Ensure the charm stays high even if factors like clothing change
                     if (isRangeModeEnabled)
                     {
                         int min = Math.Min(rangeMin, rangeMax);
                         int max = Math.Max(rangeMin, rangeMax);
                         if (__result < min) __result = (short)min;
-                        if (__result > max) __result = (short)max;
+                        else if (__result > max) __result = (short)max;
                     }
                     else if (isFixedBoostEnabled)
                     {
@@ -119,7 +148,7 @@ namespace GlobalBeautyProject
 
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
+            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
@@ -127,8 +156,9 @@ namespace GlobalBeautyProject
                 if (settlement != null && ShouldApply(settlement.GetOrgTemplateId()))
                 {
                     __result.BaseAttraction = CalculateNewAttraction(__result.BaseAttraction, random);
-                    // RecruitCharacterData also has an AvatarData which we might want to adjust,
-                    // but the game usually generates it from BaseAttraction later if we modify it here.
+                    sbyte bodyType = (sbyte)(__result.Age < 30 ? 0 : (__result.Age < 50 ? 1 : 2));
+                    __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, __result.Gender, __result.Transgender, bodyType, __result.BaseAttraction);
+                    __result.Recalculate();
                 }
             }
         }

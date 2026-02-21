@@ -23,7 +23,7 @@ using GameData.Domains.Map;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.3.3")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.3.4")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -155,7 +155,7 @@ namespace XuanNvRenaissance
                     __result.Transgender = false;
                     __result.BaseAttraction = charm;
 
-                    sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                    sbyte bodyType = (sbyte)(age < 30 ? 0 : (age < 50 ? 1 : 2));
                     __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, FemaleGenderId, false, bodyType, charm);
 
                     sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
@@ -214,7 +214,7 @@ namespace XuanNvRenaissance
                 character.SetXiangshuInfection(0, context);
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
-                sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                sbyte bodyType = (sbyte)(age < 30 ? 0 : (age < 50 ? 1 : 2));
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
                 character.SetAvatar(newAvatar, context);
                 Util.InvalidateField(character, 1, context);
@@ -418,96 +418,6 @@ namespace XuanNvRenaissance
                         }
                     }
                 }
-            }
-        }
-
-        [HarmonyPatch]
-        public static class RealTimeModifyPatch
-        {
-            [HarmonyTargetMethod]
-            static MethodBase TargetMethod() => AccessTools.Method("GameData.GameDataBridge.GameDataBridge:ProcessMethodCall");
-
-            [HarmonyPrefix]
-            public static bool ProcessMethodCall_Prefix(Operation operation, RawDataPool argDataPool, DataContext context)
-            {
-                if (operation.DomainId != 66) return true;
-                Type bridgeType = AccessTools.TypeByName("GameData.GameDataBridge.GameDataBridge, GameData");
-                var pendingField = AccessTools.Field(bridgeType, "_pendingNotifications");
-                NotificationCollection notificationCollection = (NotificationCollection)pendingField.GetValue(null);
-                if (!GameData.ArchiveData.Common.IsInWorld()) return true;
-                int result = HandleOperation(operation, argDataPool, notificationCollection.DataPool, context);
-                if (result >= 0)
-                    notificationCollection.Notifications.Add(Notification.CreateMethodReturn(operation.ListenerId, operation.DomainId, operation.MethodId, result));
-                return false;
-            }
-
-            private static int HandleOperation(Operation operation, RawDataPool argDataPool, RawDataPool returnDataPool, DataContext dataContext)
-            {
-                int result = -1;
-                int argsOffset = operation.ArgsOffset;
-                switch (operation.MethodId)
-                {
-                    case 1:
-                        {
-                            string charNameOrId = "";
-                            List<int> fids = new List<int>();
-                            int nextOffset = argsOffset + GameDataSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
-                            GameDataSerializer.Deserialize(argDataPool, nextOffset, ref fids);
-                            var character = Util.GetCharacter(charNameOrId);
-                            if (character != null)
-                                foreach (int fid in fids) character.AddFeature(dataContext, (short)fid, true);
-                        }
-                        break;
-                    case 3:
-                        {
-                            string charNameOrId = "";
-                            int val = 0;
-                            int nextOffset = argsOffset + GameDataSerializer.Deserialize(argDataPool, argsOffset, ref charNameOrId);
-                            GameDataSerializer.Deserialize(argDataPool, nextOffset, ref val);
-                            var character = Util.GetCharacter(charNameOrId);
-                            if (character != null) character.SetBaseMorality((short)val, dataContext);
-                        }
-                        break;
-                }
-                return result;
-            }
-        }
-
-        private static class GameDataSerializer
-        {
-            private static MethodInfo _deserializeMethod_string;
-            private static MethodInfo _deserializeMethod_list_int;
-            private static MethodInfo _deserializeMethod_int;
-            private static Type SerializerType => AccessTools.TypeByName("GameData.Serializer.Serializer, GameData");
-
-            public static int Deserialize(RawDataPool dataPool, int offset, ref string value)
-            {
-                if (_deserializeMethod_string == null)
-                    _deserializeMethod_string = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(string).MakeByRefType() });
-                object[] args = new object[] { dataPool, offset, value };
-                int result = (int)_deserializeMethod_string.Invoke(null, args);
-                value = (string)args[2];
-                return result;
-            }
-
-            public static int Deserialize(RawDataPool dataPool, int offset, ref List<int> value)
-            {
-                if (_deserializeMethod_list_int == null)
-                    _deserializeMethod_list_int = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(List<int>).MakeByRefType() });
-                object[] args = new object[] { dataPool, offset, value };
-                int result = (int)_deserializeMethod_list_int.Invoke(null, args);
-                value = (List<int>)args[2];
-                return result;
-            }
-
-            public static int Deserialize(RawDataPool dataPool, int offset, ref int value)
-            {
-                if (_deserializeMethod_int == null)
-                    _deserializeMethod_int = AccessTools.Method(SerializerType, "Deserialize", new Type[] { typeof(RawDataPool), typeof(int), typeof(int).MakeByRefType() });
-                object[] args = new object[] { dataPool, offset, value };
-                int result = (int)_deserializeMethod_int.Invoke(null, args);
-                value = (int)args[2];
-                return result;
             }
         }
 
