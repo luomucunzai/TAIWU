@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.5")]
+    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.6")]
     public class GlobalBeautyMod : TaiwuRemakeHarmonyPlugin
     {
         public static int globalCharmMin = 900;
@@ -51,7 +51,7 @@ namespace GlobalBeautyProject
             return (sbyte)2;
         }
 
-        public static void EnsureHair(AvatarData avatar, IRandomSource random)
+        public static void EnsureHair(ref AvatarData avatar, IRandomSource random)
         {
             AvatarGroup group = AvatarManager.Instance.GetAvatarGroup(avatar.AvatarId);
             if (group != null)
@@ -91,7 +91,8 @@ namespace GlobalBeautyProject
                     {
                         try {
                             convertedArgs[i] = Convert.ChangeType(args[i], paramType);
-                        } catch {
+                        } catch (Exception ex) {
+                            AdaptableLog.Error($"SafeInvoke Conversion Error: Method={methodName}, ArgIndex={i}, SourceType={args[i].GetType().Name}, TargetType={paramType.Name}, Value={args[i]}, Error={ex.Message}");
                             convertedArgs[i] = args[i];
                         }
                     }
@@ -101,7 +102,12 @@ namespace GlobalBeautyProject
                     convertedArgs[i] = args[i];
                 }
             }
-            return method.Invoke(target, convertedArgs);
+            try {
+                return method.Invoke(target, convertedArgs);
+            } catch (Exception ex) {
+                AdaptableLog.Error($"SafeInvoke Execution Error: Method={methodName}, Error={ex.Message}");
+                return null;
+            }
         }
 
         [HarmonyPatch]
@@ -142,7 +148,7 @@ namespace GlobalBeautyProject
                     sbyte gender = __result.GetGender();
                     bool transgender = __result.GetTransgender();
                     AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, gender, transgender, bodyType, finalCharm);
-                    EnsureHair(newAvatar, context.Random);
+                    EnsureHair(ref newAvatar, context.Random);
                     __result.SetAvatar(newAvatar, context);
 
                     SafeInvoke(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)1, context });

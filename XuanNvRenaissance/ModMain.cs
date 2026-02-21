@@ -12,10 +12,11 @@ using System.Reflection;
 using Config;
 using Redzen.Random;
 using System.Runtime.InteropServices;
+using GameData.Domains.CombatSkill;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.5")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.6")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -93,7 +94,7 @@ namespace XuanNvRenaissance
             return (sbyte)2;
         }
 
-        public static void EnsureHair(AvatarData avatar, IRandomSource random)
+        public static void EnsureHair(ref AvatarData avatar, IRandomSource random)
         {
             AvatarGroup group = AvatarManager.Instance.GetAvatarGroup(avatar.AvatarId);
             if (group != null)
@@ -144,7 +145,7 @@ namespace XuanNvRenaissance
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
                 sbyte bodyType = GetWeightedBodyType(context.Random);
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
-                EnsureHair(newAvatar, context.Random);
+                EnsureHair(ref newAvatar, context.Random);
                 character.SetAvatar(newAvatar, context);
                 Util.SafeInvoke(character, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)1, context });
 
@@ -199,7 +200,7 @@ namespace XuanNvRenaissance
             private static void LearnAndMasterSkill(GameData.Domains.Character.Character character, short skillId, DataContext context)
             {
                 object skill = character.GetLearnedCombatSkills().Contains(skillId)
-                    ? Util.SafeInvoke(DomainManager.CombatSkill, "GetElement_CombatSkills", new object[] { new ValueTuple<int, short>(character.GetId(), skillId) })
+                    ? Util.SafeInvoke(DomainManager.CombatSkill, "GetElement_CombatSkills", new object[] { new CombatSkillKey(character.GetId(), skillId) })
                     : character.LearnNewCombatSkill(context, skillId, (ushort)32767);
 
                 if (skill != null)
@@ -270,7 +271,8 @@ namespace XuanNvRenaissance
                         {
                             try {
                                 convertedArgs[i] = Convert.ChangeType(args[i], paramType);
-                            } catch {
+                            } catch (Exception ex) {
+                                AdaptableLog.Error($"SafeInvoke Conversion Error: Method={methodName}, ArgIndex={i}, SourceType={args[i].GetType().Name}, TargetType={paramType.Name}, Value={args[i]}, Error={ex.Message}");
                                 convertedArgs[i] = args[i];
                             }
                         }
@@ -280,57 +282,42 @@ namespace XuanNvRenaissance
                         convertedArgs[i] = args[i];
                     }
                 }
-                return method.Invoke(target, convertedArgs);
+                try {
+                    return method.Invoke(target, convertedArgs);
+                } catch (Exception ex) {
+                    AdaptableLog.Error($"SafeInvoke Execution Error: Method={methodName}, Error={ex.Message}");
+                    return null;
+                }
             }
 
             public static void EnforceQualFloors(GameData.Domains.Character.Character character, short cFloor, short lFloor, DataContext context)
             {
-                var cQuals = character.GetBaseCombatSkillQualifications();
-                var lQuals = character.GetBaseLifeSkillQualifications();
-
-                CombatQualsMirror cMirror = ToCombatQualsMirror(cQuals);
-                LifeQualsMirror lMirror = ToLifeQualsMirror(lQuals);
-
+                CombatSkillShorts cQuals = character.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
-                for (int i = 0; i < 14; i++) if (cMirror.Items[i] < cFloor) { cMirror.Items[i] = cFloor; cChanged = true; }
-                if (cChanged) { cQuals = FromCombatQualsMirror(cMirror); character.SetBaseCombatSkillQualifications(ref cQuals, context); }
+                unsafe {
+                    short* p = cQuals.Items;
+                    for (int i = 0; i < 14; i++) if (p[i] < cFloor) { p[i] = cFloor; cChanged = true; }
+                }
+                if (cChanged) character.SetBaseCombatSkillQualifications(ref cQuals, context);
 
+                LifeSkillShorts lQuals = character.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
-                for (int i = 0; i < 16; i++) if (lMirror.Items[i] < lFloor) { lMirror.Items[i] = lFloor; lChanged = true; }
-                if (lChanged) { lQuals = FromLifeQualsMirror(lMirror); character.SetBaseLifeSkillQualifications(ref lQuals, context); }
+                unsafe {
+                    short* p = lQuals.Items;
+                    for (int i = 0; i < 16; i++) if (p[i] < lFloor) { p[i] = lFloor; lChanged = true; }
+                }
+                if (lChanged) character.SetBaseLifeSkillQualifications(ref lQuals, context);
             }
 
             public static bool EnforceAttributeFloor(ref MainAttributes attrs, short floor)
             {
-                MainAttributesMirror mirror = ToAttrMirror(attrs);
                 bool changed = false;
-                if (mirror.Strength < floor) { mirror.Strength = floor; changed = true; }
-                if (mirror.Agility < floor) { mirror.Agility = floor; changed = true; }
-                if (mirror.Vitality < floor) { mirror.Vitality = floor; changed = true; }
-                if (mirror.Intelligence < floor) { mirror.Intelligence = floor; changed = true; }
-                if (mirror.Mind < floor) { mirror.Mind = floor; changed = true; }
-                if (mirror.Charm < floor) { mirror.Charm = floor; changed = true; }
-                if (changed) attrs = FromAttrMirror(mirror);
+                unsafe {
+                    short* p = attrs.Items;
+                    for (int i = 0; i < 6; i++) if (p[i] < floor) { p[i] = floor; changed = true; }
+                }
                 return changed;
             }
-
-            [StructLayout(LayoutKind.Sequential)]
-            public struct MainAttributesMirror { public short Strength, Agility, Vitality, Intelligence, Mind, Charm; }
-
-            [StructLayout(LayoutKind.Sequential)]
-            public struct CombatQualsMirror { [MarshalAs(UnmanagedType.ByValArray, SizeConst = 14)] public short[] Items; }
-
-            [StructLayout(LayoutKind.Sequential)]
-            public struct LifeQualsMirror { [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)] public short[] Items; }
-
-            private static MainAttributesMirror ToAttrMirror(MainAttributes a) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(a)); Marshal.StructureToPtr(a, p, false); var m = (MainAttributesMirror)Marshal.PtrToStructure(p, typeof(MainAttributesMirror)); Marshal.FreeHGlobal(p); return m; }
-            private static MainAttributes FromAttrMirror(MainAttributesMirror m) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(MainAttributes))); Marshal.StructureToPtr(m, p, false); var a = (MainAttributes)Marshal.PtrToStructure(p, typeof(MainAttributes)); Marshal.FreeHGlobal(p); return a; }
-
-            private static CombatQualsMirror ToCombatQualsMirror(CombatSkillShorts q) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(q)); Marshal.StructureToPtr(q, p, false); var m = (CombatQualsMirror)Marshal.PtrToStructure(p, typeof(CombatQualsMirror)); Marshal.FreeHGlobal(p); return m; }
-            private static CombatSkillShorts FromCombatQualsMirror(CombatQualsMirror m) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(CombatSkillShorts))); Marshal.StructureToPtr(m, p, false); var q = (CombatSkillShorts)Marshal.PtrToStructure(p, typeof(CombatSkillShorts)); Marshal.FreeHGlobal(p); return q; }
-
-            private static LifeQualsMirror ToLifeQualsMirror(LifeSkillShorts q) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(q)); Marshal.StructureToPtr(q, p, false); var m = (LifeQualsMirror)Marshal.PtrToStructure(p, typeof(LifeQualsMirror)); Marshal.FreeHGlobal(p); return m; }
-            private static LifeSkillShorts FromLifeQualsMirror(LifeQualsMirror m) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(LifeSkillShorts))); Marshal.StructureToPtr(m, p, false); var q = (LifeSkillShorts)Marshal.PtrToStructure(p, typeof(LifeSkillShorts)); Marshal.FreeHGlobal(p); return q; }
         }
     }
 }
