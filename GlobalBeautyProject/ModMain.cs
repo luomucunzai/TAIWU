@@ -8,10 +8,11 @@ using System.Linq;
 using TaiwuModdingLib.Core.Plugin;
 using Config;
 using Redzen.Random;
+using System.Reflection;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.4")]
+    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.5")]
     public class GlobalBeautyMod : TaiwuRemakeHarmonyPlugin
     {
         public static int globalCharmMin = 900;
@@ -61,6 +62,48 @@ namespace GlobalBeautyProject
             }
         }
 
+        public static object SafeInvoke(object obj, string methodName, object[] args)
+        {
+            if (obj == null) return null;
+            MethodInfo method = null;
+            Type type = (obj is Type t) ? t : obj.GetType();
+            object target = (obj is Type) ? null : obj;
+
+            method = AccessTools.Method(type, methodName);
+            if (method == null) return null;
+
+            ParameterInfo[] parameters = method.GetParameters();
+            object[] convertedArgs = new object[args.Length];
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == null)
+                {
+                    convertedArgs[i] = null;
+                }
+                else if (i < parameters.Length)
+                {
+                    Type paramType = parameters[i].ParameterType;
+                    if (paramType.IsInstanceOfType(args[i]))
+                    {
+                        convertedArgs[i] = args[i];
+                    }
+                    else
+                    {
+                        try {
+                            convertedArgs[i] = Convert.ChangeType(args[i], paramType);
+                        } catch {
+                            convertedArgs[i] = args[i];
+                        }
+                    }
+                }
+                else
+                {
+                    convertedArgs[i] = args[i];
+                }
+            }
+            return method.Invoke(target, convertedArgs);
+        }
+
         [HarmonyPatch]
         public static class BeautyHooks
         {
@@ -102,8 +145,7 @@ namespace GlobalBeautyProject
                     EnsureHair(newAvatar, context.Random);
                     __result.SetAvatar(newAvatar, context);
 
-                    var method = AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache", new Type[] { typeof(ushort), typeof(DataContext) });
-                    method?.Invoke(__result, new object[] { (ushort)1, context });
+                    SafeInvoke(__result, "SetModifiedAndInvalidateInfluencedCache", new object[] { (ushort)1, context });
                 }
             }
         }
