@@ -17,10 +17,11 @@ using Config;
 using GameData.ArchiveData;
 using GameData.Domains.Building;
 using Redzen.Random;
+using System.Diagnostics;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.4")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.5")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -69,7 +70,7 @@ namespace XuanNvRenaissance
                 gradeTargetTemplates.Clear();
                 for (sbyte i = 0; i < 9; i++)
                 {
-                    int selectedIndex = i; // Default to Rank 1 (index 0)
+                    int selectedIndex = i; // Default
                     DomainManager.Mod.GetSetting(base.ModIdStr, $"Grade{i + 1}_TargetTemplate", ref selectedIndex);
                     gradeTargetTemplates[i] = selectedIndex;
                 }
@@ -114,9 +115,7 @@ namespace XuanNvRenaissance
             public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
             {
                 if (__result == null) return;
-
-                OrganizationInfo orgInfo = __result.GetOrganizationInfo();
-                if (orgInfo.OrgTemplateId != XuanNvSectId) return;
+                if (__result.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
 
                 ApplyXuanNvHighSpec(__result, context);
             }
@@ -188,38 +187,32 @@ namespace XuanNvRenaissance
                 OrganizationInfo orgInfo = character.GetOrganizationInfo();
                 sbyte grade = orgInfo.Grade;
 
-                // --- 1. Age ---
                 short age = (short)context.Random.Next(globalAgeMin, globalAgeMax + 1);
                 character.SetActualAge(age, context);
                 character.SetCurrAge(age, context);
 
-                // --- 2. Identity & Morality ---
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
-                Util.InvalidateField(character, 3, context); // Gender
+                Util.InvalidateField(character, 3, context);
                 character.SetBaseMorality(700, context);
 
-                // --- 3. Charm & Appearance (Fresh face matching age/charm) ---
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
                 sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
                 character.SetAvatar(newAvatar, context);
-                Util.InvalidateField(character, 1, context); // Attraction
+                Util.InvalidateField(character, 1, context);
 
-                // --- 4. Health Restoration ---
                 Injuries emptyInjuries = default(Injuries);
                 emptyInjuries.Initialize();
                 character.SetInjuries(emptyInjuries, context);
                 character.SetDisorderOfQi(0, context);
                 character.SetHealth(character.GetMaxHealth(), context);
 
-                // --- 5. Pure Essence floor ---
                 if (globalPureEssence > 0)
                 {
                     if (character.GetConsummateLevel() < globalPureEssence)
                         character.SetConsummateLevel((sbyte)globalPureEssence, context);
                 }
 
-                // --- 6. Qualifications (Rank-scaled decrement) ---
                 int combatQualBase = globalCombatQual - grade * 10;
                 if (grade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
                 else combatQualBase = Math.Max(combatQualBase, 20);
@@ -246,7 +239,6 @@ namespace XuanNvRenaissance
                 }
                 if (lChanged) character.SetBaseLifeSkillQualifications(ref plQuals, context);
 
-                // --- 7. Main Attributes ---
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
@@ -257,7 +249,6 @@ namespace XuanNvRenaissance
                     if (attrChanged) character.SetBaseMainAttributes(attrs, context);
                 }
 
-                // --- 8. Features ---
                 if (!string.IsNullOrWhiteSpace(globalFeatureIds))
                 {
                     foreach (string idStr in globalFeatureIds.Split(','))
@@ -267,7 +258,6 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // --- 9. Skills Injection ---
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
                 {
                     foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
@@ -306,17 +296,99 @@ namespace XuanNvRenaissance
                 if (skill != null)
                 {
                     skill.SetPracticeLevel((sbyte)100, context);
-
                     ushort actState = 0;
-                    actState = CombatSkillStateHelper.SetPageActive(actState, 1); // Benevolent outline
-                    for (byte i = 5; i < 10; i++)
-                        actState = CombatSkillStateHelper.SetPageActive(actState, i); // Orthodox normal
-
+                    actState = CombatSkillStateHelper.SetPageActive(actState, 1);
+                    for (byte i = 5; i < 10; i++) actState = CombatSkillStateHelper.SetPageActive(actState, i);
                     skill.SetActivationState(actState, context);
 
                     for (byte pIdx = 0; pIdx < 15; pIdx++)
                         DomainManager.CombatSkill.TryActivateCombatSkillBookPageWhenSetReadingState(context, character.GetId(), skillId, pIdx);
                 }
+            }
+        }
+
+        [HarmonyPatch]
+        public static class ProfilingHooks
+        {
+            private static Stopwatch _stopwatch = new Stopwatch();
+            private static Dictionary<int, long> _charTime = new Dictionary<int, long>();
+            private static Dictionary<int, sbyte> _charSect = new Dictionary<int, sbyte>();
+            private static bool _isProfiling = false;
+
+            [HarmonyPatch(typeof(WorldDomain), "AdvanceMonth")]
+            [HarmonyPrefix]
+            public static void AdvanceMonth_Prefix()
+            {
+                _charTime.Clear();
+                _charSect.Clear();
+                _isProfiling = true;
+            }
+
+            [HarmonyPatch(typeof(WorldDomain), "AdvanceMonth")]
+            [HarmonyPostfix]
+            public static void AdvanceMonth_Postfix()
+            {
+                _isProfiling = false;
+                ReportProfiling();
+            }
+
+            [HarmonyPatch(typeof(GameData.Domains.Character.Character), "PeriAdvanceMonth_UpdateStatus")]
+            [HarmonyPrefix]
+            public static void PeriAdvanceMonth_Prefix(GameData.Domains.Character.Character __instance)
+            {
+                if (!_isProfiling) return;
+                _stopwatch.Restart();
+            }
+
+            [HarmonyPatch(typeof(GameData.Domains.Character.Character), "PeriAdvanceMonth_UpdateStatus")]
+            [HarmonyPostfix]
+            public static void PeriAdvanceMonth_Postfix(GameData.Domains.Character.Character __instance)
+            {
+                if (!_isProfiling) return;
+                _stopwatch.Stop();
+                int charId = __instance.GetId();
+                long elapsedTicks = _stopwatch.ElapsedTicks;
+
+                if (!_charTime.ContainsKey(charId))
+                {
+                    _charTime[charId] = 0;
+                    _charSect[charId] = __instance.GetOrganizationInfo().OrgTemplateId;
+                }
+                _charTime[charId] += elapsedTicks;
+            }
+
+            private static void ReportProfiling()
+            {
+                var xuanNuTime = _charTime.Where(kv => _charSect[kv.Key] == 8).OrderByDescending(kv => kv.Value).Take(20).ToList();
+                var otherTime = _charTime.Where(kv => _charSect[kv.Key] != 8).OrderByDescending(kv => kv.Value).Take(20).ToList();
+
+                AdaptableLog.Info("=== Xuan Nu Renaissance: Month-End Profiling Report (PeriAdvanceMonth_UpdateStatus) ===");
+
+                AdaptableLog.Info("--- [Xuan Nu Sect] Top Members ---");
+                foreach(var entry in xuanNuTime)
+                {
+                    double ms = entry.Value * 1000.0 / Stopwatch.Frequency;
+                    AdaptableLog.Info($"ID: {entry.Key}, Time: {ms:F4}ms");
+                }
+
+                AdaptableLog.Info("--- [Other Sects] Top Members ---");
+                foreach (var entry in otherTime)
+                {
+                    double ms = entry.Value * 1000.0 / Stopwatch.Frequency;
+                    AdaptableLog.Info($"ID: {entry.Key}, Sect: {_charSect[entry.Key]}, Time: {ms:F4}ms");
+                }
+
+                long totalXuanNuTicks = _charTime.Where(kv => _charSect[kv.Key] == 8).Sum(kv => kv.Value);
+                long totalOtherTicks = _charTime.Where(kv => _charSect[kv.Key] != 8).Sum(kv => kv.Value);
+                int countXuanNu = _charTime.Count(kv => _charSect[kv.Key] == 8);
+                int countOther = _charTime.Count(kv => _charSect[kv.Key] != 8);
+
+                double totalXuanNuMs = totalXuanNuTicks * 1000.0 / Stopwatch.Frequency;
+                double totalOtherMs = totalOtherTicks * 1000.0 / Stopwatch.Frequency;
+
+                AdaptableLog.Info($"Summary: XuanNu(Total={totalXuanNuMs:F2}ms, Count={countXuanNu}, Avg={totalXuanNuMs/Math.Max(1,countXuanNu):F4}ms)");
+                AdaptableLog.Info($"Summary: Others(Total={totalOtherMs:F2}ms, Count={countOther}, Avg={totalOtherMs/Math.Max(1,countOther):F4}ms)");
+                AdaptableLog.Info("=========================================================================================");
             }
         }
 
@@ -424,7 +496,7 @@ namespace XuanNvRenaissance
 
             public static void InvalidateField(GameData.Domains.Character.Character character, ushort fieldId, DataContext context)
             {
-                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
+                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { (ushort)fieldId, context });
             }
         }
     }
