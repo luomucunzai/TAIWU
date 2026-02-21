@@ -16,7 +16,7 @@ using GameData.Domains.CombatSkill;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.7")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.9")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -292,33 +292,53 @@ namespace XuanNvRenaissance
 
             public static void EnforceQualFloors(GameData.Domains.Character.Character character, short cFloor, short lFloor, DataContext context)
             {
+                // Read current combat quals via Marshal to avoid indexer/pointer drama
                 CombatSkillShorts cQuals = character.GetBaseCombatSkillQualifications();
-                bool cChanged = false;
-                unsafe {
-                    fixed (short* p = cQuals.Items) {
-                        for (int i = 0; i < 14; i++) if (p[i] < cFloor) { p[i] = cFloor; cChanged = true; }
-                    }
-                }
-                if (cChanged) character.SetBaseCombatSkillQualifications(ref cQuals, context);
+                short[] cVals = new short[14];
+                IntPtr cPtr = Marshal.AllocHGlobal(28);
+                try {
+                    Marshal.StructureToPtr(cQuals, cPtr, false);
+                    Marshal.Copy(cPtr, cVals, 0, 14);
+                } finally { Marshal.FreeHGlobal(cPtr); }
 
-                LifeSkillShorts lQuals = character.GetBaseLifeSkillQualifications();
-                bool lChanged = false;
-                unsafe {
-                    fixed (short* p = lQuals.Items) {
-                        for (int i = 0; i < 16; i++) if (p[i] < lFloor) { p[i] = lFloor; lChanged = true; }
+                for (sbyte i = 0; i < 14; i++) {
+                    if (cVals[i] < cFloor) {
+                        character.ChangeBaseCombatSkillQualification(context, i, (int)(cFloor - cVals[i]));
                     }
                 }
-                if (lChanged) character.SetBaseLifeSkillQualifications(ref lQuals, context);
+
+                // Read current life quals via Marshal
+                LifeSkillShorts lQuals = character.GetBaseLifeSkillQualifications();
+                short[] lVals = new short[16];
+                IntPtr lPtr = Marshal.AllocHGlobal(32);
+                try {
+                    Marshal.StructureToPtr(lQuals, lPtr, false);
+                    Marshal.Copy(lPtr, lVals, 0, 16);
+                } finally { Marshal.FreeHGlobal(lPtr); }
+
+                for (sbyte i = 0; i < 16; i++) {
+                    if (lVals[i] < lFloor) {
+                        character.ChangeBaseLifeSkillQualification(context, i, (int)(lFloor - lVals[i]));
+                    }
+                }
             }
 
             public static bool EnforceAttributeFloor(ref MainAttributes attrs, short floor)
             {
                 bool changed = false;
-                unsafe {
-                    fixed (short* p = attrs.Items) {
-                        for (int i = 0; i < 6; i++) if (p[i] < floor) { p[i] = floor; changed = true; }
+                short[] vals = new short[6];
+                IntPtr ptr = Marshal.AllocHGlobal(12);
+                try {
+                    Marshal.StructureToPtr(attrs, ptr, false);
+                    Marshal.Copy(ptr, vals, 0, 6);
+                    for (int i = 0; i < 6; i++) {
+                        if (vals[i] < floor) { vals[i] = floor; changed = true; }
                     }
-                }
+                    if (changed) {
+                        Marshal.Copy(vals, 0, ptr, 6);
+                        attrs = (MainAttributes)Marshal.PtrToStructure(ptr, typeof(MainAttributes));
+                    }
+                } finally { Marshal.FreeHGlobal(ptr); }
                 return changed;
             }
         }

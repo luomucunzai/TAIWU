@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.6")]
+    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.9")]
     public class GlobalBeautyMod : TaiwuRemakeHarmonyPlugin
     {
         public static int globalCharmMin = 900;
