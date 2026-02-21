@@ -2,6 +2,7 @@ using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character;
 using GameData.Domains.Character.AvatarSystem;
+using GameData.Domains.Character.AvatarSystem.AvatarRes;
 using GameData.Domains.Character.Creation;
 using GameData.Domains.CombatSkill;
 using GameData.Domains.Organization;
@@ -24,7 +25,7 @@ using System.Runtime.InteropServices;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.1")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.2")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -99,6 +100,25 @@ namespace XuanNvRenaissance
             }
         }
 
+        public static sbyte GetWeightedBodyType(IRandomSource random)
+        {
+            int val = random.Next(100);
+            if (val < 25) return 0; // 小体型 2.5/10 -> 25%
+            if (val < 85) return 1; // 中体型 6.0/10 -> 60%
+            return 2; // 大体型 1.5/10 -> 15%
+        }
+
+        public static void EnsureHair(AvatarData avatar, IRandomSource random)
+        {
+            AvatarGroup group = AvatarManager.Instance.GetAvatarGroup(avatar.AvatarId);
+            if (group != null)
+            {
+                var hairIds = group.GetRandomHairsNoSkinHead(random);
+                avatar.FrontHairId = hairIds.frontId;
+                avatar.BackHairId = hairIds.backId;
+            }
+        }
+
         [HarmonyPatch]
         public static class XuanNuHooks
         {
@@ -129,7 +149,7 @@ namespace XuanNvRenaissance
             // 3. Recruit Character Postfix
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
+            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
@@ -144,8 +164,9 @@ namespace XuanNvRenaissance
                     __result.Transgender = false;
                     __result.BaseAttraction = charm;
 
-                    sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                    sbyte bodyType = GetWeightedBodyType(random);
                     __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, FemaleGenderId, false, bodyType, charm);
+                    EnsureHair(__result.AvatarData, random);
 
                     sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
 
@@ -195,7 +216,6 @@ namespace XuanNvRenaissance
                 sbyte originalGrade = orgInfo.Grade;
                 sbyte effectiveGrade = originalGrade;
 
-                // Internal mapping for stats/items without affecting the official rank (and title)
                 if (gradeTargetTemplates.TryGetValue(originalGrade, out int mappedGrade))
                     effectiveGrade = (sbyte)mappedGrade;
 
@@ -209,8 +229,9 @@ namespace XuanNvRenaissance
                 character.SetXiangshuInfection(0, context);
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
-                sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                sbyte bodyType = GetWeightedBodyType(context.Random);
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
+                EnsureHair(newAvatar, context.Random);
                 character.SetAvatar(newAvatar, context);
                 Util.InvalidateField(character, 1, context);
 
@@ -271,7 +292,6 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // Learn skills based on effective grade
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
                 {
                     foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
@@ -289,40 +309,18 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // Equipment replacement if grade is mapped
                 if (effectiveGrade != originalGrade)
                 {
                     OrganizationMemberItem targetOrgMember = OrganizationDomain.GetOrgMemberConfig(XuanNvSectId, effectiveGrade);
                     if (targetOrgMember != null)
                     {
-                        // Remove old items from inventory that are of equipment types
                         character.RemoveUnequippedEquipment(context);
-
-                        // Add new items
-                        PresetEquipmentItem[] equipmentArr = new PresetEquipmentItem[12];
-                        for(int i=0; i<12; i++) equipmentArr[i] = new PresetEquipmentItem(-1, -1);
-
-                        foreach(var pEquip in targetOrgMember.Equipment)
-                        {
-                            if(context.Random.CheckPercentProb(pEquip.Prob))
-                            {
-                                // Find slot. Simple heuristic.
-                                int slot = -1;
-                                if (pEquip.Type == 3) slot = 4; // Clothing
-                                else if (pEquip.Type == 0) slot = 0; // Weapon 1
-                                // ... we skip complex logic and just use AddEquipmentAndInventoryItems which handles it better if we pass them as inventory
-                            }
-                        }
-
-                        // Actually, the easiest way to give them the high rank items is to use the game's methods
                         List<PresetInventoryItem> inventoryList = new List<PresetInventoryItem>(targetOrgMember.Inventory);
-                        // Add equipment to inventory too
                         foreach(var pEquip in targetOrgMember.Equipment)
                         {
                              if(context.Random.CheckPercentProb(pEquip.Prob))
                                  inventoryList.Add(new PresetInventoryItem(pEquip.Type, pEquip.TemplateId, 1, 100));
                         }
-
                         character.AddEquipmentAndInventoryItems(context, new PresetEquipmentItem[12], inventoryList);
                     }
                 }
