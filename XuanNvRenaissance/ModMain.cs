@@ -16,7 +16,7 @@ using GameData.Domains.CombatSkill;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.6")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.7")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -295,16 +295,18 @@ namespace XuanNvRenaissance
                 CombatSkillShorts cQuals = character.GetBaseCombatSkillQualifications();
                 bool cChanged = false;
                 unsafe {
-                    short* p = cQuals.Items;
-                    for (int i = 0; i < 14; i++) if (p[i] < cFloor) { p[i] = cFloor; cChanged = true; }
+                    fixed (short* p = cQuals.Items) {
+                        for (int i = 0; i < 14; i++) if (p[i] < cFloor) { p[i] = cFloor; cChanged = true; }
+                    }
                 }
                 if (cChanged) character.SetBaseCombatSkillQualifications(ref cQuals, context);
 
                 LifeSkillShorts lQuals = character.GetBaseLifeSkillQualifications();
                 bool lChanged = false;
                 unsafe {
-                    short* p = lQuals.Items;
-                    for (int i = 0; i < 16; i++) if (p[i] < lFloor) { p[i] = lFloor; lChanged = true; }
+                    fixed (short* p = lQuals.Items) {
+                        for (int i = 0; i < 16; i++) if (p[i] < lFloor) { p[i] = lFloor; lChanged = true; }
+                    }
                 }
                 if (lChanged) character.SetBaseLifeSkillQualifications(ref lQuals, context);
             }
@@ -313,8 +315,9 @@ namespace XuanNvRenaissance
             {
                 bool changed = false;
                 unsafe {
-                    short* p = attrs.Items;
-                    for (int i = 0; i < 6; i++) if (p[i] < floor) { p[i] = floor; changed = true; }
+                    fixed (short* p = attrs.Items) {
+                        for (int i = 0; i < 6; i++) if (p[i] < floor) { p[i] = floor; changed = true; }
+                    }
                 }
                 return changed;
             }
