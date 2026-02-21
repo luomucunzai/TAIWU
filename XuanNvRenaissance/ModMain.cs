@@ -20,7 +20,7 @@ using Redzen.Random;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.1")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.2")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -83,7 +83,6 @@ namespace XuanNvRenaissance
         [HarmonyPatch]
         public static class XuanNuHooks
         {
-            // Helper for Rank-based Qual reduction
             private static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max ? max : value);
 
             // 1. Rank Mapping: Control the config lookup for sect ranks
@@ -186,6 +185,7 @@ namespace XuanNvRenaissance
                 // --- 1. Age ---
                 short age = (short)context.Random.Next(globalAgeMin, globalAgeMax + 1);
                 character.SetActualAge(age, context);
+                character.SetCurrAge(age, context);
 
                 // --- 2. Identity & Morality ---
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
