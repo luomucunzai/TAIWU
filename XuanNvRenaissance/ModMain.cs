@@ -20,10 +20,11 @@ using Redzen.Random;
 using System.Diagnostics;
 using GameData.Domains.World.Notification;
 using GameData.Domains.Map;
+using System.Runtime.InteropServices;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.3.4")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.0")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -129,7 +130,7 @@ namespace XuanNvRenaissance
             // 3. Complete Control Over Individual Generation
             [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
-            public static unsafe void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
+            public static void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
             {
                 if (__result == null) return;
                 if (__result.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
@@ -140,7 +141,7 @@ namespace XuanNvRenaissance
             // 4. Recruit Character Postfix
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
+            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
@@ -155,7 +156,7 @@ namespace XuanNvRenaissance
                     __result.Transgender = false;
                     __result.BaseAttraction = charm;
 
-                    sbyte bodyType = (sbyte)(age < 30 ? 0 : (age < 50 ? 1 : 2));
+                    sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
                     __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, FemaleGenderId, false, bodyType, charm);
 
                     sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
@@ -168,23 +169,21 @@ namespace XuanNvRenaissance
                     if (grade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
                     else lifeQualBase = Math.Max(lifeQualBase, 20);
 
-                    CombatSkillShorts cQuals = __result.CombatSkillQualifications;
-                    short* pc = cQuals.Items;
+                    // Modifying RecruitCharacterData Qualifications using Spans (No unsafe block)
+                    ref CombatSkillShorts cQuals = ref __result.CombatSkillQualifications;
+                    Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref cQuals, 1));
                     for (int i = 0; i < 14; i++)
-                        if (pc[i] < combatQualBase) pc[i] = (short)combatQualBase;
-                    __result.CombatSkillQualifications = cQuals;
+                        if (cSpan[i] < combatQualBase) cSpan[i] = (short)combatQualBase;
 
-                    LifeSkillShorts lQuals = __result.LifeSkillQualifications;
-                    short* pl = lQuals.Items;
+                    ref LifeSkillShorts lQuals = ref __result.LifeSkillQualifications;
+                    Span<short> lSpan = MemoryMarshal.Cast<LifeSkillShorts, short>(MemoryMarshal.CreateSpan(ref lQuals, 1));
                     for (int i = 0; i < 16; i++)
-                        if (pl[i] < lifeQualBase) pl[i] = (short)lifeQualBase;
-                    __result.LifeSkillQualifications = lQuals;
+                        if (lSpan[i] < lifeQualBase) lSpan[i] = (short)lifeQualBase;
 
-                    MainAttributes attrs = __result.MainAttributes;
-                    short* pa = attrs.Items;
+                    ref MainAttributes attrs = ref __result.MainAttributes;
+                    Span<short> aSpan = MemoryMarshal.Cast<MainAttributes, short>(MemoryMarshal.CreateSpan(ref attrs, 1));
                     for (int i = 0; i < 6; i++)
-                        if (pa[i] < globalMainAttrFloor) pa[i] = (short)globalMainAttrFloor;
-                    __result.MainAttributes = attrs;
+                        if (aSpan[i] < globalMainAttrFloor) aSpan[i] = (short)globalMainAttrFloor;
 
                     if (!string.IsNullOrWhiteSpace(globalFeatureIds))
                     {
@@ -199,7 +198,7 @@ namespace XuanNvRenaissance
                 }
             }
 
-            public static unsafe void ApplyXuanNvHighSpec(GameData.Domains.Character.Character character, DataContext context)
+            public static void ApplyXuanNvHighSpec(GameData.Domains.Character.Character character, DataContext context)
             {
                 OrganizationInfo orgInfo = character.GetOrganizationInfo();
                 sbyte grade = orgInfo.Grade;
@@ -214,7 +213,7 @@ namespace XuanNvRenaissance
                 character.SetXiangshuInfection(0, context);
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
-                sbyte bodyType = (sbyte)(age < 30 ? 0 : (age < 50 ? 1 : 2));
+                sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
                 AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
                 character.SetAvatar(newAvatar, context);
                 Util.InvalidateField(character, 1, context);
@@ -239,31 +238,32 @@ namespace XuanNvRenaissance
                 if (grade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
                 else lifeQualBase = Math.Max(lifeQualBase, 20);
 
+                // Safe modification using Spans
                 CombatSkillShorts pcQuals = character.GetBaseCombatSkillQualifications();
-                short* pc = pcQuals.Items;
+                Span<short> cSpan = MemoryMarshal.Cast<CombatSkillShorts, short>(MemoryMarshal.CreateSpan(ref pcQuals, 1));
                 bool cChanged = false;
                 for (int i = 0; i < 14; i++)
                 {
-                    if (pc[i] < combatQualBase) { pc[i] = (short)combatQualBase; cChanged = true; }
+                    if (cSpan[i] < combatQualBase) { cSpan[i] = (short)combatQualBase; cChanged = true; }
                 }
                 if (cChanged) character.SetBaseCombatSkillQualifications(ref pcQuals, context);
 
                 LifeSkillShorts plQuals = character.GetBaseLifeSkillQualifications();
-                short* pl = plQuals.Items;
+                Span<short> lSpan = MemoryMarshal.Cast<LifeSkillShorts, short>(MemoryMarshal.CreateSpan(ref plQuals, 1));
                 bool lChanged = false;
                 for (int i = 0; i < 16; i++)
                 {
-                    if (pl[i] < lifeQualBase) { pl[i] = (short)lifeQualBase; lChanged = true; }
+                    if (lSpan[i] < lifeQualBase) { lSpan[i] = (short)lifeQualBase; lChanged = true; }
                 }
                 if (lChanged) character.SetBaseLifeSkillQualifications(ref plQuals, context);
 
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
-                    short* pa = attrs.Items;
+                    Span<short> aSpan = MemoryMarshal.Cast<MainAttributes, short>(MemoryMarshal.CreateSpan(ref attrs, 1));
                     bool attrChanged = false;
                     for (int i = 0; i < 6; i++)
-                        if (pa[i] < globalMainAttrFloor) { pa[i] = (short)globalMainAttrFloor; attrChanged = true; }
+                        if (aSpan[i] < globalMainAttrFloor) { aSpan[i] = (short)globalMainAttrFloor; attrChanged = true; }
                     if (attrChanged) character.SetBaseMainAttributes(attrs, context);
                 }
 
@@ -330,7 +330,7 @@ namespace XuanNvRenaissance
         {
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "PeriAdvanceMonth_UpdateStatus")]
             [HarmonyPostfix]
-            public static unsafe void PeriAdvanceMonth_UpdateStatus_Postfix(GameData.Domains.Character.Character __instance, DataContext context)
+            public static void PeriAdvanceMonth_UpdateStatus_Postfix(GameData.Domains.Character.Character __instance, DataContext context)
             {
                 if (!enableMonthlyEvents || __instance == null) return;
                 if (__instance.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;

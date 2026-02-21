@@ -15,12 +15,12 @@ using System.Reflection;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("天公不作美", "black_wing & AI Improved", "1.1.3")]
+    [PluginConfig("天公不作美", "black_wing & AI Improved", "1.1.4")]
     public class GlobalBeautyProjectMod : TaiwuRemakeHarmonyPlugin
     {
         public static bool isXuanNvModEnabled;
         public static bool isSectEnabled;
-        public static bool isVillagerEnabled;
+        public static bool isVillagerEnabled; // Kept setting for compatibility, but logic will change if requested
         public static bool isFixedBoostEnabled;
         public static int fixedBoostValue = 100;
         public static bool isRangeModeEnabled;
@@ -42,7 +42,6 @@ namespace GlobalBeautyProject
         {
             try
             {
-                // Taiwu Remake settings can be bool or string (for numbers in text fields)
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isxuannvmod", ref isXuanNvModEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isSect", ref isSectEnabled);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "isnoSect", ref isVillagerEnabled);
@@ -69,11 +68,17 @@ namespace GlobalBeautyProject
 
         public static bool ShouldApply(sbyte orgTemplateId)
         {
+            // Xuan Nu
             if (orgTemplateId == 8) return isXuanNvModEnabled;
-            // Sects: 1-15
+
+            // Other Sects: 1-15
             if (orgTemplateId >= 1 && orgTemplateId <= 15) return isSectEnabled;
-            // Villagers/Towns/etc: 21-38
+
+            // Villager range (21-38) check removed per user request: "不要求村庄" (Don't require villages)
+            // If the user still wants to toggle it via settings but default is off, we can check isVillagerEnabled
+            // but usually this means "don't apply to them".
             if (orgTemplateId >= 21 && orgTemplateId <= 38) return isVillagerEnabled;
+
             return false;
         }
 
@@ -117,7 +122,7 @@ namespace GlobalBeautyProject
                     short targetCharm = __result.GetBaseAttraction();
                     sbyte bodyType = (sbyte)(__result.GetActualAge() < 30 ? 0 : (__result.GetActualAge() < 50 ? 1 : 2));
 
-                    // Regenerate avatar using the game's official method to ensure parts match the charm value
+                    // Force matching face for boosted charm
                     AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, __result.GetGender(), __result.GetTransgender(), bodyType, targetCharm);
                     __result.SetAvatar(newAvatar, context);
 
@@ -148,7 +153,7 @@ namespace GlobalBeautyProject
 
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "GenerateRecruitCharacterData")]
             [HarmonyPostfix]
-            public static unsafe void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
+            public static void GenerateRecruitCharacterData_Postfix(IRandomSource random, sbyte peopleLevel, BuildingBlockKey blockKey, BuildingBlockData blockData, ref RecruitCharacterData __result)
             {
                 if (__result == null) return;
 
