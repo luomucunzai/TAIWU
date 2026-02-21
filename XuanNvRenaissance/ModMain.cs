@@ -18,10 +18,12 @@ using GameData.ArchiveData;
 using GameData.Domains.Building;
 using Redzen.Random;
 using System.Diagnostics;
+using GameData.Domains.World.Notification;
+using GameData.Domains.Map;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.5")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.3.3")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -38,6 +40,14 @@ namespace XuanNvRenaissance
         public static int globalMainAttrFloor = 100;
         public static string globalFeatureIds = "164"; // 忠贞不渝
         public static string globalSkillIds = "";
+
+        // Monthly Event Settings
+        public static bool enableMonthlyEvents = true;
+        public static int eventChanceMultiplier = 100; // Percentage
+        public static bool enableColdPoolHeal = true;
+        public static bool enableArtisticFavor = true;
+        public static bool enableHeavenlyRecruit = true;
+        public static bool enablePureEssenceGain = true;
 
         public static readonly Dictionary<sbyte, int> gradeTargetTemplates = new Dictionary<sbyte, int>();
 
@@ -66,6 +76,13 @@ namespace XuanNvRenaissance
                 DomainManager.Mod.GetSetting(base.ModIdStr, "globalMainAttrFloor", ref globalMainAttrFloor);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "globalFeatureIds", ref globalFeatureIds);
                 DomainManager.Mod.GetSetting(base.ModIdStr, "globalSkillIds", ref globalSkillIds);
+
+                DomainManager.Mod.GetSetting(base.ModIdStr, "enableMonthlyEvents", ref enableMonthlyEvents);
+                DomainManager.Mod.GetSetting(base.ModIdStr, "eventChanceMultiplier", ref eventChanceMultiplier);
+                DomainManager.Mod.GetSetting(base.ModIdStr, "enableColdPoolHeal", ref enableColdPoolHeal);
+                DomainManager.Mod.GetSetting(base.ModIdStr, "enableArtisticFavor", ref enableArtisticFavor);
+                DomainManager.Mod.GetSetting(base.ModIdStr, "enableHeavenlyRecruit", ref enableHeavenlyRecruit);
+                DomainManager.Mod.GetSetting(base.ModIdStr, "enablePureEssenceGain", ref enablePureEssenceGain);
 
                 gradeTargetTemplates.Clear();
                 for (sbyte i = 0; i < 9; i++)
@@ -194,6 +211,7 @@ namespace XuanNvRenaissance
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
                 Util.InvalidateField(character, 3, context);
                 character.SetBaseMorality(700, context);
+                character.SetXiangshuInfection(0, context);
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
                 sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
@@ -308,87 +326,98 @@ namespace XuanNvRenaissance
         }
 
         [HarmonyPatch]
-        public static class ProfilingHooks
+        public static class XuanNvMonthlyEvents
         {
-            private static Stopwatch _stopwatch = new Stopwatch();
-            private static Dictionary<int, long> _charTime = new Dictionary<int, long>();
-            private static Dictionary<int, sbyte> _charSect = new Dictionary<int, sbyte>();
-            private static bool _isProfiling = false;
-
-            [HarmonyPatch(typeof(WorldDomain), "AdvanceMonth")]
-            [HarmonyPrefix]
-            public static void AdvanceMonth_Prefix()
-            {
-                _charTime.Clear();
-                _charSect.Clear();
-                _isProfiling = true;
-            }
-
-            [HarmonyPatch(typeof(WorldDomain), "AdvanceMonth")]
-            [HarmonyPostfix]
-            public static void AdvanceMonth_Postfix()
-            {
-                _isProfiling = false;
-                ReportProfiling();
-            }
-
-            [HarmonyPatch(typeof(GameData.Domains.Character.Character), "PeriAdvanceMonth_UpdateStatus")]
-            [HarmonyPrefix]
-            public static void PeriAdvanceMonth_Prefix(GameData.Domains.Character.Character __instance)
-            {
-                if (!_isProfiling) return;
-                _stopwatch.Restart();
-            }
-
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "PeriAdvanceMonth_UpdateStatus")]
             [HarmonyPostfix]
-            public static void PeriAdvanceMonth_Postfix(GameData.Domains.Character.Character __instance)
+            public static unsafe void PeriAdvanceMonth_UpdateStatus_Postfix(GameData.Domains.Character.Character __instance, DataContext context)
             {
-                if (!_isProfiling) return;
-                _stopwatch.Stop();
-                int charId = __instance.GetId();
-                long elapsedTicks = _stopwatch.ElapsedTicks;
+                if (!enableMonthlyEvents || __instance == null) return;
+                if (__instance.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
 
-                if (!_charTime.ContainsKey(charId))
+                IRandomSource random = context.Random;
+                int multiplier = Math.Max(0, eventChanceMultiplier);
+
+                // 1. Cold Pool Meditation
+                if (enableColdPoolHeal && random.CheckPercentProb(10 * multiplier / 100))
                 {
-                    _charTime[charId] = 0;
-                    _charSect[charId] = __instance.GetOrganizationInfo().OrgTemplateId;
+                    var settlement = DomainManager.Organization.GetSettlementByLocation(__instance.GetValidLocation());
+                    if (settlement != null && settlement.GetOrgTemplateId() == XuanNvSectId)
+                    {
+                        if (__instance.GetDisorderOfQi() > 0)
+                        {
+                            __instance.ChangeDisorderOfQi(context, -50);
+                            DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyHealQi(__instance.GetId(), __instance.GetValidLocation());
+                        }
+
+                        Injuries injuries = __instance.GetInjuries();
+                        if (injuries.Any())
+                        {
+                            Injuries delta = default(Injuries);
+                            delta.Initialize();
+                            for (sbyte i = 0; i < 7; i++)
+                            {
+                                if (injuries.Get(i, false) > 0) delta.Set(i, false, 20);
+                                if (injuries.Get(i, true) > 0) delta.Set(i, true, 20);
+                            }
+                            __instance.ChangeInjuries(context, delta);
+                            DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyHealOuterInjury(__instance.GetId(), __instance.GetValidLocation(), 20);
+                        }
+                    }
                 }
-                _charTime[charId] += elapsedTicks;
-            }
 
-            private static void ReportProfiling()
-            {
-                var xuanNuTime = _charTime.Where(kv => _charSect[kv.Key] == 8).OrderByDescending(kv => kv.Value).Take(20).ToList();
-                var otherTime = _charTime.Where(kv => _charSect[kv.Key] != 8).OrderByDescending(kv => kv.Value).Take(20).ToList();
-
-                AdaptableLog.Info("=== Xuan Nu Renaissance: Month-End Profiling Report (PeriAdvanceMonth_UpdateStatus) ===");
-
-                AdaptableLog.Info("--- [Xuan Nu Sect] Top Members ---");
-                foreach(var entry in xuanNuTime)
+                // 2. Artistic Performance
+                if (enableArtisticFavor && random.CheckPercentProb(10 * multiplier / 100))
                 {
-                    double ms = entry.Value * 1000.0 / Stopwatch.Frequency;
-                    AdaptableLog.Info($"ID: {entry.Key}, Time: {ms:F4}ms");
+                    if (__instance.GetLifeSkillQualification(0) > 80) // Music
+                    {
+                        var location = __instance.GetValidLocation();
+                        var block = DomainManager.Map.GetBlock(location);
+                        if (block != null && block.CharacterSet != null && block.CharacterSet.Count > 1)
+                        {
+                            var nearbyCharIds = block.CharacterSet.ToList();
+                            int targetId = nearbyCharIds[random.Next(nearbyCharIds.Count)];
+                            if (targetId != __instance.GetId())
+                            {
+                                if (DomainManager.Character.TryGetElement_Objects(targetId, out var targetChar))
+                                {
+                                    DomainManager.Character.ChangeFavorability(context, __instance, targetChar, 5000);
+                                    DomainManager.World.GetMonthlyNotificationCollection().AddAmuseOthersByMusic(__instance.GetId(), location, targetId);
+                                }
+                            }
+                        }
+                    }
                 }
 
-                AdaptableLog.Info("--- [Other Sects] Top Members ---");
-                foreach (var entry in otherTime)
+                // 3. Pure Essence Gain
+                if (enablePureEssenceGain && random.CheckPercentProb(2 * multiplier / 100))
                 {
-                    double ms = entry.Value * 1000.0 / Stopwatch.Frequency;
-                    AdaptableLog.Info($"ID: {entry.Key}, Sect: {_charSect[entry.Key]}, Time: {ms:F4}ms");
+                    if (__instance.GetConsummateLevel() < 18)
+                    {
+                        __instance.SetConsummateLevel((sbyte)(__instance.GetConsummateLevel() + 1), context);
+                        DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyGetHealth(__instance.GetId(), __instance.GetValidLocation(), 1);
+                    }
                 }
 
-                long totalXuanNuTicks = _charTime.Where(kv => _charSect[kv.Key] == 8).Sum(kv => kv.Value);
-                long totalOtherTicks = _charTime.Where(kv => _charSect[kv.Key] != 8).Sum(kv => kv.Value);
-                int countXuanNu = _charTime.Count(kv => _charSect[kv.Key] == 8);
-                int countOther = _charTime.Count(kv => _charSect[kv.Key] != 8);
-
-                double totalXuanNuMs = totalXuanNuTicks * 1000.0 / Stopwatch.Frequency;
-                double totalOtherMs = totalOtherTicks * 1000.0 / Stopwatch.Frequency;
-
-                AdaptableLog.Info($"Summary: XuanNu(Total={totalXuanNuMs:F2}ms, Count={countXuanNu}, Avg={totalXuanNuMs/Math.Max(1,countXuanNu):F4}ms)");
-                AdaptableLog.Info($"Summary: Others(Total={totalOtherMs:F2}ms, Count={countOther}, Avg={totalOtherMs/Math.Max(1,countOther):F4}ms)");
-                AdaptableLog.Info("=========================================================================================");
+                // 4. Heavenly Recruitment (Only for Sect Leader)
+                if (enableHeavenlyRecruit && __instance.GetOrganizationInfo().Grade == 0 && random.CheckPercentProb(5 * multiplier / 100))
+                {
+                    short settlementId = DomainManager.Organization.GetSettlementIdByOrgTemplateId(XuanNvSectId);
+                    if (settlementId >= 0)
+                    {
+                        var info = new IntelligentCharacterCreationInfo
+                        {
+                            OrgInfo = new OrganizationInfo(XuanNvSectId, 8, false, settlementId),
+                            Gender = FemaleGenderId,
+                            Location = __instance.GetValidLocation()
+                        };
+                        var newChar = DomainManager.Character.CreateIntelligentCharacter(context, ref info);
+                        if (newChar != null)
+                        {
+                            DomainManager.World.GetMonthlyNotificationCollection().AddJoinOrganization(newChar.GetId(), settlementId);
+                        }
+                    }
+                }
             }
         }
 
