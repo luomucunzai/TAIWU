@@ -2,18 +2,16 @@ using GameData.Common;
 using GameData.Domains;
 using GameData.Domains.Character;
 using GameData.Domains.Character.AvatarSystem;
-using GameData.Domains.Character.Creation;
 using HarmonyLib;
 using System;
 using System.Linq;
 using TaiwuModdingLib.Core.Plugin;
 using Config;
-using GameData.Domains.Organization;
 using Redzen.Random;
 
 namespace GlobalBeautyProject
 {
-    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.3")]
+    [PluginConfig("全门派绝世容颜", "black_wing", "1.4.4")]
     public class GlobalBeautyMod : TaiwuRemakeHarmonyPlugin
     {
         public static int globalCharmMin = 900;
@@ -27,10 +25,7 @@ namespace GlobalBeautyProject
             LoadModSettings();
         }
 
-        public override void OnModSettingUpdate()
-        {
-            LoadModSettings();
-        }
+        public override void OnModSettingUpdate() => LoadModSettings();
 
         private void LoadModSettings()
         {
@@ -50,9 +45,9 @@ namespace GlobalBeautyProject
         public static sbyte GetWeightedBodyType(IRandomSource random)
         {
             int val = random.Next(100);
-            if (val < 25) return (sbyte)0; // 小体型 -> 25%
-            if (val < 85) return (sbyte)1; // 中体型 -> 60%
-            return (sbyte)2; // 大体型 -> 15%
+            if (val < 25) return (sbyte)0;
+            if (val < 85) return (sbyte)1;
+            return (sbyte)2;
         }
 
         public static void EnsureHair(AvatarData avatar, IRandomSource random)
@@ -72,11 +67,10 @@ namespace GlobalBeautyProject
             private static bool ShouldApply(GameData.Domains.Character.Character character)
             {
                 if (character == null) return false;
-                var orgInfo = character.GetOrganizationInfo();
-                sbyte orgId = orgInfo.OrgTemplateId;
-                if (orgId == 0) return false; // Skip Taiwu
+                sbyte orgId = character.GetOrganizationInfo().OrgTemplateId;
+                if (orgId == 0) return false;
                 if (orgId >= 21 && orgId <= 38) return enableVillages;
-                return true; // Sects (1-15) and others
+                return true;
             }
 
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
@@ -87,7 +81,7 @@ namespace GlobalBeautyProject
                 {
                     if (__result < (short)globalCharmMin) __result = (short)globalCharmMin;
                     short max = (short)Math.Max(globalCharmMin, globalCharmMax);
-                    if (__result > max) __result = max;
+                    if (__result > max && max >= globalCharmMin) __result = max;
                 }
             }
 
@@ -102,10 +96,14 @@ namespace GlobalBeautyProject
 
                 if (syncFaceParts)
                 {
-                    AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, __result.GetGender(), __result.GetTransgender(), bodyType, finalCharm);
+                    sbyte gender = __result.GetGender();
+                    bool transgender = __result.GetTransgender();
+                    AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, gender, transgender, bodyType, finalCharm);
                     EnsureHair(newAvatar, context.Random);
                     __result.SetAvatar(newAvatar, context);
-                    AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(__result, new object[] { (ushort)1, context });
+
+                    var method = AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache", new Type[] { typeof(ushort), typeof(DataContext) });
+                    method?.Invoke(__result, new object[] { (ushort)1, context });
                 }
             }
         }

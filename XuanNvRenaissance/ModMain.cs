@@ -3,32 +3,24 @@ using GameData.Domains;
 using GameData.Domains.Character;
 using GameData.Domains.Character.AvatarSystem;
 using GameData.Domains.Character.AvatarSystem.AvatarRes;
-using GameData.Domains.Character.Creation;
-using GameData.Domains.CombatSkill;
-using GameData.Domains.Organization;
 using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TaiwuModdingLib.Core.Plugin;
 using System.Reflection;
-using GameData.Domains.Item;
 using Config;
-using GameData.Domains.Building;
 using Redzen.Random;
-using GameData.Domains.World.Notification;
-using GameData.Domains.Map;
 using System.Runtime.InteropServices;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.3")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.4.4")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
         public const sbyte FemaleGenderId = 0;
 
-        // Settings variables with defaults
         public static int globalAgeMin = 16;
         public static int globalAgeMax = 20;
         public static int globalCharmMin = 900;
@@ -37,12 +29,11 @@ namespace XuanNvRenaissance
         public static int globalCombatQual = 150;
         public static int globalLifeQual = 150;
         public static int globalMainAttrFloor = 100;
-        public static string globalFeatureIds = "164"; // 忠贞不渝
+        public static string globalFeatureIds = "164";
         public static string globalSkillIds = "";
 
-        // Monthly Event Settings
         public static bool enableMonthlyEvents = true;
-        public static int eventChanceMultiplier = 100; // Percentage
+        public static int eventChanceMultiplier = 100;
         public static bool enableColdPoolHeal = true;
         public static bool enableArtisticFavor = true;
         public static bool enableHeavenlyRecruit = true;
@@ -52,14 +43,11 @@ namespace XuanNvRenaissance
 
         public override void Initialize()
         {
-            base.Initialize(); // Initializes Harmony and patches all
+            base.Initialize();
             LoadModSettings();
         }
 
-        public override void OnModSettingUpdate()
-        {
-            LoadModSettings();
-        }
+        public override void OnModSettingUpdate() => LoadModSettings();
 
         private void LoadModSettings()
         {
@@ -86,9 +74,9 @@ namespace XuanNvRenaissance
                 gradeTargetTemplates.Clear();
                 for (sbyte i = 0; i < 9; i++)
                 {
-                    int selectedIndex = i; // Default
+                    int selectedIndex = i;
                     DomainManager.Mod.GetSetting(base.ModIdStr, $"Grade{i + 1}_TargetTemplate", ref selectedIndex);
-                    gradeTargetTemplates[i] = (int)selectedIndex;
+                    gradeTargetTemplates[i] = selectedIndex;
                 }
             }
             catch (Exception ex)
@@ -100,9 +88,9 @@ namespace XuanNvRenaissance
         public static sbyte GetWeightedBodyType(IRandomSource random)
         {
             int val = random.Next(100);
-            if (val < 25) return (sbyte)0; // 小体型 25%
-            if (val < 85) return (sbyte)1; // 中体型 60%
-            return (sbyte)2; // 大体型 15%
+            if (val < 25) return (sbyte)0;
+            if (val < 85) return (sbyte)1;
+            return (sbyte)2;
         }
 
         public static void EnsureHair(AvatarData avatar, IRandomSource random)
@@ -119,47 +107,39 @@ namespace XuanNvRenaissance
         [HarmonyPatch]
         public static class XuanNuHooks
         {
-            private static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max ? max : value);
-
-            // 1. Persistent Charm
             [HarmonyPatch(typeof(GameData.Domains.Character.Character), "CalcAttraction")]
             [HarmonyPostfix]
             public static void CalcAttraction_Postfix(GameData.Domains.Character.Character __instance, ref short __result)
             {
                 if (__instance.GetOrganizationInfo().OrgTemplateId == XuanNvSectId)
                 {
-                    __result = (short)Clamp((int)__result, globalCharmMin, globalCharmMax);
+                    if (__result < (short)globalCharmMin) __result = (short)globalCharmMin;
+                    if (__result > (short)globalCharmMax && globalCharmMax >= globalCharmMin) __result = (short)globalCharmMax;
                 }
             }
 
-            // 2. Complete Control Over Individual Generation
             [HarmonyPatch(typeof(CharacterDomain), "CreateIntelligentCharacter")]
             [HarmonyPostfix]
             public static void CreateIntelligentCharacter_Postfix(DataContext context, GameData.Domains.Character.Character __result)
             {
-                if (__result == null) return;
-                if (__result.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
-
+                if (__result == null || __result.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
                 ApplyXuanNvHighSpec(__result, context);
             }
 
             public static void ApplyXuanNvHighSpec(GameData.Domains.Character.Character character, DataContext context)
             {
-                OrganizationInfo orgInfo = character.GetOrganizationInfo();
-                sbyte originalGrade = orgInfo.Grade;
+                sbyte originalGrade = character.GetOrganizationInfo().Grade;
                 sbyte effectiveGrade = originalGrade;
-
-                if (gradeTargetTemplates.TryGetValue(originalGrade, out int mappedGrade))
-                    effectiveGrade = (sbyte)mappedGrade;
+                if (gradeTargetTemplates.TryGetValue(originalGrade, out int mappedGrade)) effectiveGrade = (sbyte)mappedGrade;
 
                 short age = (short)context.Random.Next(globalAgeMin, globalAgeMax + 1);
-                character.SetActualAge(age, context);
-                character.SetCurrAge(age, context);
+                Util.SafeInvoke(character, "SetActualAge", new object[] { age, context });
+                Util.SafeInvoke(character, "SetCurrAge", new object[] { age, context });
 
                 character.OfflineSetGenderInfo(FemaleGenderId, false);
                 Util.InvalidateField(character, (ushort)3, context);
-                character.SetBaseMorality((short)700, context);
-                character.SetXiangshuInfection((short)0, context);
+                Util.SafeInvoke(character, "SetBaseMorality", new object[] { (short)700, context });
+                Util.SafeInvoke(character, "SetXiangshuInfection", new object[] { (short)0, context });
 
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
                 sbyte bodyType = GetWeightedBodyType(context.Random);
@@ -168,117 +148,65 @@ namespace XuanNvRenaissance
                 character.SetAvatar(newAvatar, context);
                 Util.InvalidateField(character, (ushort)1, context);
 
-                Injuries emptyInjuries = default(Injuries);
-                emptyInjuries.Initialize();
-                character.SetInjuries(emptyInjuries, context);
-                character.SetDisorderOfQi(0, context);
-                character.SetHealth(character.GetMaxHealth(), context);
+                Util.SafeInvoke(character, "SetHealth", new object[] { character.GetMaxHealth(), context });
 
                 if (globalPureEssence > 0)
                 {
-                    if (character.GetConsummateLevel() < (sbyte)globalPureEssence)
-                        character.SetConsummateLevel((sbyte)globalPureEssence, context);
+                    sbyte level = (sbyte)globalPureEssence;
+                    if (character.GetConsummateLevel() < level)
+                        Util.SafeInvoke(character, "SetConsummateLevel", new object[] { level, context });
                 }
 
                 int combatQualBase = globalCombatQual - effectiveGrade * 10;
-                if (effectiveGrade <= 2) combatQualBase = Math.Max(combatQualBase, 85);
-                else combatQualBase = Math.Max(combatQualBase, 20);
+                combatQualBase = Math.Max(combatQualBase, effectiveGrade <= 2 ? 85 : 20);
 
                 int lifeQualBase = globalLifeQual - effectiveGrade * 10;
-                if (effectiveGrade <= 2) lifeQualBase = Math.Max(lifeQualBase, 85);
-                else lifeQualBase = Math.Max(lifeQualBase, 20);
+                lifeQualBase = Math.Max(lifeQualBase, effectiveGrade <= 2 ? 85 : 20);
 
-                // Safe Qualification modification
-                for (sbyte i = 0; i < (sbyte)14; i++)
-                {
-                    short current = character.GetBaseCombatSkillQualification(i);
-                    if (current < (short)combatQualBase)
-                        character.ChangeBaseCombatSkillQualification(context, i, (short)(combatQualBase - current));
-                }
+                Util.EnforceQualFloors(character, (short)combatQualBase, (short)lifeQualBase, context);
 
-                for (sbyte i = 0; i < (sbyte)16; i++)
-                {
-                    short current = character.GetBaseLifeSkillQualification(i);
-                    if (current < (short)lifeQualBase)
-                        character.ChangeBaseLifeSkillQualification(context, i, (short)(lifeQualBase - current));
-                }
-
-                // Safe Main Attribute modification
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
-                    bool changed = Util.EnforceAttributeFloor(ref attrs, (short)globalMainAttrFloor);
-                    if (changed) character.SetBaseMainAttributes(attrs, context);
+                    if (Util.EnforceAttributeFloor(ref attrs, (short)globalMainAttrFloor))
+                        character.SetBaseMainAttributes(attrs, context);
                 }
 
                 if (!string.IsNullOrWhiteSpace(globalFeatureIds))
                 {
+                    var existing = character.GetFeatureIds();
                     foreach (string idStr in globalFeatureIds.Split(','))
-                    {
-                        if (short.TryParse(idStr.Trim(), out short fid))
-                            if (!character.GetFeatureIds().Contains(fid)) character.AddFeature(context, fid, true);
-                    }
+                        if (short.TryParse(idStr.Trim(), out short fid) && !existing.Contains(fid))
+                            character.AddFeature(context, fid, true);
                 }
 
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
                 {
-                    foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
-                    {
+                    foreach (var skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
                         if (skillCfg.SectId == XuanNvSectId && skillCfg.Grade >= effectiveGrade)
                             LearnAndMasterSkill(character, skillCfg.TemplateId, context);
-                    }
                 }
                 else
                 {
                     foreach (string idStr in globalSkillIds.Split(','))
-                    {
                         if (short.TryParse(idStr.Trim(), out short sid))
                             LearnAndMasterSkill(character, sid, context);
-                    }
                 }
 
-                if (effectiveGrade != originalGrade)
-                {
-                    OrganizationMemberItem targetOrgMember = OrganizationDomain.GetOrgMemberConfig(XuanNvSectId, effectiveGrade);
-                    if (targetOrgMember != null)
-                    {
-                        character.RemoveUnequippedEquipment(context);
-                        List<PresetInventoryItem> inventoryList = new List<PresetInventoryItem>(targetOrgMember.Inventory);
-                        foreach(var pEquip in targetOrgMember.Equipment)
-                        {
-                             if(context.Random.CheckPercentProb(pEquip.Prob))
-                                 inventoryList.Add(new PresetInventoryItem(pEquip.Type, pEquip.TemplateId, 1, 100));
-                        }
-                        character.AddEquipmentAndInventoryItems(context, new PresetEquipmentItem[12], inventoryList);
-                    }
-                }
-
-                Util.InvokeMethod(character, "InvalidateAllCaches", new object[] { context });
+                Util.SafeInvoke(character, "InvalidateAllCaches", new object[] { context });
             }
 
             private static void LearnAndMasterSkill(GameData.Domains.Character.Character character, short skillId, DataContext context)
             {
-                var learnedSkills = character.GetLearnedCombatSkills();
-                GameData.Domains.CombatSkill.CombatSkill skill = null;
-
-                if (learnedSkills.Contains(skillId))
-                {
-                    skill = DomainManager.CombatSkill.GetElement_CombatSkills((character.GetId(), skillId));
-                    if (skill != null) skill.SetReadingState((ushort)32767, context);
-                }
-                else
-                {
-                    skill = character.LearnNewCombatSkill(context, skillId, (ushort)32767);
-                }
+                object skill = character.GetLearnedCombatSkills().Contains(skillId)
+                    ? Util.SafeInvoke(DomainManager.CombatSkill, "GetElement_CombatSkills", new object[] { new ValueTuple<int, short>(character.GetId(), skillId) })
+                    : character.LearnNewCombatSkill(context, skillId, (ushort)32767);
 
                 if (skill != null)
                 {
-                    skill.SetPracticeLevel((sbyte)100, context);
-                    ushort actState = 0;
-                    actState = CombatSkillStateHelper.SetPageActive(actState, 1);
-                    for (byte i = 5; i < 10; i++) actState = CombatSkillStateHelper.SetPageActive(actState, (int)i);
-                    skill.SetActivationState(actState, context);
-
+                    Util.SafeInvoke(skill, "SetPracticeLevel", new object[] { (sbyte)100, context });
+                    ushort actState = (ushort)(1 | (1 << 5) | (1 << 6) | (1 << 7) | (1 << 8) | (1 << 9));
+                    Util.SafeInvoke(skill, "SetActivationState", new object[] { actState, context });
                     for (byte pIdx = 0; pIdx < 15; pIdx++)
                         DomainManager.CombatSkill.TryActivateCombatSkillBookPageWhenSetReadingState(context, character.GetId(), skillId, pIdx);
                 }
@@ -292,163 +220,83 @@ namespace XuanNvRenaissance
             [HarmonyPostfix]
             public static void PeriAdvanceMonth_UpdateStatus_Postfix(GameData.Domains.Character.Character __instance, DataContext context)
             {
-                if (!enableMonthlyEvents || __instance == null) return;
-                if (__instance.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
+                if (!enableMonthlyEvents || __instance == null || __instance.GetOrganizationInfo().OrgTemplateId != XuanNvSectId) return;
 
                 IRandomSource random = context.Random;
                 int multiplier = Math.Max(0, eventChanceMultiplier);
 
-                // 1. Cold Pool Meditation
                 if (enableColdPoolHeal && random.CheckPercentProb(10 * multiplier / 100))
                 {
-                    var settlement = DomainManager.Organization.GetSettlementByLocation(__instance.GetValidLocation());
-                    if (settlement != null && settlement.GetOrgTemplateId() == XuanNvSectId)
-                    {
-                        if (__instance.GetDisorderOfQi() > 0)
-                        {
-                            __instance.ChangeDisorderOfQi(context, -50);
-                            DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyHealQi(__instance.GetId(), __instance.GetValidLocation());
-                        }
-
-                        Injuries injuries = __instance.GetInjuries();
-                        if (injuries.Any())
-                        {
-                            Injuries delta = default(Injuries);
-                            delta.Initialize();
-                            for (sbyte i = 0; i < (sbyte)7; i++)
-                            {
-                                if (injuries.Get(i, false) > 0) delta.Set(i, false, (short)20);
-                                if (injuries.Get(i, true) > 0) delta.Set(i, true, (short)20);
-                            }
-                            __instance.ChangeInjuries(context, delta);
-                            DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyHealOuterInjury(__instance.GetId(), __instance.GetValidLocation(), 20);
-                        }
-                    }
+                    if (__instance.GetDisorderOfQi() > 0)
+                        __instance.ChangeDisorderOfQi(context, -50);
                 }
 
-                // 2. Artistic Performance
-                if (enableArtisticFavor && random.CheckPercentProb(10 * multiplier / 100))
+                if (enablePureEssenceGain && random.CheckPercentProb(2 * multiplier / 100) && __instance.GetConsummateLevel() < (sbyte)18)
                 {
-                    if (__instance.GetLifeSkillQualification((sbyte)0) > 80) // Music
-                    {
-                        var location = __instance.GetValidLocation();
-                        var block = DomainManager.Map.GetBlock(location);
-                        if (block != null && block.CharacterSet != null && block.CharacterSet.Count > 1)
-                        {
-                            var nearbyCharIds = block.CharacterSet.ToList();
-                            int targetId = nearbyCharIds[random.Next(nearbyCharIds.Count)];
-                            if (targetId != __instance.GetId())
-                            {
-                                if (DomainManager.Character.TryGetElement_Objects(targetId, out var targetChar))
-                                {
-                                    DomainManager.Character.ChangeFavorability(context, __instance, targetChar, 5000);
-                                    DomainManager.World.GetMonthlyNotificationCollection().AddAmuseOthersByMusic(__instance.GetId(), location, targetId);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // 3. Pure Essence Gain
-                if (enablePureEssenceGain && random.CheckPercentProb(2 * multiplier / 100))
-                {
-                    if (__instance.GetConsummateLevel() < (sbyte)18)
-                    {
-                        __instance.SetConsummateLevel((sbyte)(__instance.GetConsummateLevel() + 1), context);
-                        DomainManager.World.GetMonthlyNotificationCollection().AddUnexpectedlyGetHealth(__instance.GetId(), __instance.GetValidLocation(), 1);
-                    }
-                }
-
-                // 4. Heavenly Recruitment (Only for Sect Leader)
-                if (enableHeavenlyRecruit && __instance.GetOrganizationInfo().Grade == 0 && random.CheckPercentProb(5 * multiplier / 100))
-                {
-                    short settlementId = DomainManager.Organization.GetSettlementIdByOrgTemplateId(XuanNvSectId);
-                    if (settlementId >= 0)
-                    {
-                        var info = new IntelligentCharacterCreationInfo
-                        {
-                            OrgInfo = new OrganizationInfo(XuanNvSectId, (sbyte)8, false, settlementId),
-                            Gender = FemaleGenderId,
-                            Location = __instance.GetValidLocation()
-                        };
-                        var newChar = DomainManager.Character.CreateIntelligentCharacter(context, ref info);
-                        if (newChar != null)
-                        {
-                            DomainManager.World.GetMonthlyNotificationCollection().AddJoinOrganization(newChar.GetId(), settlementId);
-                        }
-                    }
+                    sbyte next = (sbyte)(__instance.GetConsummateLevel() + 1);
+                    Util.SafeInvoke(__instance, "SetConsummateLevel", new object[] { next, context });
                 }
             }
         }
 
         public static class Util
         {
-            public static GameData.Domains.Character.Character GetCharacter(string charNameOrId)
+            public static object SafeInvoke(object obj, string methodName, object[] args)
             {
-                if (string.IsNullOrEmpty(charNameOrId)) return null;
-                if (int.TryParse(charNameOrId, out int id))
-                    if (DomainManager.Character.TryGetElement_Objects(id, out GameData.Domains.Character.Character character)) return character;
-                return null;
+                if (obj == null) return null;
+                var method = AccessTools.Method(obj.GetType(), methodName);
+                return method?.Invoke(obj, args);
             }
-
-            public static object InvokeMethod(object obj, string methodName, object[] args) => AccessTools.Method(obj.GetType(), methodName)?.Invoke(obj, args);
 
             public static void InvalidateField(GameData.Domains.Character.Character character, ushort fieldId, DataContext context)
             {
-                AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache").Invoke(character, new object[] { fieldId, context });
+                var method = AccessTools.Method(typeof(GameData.Domains.Character.Character), "SetModifiedAndInvalidateInfluencedCache", new Type[] { typeof(ushort), typeof(DataContext) });
+                method?.Invoke(character, new object[] { fieldId, context });
+            }
+
+            public static void EnforceQualFloors(GameData.Domains.Character.Character character, short cFloor, short lFloor, DataContext context)
+            {
+                var cQuals = character.GetBaseCombatSkillQualifications();
+                var lQuals = character.GetBaseLifeSkillQualifications();
+
+                QualsMirror cMirror = ToQualsMirror(cQuals);
+                QualsMirror lMirror = ToQualsMirror(lQuals);
+
+                bool cChanged = false;
+                for (int i = 0; i < 14; i++) if (cMirror.Items[i] < cFloor) { cMirror.Items[i] = cFloor; cChanged = true; }
+                if (cChanged) { cQuals = FromQualsMirror(cMirror); character.SetBaseCombatSkillQualifications(ref cQuals, context); }
+
+                bool lChanged = false;
+                for (int i = 0; i < 16; i++) if (lMirror.Items[i] < lFloor) { lMirror.Items[i] = lFloor; lChanged = true; }
+                if (lChanged) { lQuals = FromQualsMirror(lMirror, true); character.SetBaseLifeSkillQualifications(ref lQuals, context); }
             }
 
             public static bool EnforceAttributeFloor(ref MainAttributes attrs, short floor)
             {
+                MainAttributesMirror mirror = ToAttrMirror(attrs);
                 bool changed = false;
-
-                // Mirror struct for safe layout access without unsafe/Span
-                MainAttributesMirror mirror = ToMirror(attrs);
-
                 if (mirror.Strength < floor) { mirror.Strength = floor; changed = true; }
                 if (mirror.Agility < floor) { mirror.Agility = floor; changed = true; }
                 if (mirror.Vitality < floor) { mirror.Vitality = floor; changed = true; }
                 if (mirror.Intelligence < floor) { mirror.Intelligence = floor; changed = true; }
                 if (mirror.Mind < floor) { mirror.Mind = floor; changed = true; }
                 if (mirror.Charm < floor) { mirror.Charm = floor; changed = true; }
-
-                if (changed) attrs = FromMirror(mirror);
+                if (changed) attrs = FromAttrMirror(mirror);
                 return changed;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            private struct MainAttributesMirror {
-                public short Strength;
-                public short Agility;
-                public short Vitality;
-                public short Intelligence;
-                public short Mind;
-                public short Charm;
-            }
+            public struct MainAttributesMirror { public short Strength, Agility, Vitality, Intelligence, Mind, Charm; }
 
-            private static MainAttributesMirror ToMirror(MainAttributes attrs)
-            {
-                int size = Marshal.SizeOf(typeof(MainAttributes));
-                IntPtr ptr = Marshal.AllocHGlobal(size);
-                try {
-                    Marshal.StructureToPtr(attrs, ptr, false);
-                    return (MainAttributesMirror)Marshal.PtrToStructure(ptr, typeof(MainAttributesMirror));
-                } finally {
-                    Marshal.FreeHGlobal(ptr);
-                }
-            }
+            [StructLayout(LayoutKind.Sequential)]
+            public struct QualsMirror { [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)] public short[] Items; }
 
-            private static MainAttributes FromMirror(MainAttributesMirror mirror)
-            {
-                int size = Marshal.SizeOf(typeof(MainAttributes));
-                IntPtr ptr = Marshal.AllocHGlobal(size);
-                try {
-                    Marshal.StructureToPtr(mirror, ptr, false);
-                    return (MainAttributes)Marshal.PtrToStructure(ptr, typeof(MainAttributes));
-                } finally {
-                    Marshal.FreeHGlobal(ptr);
-                }
-            }
+            private static MainAttributesMirror ToAttrMirror(MainAttributes a) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(a)); Marshal.StructureToPtr(a, p, false); var m = (MainAttributesMirror)Marshal.PtrToStructure(p, typeof(MainAttributesMirror)); Marshal.FreeHGlobal(p); return m; }
+            private static MainAttributes FromAttrMirror(MainAttributesMirror m) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(MainAttributes))); Marshal.StructureToPtr(m, p, false); var a = (MainAttributes)Marshal.PtrToStructure(p, typeof(MainAttributes)); Marshal.FreeHGlobal(p); return a; }
+
+            private static QualsMirror ToQualsMirror(object q) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(q)); Marshal.StructureToPtr(q, p, false); var m = (QualsMirror)Marshal.PtrToStructure(p, typeof(QualsMirror)); Marshal.FreeHGlobal(p); return m; }
+            private static CombatSkillShorts FromQualsMirror(QualsMirror m) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(CombatSkillShorts))); Marshal.StructureToPtr(m, p, false); var q = (CombatSkillShorts)Marshal.PtrToStructure(p, typeof(CombatSkillShorts)); Marshal.FreeHGlobal(p); return q; }
+            private static LifeSkillShorts FromQualsMirror(QualsMirror m, bool isLife) { IntPtr p = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(LifeSkillShorts))); Marshal.StructureToPtr(m, p, false); var q = (LifeSkillShorts)Marshal.PtrToStructure(p, typeof(LifeSkillShorts)); Marshal.FreeHGlobal(p); return q; }
         }
     }
 }
