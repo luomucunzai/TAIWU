@@ -20,7 +20,7 @@ using Redzen.Random;
 
 namespace XuanNvRenaissance
 {
-    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.2")]
+    [PluginConfig("璇女峰文艺复兴", "black_wing", "1.2.3")]
     public class XuanNvRenaissanceMod : TaiwuRemakeHarmonyPlugin
     {
         public const short XuanNvSectId = 8;
@@ -138,8 +138,10 @@ namespace XuanNvRenaissance
                     __result.Gender = FemaleGenderId;
                     __result.Transgender = false;
                     __result.BaseAttraction = charm;
-                    __result.AvatarData.ChangeGender(FemaleGenderId);
-                    __result.AvatarData.AdjustToBaseCharm(random, charm);
+
+                    // Generate young face
+                    sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                    __result.AvatarData = AvatarManager.Instance.GetRandomAvatar(random, FemaleGenderId, false, bodyType, charm);
 
                     sbyte grade = (sbyte)Clamp(peopleLevel - 1, 0, 8);
 
@@ -192,22 +194,27 @@ namespace XuanNvRenaissance
                 Util.InvalidateField(character, 3, context); // Gender
                 character.SetBaseMorality(700, context);
 
-                // --- 3. Charm & Appearance ---
+                // --- 3. Charm & Appearance (New Face) ---
                 short finalCharm = (short)context.Random.Next(globalCharmMin, globalCharmMax + 1);
-                AvatarData avatar = character.GetAvatar();
-                avatar.ChangeGender(FemaleGenderId);
-                avatar.AdjustToBaseCharm(context.Random, finalCharm);
-                character.SetAvatar(avatar, context);
+                sbyte bodyType = (sbyte)(age < 40 ? 0 : (age < 65 ? 1 : 2));
+                AvatarData newAvatar = AvatarManager.Instance.GetRandomAvatar(context.Random, FemaleGenderId, false, bodyType, finalCharm);
+                character.SetAvatar(newAvatar, context);
                 Util.InvalidateField(character, 1, context); // Attraction
 
-                // --- 4. Pure Essence ---
+                // --- 4. Health & Injuries (100% Healthy) ---
+                Injuries emptyInjuries = default(Injuries);
+                emptyInjuries.Initialize();
+                character.SetInjuries(emptyInjuries, context);
+                character.SetHealth(character.GetMaxHealth(), context);
+
+                // --- 5. Pure Essence ---
                 if (globalPureEssence > 0)
                 {
                     if (character.GetConsummateLevel() < globalPureEssence)
                         character.SetConsummateLevel((sbyte)globalPureEssence, context);
                 }
 
-                // --- 5. Qualifications ---
+                // --- 6. Qualifications ---
                 int combatQualBase = Clamp(globalCombatQual - grade * 10, 20, 200);
                 int lifeQualBase = Clamp(globalLifeQual - grade * 10, 20, 200);
 
@@ -229,7 +236,7 @@ namespace XuanNvRenaissance
                 }
                 if (lChanged) character.SetBaseLifeSkillQualifications(ref lQuals, context);
 
-                // --- 6. Main Attributes ---
+                // --- 7. Main Attributes ---
                 if (globalMainAttrFloor > 0)
                 {
                     MainAttributes attrs = character.GetBaseMainAttributes();
@@ -240,7 +247,7 @@ namespace XuanNvRenaissance
                     if (attrChanged) character.SetBaseMainAttributes(attrs, context);
                 }
 
-                // --- 7. Features ---
+                // --- 8. Features ---
                 if (!string.IsNullOrWhiteSpace(globalFeatureIds))
                 {
                     foreach (string idStr in globalFeatureIds.Split(','))
@@ -250,7 +257,7 @@ namespace XuanNvRenaissance
                     }
                 }
 
-                // --- 8. Skills ---
+                // --- 9. Skills ---
                 if (string.IsNullOrWhiteSpace(globalSkillIds))
                 {
                     foreach (CombatSkillItem skillCfg in (IEnumerable<CombatSkillItem>)Config.CombatSkill.Instance)
@@ -291,7 +298,6 @@ namespace XuanNvRenaissance
                 {
                     skill.SetPracticeLevel((sbyte)100, context);
 
-                    // Breakthrough activation (Default Orthodox)
                     ushort actState = 0;
                     actState = CombatSkillStateHelper.SetPageActive(actState, 1); // Benevolent outline
                     for (byte i = 5; i < 10; i++)
